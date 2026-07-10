@@ -22,43 +22,7 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Category", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,51 +48,9 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2026, 6, 30, 16, 14, 3, 257, DateTimeKind.Local).AddTicks(3562),
-                            Description = "Traditional ice cream flavors like Vanilla, Chocolate",
-                            IsActive = true,
-                            Name = "Classic"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2026, 6, 30, 16, 14, 3, 257, DateTimeKind.Local).AddTicks(3573),
-                            Description = "Fresh fruit based ice creams like Strawberry, Mango",
-                            IsActive = true,
-                            Name = "Fruit"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2026, 6, 30, 16, 14, 3, 257, DateTimeKind.Local).AddTicks(3575),
-                            Description = "Luxury and gourmet flavors",
-                            IsActive = true,
-                            Name = "Premium"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateTime(2026, 6, 30, 16, 14, 3, 257, DateTimeKind.Local).AddTicks(3577),
-                            Description = "Seasonal and limited edition flavors",
-                            IsActive = true,
-                            Name = "Special"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedDate = new DateTime(2026, 6, 30, 16, 14, 3, 257, DateTimeKind.Local).AddTicks(3578),
-                            Description = "Healthy sugar-free options for diabetics",
-                            IsActive = true,
-                            Name = "Sugar Free"
-                        });
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Customer", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,7 +93,7 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Order", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,7 +159,7 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.OrderItem", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -271,7 +193,7 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.ToTable("OrderItem");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Product", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -325,6 +247,42 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Feedback", b =>
@@ -399,6 +357,9 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Procedure")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -470,6 +431,9 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -683,13 +647,13 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Order", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Order", b =>
                 {
                     b.HasOne("Ice_Cream_Parlour_Eproject.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId");
 
-                    b.HasOne("Ice_Cream_Parlour_Eproject.Models.Entities.Customer", "Customer")
+                    b.HasOne("Ice_Cream_Parlour_Eproject.Areas.Models.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -700,15 +664,15 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.OrderItem", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.OrderItem", b =>
                 {
-                    b.HasOne("Ice_Cream_Parlour_Eproject.Models.Entities.Order", "Order")
+                    b.HasOne("Ice_Cream_Parlour_Eproject.Areas.Models.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ice_Cream_Parlour_Eproject.Models.Entities.Product", "Product")
+                    b.HasOne("Ice_Cream_Parlour_Eproject.Areas.Models.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -719,9 +683,9 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Product", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Product", b =>
                 {
-                    b.HasOne("Ice_Cream_Parlour_Eproject.Models.Category", "Category")
+                    b.HasOne("Ice_Cream_Parlour_Eproject.Areas.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -781,17 +745,17 @@ namespace Ice_Cream_Parlour_Eproject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Customer", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Order", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Models.Entities.Product", b =>
+            modelBuilder.Entity("Ice_Cream_Parlour_Eproject.Areas.Models.Product", b =>
                 {
                     b.Navigation("OrderItems");
                 });

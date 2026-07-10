@@ -1,8 +1,10 @@
-@using Ice_Cream_Parlour_Eproject.Models
+@using Ice_Cream_Parlour_Eproject.Areas.Models.Enums
+@using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels
 @model OrderViewModel
 
 @{
     ViewData["Title"] = $"Order {Model.OrderNumber}";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="page-header no-print">

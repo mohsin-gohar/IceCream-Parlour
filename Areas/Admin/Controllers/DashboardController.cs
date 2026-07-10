@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Ice_Cream_Parlour_Eproject.Data;
 using Ice_Cream_Parlour_Eproject.Models;
-using Ice_Cream_Parlour_Eproject.Models.ViewModels;
+using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels;
 
 namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
 {

@@ -1,13 +1,13 @@
 @model Ice_Cream_Parlour_Eproject.Models.Recipe
 @{
-    ViewData["Title"] = "Edit Product";
+    ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Edit Product</h2>
-        <a asp-action="Products" class="btn btn-secondary">
+        <a asp-action="Index" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-2"></i>Back
         </a>
     </div>
@@ -20,9 +20,18 @@
         </div>
     }
 
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
     <div class="card shadow-sm">
         <div class="card-body">
-            <form asp-action="EditProduct" method="post" enctype="multipart/form-data">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="Id" />
 
                 <div class="row g-3">
@@ -60,7 +69,7 @@
                     </div>
 
                     <!-- IsFree -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label asp-for="IsFree" class="form-label fw-bold">Access Type</label>
                         <select asp-for="IsFree" class="form-select">
                             <option value="true">Free Recipe</option>
@@ -68,12 +77,19 @@
                         </select>
                     </div>
 
+                    <!-- Price -->
+                    <div class="col-md-4">
+                        <label asp-for="Price" class="form-label fw-bold">Price ($) *</label>
+                        <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
                     <!-- Current Image -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="form-label fw-bold">Current Image</label>
                         @if (!string.IsNullOrEmpty(Model.ImagePath))
                         {
-                            <img src="@Model.ImagePath" style="width:100px; height:100px; object-fit:cover; border-radius:8px; display:block;" />
+                            <img src="@Model.ImagePath" alt="Current" style="width:100px; height:100px; object-fit:cover; border-radius:8px; display:block;" />
                         }
                         else
                         {
@@ -85,7 +101,7 @@
                     <div class="col-12">
                         <label class="form-label fw-bold">Upload New Image</label>
                         <input type="file" name="ImageFile" class="form-control" accept="image/*" />
-                        <small class="text-muted">Leave empty to keep current image</small>
+                        <small class="text-muted">Leave empty to keep current image (Max 2MB)</small>
                     </div>
 
                     <!-- Submit -->
@@ -99,3 +115,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

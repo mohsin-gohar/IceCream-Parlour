@@ -1,6 +1,5 @@
 ﻿using Ice_Cream_Parlour_Eproject.Areas.Models;
 using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels;
-using Ice_Cream_Parlour_Eproject.Models.ViewModels;
 
 namespace Ice_Cream_Parlour_Eproject.Services
 {
@@ -8,7 +7,7 @@ namespace Ice_Cream_Parlour_Eproject.Services
     {
         Task<ProductViewModel> GetPagedAsync(string? search, int? categoryId, int page, int pageSize);
         Task<ProductViewModel?> GetByIdAsync(int id);
-        Task<Product?> GetLastProductAsync();   // ✅ sahi
+        Task<Product?> GetLastProductAsync();   
         Task CreateAsync(ProductViewModel model, IWebHostEnvironment env);
         Task<bool> UpdateAsync(ProductViewModel model, IWebHostEnvironment env);
         Task DeleteAsync(int id, IWebHostEnvironment env);

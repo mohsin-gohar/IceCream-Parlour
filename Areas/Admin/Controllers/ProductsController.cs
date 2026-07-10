@@ -1,8 +1,8 @@
+using Ice_Cream_Parlour_Eproject.Data;
+using Ice_Cream_Parlour_Eproject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Models;
 
 namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
 {
@@ -10,143 +10,202 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
+        private readonly ApplicationDbContext context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        private readonly ApplicationDbContext dbcontext;
-        private readonly IWebHostEnvironment webHostEnvironment;
-
-        // ✅ Constructor - DbContext aur WebHostEnvironment inject karein
-        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, ApplicationDbContext dbcontext)
+        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
-            this.webHostEnvironment = webHostEnvironment;
-            this.dbcontext = context;
+            this.context = context;
+            this._webHostEnvironment = webHostEnvironment;
         }
 
-        // ============================================================
-        // 1️⃣ INDEX - Sab products ki list dikhana
-        // ============================================================
+        // ===== INDEX =====
         public async Task<IActionResult> Index()
         {
-            // ✅ Database se saare recipes (products) fetch karo
-            var products = await dbcontext.Recipes.ToListAsync();
-            return View(products);
+            var recipes = await context.Recipes.ToListAsync();
+            return View(recipes);
         }
 
-        // ============================================================
-        // 2️⃣ CREATE - Naya product add karna (GET)
-        // ============================================================
+        // ===== CREATE (GET) =====
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return View(new Recipe());
         }
 
-        // ============================================================
-        // 3️⃣ CREATE - Naya product save karna (POST)
-        // ============================================================
+        // ===== CREATE (POST) =====
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Recipe recipe, IFormFile? ImageFile)
         {
-            // ✅ Validation check
             if (ModelState.IsValid)
             {
-                // ✅ Image Upload (agar image select ki hai to)
+                // ✅ Ensure directory exists
+                string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "recipes");
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+
+                // Handle Image Upload
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
-                    string folder = "images/recipes/";
                     string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                    string fullPath = Path.Combine(webHostEnvironment.WebRootPath, folder, fileName);
+                    string filePath = Path.Combine(uploadFolder, fileName);
 
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await ImageFile.CopyToAsync(stream);
                     }
-                    recipe.ImagePath = "/" + folder + fileName;
+
+                    recipe.ImagePath = "/images/" + fileName;
+                }
+                else
+                {
+                    // Default image
+                    recipe.ImagePath = "/images/";
                 }
 
-                // ✅ CreatedDate set karo
-                recipe.CreatedDate = DateTime.Now;
-
-                // ✅ Database mein add karo
-                dbcontext.Recipes.Add(recipe);
-                await dbcontext.SaveChangesAsync();
+                context.Recipes.Add(recipe);
+                await context.SaveChangesAsync();
 
                 TempData["Success"] = "Product added successfully!";
                 return RedirectToAction(nameof(Index));
             }
+
             return View(recipe);
         }
 
-        // ============================================================
-        // 4️⃣ EDIT - Product edit karna (GET)
-        // ============================================================
+        // ===== EDIT (GET) =====
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var product = await dbcontext.Recipes.FindAsync(id);
-            if (product == null)
-                return NotFound();
-            return View(product);
-        }
-
-        // ============================================================
-        // 5️⃣ EDIT - Product update karna (POST)
-        // ============================================================
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Recipe recipe, IFormFile? ImageFile)
-        {
-            if (ModelState.IsValid)
+            var recipe = await context.Recipes.FindAsync(id);
+            if (recipe == null)
             {
-                var existing = await dbcontext.Recipes.FindAsync(recipe.Id);
-                if (existing == null)
-                    return NotFound();
-
-                // ✅ Sirf allowed fields update karo
-                existing.Name = recipe.Name;
-                existing.Category = recipe.Category;
-                existing.Ingredients = recipe.Ingredients;
-                existing.Procedure = recipe.Procedure;
-                existing.IsFree = recipe.IsFree;
-
-                // ✅ Agar nayi image select ki hai to update karo
-                if (ImageFile != null && ImageFile.Length > 0)
-                {
-                    string folder = "images/recipes/";
-                    string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                    string fullPath = Path.Combine(webHostEnvironment.WebRootPath, folder, fileName);
-
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        await ImageFile.CopyToAsync(stream);
-                    }
-                    existing.ImagePath = "/" + folder + fileName;
-                }
-
-                // ✅ Database update karo
-                await dbcontext.SaveChangesAsync();
-
-                TempData["Success"] = "Product updated successfully!";
+                TempData["Error"] = "Product not found!";
                 return RedirectToAction(nameof(Index));
             }
             return View(recipe);
         }
 
-        // ============================================================
-        // 6️⃣ DELETE - Product delete karna (POST)
-        // ============================================================
+        // ===== EDIT (POST) =====
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Recipe recipe, IFormFile? ImageFile)
+        {
+            if (id != recipe.Id)
+            {
+                TempData["Error"] = "Product not found!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingRecipe = await context.Recipes.FindAsync(id);
+                    if (existingRecipe == null)
+                    {
+                        TempData["Error"] = "Product not found!";
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    // Update fields
+                    existingRecipe.Name = recipe.Name;
+                    existingRecipe.Category = recipe.Category;
+                    existingRecipe.Ingredients = recipe.Ingredients;
+                    existingRecipe.Procedure = recipe.Procedure;
+                    existingRecipe.IsFree = recipe.IsFree;
+                    existingRecipe.Price = recipe.Price;
+
+                    // ✅ Ensure directory exists
+                    string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "recipes");
+                    if (!Directory.Exists(uploadFolder))
+                    {
+                        Directory.CreateDirectory(uploadFolder);
+                    }
+
+                    // Handle Image Upload
+                    if (ImageFile != null && ImageFile.Length > 0)
+                    {
+                        // Delete old image
+                        if (!string.IsNullOrEmpty(existingRecipe.ImagePath) &&
+                            !existingRecipe.ImagePath.Contains("default-product.jpg"))
+                        {
+                            string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath,
+                                existingRecipe.ImagePath.TrimStart('/'));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+                        string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
+                        string filePath = Path.Combine(uploadFolder, fileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await ImageFile.CopyToAsync(stream);
+                        }
+
+                        existingRecipe.ImagePath = "/images/" + fileName;
+                    }
+
+                    await context.SaveChangesAsync();
+                    TempData["Success"] = "Product updated successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RecipeExists(recipe.Id))
+                    {
+                        TempData["Error"] = "Product not found!";
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(recipe);
+        }
+
+        // ===== DELETE =====
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var product = await dbcontext.Recipes.FindAsync(id);
-            if (product != null)
+            var recipe = await context.Recipes.FindAsync(id);
+            if (recipe == null)
             {
-                dbcontext.Recipes.Remove(product);
-                await dbcontext.SaveChangesAsync();
-                TempData["Success"] = "Product deleted successfully!";
+                TempData["Error"] = "Product not found!";
+                return RedirectToAction(nameof(Index));
             }
+
+            // Delete image file
+            if (!string.IsNullOrEmpty(recipe.ImagePath) &&
+                !recipe.ImagePath.Contains("default-product.jpg"))
+            {
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath,
+                    recipe.ImagePath.TrimStart('/'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+
+            context.Recipes.Remove(recipe);
+            await context.SaveChangesAsync();
+
+            TempData["Success"] = "Product deleted successfully!";
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool RecipeExists(int id)
+        {
+            return  context.Recipes.Any(e => e.Id == id);
         }
     }
 }

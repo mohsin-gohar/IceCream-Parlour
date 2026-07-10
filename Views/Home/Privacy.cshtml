@@ -1,152 +1,258 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - iCREAM Ice Cream Parlor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="~/css/style.css" rel="stylesheet">
-   
-</head>
-<body>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Privacy Policy - iCREAM";
+}
 
-   
-    <!-- Page Header Start -->
-    <div class="page-header">
-        <div class="container text-center">
-            <h1>Privacy Policy</h1>
-            <p><a asp-action="Index" asp-controller="Home">Home</a> / Privacy Policy</p>
-        </div>
-    </div>
-    <!-- Page Header End -->
-    <!-- Privacy Content Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="privacy-container">
-                <div class="privacy-header">
-                    <h1>🔒 Privacy Policy</h1>
-                    <p>Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
+<!-- Privacy Content Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="section-title text-start mb-5">
+                    <h1 class="display-6 mb-3">🔒 Your Privacy Matters</h1>
+                    <p class="text-muted">We are committed to protecting your personal information and being transparent about how we handle your data.</p>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>1. Information We Collect</h2>
-                    <p>At iCREAM Ice Cream Parlor, we collect the following types of information to provide you with the best service:</p>
-                    <ul>
-                        <li><i class="fas fa-user"></i> <strong>Personal Information:</strong> Name, email address, phone number, and delivery address when you register or place an order.</li>
-                        <li><i class="fas fa-credit-card"></i> <strong>Payment Information:</strong> Credit/debit card details for processing payments (securely encrypted).</li>
-                        <li><i class="fas fa-chart-line"></i> <strong>Usage Data:</strong> Information about how you use our website, including pages visited and time spent.</li>
-                        <li><i class="fas fa-cookie-bite"></i> <strong>Cookies:</strong> Small data files stored on your device to enhance your browsing experience.</li>
+                <!-- Section 1 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-database me-2"></i>1. Information We Collect</h3>
+                    <p class="text-muted">To provide you with the best ice cream experience, we collect the following information:</p>
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-start">
+                                <i class="fas fa-user-circle text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Personal Information</h6>
+                                    <small class="text-muted">Name, email, phone, delivery address</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-start">
+                                <i class="fas fa-credit-card text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Payment Information</h6>
+                                    <small class="text-muted">Securely encrypted card details</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-start">
+                                <i class="fas fa-chart-bar text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Usage Data</h6>
+                                    <small class="text-muted">Pages visited, time spent, preferences</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-start">
+                                <i class="fas fa-cookie-bite text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Cookies</h6>
+                                    <small class="text-muted">Enhance browsing experience</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-cogs me-2"></i>2. How We Use Your Data</h3>
+                    <p class="text-muted">Your information helps us serve you better in the following ways:</p>
+                    <div class="row g-2 mt-2">
+                        <div class="col-12">
+                            <p class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Process registrations and membership payments</p>
+                            <p class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Fulfill book orders and recipe deliveries</p>
+                            <p class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Send updates about new recipes and promotions</p>
+                            <p class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Improve website functionality and customer service</p>
+                            <p class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Process prize money for winning recipe submissions</p>
+                            <p class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Send participation certificates to winners</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Badge -->
+                <div class="security-badge bg-primary text-white p-4 rounded-4 mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shield-alt fa-3x me-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-1">Your Data is Safe With Us</h4>
+                            <p class="mb-0 opacity-75">We use industry-standard encryption and security measures. We never sell your data to third parties.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-users me-2"></i>3. Membership & Payment</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="membership-card bg-light p-3 rounded-3">
+                                <h6 class="text-primary">Monthly Membership</h6>
+                                <p class="h4">$15<span class="text-muted small">/month</span></p>
+                                <small class="text-muted">Full recipe access</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="membership-card bg-light p-3 rounded-3">
+                                <h6 class="text-primary">Yearly Membership</h6>
+                                <p class="h4">$150<span class="text-muted small">/year</span></p>
+                                <small class="text-muted">Full access + 1 free recipe book</small>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-muted">All payments are processed through secure gateways. We do not store full card details.</p>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-utensils me-2"></i>4. Recipe Submissions</h3>
+                    <p class="text-muted">When you share your delicious recipes with us:</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-utensils text-primary me-2"></i>Your recipe becomes part of our community collection</li>
+                        <li class="mb-2"><i class="fas fa-trophy text-warning me-2"></i>Selected recipes receive prize money</li>
+                        <li class="mb-2"><i class="fas fa-certificate text-primary me-2"></i>Winners receive a participation certificate</li>
+                        <li class="mb-2"><i class="fas fa-star text-warning me-2"></i>Featured on our Home Page under "Top Recipe Winners"</li>
                     </ul>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>2. How We Use Your Information</h2>
-                    <p>We use the information we collect for the following purposes:</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> To process your registration and membership payments</li>
-                        <li><i class="fas fa-check-circle"></i> To fulfill your book orders and deliver recipes</li>
-                        <li><i class="fas fa-check-circle"></i> To send you updates about new recipes and promotions</li>
-                        <li><i class="fas fa-check-circle"></i> To improve our website and customer service</li>
-                        <li><i class="fas fa-check-circle"></i> To process prize money for winning recipe submissions</li>
-                        <li><i class="fas fa-check-circle"></i> To send participation certificates</li>
-                    </ul>
+                <!-- Section 5 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-cookie me-2"></i>5. Cookies & Tracking</h3>
+                    <p class="text-muted">We use cookies for:</p>
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i>Remember login status</p>
+                            <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i>Keep items in cart</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i>Analyze website traffic</p>
+                            <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i>Personalize experience</p>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-muted small">You can disable cookies in your browser settings, but some features may not work properly.</p>
                 </div>
 
-                <div class="info-box">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Your Data is Safe With Us</h3>
-                    <p>We use industry-standard encryption and security measures to protect your personal and payment information. We never sell your data to third parties.</p>
+                <!-- Section 6 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-handshake me-2"></i>6. Third-Party Services</h3>
+                    <p class="text-muted">We use trusted services to enhance your experience:</p>
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <div class="text-center p-2 bg-light rounded">
+                                <i class="fab fa-cc-visa fa-2x text-primary"></i>
+                                <p class="small mb-0">Payment Processors</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-2 bg-light rounded">
+                                <i class="fas fa-envelope fa-2x text-primary"></i>
+                                <p class="small mb-0">Email Services</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-2 bg-light rounded">
+                                <i class="fas fa-chart-simple fa-2x text-primary"></i>
+                                <p class="small mb-0">Analytics</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>3. Membership & Payment Information</h2>
-                    <p>When you register for a membership, we collect:</p>
-                    <ul>
-                        <li><i class="fas fa-dollar-sign"></i> Monthly Membership: $15/month - Full recipe access</li>
-                        <li><i class="fas fa-dollar-sign"></i> Yearly Membership: $150/year - Full recipe access + 1 free recipe book</li>
-                    </ul>
-                    <p>Your payment information is processed through secure payment gateways. We do not store full credit card details on our servers.</p>
+                <!-- Section 7 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-user-shield me-2"></i>7. Your Rights</h3>
+                    <p class="text-muted">As a registered user, you have the right to:</p>
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="fas fa-eye text-primary me-2"></i>Access your personal data</p>
+                            <p class="mb-1"><i class="fas fa-pen text-primary me-2"></i>Correct inaccurate information</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="fas fa-trash text-danger me-2"></i>Request account deletion</p>
+                            <p class="mb-1"><i class="fas fa-download text-primary me-2"></i>Export your data</p>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-muted">Contact us at <strong>privacy@icream.com</strong> to exercise your rights.</p>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>4. Recipe Submissions & Prize Money</h2>
-                    <p>When you submit a recipe to our platform:</p>
-                    <ul>
-                        <li><i class="fas fa-utensils"></i> Your recipe becomes part of our community collection</li>
-                        <li><i class="fas fa-trophy"></i> Selected recipes receive prize money (amount decided by admin)</li>
-                        <li><i class="fas fa-certificate"></i> Winners receive a participation certificate</li>
-                        <li><i class="fas fa-star"></i> Your name will be featured on our Home Page under "Top Recipe Winners"</li>
-                    </ul>
+                <!-- Section 8 & 9 -->
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-child me-2"></i>8. Children's Privacy</h3>
+                    <p class="text-muted">Our website is not intended for children under 13. We do not knowingly collect their information.</p>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>5. Cookies & Tracking Technologies</h2>
-                    <p>We use cookies to:</p>
-                    <ul>
-                        <li><i class="fas fa-cookie"></i> Remember your login status</li>
-                        <li><i class="fas fa-cookie"></i> Keep items in your shopping cart</li>
-                        <li><i class="fas fa-cookie"></i> Analyze website traffic and improve performance</li>
-                        <li><i class="fas fa-cookie"></i> Personalize your experience</li>
-                    </ul>
-                    <p>You can disable cookies in your browser settings, but some features may not work properly.</p>
+                <div class="privacy-card mb-4">
+                    <h3 class="text-primary mb-3"><i class="fas fa-clock me-2"></i>9. Policy Updates</h3>
+                    <p class="text-muted">We may update this policy periodically. Check this page for the latest version.</p>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Quick Links -->
+                <div class="sidebar-card bg-light p-4 rounded-4 mb-4">
+                    <h5 class="mb-3"><i class="fas fa-list me-2"></i>Quick Links</h5>
+                    <div class="sidebar-links">
+                        <a href="#section1" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>Information We Collect
+                        </a>
+                        <a href="#section2" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>How We Use Your Data
+                        </a>
+                        <a href="#section3" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>Membership & Payment
+                        </a>
+                        <a href="#section4" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>Recipe Submissions
+                        </a>
+                        <a href="#section5" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>Cookies & Tracking
+                        </a>
+                        <a href="#section6" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>Third-Party Services
+                        </a>
+                        <a href="#section7" class="d-block mb-2 text-dark text-decoration-none">
+                            <i class="fas fa-chevron-right text-primary me-2"></i>Your Rights
+                        </a>
+                    </div>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>6. Third-Party Services</h2>
-                    <p>We use trusted third-party services to enhance our website:</p>
-                    <ul>
-                        <li><i class="fab fa-cc-visa"></i> Payment Processors (Stripe/PayPal)</li>
-                        <li><i class="fas fa-envelope"></i> Email Service Providers</li>
-                        <li><i class="fas fa-chart-simple"></i> Analytics Services (Google Analytics)</li>
-                    </ul>
-                    <p>These services have their own privacy policies and security measures.</p>
+                <!-- Contact Card -->
+                <div class="contact-card bg-primary text-white p-4 rounded-4">
+                    <h5 class="mb-3"><i class="fas fa-envelope me-2"></i>Contact Us</h5>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-envelope me-2"></i>
+                        <span>privacy@icream.com</span>
+                    </div>
+                    <div class="contact-item mb-3">
+                        <i class="fas fa-phone me-2"></i>
+                        <span>+012 345 67890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <span>123 Ice Cream Street, New York</span>
+                    </div>
                 </div>
 
-                <div class="privacy-section">
-                    <h2>7. Your Rights</h2>
-                    <p>As a registered user, you have the right to:</p>
-                    <ul>
-                        <li><i class="fas fa-eye"></i> Access your personal data</li>
-                        <li><i class="fas fa-pen"></i> Correct inaccurate information</li>
-                        <li><i class="fas fa-trash"></i> Request deletion of your account</li>
-                        <li><i class="fas fa-download"></i> Export your data</li>
-                        <li><i class="fas fa-ban"></i> Opt-out of marketing communications</li>
-                    </ul>
-                    <p>To exercise these rights, please contact us at <strong>privacy@icream.com</strong></p>
-                </div>
-
-                <div class="privacy-section">
-                    <h2>8. Children's Privacy</h2>
-                    <p>Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.</p>
-                </div>
-
-                <div class="privacy-section">
-                    <h2>9. Changes to This Policy</h2>
-                    <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date. You are advised to review this policy periodically.</p>
-                </div>
-
-                <div class="info-box">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Contact Us</h3>
-                    <p>If you have any questions about this Privacy Policy, please contact us:</p>
-                    <p><i class="fas fa-envelope"></i> Email: privacy@icream.com</p>
-                    <p><i class="fas fa-phone"></i> Phone: +012 345 67890</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Address: 123 Ice Cream Street, New York, USA</p>
-                </div>
-
-                <div class="last-updated">
-                    <p>Last Updated: June 14, 2026</p>
-                    <p>© 2026 iCREAM Ice Cream Parlor. All rights reserved.</p>
+                <!-- Last Updated -->
+                <div class="mt-4 text-center text-muted">
+                    <p class="small mb-0">Last Updated: June 14, 2026</p>
+                    <p class="small mb-0">&copy; 2026 iCREAM. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Privacy Content End -->
-   
-    <!-- Back to Top -->
-    <a href="#" class="back-to-top"><i class="fas fa-angle-double-up"></i></a>
+</div>
+<!-- Privacy Content End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-  <script scr="~/js/js.min.js"></script>
-</body>
-</html>
+@section Scripts {
+    <script src="~/js/main.js"></script>
+}

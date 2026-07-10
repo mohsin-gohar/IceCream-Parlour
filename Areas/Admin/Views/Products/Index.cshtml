@@ -1,4 +1,4 @@
-@model Ice_Cream_Parlour_Eproject.Models.ProductViewModel
+@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Recipe>
 @{
     ViewData["Title"] = "Products";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -10,7 +10,7 @@
             <h2>Product Management</h2>
             <p class="text-muted">Manage ice cream products, recipes and pricing</p>
         </div>
-        <a asp-action="CreateProduct" class="btn btn-primary">
+        <a asp-action="Create" class="btn btn-primary">
             <i class="fas fa-plus me-2"></i>Add Product
         </a>
     </div>
@@ -19,6 +19,14 @@
     {
         <div class="alert alert-success alert-dismissible fade show">
             <i class="fas fa-check-circle"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     }
@@ -33,17 +41,23 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Type</th>
+                            <th>Price</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Products.Items)
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
                                     @if (!string.IsNullOrEmpty(item.ImagePath))
                                     {
-                                        <img src="@item.ImagePath" style="width:50px; height:50px; object-fit:cover; border-radius:8px;" />
+                                        <img src="@item.ImagePath" alt="@item.Name"
+                                             style="width:50px; height:50px; object-fit:cover; border-radius:8px;"
+                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                                        <div style="width:50px; height:50px; background:#f0f0f0; border-radius:8px; display:none; align-items:center; justify-content:center;">
+                                            <i class="fas fa-ice-cream text-muted"></i>
+                                        </div>
                                     }
                                     else
                                     {
@@ -61,16 +75,26 @@
                                     }
                                     else
                                     {
-                                        <span class="badge bg-warning">Premium</span>
+                                        <span class="badge bg-warning text-dark">Premium</span>
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="EditProduct" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                                    @if (!item.IsFree)
+                                    {
+                                        <span class="fw-bold">$@item.Price.ToString("0.00")</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Free</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form asp-action="DeleteProduct" asp-route-id="@item.Id" method="post" class="d-inline">
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
                                         @Html.AntiForgeryToken()
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this product?')">
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

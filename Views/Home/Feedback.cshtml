@@ -1,72 +1,523 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feedback - iCREAM Ice Cream</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Feedback - iCREAM";
+}
 
-    <div class="feedback-wrapper">
-        <div class="feedback-header">
-            <span class="feedback-badge">We Value Your Feedback</span>
-            <h1>Share Your <span>Ice Cream</span> Experience</h1>
-            <p class="feedback-subtext">Aapka feedback hamare liye bohot keemti hai...</p>
-        </div>
+<style>
+    /* ===== FEEDBACK SECTION ===== */
+    .feedback-section {
+        background: #f8f9fa;
+    }
 
-        <form class="icream-feedback-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Full Name</label>
-                    <input type="text" placeholder="Enter your full name" required />
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-envelope"></i> Email Address</label>
-                    <input type="email" placeholder="Enter your email" required />
-                </div>
-            </div>
+    .feedback-form-wrapper {
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
 
-            <div class="form-group">
-                <label><i class="fas fa-ice-cream"></i> Which flavor did you try?</label>
-                <select required>
-                    <option value="">Select your favorite flavor</option>
-                    <option value="vanilla">Madagascar Vanilla</option>
-                    <option value="chocolate">Belgian Dark Chocolate</option>
-                </select>
-            </div>
+        .feedback-form-wrapper:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08) !important;
+        }
 
-            <div class="form-group">
-                <label><i class="fas fa-star"></i> Rate Your Experience</label>
-                <div class="star-rating-box">
-                    <input type="radio" name="rating" id="star5" value="5" />
-                    <label for="star5">★</label>
-                    <input type="radio" name="rating" id="star4" value="4" />
-                    <label for="star4">★</label>
-                    <input type="radio" name="rating" id="star3" value="3" />
-                    <label for="star3">★</label>
-                    <input type="radio" name="rating" id="star2" value="2" />
-                    <label for="star2">★</label>
-                    <input type="radio" name="rating" id="star1" value="1" />
-                    <label for="star1">★</label>
-                </div>
-            </div>
+    /* ===== FORM STYLES ===== */
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+    }
 
-            <div class="form-group">
-                <label><i class="fas fa-comment"></i> Your Review / Comments</label>
-                <textarea rows="4" placeholder="Tell us what you loved or how we can improve..." required></textarea>
-            </div>
+        .form-control:focus, .form-select:focus {
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
 
-            <button type="submit" class="btn-feedback-submit">
-                <i class="fas fa-paper-plane"></i> Submit Feedback
-            </button>
-        </form>
+    .form-control-lg {
+        font-size: 1rem;
+    }
+
+    .form-label {
+        color: #2d2d2d;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    /* ===== STAR RATING ===== */
+    .star-rating-box {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+        .star-rating-box input[type="radio"] {
+            display: none;
+        }
+
+    .star-label {
+        font-size: 2.5rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+    }
+
+        .star-label:hover {
+            transform: scale(1.1);
+        }
+
+            .star-label:hover,
+            .star-label:hover ~ .star-label {
+                color: #D4AF37 !important;
+            }
+
+    .star-rating-box input[type="radio"]:checked ~ .star-label {
+        color: #D4AF37;
+    }
+
+    /* ===== FEEDBACK STATS ===== */
+    .feedback-stats {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stat-item {
+        transition: all 0.3s ease;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+        .stat-item:hover {
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateX(5px);
+        }
+
+    .stat-icon {
+        flex-shrink: 0;
+    }
+
+    /* ===== FEEDBACK QUOTE ===== */
+    .feedback-quote {
+        border-left: 4px solid #D4AF37;
+        transition: all 0.3s ease;
+    }
+
+        .feedback-quote:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+    .avatar-circle {
+        background: linear-gradient(135deg, #D4AF37, #F5D76E);
+        color: #3D0C11 !important;
+        font-weight: bold;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #D4AF37;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+        border: none;
+        text-decoration: none;
+    }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #3D0C11;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 768px) {
+        .feedback-form-wrapper {
+            padding: 30px 20px !important;
+        }
+
+        .feedback-info {
+            text-align: center;
+        }
+
+        .stat-item {
+            justify-content: center;
+        }
+
+        .star-label {
+            font-size: 2rem;
+        }
+
+        .page-header {
+            min-height: 250px;
+        }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+    }
+    .page-header {
+            background-image: url('/img/header.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+</style>
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Feedback</h1>
+        <p class="text-white-50 fs-5 mb-0 animated slideInDown">We value your opinion. Share your ice cream experience with us.</p>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                <li class="breadcrumb-item">
+                    <a class="text-white" asp-action="Index" asp-controller="Home"><i style="color:black;">Home</i></a>
+                </li>
+                <li class="breadcrumb-item text-primary active" aria-current="page"><i style="color:black;">Feedback</i></li>
+            </ol>
+        </nav>
     </div>
+</div>
+<!-- Page Header End -->
+<!-- Feedback Section Start -->
+<div class="container-fluid feedback-section py-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Left Column - Info -->
+            <div class="col-lg-5">
+                <div class="feedback-info">
+                    <span class="badge bg-primary text-white px-4 py-2 rounded-pill mb-3">
+                        <i class="fas fa-heart me-2"></i>We Value Your Feedback
+                    </span>
+                    <h2 class="display-5 fw-bold mb-3">Share Your <span class="text-primary">Ice Cream</span> Experience</h2>
+                    <p class="text-muted mb-4">Your feedback helps us improve and serve you better. We appreciate every opinion and suggestion.</p>
 
-    <!-- ===== JAVASCRIPT ===== -->
-    <script src="~/js/main.js"></script>
+                    <div class="feedback-stats">
+                        <div class="stat-item d-flex align-items-center mb-3">
+                            <div class="stat-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <i class="fas fa-users fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">500+ Happy Customers</h5>
+                                <small class="text-muted">And counting...</small>
+                            </div>
+                        </div>
+                        <div class="stat-item d-flex align-items-center mb-3">
+                            <div class="stat-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <i class="fas fa-star fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">4.9 Average Rating</h5>
+                                <small class="text-muted">From our customers</small>
+                            </div>
+                        </div>
+                        <div class="stat-item d-flex align-items-center">
+                            <div class="stat-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                <i class="fas fa-ice-cream fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">50+ Premium Flavors</h5>
+                                <small class="text-muted">Something for everyone</small>
+                            </div>
+                        </div>
+                    </div>
 
-</body>
-</html>
+                    <!-- Testimonial Quote -->
+                    <div class="feedback-quote bg-light p-4 rounded-4 mt-4">
+                        <i class="fas fa-quote-left text-primary fa-2x mb-3"></i>
+                        <p class="mb-2 fst-italic">"The best ice cream I've ever tasted! iCREAM truly knows how to make people happy."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-circle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; font-weight: bold;">
+                                S
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Sarah Ahmed</h6>
+                                <small class="text-muted">Regular Customer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Form -->
+            <div class="col-lg-7">
+                <div class="feedback-form-wrapper bg-white p-5 rounded-4 shadow-sm">
+                    <h4 class="fw-bold mb-4">Send Your Feedback</h4>
+                    <p class="text-muted small mb-4">Fill in the form below and let us know about your experience.</p>
+
+                    <!-- Success/Error Messages -->
+                    <div id="feedbackMessage" style="display: none;"></div>
+
+                    <form id="feedbackForm" class="feedback-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fas fa-user text-primary me-2"></i>Full Name
+                                    </label>
+                                    <input type="text" id="fullName" class="form-control form-control-lg"
+                                           placeholder="Enter your full name" required />
+                                    <span class="text-danger error-message" id="fullNameError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fas fa-envelope text-primary me-2"></i>Email Address
+                                    </label>
+                                    <input type="email" id="email" class="form-control form-control-lg"
+                                           placeholder="Enter your email" required />
+                                    <span class="text-danger error-message" id="emailError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-ice-cream text-primary me-2"></i>Which flavor did you try?
+                            </label>
+                            <select id="flavor" class="form-select form-select-lg" required>
+                                <option value="">Select your favorite flavor</option>
+                                <option value="Madagascar Vanilla">Madagascar Vanilla</option>
+                                <option value="Belgian Dark Chocolate">Belgian Dark Chocolate</option>
+                                <option value="Strawberry Bliss">Strawberry Bliss</option>
+                                <option value="Mango Tango">Mango Tango</option>
+                                <option value="Butterscotch Dream">Butterscotch Dream</option>
+                                <option value="Pistachio Delight">Pistachio Delight</option>
+                                <option value="Coffee Crunch">Coffee Crunch</option>
+                                <option value="Black Currant">Black Currant</option>
+                            </select>
+                            <span class="text-danger error-message" id="flavorError"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-star text-primary me-2"></i>Rate Your Experience
+                            </label>
+                            <div class="star-rating-box d-flex flex-row-reverse justify-content-end gap-2">
+                                <input type="radio" name="rating" id="star5" value="5" />
+                                <label for="star5" class="star-label" title="Excellent">★</label>
+                                <input type="radio" name="rating" id="star4" value="4" />
+                                <label for="star4" class="star-label" title="Very Good">★</label>
+                                <input type="radio" name="rating" id="star3" value="3" />
+                                <label for="star3" class="star-label" title="Good">★</label>
+                                <input type="radio" name="rating" id="star2" value="2" />
+                                <label for="star2" class="star-label" title="Fair">★</label>
+                                <input type="radio" name="rating" id="star1" value="1" />
+                                <label for="star1" class="star-label" title="Poor">★</label>
+                            </div>
+                            <small class="text-muted">Click on a star to rate</small>
+                            <span class="text-danger error-message d-block" id="ratingError"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-comment text-primary me-2"></i>Your Review / Comments
+                            </label>
+                            <textarea id="comment" class="form-control" rows="5"
+                                      placeholder="Tell us what you loved or how we can improve..." required></textarea>
+                            <span class="text-danger error-message" id="commentError"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 rounded-pill" id="submitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feedback Section End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+@section Scripts {
+    <script>
+        // ===== STAR RATING INTERACTION =====
+        document.querySelectorAll('.star-label').forEach(label => {
+            label.addEventListener('mouseenter', function() {
+                const rating = this.previousElementSibling.value;
+                const labels = this.parentElement.querySelectorAll('.star-label');
+                labels.forEach(l => {
+                    const input = l.previousElementSibling;
+                    if (input.value <= rating) {
+                        l.style.color = '#D4AF37';
+                    } else {
+                        l.style.color = '#ddd';
+                    }
+                });
+            });
+
+            label.addEventListener('click', function() {
+                document.getElementById('ratingError').textContent = '';
+            });
+        });
+
+        document.querySelector('.star-rating-box').addEventListener('mouseleave', function() {
+            const checked = this.querySelector('input[type="radio"]:checked');
+            const labels = this.querySelectorAll('.star-label');
+            labels.forEach(l => {
+                const input = l.previousElementSibling;
+                if (checked && input.value <= checked.value) {
+                    l.style.color = '#D4AF37';
+                } else {
+                    l.style.color = '#ddd';
+                }
+            });
+        });
+
+        // ===== FORM SUBMISSION WITH PURE JAVASCRIPT =====
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+            // Get form values
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const flavor = document.getElementById('flavor').value;
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const comment = document.getElementById('comment').value.trim();
+
+            let isValid = true;
+
+            // Validate Full Name
+            if (!fullName) {
+                document.getElementById('fullNameError').textContent = 'Please enter your full name';
+                isValid = false;
+            }
+
+            // Validate Email
+            const emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Please enter your email address';
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                isValid = false;
+            }
+
+            // Validate Flavor
+            if (!flavor) {
+                document.getElementById('flavorError').textContent = 'Please select a flavor';
+                isValid = false;
+            }
+
+            // Validate Rating
+            if (!rating) {
+                document.getElementById('ratingError').textContent = 'Please select a rating';
+                isValid = false;
+            }
+
+            // Validate Comment
+            if (!comment) {
+                document.getElementById('commentError').textContent = 'Please write your review';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                // Scroll to first error
+                const firstError = document.querySelector('.error-message:not(:empty)');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+
+            // ===== SUBMIT FORM USING JAVASCRIPT =====
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+            submitBtn.disabled = true;
+
+            // Prepare data
+            const formData = {
+                fullName: fullName,
+                email: email,
+                flavor: flavor,
+                rating: rating.value,
+                comment: comment,
+                submittedAt: new Date().toISOString()
+            };
+
+            // Save to localStorage (optional - for demo)
+            let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+            feedbacks.push(formData);
+            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+            // Show success message
+            setTimeout(() => {
+                const messageDiv = document.getElementById('feedbackMessage');
+                messageDiv.style.display = 'block';
+                messageDiv.className = 'alert alert-success';
+                messageDiv.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>Thank you!</strong> Your feedback has been submitted successfully.
+                    <button type="button" class="btn-close float-end" onclick="this.parentElement.style.display='none'"></button>
+                `;
+
+                // Reset form
+                document.getElementById('feedbackForm').reset();
+                document.querySelectorAll('.star-label').forEach(l => l.style.color = '#ddd');
+
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+
+                // Auto hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+
+                // Scroll to success message
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            }, 1500);
+        });
+
+        // ===== BACK TO TOP =====
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== VIEW STORED FEEDBACKS (For Testing) =====
+        console.log('Stored Feedbacks:', JSON.parse(localStorage.getItem('feedbacks') || '[]'));
+    </script>
+}

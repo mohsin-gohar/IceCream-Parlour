@@ -1,7 +1,6 @@
 ﻿using Ice_Cream_Parlour_Eproject.Areas.Models;
 using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels;
 using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ice_Cream_Parlour_Eproject.Services

@@ -19,7 +19,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         public async Task<IActionResult> Index()
         {
             var books = await _context.Books.ToListAsync();
-            return View(books);
+            return View("index", books);
         }
 
         // ===== BOOK ORDER =====

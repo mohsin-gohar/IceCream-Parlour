@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +35,7 @@
             <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Customers" ? "active" : "")">
                 <i class="fas fa-users"></i><span>Customers</span>
             </a>
-            <a asp-area="Admin" asp-controller="Categories" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Category" ? "active" : "")">
+            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Category" ? "active" : "")">
                 <i class="fas fa-tags"></i><span>Categories</span>
             </a>
             <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")">
@@ -42,6 +43,9 @@
             </a>
             <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Orders" ? "active" : "")">
                 <i class="fas fa-shopping-cart"></i><span>Orders</span>
+            </a>
+            <a asp-area="Admin" asp-controller="Books" asp-action="Index"class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Books" ? "active" : "")">
+                <i class="fas fa-book"></i><span>Books</span>
             </a>
             <a asp-area="Admin" asp-controller="Reports" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Reports" ? "active" : "")">
                 <i class="fas fa-file-alt"></i><span>Reports</span>
@@ -92,16 +96,7 @@
         </main>
     </div>
 
-    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script src="~/js/admin.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false) *@
-        
-    <!-- Scripts - Admin Panel -->
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>

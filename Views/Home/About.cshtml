@@ -1,173 +1,156 @@
-﻿
-<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "About - iCREAM";
+}
+cc
+<!-- ===== PAGE HEADER ===== -->
+<div class="page-header">
+    <div class="container text-center py-5">
+        <h1 class="text-white display-3">About Us</h1>
+        <div class="d-inline-flex align-items-center text-white">
+            <a asp-action="Index" asp-controller="Home"
+               class="text-dark text-decoration-none fw-bold"><i class="fa fa-home me-1"></i> Home</a><i class="fa fa-circle px-3" style="font-size: 6px;"></i>
+            <span style="color:black;">About</span>
+        </div>
+    </div>
+</div>  
 
-<head>
-    <meta charset="utf-8">
-    <title>iCREAM - Ice Cream Shop Website Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+<!-- ===== ABOUT CONTENT ===== -->
+<section class="container-fluid py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 text-center">
+                <h2 class="section-title position-relative mb-5">Traditional &amp; Delicious Ice Cream Since 1950</h2>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <!-- Left: About Text -->
+            <div class="col-lg-4 py-4">
+                <h4 class="fw-bold mb-3">About Us</h4>
+                <p class="text-muted">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</p>
+                <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod. Amet sit amet amet no. Est nonumy sed labore eirmod sit magna. Erat at est justo sit ut. Labor diam sed ipsum et eirmod</p>
+                <a href="#" class="btn btn-secondary mt-2">Learn More</a>
+            </div>
 
-    <!-- Favicon -->
-    <link href="~/img/favicon.ico" rel="icon">
+            <!-- Center: Image -->
+            <div class="col-lg-4">
+                <div class="rounded shadow"
+                     style="min-height:350px;
+                    background-image:url('/img/gallery5.jpg');
+                    background-size:cover;
+                    background-position:center;
+                    background-repeat:no-repeat;">
+                </div>
+            </div>
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="~/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/css/style.css" rel="stylesheet">
-    <link href="~/css/style.min.css" rel="stylesheet">
-</head>
-
-<body>
-
-    
-    <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
-        <div class="container text-center py-5">
-            <h1 class="text-white display-3 mt-lg-5">About</h1>
-            <div class="d-inline-flex align-items-center text-white">
-                <p class="m-0"><a class="text-white" asp-action="Index" asp-controller="Home">Home</a></p>
-                <i class="fa fa-circle px-3"></i>
-                <p class="m-0">About</p>
+            <!-- Right: Features -->
+            <div class="col-lg-4 py-4">
+                <h4 class="fw-bold " style="margin-left:100px;">Our Features</h4>
+                <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo.</p>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fa fa-check text-secondary me-3"></i>
+                    <span class="fw-medium">Premium Quality Ingredients</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fa fa-check text-secondary me-3"></i>
+                    <span class="fw-medium">100% Organic Milk</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fa fa-check text-secondary me-3"></i>
+                    <span class="fw-medium">Traditional Family Recipes</span>
+                </div>
+                <a href="#" class="btn btn-primary mt-2">Learn More</a>
             </div>
         </div>
     </div>
-    <!-- Header End -->
-    <!-- About Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <h1 class="section-title position-relative text-center mb-5">Traditional & Delicious Ice Cream Since 1950</h1>
-                </div>
+</section>
+
+<!-- ===== TEAM SECTION ===== -->
+<section class="container-fluid py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="section-title position-relative mb-5">Experienced &amp; Most Famous Ice Cream Chefs</h2>
             </div>
-            <div class="row">
-                <div class="col-lg-4 py-5">
-                    <h4 class="font-weight-bold mb-3">About Us</h4>
-                    <h5 class="text-muted mb-3">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</h5>
-                    <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod. Amet sit amet amet no. Est nonumy sed labore eirmod sit magna. Erat at est justo sit ut. Labor diam sed ipsum et eirmod</p>
-                    <a href="" class="btn btn-secondary mt-2">Learn More</a>
-                </div>
-                <div class="col-lg-4" style="min-height: 400px;">
-                    <div class="position-relative h-100 rounded overflow-hidden">
-                        <img class="position-absolute w-100 h-100" src="img/about.jpg" style="object-fit: cover;">
+            <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Team Member 1 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card text-center">
+                    <div class="team-img-wrapper mx-auto">
+                        <img src="~/img/team-1.jpg" alt="Chef" class="img-fluid rounded-circle">
                     </div>
-                </div>
-                <div class="col-lg-4 py-5">
-                    <h4 class="font-weight-bold mb-3">Our Features</h4>
-                    <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor</p>
-                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Eos kasd eos dolor</h5>
-                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Eos kasd eos dolor</h5>
-                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Eos kasd eos dolor</h5>
-                    <a href="" class="btn btn-primary mt-2">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-    <!-- Team Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="section-title position-relative mb-5">Experienced & Most Famous Ice Cream Chefs</h1>
-                </div>
-                <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="owl-carousel team-carousel">
-                        <div class="team-item">
-                            <div class="team-img mx-auto">
-                                <img class="rounded-circle w-100 h-100" src="img/team-1.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
-                                <h6 class="text-uppercase text-muted mb-4">Designation</h6>
-                                <div class="d-flex justify-content-center pt-1">
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-item">
-                            <div class="team-img mx-auto">
-                                <img class="rounded-circle w-100 h-100" src="img/team-2.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
-                                <h6 class="text-uppercase text-muted mb-4">Designation</h6>
-                                <div class="d-flex justify-content-center pt-1">
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-item">
-                            <div class="team-img mx-auto">
-                                <img class="rounded-circle w-100 h-100" src="img/team-3.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
-                                <h6 class="text-uppercase text-muted mb-4">Designation</h6>
-                                <div class="d-flex justify-content-center pt-1">
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="team-item">
-                            <div class="team-img mx-auto">
-                                <img class="rounded-circle w-100 h-100" src="img/team-4.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
-                                <h6 class="text-uppercase text-muted mb-4">Designation</h6>
-                                <div class="d-flex justify-content-center pt-1">
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
+                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
+                        <h5 class="fw-bold mt-3">John Doe</h5>
+                        <p class="text-muted small">Master Chef</p>
+                        <div class="social-links">
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Team Member 2 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card text-center">
+                    <div class="team-img-wrapper mx-auto">
+                        <img src="~/img/team-2.jpg" alt="Chef" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
+                        <h5 class="fw-bold mt-3">Jane Smith</h5>
+                        <p class="text-muted small">Pastry Chef</p>
+                        <div class="social-links">
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card text-center">
+                    <div class="team-img-wrapper mx-auto">
+                        <img src="~/img/team-3.jpg" alt="Chef" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
+                        <h5 class="fw-bold mt-3">Mike Johnson</h5>
+                        <p class="text-muted small">Ice Cream Expert</p>
+                        <div class="social-links">
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card text-center">
+                    <div class="team-img-wrapper mx-auto">
+                        <img src="~/img/team-4.jpg" alt="Chef" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
+                        <h5 class="fw-bold mt-3">Sarah Williams</h5>
+                        <p class="text-muted small">Recipe Developer</p>
+                        <div class="social-links">
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Team End -->
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+</section>
 
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/easing/easing.min.js"></script>
-    <script src="~/lib/waypoints/waypoints.min.js"></script>
-    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="~/lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="~/lib/lightbox/js/lightbox.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="~/mail/jqBootstrapValidation.min.js"></script>
-    <script src="~/mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="~/js/main.js"></script>
-</body>
-
-</html>

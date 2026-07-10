@@ -1,83 +1,136 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Ice_Cream_Parlour_Eproject.Areas.Models;
+using Ice_Cream_Parlour_Eproject.Data;
+using Ice_Cream_Parlour_Eproject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
 {
-    public class CatagoryController : Controller
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+    public class CategoryController : Controller
     {
-        // GET: CatagoryController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public  CategoryController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+      
+
+        // ===== INDEX - List all categories =====
+        public async Task<IActionResult> Index()
+        {
+            var categories = await _context.Categories.ToListAsync();
+            return View(categories);
+        }
+
+        // ===== DETAILS =====
+        public async Task<IActionResult> Details(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+            return View(category);
+        }
+
+        // ===== CREATE (GET) =====
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: CatagoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CatagoryController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CatagoryController/Create
+        // ===== CREATE (POST) =====
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(Category category)
         {
-            try
+            if (ModelState.IsValid)
             {
+                category.CreatedDate = DateTime.Now;
+                _context.Categories.Add(category);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Category created successfully!";
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(category);
         }
 
-        // GET: CatagoryController/Edit/5
-        public ActionResult Edit(int id)
+        // ===== EDIT (GET) =====
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+            return View(category);
         }
 
-        // POST: CatagoryController/Edit/5
+        // ===== EDIT (POST) =====
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, Category category)
         {
-            try
+            if (id != category.Id)
+                return NotFound();
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var existing = await _context.Categories.FindAsync(id);
+                    if (existing == null)
+                        return NotFound();
+
+                    existing.Name = category.Name;
+                    existing.Description = category.Description;
+                    existing.IsActive = category.IsActive;
+
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Category updated successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CategoryExists(category.Id))
+                        return NotFound();
+                    throw;
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(category);
         }
 
-        // GET: CatagoryController/Delete/5
-        public ActionResult Delete(int id)
+        // ===== DELETE (GET) =====
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+            return View(category);
         }
 
-        // POST: CatagoryController/Delete/5
+        // ===== DELETE (POST) =====
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            var category = await _context.Categories.FindAsync(id);
+            if (category != null)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Category deleted successfully!";
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CategoryExists(int id)
+        {
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

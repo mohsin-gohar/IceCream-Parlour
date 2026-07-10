@@ -1,92 +1,284 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iCREAM - Contact Us</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Contact Us - iCREAM";
+}
 
-   
-        <div class="page-header">
-            <div class="container text-center">
-                <div class="header-content">
-                    <h1>Contact Us</h1>
-                    <p>Have questions or feedback? We'd love to hear from you!</p>
+<!-- Contact Section Start -->
+<div class="container-fluid contact-section py-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Contact Info Column -->
+            <div class="col-lg-5">
+                <div class="contact-info">
+                    <span class="badge bg-primary text-white px-4 py-2 rounded-pill mb-3">
+                        <i class="fas fa-heart me-2"></i>Get In Touch
+                    </span>
+                    <h2 class="display-5 fw-bold mb-3">We Are Here <span class="text-primary">For You</span></h2>
+                    <p class="text-muted mb-4">Aap hamein kisi bhi waqt message ya call kar sakte hain. Hamari team jald se jald aap se rabta karegi.</p>
+
+                    <!-- Contact Info Cards -->
+                    <div class="contact-info-cards">
+                        <div class="info-card d-flex align-items-start p-3 mb-3 rounded-3 bg-white shadow-sm">
+                            <div class="info-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Our Location</h6>
+                                <p class="text-muted mb-0">123 Ice Cream Street, Karachi, Pakistan</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card d-flex align-items-start p-3 mb-3 rounded-3 bg-white shadow-sm">
+                            <div class="info-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Phone Number</h6>
+                                <p class="text-muted mb-0">+92 300 1234567</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card d-flex align-items-start p-3 rounded-3 bg-white shadow-sm">
+                            <div class="info-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Email Address</h6>
+                                <p class="text-muted mb-0">support@icream.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="social-media mt-4">
+                        <h6 class="fw-bold mb-3">Follow Us</h6>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Column -->
+            <div class="col-lg-7">
+                <div class="contact-form-wrapper bg-white p-5 rounded-4 shadow-sm">
+                    <h4 class="fw-bold mb-2">Send Us a Message</h4>
+                    <p class="text-muted small mb-4">We'll get back to you within 24 hours.</p>
+
+                    <!-- Success/Error Messages -->
+                    <div id="contactMessage" style="display: none;"></div>
+
+                    <form id="contactForm" class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fas fa-user text-primary me-2"></i>Your Name
+                                    </label>
+                                    <input type="text" id="userName" class="form-control form-control-lg"
+                                           placeholder="Enter your full name" required />
+                                    <span class="text-danger error-message" id="nameError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-semibold">
+                                        <i class="fas fa-envelope text-primary me-2"></i>Your Email
+                                    </label>
+                                    <input type="email" id="userEmail" class="form-control form-control-lg"
+                                           placeholder="Enter your email" required />
+                                    <span class="text-danger error-message" id="emailError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-tag text-primary me-2"></i>Subject
+                            </label>
+                            <input type="text" id="userSubject" class="form-control form-control-lg"
+                                   placeholder="How can we help you?" required />
+                            <span class="text-danger error-message" id="subjectError"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label fw-semibold">
+                                <i class="fas fa-comment text-primary me-2"></i>Message
+                            </label>
+                            <textarea id="userMessage" class="form-control" rows="5"
+                                      placeholder="Write your message here..." required></textarea>
+                            <span class="text-danger error-message" id="messageError"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 rounded-pill" id="submitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-    
-    
-    <section class="contact-section">
-        <div class="contact-container">
-            
-            <div class="contact-info-col">
-                <p class="section-label">Get In Touch</p>
-                <h2 class="section-heading">We Are Here For You</h2>
-                <p class="info-desc">Aap hamein kisi bhi waqt message ya call kar sakte hain. Hamari team jald se jald aap se rabta karegi.</p>
-                
-                <div class="info-cards-list">
-                    <div class="info-box-card">
-                        <div class="info-icon">📍</div>
-                        <div class="info-text-group">
-                            <h4>Our Location</h4>
-                            <p>123 Ice Cream Street, Karachi, Pakistan</p>
-                        </div>
-                    </div>
 
-                    <div class="info-box-card">
-                        <div class="info-icon">📞</div>
-                        <div class="info-text-group">
-                            <h4>Phone Number</h4>
-                            <p>+92 300 1234567</p>
-                        </div>
-                    </div>
-
-                    <div class="info-box-card">
-                        <div class="info-icon">✉️</div>
-                        <div class="info-text-group">
-                            <h4>Email Address</h4>
-                            <p>support@icream.com</p>
-                        </div>
-                    </div>
+        <!-- Google Map -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="map-container rounded-4 overflow-hidden shadow-sm">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28959.578346889755!2d67.0011!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e066f5f48dd%3A0xb2a6f2d5c72c8f9d!2sKarachi%2C%20Pakistan!5e0!3m2!1sen!2s!4v1680000000000"
+                            width="100%"
+                            height="350"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
-
-            <div class="contact-form-col">
-                <form class="icream-contact-form" onsubmit="event.preventDefault();">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="username">Your Name</label>
-                            <input type="text" id="username" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="useremail">Your Email</label>
-                            <input type="email" id="useremail" placeholder="Enter your email" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="usersubject">Subject</label>
-                        <input type="text" id="usersubject" placeholder="How can we help you?" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="usermessage">Message</label>
-                        <textarea id="usermessage" rows="5" placeholder="Write your message here..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-form-submit">
-                        Send Message
-                    </button>
-                </form>
-            </div>
-
         </div>
-    </section>
-    
+    </div>
+</div>
+<!-- Contact Section End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-</body>
-</html>
+@section Scripts {
+    <script>
+        // ===== FORM SUBMISSION =====
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+            // Get form values
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const subject = document.getElementById('userSubject').value.trim();
+            const message = document.getElementById('userMessage').value.trim();
+
+            let isValid = true;
+
+            // Validate Name
+            if (!name) {
+                document.getElementById('nameError').textContent = 'Please enter your name';
+                isValid = false;
+            }
+
+            // Validate Email
+            const emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Please enter your email';
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email';
+                isValid = false;
+            }
+
+            // Validate Subject
+            if (!subject) {
+                document.getElementById('subjectError').textContent = 'Please enter a subject';
+                isValid = false;
+            }
+
+            // Validate Message
+            if (!message) {
+                document.getElementById('messageError').textContent = 'Please write your message';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                const firstError = document.querySelector('.error-message:not(:empty)');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+
+            // Submit form
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+            submitBtn.disabled = true;
+
+            // Prepare data
+            const formData = {
+                name: name,
+                email: email,
+                subject: subject,
+                message: message,
+                submittedAt: new Date().toISOString()
+            };
+
+            // Save to localStorage (for demo)
+            let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            messages.push(formData);
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+            // Show success message
+            setTimeout(() => {
+                const messageDiv = document.getElementById('contactMessage');
+                messageDiv.style.display = 'block';
+                messageDiv.className = 'alert alert-success';
+                messageDiv.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you soon.
+                    <button type="button" class="btn-close float-end" onclick="this.parentElement.style.display='none'"></button>
+                `;
+
+                // Reset form
+                document.getElementById('contactForm').reset();
+
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+
+                // Auto hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+
+                // Scroll to success message
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            }, 1500);
+        });
+
+        // ===== SOCIAL MEDIA HOVER =====
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 5px 20px rgba(212, 175, 55, 0.3)';
+            });
+
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // ===== BACK TO TOP =====
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+}

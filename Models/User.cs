@@ -11,5 +11,6 @@ namespace Ice_Cream_Parlour_Eproject.Models
         public DateTime? PaymentExpiry { get; set; }
         public bool IsPaid { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string? ProfilePicture { get; set; }
     }
 }

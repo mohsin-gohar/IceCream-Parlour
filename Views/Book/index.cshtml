@@ -1,0 +1,204 @@
+﻿@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Book>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Recipe Books - iCREAM";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div style="background-image:url('/img/header.jpg') ; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
+    <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 8px;"><i class="fas fa-book-open" style="margin-right: 15px;"></i> Recipe Books</h1>
+    <p style="font-size: 1.1rem; opacity: 0.9; max-width: 550px;">Discover Mr. A's collection of handcrafted recipe books — from classic ice cream to gourmet desserts</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px;">
+        <span style="background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 500; border: 1px solid rgba(255,255,255,0.15);">
+            <i class="fas fa-ice-cream" style="margin-right: 5px;"></i> @(Model?.Count() ?? 0) Books
+        </span>
+        <span style="background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 500; border: 1px solid rgba(255,255,255,0.15);">
+            <i class="fas fa-trophy" style="margin-right: 5px;"></i> Bestseller
+        </span>
+        <span style="background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 500; border: 1px solid rgba(255,255,255,0.15);">
+            <i class="fas fa-gift" style="margin-right: 5px;"></i> Free Shipping over $100
+        </span>
+        <span style="background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 500; border: 1px solid rgba(255,255,255,0.15);">
+            <i class="fas fa-user" style="margin-right: 5px;"></i> 10% Off for Members
+        </span>
+    </div>
+</div>
+
+<!-- ===== BOOKS GRID ===== -->
+<section style="padding: 50px 0; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+
+        @if (Model == null || !Model.Any())
+        {
+            <div style="text-align: center; padding: 60px 0;">
+                <i class="fas fa-book-open" style="font-size: 3.5rem; color: #ccc; margin-bottom: 15px; display: block;"></i>
+                <h4 style="color: #888;">No books available</h4>
+                <p style="color: #aaa; font-size: 14px;">Check back soon for new recipe books!</p>
+            </div>
+        }
+        else
+        {
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px;">
+                @foreach (var book in Model)
+                {
+                    <div style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06); height: 100%; display: flex; flex-direction: column; position: relative;">
+
+                        <!-- Book Image -->
+                        <div style="height: 220px; overflow: hidden; position: relative; background: #f8f5f6;">
+                            @if (!string.IsNullOrEmpty(book.ImagePath))
+                            {
+                                <img src="@book.ImagePath" alt="@book.Title" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
+                            }
+                            else
+                            {
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 80px; color: #F195B2; opacity: 0.15;">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                            }
+                            <!-- Stock Badge -->
+                            <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
+                                @(book.StockQuantity > 0 ? "In Stock" : "Out of Stock")
+                            </span>
+                        </div>
+
+                        <!-- Book Content -->
+                        <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1;">
+                            <h5 style="font-size: 18px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px;">@book.Title</h5>
+                            <p style="font-size: 13px; color: #888; margin-bottom: 8px;">
+                                <i class="fas fa-user-edit" style="color: #F195B2; margin-right: 5px;"></i> @book.Author
+                            </p>
+                            <p style="font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 14px; flex: 1;">@book.Description</p>
+
+                            <!-- Book Footer -->
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid #f0ecee;">
+                                <div style="font-size: 20px; font-weight: 800; color: #F195B2;">
+                                    $@book.Price.ToString("0.00")
+                                </div>
+                                <a asp-controller="Book" asp-action="Order" asp-route-id="@book.Id"
+                                   style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 13px; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                                    <i class="fas fa-shopping-bag"></i> Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ===== MEMBERSHIP BANNER ===== -->
+<div style="padding: 18px 0; width: 100%; background: #fff; border-top: 3px solid #F195B2; border-bottom: 1px solid rgba(0,0,0,0.05); margin-top: 10px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+                <div style="background: linear-gradient(135deg, #F195B2, #62C3E7); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; flex-shrink: 0;">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div>
+                    <h5 style="margin: 0; font-size: 15px; font-weight: 700;">Registered Members Get 10% Off!</h5>
+                    <p style="margin: 0; color: #888; font-size: 13px;"><i class="fas fa-check-circle" style="color: #28a745; margin-right: 5px;"></i> Monthly ($15) or Yearly ($150) membership</p>
+                </div>
+            </div>
+            <div style="flex-shrink: 0;">
+                <a asp-controller="Account" asp-action="Register" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 10px 28px; border-radius: 50px; font-weight: 600; font-size: 14px; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
+                    Join Now <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== HOVER EFFECTS (via JavaScript) ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Book card hover effects
+        document.querySelectorAll('.book-card-style').forEach(function(card) {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 15px 35px rgba(241,149,178,0.15)';
+                this.style.borderColor = '#F195B2';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.06)';
+                this.style.borderColor = 'rgba(241,149,178,0.06)';
+            });
+        });
+    });
+</script>
+
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" style="position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 6px 20px rgba(241,149,178,0.4); text-decoration: none; z-index: 999; transition: all 0.3s ease;"
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(241,149,178,0.5)';"
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(241,149,178,0.4)';">
+    <i class="fa fa-angle-double-up"></i>
+</a>
+
+<!-- ===== RESPONSIVE TWEAKS ===== -->
+<style>
+    /* Back to top button - visible on scroll */
+    .back-to-top-btn {
+        transition: all 0.3s ease;
+    }
+
+    @@media (max-width: 768px) {
+        .book-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
+        .book-image {
+            height: 160px !important;
+        }
+
+        .book-title {
+            font-size: 16px !important;
+        }
+
+        .book-price {
+            font-size: 17px !important;
+        }
+
+        .btn-order-book {
+            font-size: 12px !important;
+            padding: 6px 14px !important;
+        }
+
+        .membership-banner {
+            padding: 14px 0 !important;
+        }
+
+            .membership-banner .flex-wrap {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+
+                .membership-banner .flex-wrap .flex-1 {
+                    justify-content: center !important;
+                }
+    }
+    @@media (max-width: 576px) {
+        .book-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+
+        .book-image {
+            height: 200px !important;
+        }
+
+        .page-header h1 {
+            font-size: 2rem !important;
+        }
+
+        .page-header p {
+            font-size: 0.95rem !important;
+        }
+
+        .badge-group span {
+            font-size: 11px !important;
+            padding: 4px 12px !important;
+        }
+    }
+</style>

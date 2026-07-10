@@ -1,174 +1,185 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iCREAM — Artisan Gallery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet">
-    <link href="~/css/style.min.css" rel="stylesheet">
-
-</head>
-<body>
+﻿@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Gallery - iCREAM";
+}
 
 
-    <!-- HERO -->
-    <div class="page-header">
-        <div class="container text-center">
-            <div class="header-content">
-                <h1>Our Gallery</h1>
-                <p>A visual treat of our premium ice cream flavors and events</p>
-            </div>
+<style>
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 992px) {
+        .gallery-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+        }
+
+        .filter-chip {
+            padding: 8px 20px !important;
+            font-size: 13px !important;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+        }
+
+        .page-header h1 {
+            font-size: 2rem !important;
+        }
+
+        .filter-chip {
+            padding: 6px 14px !important;
+            font-size: 12px !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .gallery-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+        }
+
+        .gallery-item {
+            border-radius: 14px !important;
+        }
+
+        .filter-chip {
+            padding: 4px 12px !important;
+            font-size: 11px !important;
+        }
+    }
+</style>
+
+<!-- ===== FILTER BAR ===== -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 30px 20px; max-width: 1200px; margin: 0 auto;">
+    <button class="filter-chip active" data-filter="all" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">All</button>
+    <button class="filter-chip" data-filter="recipe" style="background: #fff; border: 2px solid #f0e8e5; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.3s ease;">🍦 Flavors</button>
+    <button class="filter-chip" data-filter="book" style="background: #fff; border: 2px solid #f0e8e5; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.3s ease;">📚 Books</button>
+    <button class="filter-chip" data-filter="user" style="background: #fff; border: 2px solid #f0e8e5; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.3s ease;">👨‍🍳 User Recipes</button>
+</div>
+
+<!-- ===== GALLERY GRID ===== -->
+<section style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px;">
+    @if (Model == null || !Model.Any())
+    {
+        <div style="text-align: center; padding: 60px 0;">
+            <i class="fas fa-images fa-3x text-muted mb-3"></i>
+            <h4 style="color: #888;">No items in gallery yet</h4>
+            <p style="color: #aaa;">Check back soon for new additions!</p>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px;">
+            @foreach (var item in Model)
+            {
+                <div class="gallery-item" data-type="@item.Type" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+                    <!-- Image -->
+                    <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="@item.ImagePath" alt="@item.Name" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                        }
+                        else
+                        {
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 60px; color: #ddd;">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        }
+                        <!-- Type Badge -->
+                        <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
+                            @switch (item.Type)
+                            {
+                                case "recipe":
+                                    <text>🍦 Flavor</text>
+                                    break;
+                                case "book":
 
-    <div class="filter-bar">
-        <button class="filter-chip active">All Flavors</button>
-        <button class="filter-chip">Classic</button>
-        <button class="filter-chip">Fruit</button>
-        <button class="filter-chip">Nut & Cream</button>
-        <button class="filter-chip">Seasonal</button>
-        <button class="filter-chip">Sugar-Free</button>
-        <button class="filter-chip">Vegan</button>
-    </div>
+                                    <text>📚 Book</text>
+                                    break;
+                                case "user":
 
-    <section class="gallery-section">
-        <p class="section-label">Our Collection</p>
-        <h2 class="section-heading">Signature Flavors</h2>
+                                    <text>👨‍🍳 User</text>
+                                    break;
+                                default:
 
-        <div class="gallery-grid">
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery1.jpg" alt="Madagascar Vanilla" class="flavor-img">
+                                    <text>@item.Type</text>
+                                    break;
+                            }
+                        </span>
+                    </div>
+                    <!-- Content -->
+                    <div style="padding: 16px 18px 18px; text-align: center;">
+                        <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">@item.Name</div>
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                            <p style="font-size: 13px; color: #888; margin-bottom: 6px;">@item.Description</p>
+                        }
+                        @if (item.Price > 0)
+                        {
+                            <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$@item.Price.ToString("0.00")</div>
+                        }
+                        @if (!string.IsNullOrEmpty(item.Author))
+                        {
+                            <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> @item.Author</div>
+                        }
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="flavor-name">Madagascar Vanilla</div>
-                    <div class="price-tag">$3.99 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery2.jpg" alt="Belgian Dark Chocolate" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Belgian Dark Chocolate</div>
-                    <div class="price-tag">$4.50 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbLvmAeifOnse5RIa5U0q-rQXwE31C9zVdmjdHpoo4tg&s" alt="Fresh Strawberry" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Fresh Strawberry</div>
-                    <div class="price-tag">$3.75 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery4.jpg" alt="Alphonso Mango" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Alphonso Mango</div>
-                    <div class="price-tag">$4.25 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery5.jpg" alt="Bronte Pistachio" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Bronte Pistachio</div>
-                    <div class="price-tag">$5.50 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery6.jpg" alt="Butterscotch Caramel" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Butterscotch Caramel</div>
-                    <div class="price-tag">$3.99 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery7.jpg" alt="Persian Rose" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Persian Rose</div>
-                    <div class="price-tag">$4.75 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/product-8.jpg" alt="Wild Blueberry" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Wild Blueberry</div>
-                    <div class="price-tag">$4.25 <span>/ scoop</span></div>
-                </div>
-            </div>
-
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery9.jpg" alt="Espresso Crunch" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Espresso Crunch</div>
-                    <div class="price-tag">$4.99 <span>/ scoop</span></div>
-                </div>
-            </div>
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery9.jpg" alt="Espresso Crunch" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Espresso Crunch</div>
-                    <div class="price-tag">$4.99 <span>/ scoop</span></div>
-                </div>
-            </div>
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery9.jpg" alt="Espresso Crunch" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Espresso Crunch</div>
-                    <div class="price-tag">$4.99 <span>/ scoop</span></div>
-                </div>
-            </div>
-            <div class="flavor-card">
-                <div class="card-image-box">
-                    <img src="~/img/gallery9.jpg" alt="Espresso Crunch" class="flavor-img">
-                </div>
-                <div class="card-body">
-                    <div class="flavor-name">Espresso Crunch</div>
-                    <div class="price-tag">$4.99 <span>/ scoop</span></div>
-                </div>
-            </div>
-
+            }
         </div>
-    </section>
+    }
+</section>
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" style="position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 6px 20px rgba(241,149,178,0.4); text-decoration: none; z-index: 999; transition:0.3s;">
+    <i class="fa fa-angle-double-up"></i>
+</a>
+<!-- ===== SCRIPTS ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+      filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                // Update active state
+                filterChips.forEach(c => {
+                    c.style.background = '#fff';
+                    c.style.color = '#666';
+                    c.style.border = '2px solid #f0e8e5';
+                });
+                this.style.background = 'linear-gradient(135deg, #F195B2, #62C3E7)';
+                this.style.color = '#fff';
+                this.style.border = 'none';
 
-
-
-
-    <script>
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-              chip.addEventListener('click', function() {
-                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-              });
+                const filter = this.getAttribute('data-filter');
+                galleryItems.forEach(item => {
+                    const type = item.getAttribute('data-type');
+                    if (filter === 'all' || type === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
-    </script>
-    <script src="~/js/main.js"></script>
-</body>
-</html>
+        });
+
+        // Hover effects
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 15px 35px rgba(241,149,178,0.15)';
+                this.style.borderColor = '#F195B2';
+                const img = this.querySelector('img');
+                if (img) img.style.transform = 'scale(1.08)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.06)';
+                this.style.borderColor = 'rgba(241,149,178,0.06)';
+                const img = this.querySelector('img');
+                if (img) img.style.transform = 'scale(1)';
+            });
+        });
+    });
+</script>

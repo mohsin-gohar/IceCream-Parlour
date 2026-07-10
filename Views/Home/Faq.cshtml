@@ -1,66 +1,406 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "FAQ - iCREAM";
+}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iCREAM - Complete FAQ | 100+ Questions Answered</title>
-    <!-- Google Fonts + Font Awesome + Bootstrap -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/style.css" />
-</head>
-<body>
-
-    <div class="faq-page">
-        <!-- Hero Section -->
-        <div class="faq-hero">
-            <div class="brand-icon">
-                <i class="fas fa-ice-cream"></i>
-            </div>
-            <h1>Frequently Asked Questions</h1>
-            <p>Everything you need to know about iCREAM Parlor — from membership and recipes to contests and orders</p>
-    
-            <div class="faq-stats">
-                <span class="stat-item"><i class="fas fa-question-circle"></i> 100+ Questions</span>
-                <span class="stat-item"><i class="fas fa-tag"></i> 12 Categories</span>
-                <span class="stat-item"><i class="fas fa-users"></i> 20+ Flavors</span>
-                <span class="stat-item"><i class="fas fa-trophy"></i> Recipe Contest</span>
+<!-- FAQ Section Start -->
+<div class="container-fluid faq-section py-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <!-- FAQ Stats -->
+        <div class="faq-stats-wrapper text-center mb-5">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card bg-white p-4 rounded-4 shadow-sm">
+                        <div class="stat-icon text-primary mb-2">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </div>
+                        <h3 class="fw-bold mb-0">100+</h3>
+                        <p class="text-muted mb-0">Questions Answered</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card bg-white p-4 rounded-4 shadow-sm">
+                        <div class="stat-icon text-primary mb-2">
+                            <i class="fas fa-tag fa-2x"></i>
+                        </div>
+                        <h3 class="fw-bold mb-0">12</h3>
+                        <p class="text-muted mb-0">Categories</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card bg-white p-4 rounded-4 shadow-sm">
+                        <div class="stat-icon text-primary mb-2">
+                            <i class="fas fa-ice-cream fa-2x"></i>
+                        </div>
+                        <h3 class="fw-bold mb-0">20+</h3>
+                        <p class="text-muted mb-0">Flavors</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card bg-white p-4 rounded-4 shadow-sm">
+                        <div class="stat-icon text-primary mb-2">
+                            <i class="fas fa-trophy fa-2x"></i>
+                        </div>
+                        <h3 class="fw-bold mb-0">Monthly</h3>
+                        <p class="text-muted mb-0">Recipe Contest</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Search Bar -->
-        <div class="faq-search">
-            <input type="text" id="faqSearchInput" placeholder="Search your question..." onkeyup="searchFAQ()">
+        <div class="faq-search-wrapper mb-4">
+            <div class="input-group input-group-lg">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="fas fa-search text-primary"></i>
+                </span>
+                <input type="text" id="faqSearch" class="form-control border-start-0"
+                       placeholder="Search your question..." />
+                <button class="btn btn-primary" onclick="clearSearch()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
 
         <!-- Category Filters -->
-        <div class="faq-categories" id="categoryFilters">
-            <!-- Categories will be injected via JS -->
+        <div class="faq-categories-wrapper mb-4">
+            <div class="d-flex flex-wrap gap-2" id="categoryFilters">
+                <button class="btn btn-outline-primary active" data-category="all" onclick="filterCategory('all')">
+                    <i class="fas fa-list me-2"></i>All
+                </button>
+                <button class="btn btn-outline-primary" data-category="general" onclick="filterCategory('general')">
+                    <i class="fas fa-info-circle me-2"></i>General
+                </button>
+                <button class="btn btn-outline-primary" data-category="membership" onclick="filterCategory('membership')">
+                    <i class="fas fa-user-plus me-2"></i>Membership
+                </button>
+                <button class="btn btn-outline-primary" data-category="orders" onclick="filterCategory('orders')">
+                    <i class="fas fa-shopping-cart me-2"></i>Orders
+                </button>
+                <button class="btn btn-outline-primary" data-category="recipes" onclick="filterCategory('recipes')">
+                    <i class="fas fa-utensils me-2"></i>Recipes
+                </button>
+                <button class="btn btn-outline-primary" data-category="delivery" onclick="filterCategory('delivery')">
+                    <i class="fas fa-truck me-2"></i>Delivery
+                </button>
+                <button class="btn btn-outline-primary" data-category="contest" onclick="filterCategory('contest')">
+                    <i class="fas fa-trophy me-2"></i>Contest
+                </button>
+            </div>
         </div>
 
         <!-- FAQ Accordion -->
-        <div class="faq-accordion" id="faqContainer">
-            <!-- FAQ items will be injected via JavaScript -->
+        <div class="faq-accordion-wrapper" id="faqContainer">
+            <!-- FAQ items will be rendered by JavaScript -->
         </div>
 
         <!-- Still Have Questions -->
-        <div class="still-questions">
-            <h3>Still have questions?</h3>
-            <p>We're here to help! Reach out to us anytime.</p>
-            <div class="contact-btns">
-                <a href="contact.html" class="btn-contact"><i class="fas fa-envelope"></i> Contact Us</a>
-                <a href="feedback.html" class="btn-feedback"><i class="fas fa-comment"></i> Give Feedback</a>
+        <div class="still-questions text-center bg-light p-5 rounded-4 mt-5">
+            <h3 class="fw-bold mb-3">Still have questions?</h3>
+            <p class="text-muted mb-4">We're here to help! Reach out to us anytime.</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a asp-action="Contact" asp-controller="Home" class="btn btn-primary btn-lg rounded-pill px-5">
+                    <i class="fas fa-envelope me-2"></i>Contact Us
+                </a>
+                <a asp-action="Feedback" asp-controller="Home" class="btn btn-outline-primary btn-lg rounded-pill px-5">
+                    <i class="fas fa-comment me-2"></i>Give Feedback
+                </a>
             </div>
         </div>
     </div>
+</div>
+<!-- FAQ Section End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-    <script src="~/js/min.js"></script>
+@section Scripts {
+    <script>
+        // ===== FAQ DATA =====
+        const faqData = [
+            // General
+            {
+                id: 1,
+                category: 'general',
+                question: 'What is iCREAM Ice Cream Parlor?',
+                answer: 'iCREAM is a premium ice cream parlor that offers handcrafted, organic ice cream made from the finest ingredients. We have been serving delicious ice cream since 2006 with over 20+ flavors.'
+            },
+            {
+                id: 2,
+                category: 'general',
+                question: 'Where is iCREAM located?',
+                answer: 'We are located at 123 Ice Cream Street, New York, USA. We also offer delivery services across the city.'
+            },
+            {
+                id: 3,
+                category: 'general',
+                question: 'What are your business hours?',
+                answer: 'We are open from 10:00 AM to 10:00 PM, 7 days a week. Delivery hours are from 11:00 AM to 9:00 PM.'
+            },
+            // Membership
+            {
+                id: 4,
+                category: 'membership',
+                question: 'How much does membership cost?',
+                answer: 'Monthly membership is $15/month and Yearly membership is $150/year. Yearly members get full recipe access + 1 free recipe book.'
+            },
+            {
+                id: 5,
+                category: 'membership',
+                question: 'What are the benefits of membership?',
+                answer: 'Members get access to exclusive recipes, special discounts, early access to new flavors, and invitations to special events.'
+            },
+            {
+                id: 6,
+                category: 'membership',
+                question: 'How do I cancel my membership?',
+                answer: 'You can cancel your membership anytime by going to your account settings or contacting our support team.'
+            },
+            // Orders
+            {
+                id: 7,
+                category: 'orders',
+                question: 'How do I place an order?',
+                answer: 'You can place an order through our website by selecting your favorite flavors and adding them to your cart. You can also call us directly.'
+            },
+            {
+                id: 8,
+                category: 'orders',
+                question: 'What payment methods do you accept?',
+                answer: 'We accept all major credit cards, debit cards, PayPal, and cash on delivery.'
+            },
+            {
+                id: 9,
+                category: 'orders',
+                question: 'Can I cancel my order?',
+                answer: 'Yes, you can cancel your order within 30 minutes of placing it. Please contact our support team immediately.'
+            },
+            // Recipes
+            {
+                id: 10,
+                category: 'recipes',
+                question: 'How do I submit my own recipe?',
+                answer: 'You can submit your recipe through our website. If selected, you\'ll receive prize money and a participation certificate.'
+            },
+            {
+                id: 11,
+                category: 'recipes',
+                question: 'Can I view recipes without membership?',
+                answer: 'Basic recipes are available for free. Premium recipes require a membership subscription.'
+            },
+            {
+                id: 12,
+                category: 'recipes',
+                question: 'How do I download recipe books?',
+                answer: 'Recipe books are available for download in your account dashboard after becoming a member.'
+            },
+            // Delivery
+            {
+                id: 13,
+                category: 'delivery',
+                question: 'What is the delivery time?',
+                answer: 'Standard delivery takes 30-45 minutes. Express delivery is available within 20 minutes for an additional fee.'
+            },
+            {
+                id: 14,
+                category: 'delivery',
+                question: 'Is there a delivery fee?',
+                answer: 'Free delivery on orders above $25. A $3 delivery fee applies to orders below $25.'
+            },
+            {
+                id: 15,
+                category: 'delivery',
+                question: 'Do you deliver outside the city?',
+                answer: 'Currently we deliver within the city limits. We are expanding our delivery area soon.'
+            },
+            // Contest
+            {
+                id: 16,
+                category: 'contest',
+                question: 'How does the recipe contest work?',
+                answer: 'Submit your best ice cream recipe every month. Winners are selected by our expert panel and receive cash prizes.'
+            },
+            {
+                id: 17,
+                category: 'contest',
+                question: 'What is the prize for winning?',
+                answer: 'Winners receive prize money (amount decided by admin), a participation certificate, and their recipe is featured on our website.'
+            },
+            {
+                id: 18,
+                category: 'contest',
+                question: 'How often is the contest held?',
+                answer: 'The recipe contest is held monthly. Submission deadlines are on the 25th of each month.'
+            },
+            // More General
+            {
+                id: 19,
+                category: 'general',
+                question: 'Do you offer vegan options?',
+                answer: 'Yes! We have a selection of vegan ice cream flavors made with coconut milk and almond milk.'
+            },
+            {
+                id: 20,
+                category: 'general',
+                question: 'Are your products organic?',
+                answer: 'Yes, we use 100% organic milk and natural ingredients in all our ice cream products.'
+            },
+            {
+                id: 21,
+                category: 'orders',
+                question: 'Can I customize my ice cream?',
+                answer: 'Absolutely! You can customize your ice cream with various toppings, mix-ins, and sauces.'
+            },
+            {
+                id: 22,
+                category: 'membership',
+                question: 'Do you offer family memberships?',
+                answer: 'Yes, family memberships are available for $40/month for up to 4 family members.'
+            },
+            {
+                id: 23,
+                category: 'delivery',
+                question: 'Do you deliver ice cream cakes?',
+                answer: 'Yes, we deliver custom ice cream cakes for all celebrations and special occasions.'
+            },
+            {
+                id: 24,
+                category: 'recipes',
+                question: 'Can I request a specific recipe?',
+                answer: 'Yes, you can request recipes through our contact form. We\'ll try to add your requested flavors.'
+            }
+        ];
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        // ===== RENDER FAQ ITEMS =====
+        function renderFaqItems(items) {
+            const container = document.getElementById('faqContainer');
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                        <h4>No questions found</h4>
+                        <p class="text-muted">Try adjusting your search or filter</p>
+                    </div>
+                `;
+                return;
+            }
 
-</body>
-</html>
+            let html = '<div class="accordion" id="faqAccordion">';
+
+            items.forEach((item, index) => {
+                const isActive = index === 0 ? 'show' : '';
+                const collapsed = index === 0 ? '' : 'collapsed';
+
+                html += `
+                    <div class="accordion-item border-0 shadow-sm mb-3 rounded-3" data-category="${item.category}">
+                        <h2 class="accordion-header" id="heading${item.id}">
+                            <button class="accordion-button ${collapsed} rounded-3" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapse${item.id}"
+                                    aria-expanded="${index === 0 ? 'true' : 'false'}"
+                                    aria-controls="collapse${item.id}">
+                                <span class="category-badge bg-primary text-white px-2 py-1 rounded-pill me-3 small">
+                                    ${item.category}
+                                </span>
+                                ${item.question}
+                            </button>
+                        </h2>
+                        <div id="collapse${item.id}" class="accordion-collapse collapse ${isActive}"
+                             aria-labelledby="heading${item.id}" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                ${item.answer}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // ===== FILTER BY CATEGORY =====
+        let currentCategory = 'all';
+
+        function filterCategory(category) {
+            currentCategory = category;
+
+            // Update active button
+            document.querySelectorAll('#categoryFilters .btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter items
+            const searchTerm = document.getElementById('faqSearch').value.toLowerCase();
+            applyFilters(category, searchTerm);
+        }
+
+        // ===== SEARCH FAQ =====
+        document.getElementById('faqSearch').addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            applyFilters(currentCategory, searchTerm);
+        });
+
+        // ===== APPLY FILTERS =====
+        function applyFilters(category, searchTerm) {
+            let filtered = faqData;
+
+            // Filter by category
+            if (category !== 'all') {
+                filtered = filtered.filter(item => item.category === category);
+            }
+
+            // Filter by search
+            if (searchTerm) {
+                filtered = filtered.filter(item =>
+                    item.question.toLowerCase().includes(searchTerm) ||
+                    item.answer.toLowerCase().includes(searchTerm) ||
+                    item.category.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            renderFaqItems(filtered);
+
+            // Re-initialize accordion
+            if (typeof bootstrap !== 'undefined') {
+                // Bootstrap handles this automatically
+            }
+        }
+
+        // ===== CLEAR SEARCH =====
+        function clearSearch() {
+            document.getElementById('faqSearch').value = '';
+            applyFilters(currentCategory, '');
+        }
+
+        // ===== INITIAL RENDER =====
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFaqItems(faqData);
+
+            // Update stats with actual data
+            const totalQuestions = faqData.length;
+            const categories = [...new Set(faqData.map(item => item.category))];
+
+            document.querySelector('.stat-card:nth-child(1) h3').textContent = totalQuestions + '+';
+            document.querySelector('.stat-card:nth-child(2) h3').textContent = categories.length;
+
+            // Show all categories in button filter
+        });
+
+        // ===== BACK TO TOP =====
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+}

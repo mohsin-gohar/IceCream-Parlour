@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Models.ViewModels;
-using Ice_Cream_Parlour_Eproject.Areas.Models.Enums;
 using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels;
+using Ice_Cream_Parlour_Eproject.Areas.Models.Enums;
 
 namespace Ice_Cream_Parlour_Eproject.Services
 {
@@ -79,19 +78,19 @@ namespace Ice_Cream_Parlour_Eproject.Services
                     FullName = c.FullName,
                     Email = c.Email
                 }).ToListAsync(),
-                Products = await _context.Products.Select(p => new ProductOrderSelectDto
+                Products = await _context.Recipes.Select(p => new ProductOrderSelectDto
                 {
                     Id = p.Id,
                     Name = p.Name,
-                    FinalPrice = p.Price - (p.Price * p.DiscountPercent / 100),
-                    StockQuantity = p.StockQuantity
+                    FinalPrice = 0,
+                    StockQuantity = 9999
                 }).ToListAsync()
             };
         }
 
         public async Task<int> CreateAsync(OrderCreateViewModel model, string? userId)
         {
-            var order = new Models.Entities.Order
+            var order = new Areas.Models.Order
             {
                 CustomerId = model.CustomerId,
                 CustomerName = _context.Customers.Find(model.CustomerId)?.FullName ?? "",

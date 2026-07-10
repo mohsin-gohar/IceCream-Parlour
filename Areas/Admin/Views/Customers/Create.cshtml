@@ -1,9 +1,10 @@
 @using Ice_Cream_Parlour_Eproject.Models
-@using Ice_Cream_Parlour_Eproject.Models.ViewModels
+@using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels
 @model CustomerViewModel
 @{
     ViewData["Title"] = Model.Id == 0 ? "Add Customer" : "Edit Customer";
     var isEdit = Model.Id > 0;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="page-header">

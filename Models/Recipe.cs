@@ -30,5 +30,7 @@ namespace Ice_Cream_Parlour_Eproject.Models
 
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
+        public decimal Price { get; set; }
+
     }
 }

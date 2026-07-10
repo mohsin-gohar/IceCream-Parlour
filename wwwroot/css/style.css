@@ -6188,3 +6188,376 @@
             padding: 14px 10px;
         }
     }
+/*    index new css*/
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+    position: relative;
+    padding-bottom: 15px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #F195B2, #62C3E7);
+    border-radius: 10px;
+}
+
+.section-title.text-start::after {
+    left: 0;
+    transform: none;
+}
+
+/* ===== TEAM CARDS ===== */
+.team-card {
+    transition: all 0.3s ease;
+}
+
+    .team-card:hover {
+        transform: translateY(-8px);
+    }
+
+.team-img-wrapper {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+}
+
+    .team-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+
+.team-card:hover .team-img-wrapper img {
+    border-color: #F195B2;
+    transform: scale(1.04);
+}
+
+.team-info {
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 12px !important;
+    border: 1px solid rgba(241,149,178,0.1);
+    border-radius: 16px !important;
+}
+
+    .team-info h5 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+
+    .team-info p {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 8px;
+    }
+
+    .team-info .social-links a {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 50%;
+        background: #f8f5f6;
+        color: #888;
+        transition: all 0.3s ease;
+    }
+
+        .team-info .social-links a:hover {
+            background: linear-gradient(135deg, #F195B2, #62C3E7);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+@media (max-width: 768px) {
+    .team-img-wrapper {
+        width: 130px;
+        height: 130px;
+    }
+
+    .team-info {
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-img-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+
+    .team-info {
+        max-width: 160px;
+    }
+
+    .section-title::after {
+        width: 50px;
+    }
+}
+
+/*faq new csss*/
+/* ===== FAQ SECTION ===== */
+.faq-section {
+    background: #f8f9fa;
+}
+
+/* ===== STATS CARDS ===== */
+.stat-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    .stat-card .stat-icon {
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon {
+        transform: scale(1.1);
+    }
+
+/* ===== SEARCH BAR ===== */
+.faq-search-wrapper .input-group-text {
+    background: white;
+    border-right: none;
+}
+
+.faq-search-wrapper .form-control {
+    border-left: none;
+    padding: 12px 20px;
+}
+
+    .faq-search-wrapper .form-control:focus {
+        box-shadow: none;
+        border-color: #D4AF37;
+    }
+
+.faq-search-wrapper .btn {
+    border-radius: 0 12px 12px 0;
+}
+
+/* ===== CATEGORY FILTERS ===== */
+#categoryFilters .btn {
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+    border-color: #D4AF37;
+    color: #D4AF37;
+}
+
+    #categoryFilters .btn:hover {
+        background: #D4AF37;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    #categoryFilters .btn.active {
+        background: #D4AF37;
+        color: white;
+        border-color: #D4AF37;
+    }
+
+/* ===== ACCORDION ===== */
+.accordion-item {
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+    .accordion-item:hover {
+        box-shadow: 0 5px 25px rgba(0,0,0,0.08) !important;
+    }
+
+.accordion-button {
+    padding: 20px 25px;
+    font-weight: 500;
+    background: white;
+    border: none;
+}
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, #f8f9fa, #ffffff);
+        color: #3D0C11;
+        box-shadow: none;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: #D4AF37;
+    }
+
+    .accordion-button .category-badge {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+.accordion-body {
+    padding: 20px 25px;
+    line-height: 1.8;
+}
+
+/* ===== STILL QUESTIONS ===== */
+.still-questions {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+    .still-questions .btn {
+        font-weight: 500;
+    }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .stat-card {
+        margin-bottom: 15px;
+    }
+
+    .accordion-button {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+
+        .accordion-button .category-badge {
+            display: none;
+        }
+
+    .faq-search-wrapper .input-group {
+        flex-wrap: nowrap;
+    }
+
+    .still-questions .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+/* ===== CONTACT SECTION ===== */
+.contact-section {
+    background: #f8f9fa;
+}
+
+/* ===== INFO CARDS ===== */
+.info-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+    .info-card:hover {
+        transform: translateX(8px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+    }
+
+    .info-card .info-icon {
+        transition: all 0.3s ease;
+    }
+
+    .info-card:hover .info-icon {
+        background: #D4AF37 !important;
+        transform: scale(1.1);
+    }
+
+/* ===== CONTACT FORM ===== */
+.contact-form-wrapper {
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+    .contact-form-wrapper:hover {
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08) !important;
+    }
+
+/* ===== FORM STYLES ===== */
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #D4AF37;
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+    }
+
+.form-control-lg {
+    font-size: 1rem;
+}
+
+.form-label {
+    color: #2d2d2d;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+/* ===== SOCIAL MEDIA ===== */
+.social-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .social-link:hover {
+        background: #D4AF37 !important;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+    }
+
+/* ===== MAP ===== */
+.map-container {
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+    .map-container iframe {
+        display: block;
+    }
+
+/* ===== RESPONSIVE ===== */
+@@media (max-width: 768px) {
+    .contact-form-wrapper {
+        padding: 30px 20px !important;
+    }
+
+    .info-card {
+        padding: 15px !important;
+    }
+
+    .page-header {
+        min-height: 250px;
+    }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+    .contact-info {
+        text-align: center;
+    }
+
+    .info-card {
+        text-align: left;
+    }
+
+    .social-media {
+        text-align: center;
+    }
+
+        .social-media .d-flex {
+            justify-content: center;
+        }
+}

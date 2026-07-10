@@ -47,7 +47,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Models
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 
- 
+
 
     public enum ProductStatus
     {

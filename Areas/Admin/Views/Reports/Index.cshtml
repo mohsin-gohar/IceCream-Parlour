@@ -1,7 +1,9 @@
+@using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels
 @using Ice_Cream_Parlour_Eproject.Models
 @model ReportViewModel
 @{
     ViewData["Title"] = "Reports";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
     
 <div class="page-header">
@@ -62,7 +64,22 @@
         </table>
     </div>
 </div>
-
-
 <script src="~/js/admin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const reportCanvas = document.getElementById("reportChart");
 
+    if (reportCanvas) {
+    new Chart(reportCanvas, {
+    type: "bar",
+    data: {
+    labels: ["Jan","Feb","Mar","Apr","May"],
+    datasets: [{
+    label: "Sales",
+    data: [1200, 1800, 1500, 2400, 2100],
+    borderWidth: 1
+    }]
+    }
+    });
+    }
+</script>

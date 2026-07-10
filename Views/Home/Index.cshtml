@@ -1,585 +1,348 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Home - iCREAM";
+}
 
-<head>
-    <meta charset="utf-8">
-    <title>iCREAM - Ice Cream Shop Website Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
-
-    <!-- Favicon -->
-    <link href="~/img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="~/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/css/style.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5 pb-5" >
-        <div id="header-carousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="~/img/carousel-1.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
-                            <h1 class="display-3 text-white mb-md-4">Traditional Ice Cream Since 1950</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="~/img/carousel-2.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
-                            <h1 class="display-3 text-white mb-md-4">Made From Our Own Organic Milk</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Learn More</a>
-                        </div>
+<!-- ===== HERO CAROUSEL ===== -->
+<div class="container-fluid p-0 mb-5 pb-5">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="~/img/carousel-1.jpg" alt="Image">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
+                        <h1 class="display-3 text-white mb-md-4">Traditional Ice Cream Since 2006</h1>
+                        <a asp-controller="Home" asp-action="About" class="btn btn-primary py-md-3 px-md-5 mt-2">Learn More</a>
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                <div class="btn btn-secondary px-0" style="width: 45px; height: 45px;">
-                    <span class="carousel-control-prev-icon mb-n1"></span>
-                </div>
-            </a>
-            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                <div class="btn btn-secondary px-0" style="width: 45px; height: 45px;">
-                    <span class="carousel-control-next-icon mb-n1"></span>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- Carousel End -->
-    <!-- About Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <h1 class="section-title position-relative text-center mb-5">Traditional & Delicious Ice Cream Since 1950</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 py-5">
-                    <h4 class="font-weight-bold mb-3">About Us</h4>
-                    <h5 class="text-muted mb-3">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</h5>
-                    <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod. Amet sit amet amet no. Est nonumy sed labore eirmod sit magna. Erat at est justo sit ut. Labor diam sed ipsum et eirmod</p>
-                    <a href="" class="btn btn-secondary mt-2">Learn More</a>
-                </div>
-                <div class="col-lg-4" style="min-height: 400px;">
-                    <div class="position-relative h-100 rounded overflow-hidden">
-                        <img class="position-absolute w-100 h-100" src="~/img/about.jpg" style="object-fit: cover;">
-                    </div>
-                </div>
-                <div class="col-lg-4 py-5">
-                    <h4 class="font-weight-bold mb-3">Our Features</h4>
-                    <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor</p>
-                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Eos kasd eos dolor</h5>
-                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Eos kasd eos dolor</h5>
-                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Eos kasd eos dolor</h5>
-                    <a href="" class="btn btn-primary mt-2">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-    <!-- Promotion Start -->
-    <div class="container-fluid my-5 py-5 px-0">
-        <div class="row bg-primary m-0">
-            <div class="col-md-6 px-0" style="min-height: 500px;">
-                <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100" src="~/img/promotion.jpg" style="object-fit: cover;">
-                    <button type="button" class="btn-play" data-toggle="modal"
-                            data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-target="#videoModal">
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-6 py-5 py-md-0 px-0">
-                <div class="h-100 d-flex flex-column align-items-center justify-content-center text-center p-5">
-                    <div class="d-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
-                         style="width: 100px; height: 100px;">
-                        <h3 class="font-weight-bold text-secondary mb-0">$199</h3>
-                    </div>
-                    <h3 class="font-weight-bold text-white mt-3 mb-4">Chocolate Ice Cream</h3>
-                    <p class="text-white mb-4">
-                        Lorem justo clita dolor ipsum ut sed eos, ipsum et dolor kasd sit ea
-                        justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum
-                    </p>
-                    <a href="" class="btn btn-secondary py-3 px-5 mt-2">Order Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Promotion End -->
-    <!-- Video Modal Start -->
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <!-- 16:9 aspect ratio -->
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+            <div class="carousel-item">
+                <img class="w-100" src="~/img/carousel-2.jpg" alt="Image">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
+                        <h1 class="display-3 text-white mb-md-4">Made From Our Own Organic Milk</h1>
+                        <a asp-controller="Home" asp-action="About" class="btn btn-primary py-md-3 px-md-5 mt-2">Learn More</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Video Modal End -->
-    <!-- Services Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="section-title position-relative mb-5">Best Services We Provide For Our Clients</h1>
-                </div>
-                <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-secondary px-0" style="width:45px;height:45px;">
+                <span class="carousel-control-prev-icon mb-n1"></span>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="owl-carousel service-carousel">
-                        <div class="service-item">
-                            <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="~/img/service-1.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
-                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Quality Maintain</h5>
-                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
-                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="service-item">
-                            <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="~/img/service-2.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
-                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Individual Approach</h5>
-                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
-                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="service-item">
-                            <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="~/img/service-3.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
-                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Celebration Ice Cream</h5>
-                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
-                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="service-item">
-                            <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="~/img/service-4.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
-                                <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Delivery To Any Point</h5>
-                                <p>Dolor nonumy sed eos sed lorem diam amet eos magna. Dolor kasd lorem duo stet kasd justo</p>
-                                <a href="" class="border-bottom border-secondary text-decoration-none text-secondary">Learn More</a>
-                            </div>
-                        </div>
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-secondary px-0" style="width:45px;height:45px;">
+                <span class="carousel-control-next-icon mb-n1"></span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- ===== ABOUT PREVIEW ===== -->
+<section class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 text-center">
+                <h2 class="section-title position-relative mb-5">Traditional &amp; Delicious Ice Cream Since 2006</h2>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-4 py-5">
+                <h4 class="fw-bold mb-3">About Us</h4>
+                <p class="text-muted">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</p>
+                <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod.</p>
+                <a asp-controller="Home" asp-action="About" class="btn btn-secondary mt-2">Learn More</a>
+            </div>
+            <div class="col-lg-4" style="height:450px;">
+                <div class="position-relative h-100 rounded overflow-hidden shadow"
+                     style="background: url('/img/about.jpg') center center / cover no-repeat;">
+                </div>
+            </div>
+            <div class="col-lg-4 py-5">
+                <h4 class="fw-bold mb-3">Our Features</h4>
+                <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos.</p>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fa fa-check text-secondary me-3"></i>
+                    <span>Premium Quality Ingredients</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fa fa-check text-secondary me-3"></i>
+                    <span>100% Organic Milk</span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fa fa-check text-secondary me-3"></i>
+                    <span>Traditional Family Recipes</span>
+                </div>
+                <a asp-controller="Home" asp-action="About" class="btn btn-primary mt-2">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROMOTION ===== -->
+<div class="container-fluid my-5 py-5 px-0">
+    <div class="row bg-primary m-0">
+        <div class="col-md-6 px-0" style="min-height:500px;">
+            <div class="position-relative h-100">
+                <img class="position-absolute w-100 h-100" src="~/img/promotion.jpg" style="object-fit:cover;">
+                <button type="button" class="btn-play" data-toggle="modal"
+                        data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-target="#videoModal">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6 py-5 py-md-0 px-0">
+            <div class="h-100 d-flex flex-column align-items-center justify-content-center text-center p-5">
+                <div class="d-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                     style="width:100px;height:100px;">
+                    <h3 class="text-secondary mb-0">$199</h3>
+                </div>
+                <h3 class="text-white mt-3 mb-4">Chocolate Ice Cream</h3>
+                <p class="text-white mb-4">Lorem justo clita dolor ipsum ut sed eos, ipsum et dolor kasd sit ea justo.</p>
+                <a href="#" class="btn btn-secondary py-3 px-5 mt-2">Order Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SERVICES AS CARDS ===== -->
+<section class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-lg-6">
+                <h2 class="section-title position-relative mb-5">Best Services We Provide For Our Clients</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <!-- Service Card 1 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="service-icon mx-auto">
+                        <i class="fas fa-medal"></i>
                     </div>
+                    <h5 class="fw-bold mt-3">Quality Maintain</h5>
+                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
+                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
+                </div>
+            </div>
+            <!-- Service Card 2 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="service-icon mx-auto">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3">Individual Approach</h5>
+                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
+                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
+                </div>
+            </div>
+            <!-- Service Card 3 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="service-icon mx-auto">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3">Celebration Ice Cream</h5>
+                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
+                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
+                </div>
+            </div>
+            <!-- Service Card 4 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="service-icon mx-auto">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3">Delivery To Any Point</h5>
+                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
+                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Services End -->
-    <!-- Portfolio Start -->
-    <div class="container-fluid my-5 py-5 px-0">
-        <div class="row justify-content-center m-0">
-            <div class="col-lg-5">
-                <h1 class="section-title position-relative text-center mb-5">Delicious Ice Cream Made From Our Very Own Organic Milk</h1>
-            </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<div class="container-fluid my-5 py-5 px-0">
+    <div class="row justify-content-center m-0">
+        <div class="col-lg-5 text-center">
+            <h2 class="section-title position-relative mb-5">Delicious Ice Cream Made From Our Very Own Organic Milk</h2>
         </div>
-        <div class="row m-0 portfolio-container">
+    </div>
+    <div class="row m-0 portfolio-container">
+        @for (int i = 1; i <= 6; i++)
+        {
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-1.jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-1.jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    <img class="img-fluid w-100" src="~/img/portfolio-@(i).jpg" alt="">
+                    <a class="portfolio-btn" href="~/img/portfolio-@(i).jpg" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size:60px;"></i>
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
-                <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-2.jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-2.jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
-                <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-3.jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-3.jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
-                <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-4.jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-4.jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
-                <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-5.jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-5.jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
-                <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-6.jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-6.jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
-                    </a>
-                </div>
-            </div>
+        }
+    </div>
+</div>
+
+<!-- ===== PRODUCTS WITH ORDER LINKS ===== -->
+<section class="container-fluid py-5">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2>Best Prices We Offer For Ice Cream Lovers</h2>
+            <p>Delicious ice cream made with love and care</p>
+        </div>
+        <div class="row g-4">
+            @if (ViewBag.Products != null)
+            {
+                foreach (var product in ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>)
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="product-card">
+                            <div class="product-badge">@(product.IsFree ? "Free" : "Premium")</div>
+                            <div class="product-image">
+                                <img src="@(string.IsNullOrEmpty(product.ImagePath) ? "~/img/product-placeholder.jpg" : product.ImagePath)" alt="@product.Name">
+                            </div>
+                            <div class="product-body">
+                                <h5 class="product-title">@product.Name</h5>
+                                <p class="product-description small text-muted">@product.Category</p>
+                                <div class="product-price">
+                                    <span class="current-price">$@product.Price.ToString("0.00")</span>
+                                </div>
+                                <a asp-controller="Book" asp-action="Order" asp-route-id="@product.Id" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <!-- Fallback static products -->
+                @foreach (var p in new[] { "Vanilla", "Chocolate", "Strawberry", "Mango", "Butterscotch", "Coffee", "Pistachio", "Black Currant" })
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="product-card">
+                            <div class="product-badge">Popular</div>
+                            <div class="product-image">
+                                <img src="~/img/product-@(Array.IndexOf(new[] { "Vanilla", "Chocolate", "Strawberry", "Mango", "Butterscotch", "Coffee", "Pistachio", "Black Currant" }, p) + 1).jpg" alt="@p">
+                            </div>
+                            <div class="product-body">
+                                <h5 class="product-title">@p Ice Cream</h5>
+                                <p class="product-description small text-muted">Delicious @p flavor</p>
+                                <div class="product-price">
+                                    <span class="current-price">$10.00</span>
+                                    <span class="old-price">$15.00</span>
+                                </div>
+                                <a asp-controller="Book" asp-action="Order"  class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
     </div>
-    <!-- Portfolio End -->
+</section>
 
-    <!-- Products Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="section-title text-center mb-5">
-                <h2>Best Prices We Offer For Ice Cream Lovers</h2>
-                <p>Delicious ice cream made with love and care</p>
-            </div>
-        
-            <div class="products-grid">
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <div class="product-badge">Best Seller</div>
-                    <div class="product-image">
-                        <img src="img/product-1.jpg" alt="Vanilla Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Vanilla'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Vanilla Ice Cream</h3>
-                        <p class="product-description">Creamy vanilla bean ice cream made with fresh milk</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 2 -->
-                <div class="product-card">
-                    <div class="product-badge">Popular</div>
-                    <div class="product-image">
-                        <img src="img/product-2.jpg" alt="Chocolate Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Chocolate'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Chocolate Ice Cream</h3>
-                        <p class="product-description">Rich dark chocolate ice cream for chocolate lovers</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 3 -->
-                <div class="product-card">
-                    <div class="product-badge">New</div>
-                    <div class="product-image">
-                        <img src="img/product-3.jpg" alt="Strawberry Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Strawberry'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Strawberry Ice Cream</h3>
-                        <p class="product-description">Fresh strawberry ice cream with real fruit pieces</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 4 -->
-                <div class="product-card">
-                    <div class="product-badge">Limited</div>
-                    <div class="product-image">
-                        <img src="img/product-4.jpg" alt="Mango Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Mango'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Mango Ice Cream</h3>
-                        <p class="product-description">Tropical mango ice cream with creamy texture</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 5 -->
-                <div class="product-card">
-                    <div class="product-badge">Best Seller</div>
-                    <div class="product-image">
-                        <img src="img/product-5.jpg" alt="Butterscotch Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Butterscotch'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Butterscotch Ice Cream</h3>
-                        <p class="product-description">Sweet butterscotch ice cream with crunchy bits</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 6 -->
-                <div class="product-card">
-                    <div class="product-badge">Popular</div>
-                    <div class="product-image">
-                        <img src="~/img/product-6.jpg" alt="Coffee Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Coffee'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Coffee Ice Cream</h3>
-                        <p class="product-description">Coffee flavored ice cream with rich aroma</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 7 -->
-                <div class="product-card">
-                    <div class="product-badge">New</div>
-                    <div class="product-image">
-                       <img src="~/img/product-7.webp" alt="Pistachio Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Pistachio'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Pistachio Ice Cream</h3>
-                        <p class="product-description">Premium pistachio ice cream with nutty flavor</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-
-                <!-- Product Card 8 -->
-                <div class="product-card">
-                    <div class="product-badge">Limited</div>
-                    <div class="product-image">
-                        <img src="~/img/product-8.jpg" alt="Black Currant Ice Cream" onerror="this.src='https://via.placeholder.com/300x300?text=Black+Currant'">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-title">Black Currant Ice Cream</h3>
-                        <p class="product-description">Tangy black currant ice cream with berry taste</p>
-                        <div class="product-price">
-                            <span class="current-price">$10.00</span>
-                            <span class="old-price">$15.00</span>
-                        </div>
-                        <a href="#" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-            </div>
+<!-- ===== TESTIMONIALS AS CARDS ===== -->
+<section class="container-fluid py-5 bg-light">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2>Clients Say About Our Famous Ice Cream</h2>
+            <p>What our customers are saying about us</p>
         </div>
-    </div>
-    <!-- Products End -->
-    <!-- Team Start -->
-    <!-- Testimonials Section Start -->
-    <div class="container-fluid py-5 bg-light">
-        <div class="container">
-            <div class="section-title text-center mb-5">
-                <h2>Clients Say About Our Famous Ice Cream</h2>
-                <p>What our customers are saying about us</p>
+        <div class="row g-4">
+            <!-- Testimonial Card 1 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="mt-2">"Best ice cream I've ever tasted! The creamy texture and authentic flavors are unmatched."</p>
+                    <div class="d-flex align-items-center mt-auto pt-3">
+                        <img src="~/img/team-1.jpg" class="rounded-circle" width="50" height="50" alt="Client">
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">John Anderson</h6>
+                            <small class="text-muted">Regular Customer</small>
+                            <div class="text-warning small">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        
-            <div class="testimonials-grid">
-                <!-- Testimonial Card 1 -->
-                <div class="testimonial-card">
-                    <div class="quote-icon">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"Best ice cream I've ever tasted! The creamy texture and authentic flavors are unmatched. Highly recommend the vanilla bean flavor!"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="~/img/team-1.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/60x60?text=User'">
-                        <div class="author-info">
-                            <h4>John Anderson</h4>
-                            <span>Regular Customer</span>
-                            <div class="author-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+            <!-- Testimonial Card 2 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="mt-2">"Amazing quality and variety! The chocolate ice cream is my absolute favorite."</p>
+                    <div class="d-flex align-items-center mt-auto pt-3">
+                        <img src="~/img/team-2.jpg" class="rounded-circle" width="50" height="50" alt="Client">
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Maria Garcia</h6>
+                            <small class="text-muted">Food Blogger</small>
+                            <div class="text-warning small">★★★★★</div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Testimonial Card 2 -->
-                <div class="testimonial-card">
-                    <div class="quote-icon">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"Amazing quality and variety! The chocolate ice cream is my absolute favorite. The staff is very friendly and professional."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="~/img/team-2.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/60x60?text=User'">
-                        <div class="author-info">
-                            <h4>Maria Garcia</h4>
-                            <span>Food Blogger</span>
-                            <div class="author-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+            </div>
+            <!-- Testimonial Card 3 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="mt-2">"The strawberry ice cream tastes like real strawberries! Organic ingredients make all the difference."</p>
+                    <div class="d-flex align-items-center mt-auto pt-3">
+                        <img src="~/img/team-3.jpg" class="rounded-circle" width="50" height="50" alt="Client">
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Robert Wilson</h6>
+                            <small class="text-muted">Ice Cream Lover</small>
+                            <div class="text-warning small">★★★★☆</div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Testimonial Card 3 -->
-                <div class="testimonial-card">
-                    <div class="quote-icon">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"The strawberry ice cream tastes like real strawberries! Their organic ingredients make all the difference. Will definitely order again!"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="~/img/team-3.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/60x60?text=User'">
-                        <div class="author-info">
-                            <h4>Robert Wilson</h4>
-                            <span>Ice Cream Lover</span>
-                            <div class="author-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial Card 4 -->
-                <div class="testimonial-card">
-                    <div class="quote-icon">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"Perfect dessert spot! The butterscotch ice cream is to die for. Love the cozy atmosphere and quick delivery service."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="~/img/team-4.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/60x60?text=User'">
-                        <div class="author-info">
-                            <h4>Lisa Thompson</h4>
-                            <span>Verified Buyer</span>
-                            <div class="author-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+            </div>
+            <!-- Testimonial Card 4 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="mt-2">"Perfect dessert spot! The butterscotch ice cream is to die for. Love the atmosphere."</p>
+                    <div class="d-flex align-items-center mt-auto pt-3">
+                        <img src="~/img/team-4.jpg" class="rounded-circle" width="50" height="50" alt="Client">
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Lisa Thompson</h6>
+                            <small class="text-muted">Verified Buyer</small>
+                            <div class="text-warning small">★★★★★</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Testimonials Section End -->
-    <!-- Team End -->
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <h1 class="section-title position-relative text-center mb-5">Clients Say About Our Famous Ice Cream</h1>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="owl-carousel testimonial-carousel">
-                        <div class="text-center">
-                            <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-light mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="~/img/testimonial-1.jpg" alt="">
-                            <h5 class="font-weight-bold m-0">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                        <div class="text-center">
-                            <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-light mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="~/img/testimonial-2.jpg" alt="">
-                            <h5 class="font-weight-bold m-0">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                        <div class="text-center">
-                            <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-light mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="~/img/testimonial-3.jpg" alt="">
-                            <h5 class="font-weight-bold m-0">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
+</section>
+
+<!-- ===== VIDEO MODAL ===== -->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
-    
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+@section Scripts {
     <script src="~/lib/easing/easing.min.js"></script>
     <script src="~/lib/waypoints/waypoints.min.js"></script>
     <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="~/lib/isotope/isotope.pkgd.min.js"></script>
     <script src="~/lib/lightbox/js/lightbox.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="~/mail/jqBootstrapValidation.min.js"></script>
-    <script src="~/mail/contact.js"></script>
-
-    <!-- Template Javascript -->
     <script src="~/js/main.js"></script>
-</body>
-
-</html>
+}
