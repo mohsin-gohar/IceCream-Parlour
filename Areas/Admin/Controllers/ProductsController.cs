@@ -58,12 +58,12 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                         await ImageFile.CopyToAsync(stream);
                     }
 
-                    recipe.ImagePath = "/images/" + fileName;
+                    recipe.ImagePath = "/images/recipes/" + fileName;
                 }
                 else
                 {
                     // Default image
-                    recipe.ImagePath = "/images/";
+                    recipe.ImagePath = "/images/recipes/default-product.jpg";
                 }
 
                 context.Recipes.Add(recipe);
@@ -149,7 +149,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                             await ImageFile.CopyToAsync(stream);
                         }
 
-                        existingRecipe.ImagePath = "/images/" + fileName;
+                        existingRecipe.ImagePath = "/images/recipes/" + fileName;
                     }
 
                     await context.SaveChangesAsync();

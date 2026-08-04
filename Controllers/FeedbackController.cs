@@ -28,7 +28,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             {
                 feedback.SubmittedDate = DateTime.Now;
 
-                if (User.Identity.IsAuthenticated)
+                if (User.Identity?.IsAuthenticated == true)
                 {
                     feedback.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     feedback.UserName = User.Identity?.Name ?? "User";

@@ -5,7 +5,7 @@
 @{
     // ===== MEMBERSHIP BANNER LOGIC =====
     var showMembershipBanner = true;
-    if (User.Identity.IsAuthenticated)
+    if (User.Identity?.IsAuthenticated == true)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(userId))
@@ -22,7 +22,7 @@
     string avatarImage = "";
     string userInitials = "U";
     string fullName = "";
-    if (User.Identity.IsAuthenticated)
+    if (User.Identity?.IsAuthenticated == true)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(userId))
@@ -30,7 +30,7 @@
             var user = await DbContext.Users.FindAsync(userId);
             if (user != null)
             {
-                fullName = user.FullName ?? user.UserName;
+                fullName = user.FullName ?? user.UserName ?? "";
                 avatarImage = user.ProfilePicture ?? "";
                 // Initials = first letter of first and last name
                 if (!string.IsNullOrEmpty(fullName))
@@ -96,7 +96,7 @@
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Home" asp-action="Contact">Contact</a></li>
 
                     <!-- User Menu -->
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity?.IsAuthenticated == true)
                     {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 4px 8px;">
