@@ -41,7 +41,7 @@ namespace Ice_Cream_Parlour_Eproject.Services
                     StockQuantity = p.StockQuantity,
                     LowStockThreshold = p.LowStockThreshold,
                     Barcode = p.Barcode,
-                    ProductCode = p.ProductCode,
+                    ProductCode = p.ProductCode ?? "",
                     Status = (ProductStatus)p.Status,
                     ExistingImages = string.IsNullOrEmpty(p.ImagePath)
                         ? new List<string>()
@@ -80,7 +80,7 @@ namespace Ice_Cream_Parlour_Eproject.Services
                 StockQuantity = product.StockQuantity,
                 LowStockThreshold = product.LowStockThreshold,
                 Barcode = product.Barcode,
-                ProductCode = product.ProductCode,
+                ProductCode = product.ProductCode ?? "",
                 Status = (ProductStatus)product.Status,
                 ExistingImages = string.IsNullOrEmpty(product.ImagePath)
                     ? new List<string>()

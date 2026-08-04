@@ -207,6 +207,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         public async Task<IActionResult> Profile()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return Challenge();
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) return NotFound();
             return View(user);
@@ -241,6 +242,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             }
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return Challenge();
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) return NotFound();
 
