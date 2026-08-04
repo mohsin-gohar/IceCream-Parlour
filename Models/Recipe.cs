@@ -5,6 +5,8 @@ namespace Ice_Cream_Parlour_Eproject.Models
 {
     public class Recipe
     {
+        internal DateTime UpdatedDate;
+
         [Key]
         public int Id { get; set; }
 

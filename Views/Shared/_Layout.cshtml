@@ -192,16 +192,138 @@
                         </div>
                     </div>
                 </div>
+                @* <!-- ===== QUICK LINKS - FOOTER ===== -->
                 <div class="col-lg-2 col-md-6">
                     <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Quick Links</h6>
                     <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 8px;"><a asp-controller="Home" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">Home</a></li>
-                        <li style="margin-bottom: 8px;"><a asp-controller="Home" asp-action="About" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">About</a></li>
-                        <li style="margin-bottom: 8px;"><a asp-controller="Home" asp-action="Product" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">Products</a></li>
-                        <li style="margin-bottom: 8px;"><a asp-controller="Book" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">Books</a></li>
-                        <li style="margin-bottom: 8px;"><a asp-controller="Home" asp-action="Contact" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">Contact</a></li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-home me-2" style="font-size: 0.75rem;"></i>Home
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="About" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-info-circle me-2" style="font-size: 0.75rem;"></i>About Us
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="Product" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-ice-cream me-2" style="font-size: 0.75rem;"></i>Products
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Book" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-book me-2" style="font-size: 0.75rem;"></i>Books
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="Gallery" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-images me-2" style="font-size: 0.75rem;"></i>Gallery
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="Contact" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-envelope me-2" style="font-size: 0.75rem;"></i>Contact
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="Faq" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-question-circle me-2" style="font-size: 0.75rem;"></i>FAQ
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 8px;">
+                            <a asp-controller="Home" asp-action="Privacy" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <i class="fas fa-shield-alt me-2" style="font-size: 0.75rem;"></i>Privacy Policy
+                            </a>
+                        </li>
+                        @* @if (User.Identity.IsAuthenticated)
+                        {
+                            <li style="margin-bottom: 8px;">
+                                <a asp-controller="Account" asp-action="Profile" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                    <i class="fas fa-user me-2" style="font-size: 0.75rem;"></i>My Profile
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="margin-bottom: 8px;">
+                                <a asp-controller="Account" asp-action="Login" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                    <i class="fas fa-sign-in-alt me-2" style="font-size: 0.75rem;"></i>Login
+                                </a>
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <a asp-controller="Account" asp-action="Register" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                    <i class="fas fa-user-plus me-2" style="font-size: 0.75rem;"></i>Register
+                                </a>
+                            </li>
+                        } 
                     </ul>
-                </div>
+                </div> *@
+
+        <!-- ===== QUICK LINKS - FOOTER (2 Columns) ===== -->
+        <div class="col-lg-2 col-md-6">
+            <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Quick Links</h6>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px;">
+                <!-- Column 1 -->
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-home me-1" style="font-size: 0.7rem;"></i>Home
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="About" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-info-circle me-1" style="font-size: 0.7rem;"></i>About
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Product" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-ice-cream me-1" style="font-size: 0.7rem;"></i>Products
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Recipe" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-utensils me-1" style="font-size: 0.7rem;"></i>Recipes
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Book" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-book me-1" style="font-size: 0.7rem;"></i>Books
+                        </a>
+                    </li>
+                 
+                </ul>
+
+                <!-- Column 2 -->
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Contact" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-envelope me-1" style="font-size: 0.7rem;"></i>Contact
+                        </a>
+                    </li>
+                            <li style="margin-bottom: 8px;">
+                                <a asp-controller="Home" asp-action="Gallery" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                    <i class="fas fa-images me-1" style="font-size: 0.7rem;"></i>Gallery
+                                </a>
+                            </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Faq" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-question-circle me-1" style="font-size: 0.7rem;"></i>FAQ
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Privacy" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-shield-alt me-1" style="font-size: 0.7rem;"></i>Privacy
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <a asp-controller="Home" asp-action="Blog" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                            <i class="fas fa-blog me-1" style="font-size: 0.7rem;"></i>Blog
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
                 <div class="col-lg-3 col-md-6">
                     <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Get in Touch</h6>
                     <ul style="list-style: none; padding: 0; margin: 0;">
@@ -222,6 +344,39 @@
                             <input type="email" placeholder="Your email" style="flex:1; padding: 6px 12px; border: none; border-radius: 30px; background: rgba(255,255,255,0.08); color: #fff; font-size: 0.8rem; outline: none; transition: 0.3s;" onfocus="this.style.background='rgba(255,255,255,0.15)';" onblur="this.style.background='rgba(255,255,255,0.08)';" />
                             <button style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 30px; padding: 6px 16px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(241,149,178,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Subscribe</button>
                         </div>
+                    </div><br />
+                    @* <div style="display: flex; gap: 6px;">
+                        <button style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 30px; padding: 6px 16px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(241,149,178,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Register</button>
+                        <button style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 30px; padding: 6px 16px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(241,149,178,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Login</button>
+                    </div>  *@
+                    <div style="display: flex; gap: 10px; margin-top: 8px;">
+                        <!-- Register Button -->
+                        <a asp-controller="Account" asp-action="Register"
+                           style="display: inline-block; padding: 8px 24px;
+                            background: linear-gradient(135deg, #F195B2, #e07a9e);
+                            color: #fff; font-weight: 600; font-size: 0.85rem;
+                            border: none; border-radius: 50px;
+                            text-decoration: none; cursor: pointer;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 4px 15px rgba(241,149,178,0.3);"
+                           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(241,149,178,0.5)'; this.style.background='linear-gradient(135deg, #e07a9e, #d46a8e)';"
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(241,149,178,0.3)'; this.style.background='linear-gradient(135deg, #F195B2, #e07a9e)';">
+                            <i class="fas fa-user-plus me-2"></i>Register
+                        </a>
+
+                        <!-- Login Button -->
+                        <a asp-controller="Account" asp-action="Login"
+                           style="display: inline-block; padding: 8px 28px;
+                            background: linear-gradient(135deg, #62C3E7, #4aafd4);
+                            color: #fff; font-weight: 600; font-size: 0.85rem;
+                            border: none; border-radius: 50px;
+                            text-decoration: none; cursor: pointer;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 4px 15px rgba(98,195,231,0.3);"
+                           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(98,195,231,0.5)'; this.style.background='linear-gradient(135deg, #4aafd4, #3a9fc4)';"
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(98,195,231,0.3)'; this.style.background='linear-gradient(135deg, #62C3E7, #4aafd4)';">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
                     </div>
                 </div>
             </div>

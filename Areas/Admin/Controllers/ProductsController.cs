@@ -11,12 +11,12 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             this.context = context;
-            this._webHostEnvironment = webHostEnvironment;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         // ===== INDEX =====
@@ -41,7 +41,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // ✅ Ensure directory exists
-                string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "recipes");
+                string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "recipes");
                 if (!Directory.Exists(uploadFolder))
                 {
                     Directory.CreateDirectory(uploadFolder);
@@ -120,7 +120,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                     existingRecipe.Price = recipe.Price;
 
                     // ✅ Ensure directory exists
-                    string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "recipes");
+                    string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "recipes");
                     if (!Directory.Exists(uploadFolder))
                     {
                         Directory.CreateDirectory(uploadFolder);
@@ -133,7 +133,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                         if (!string.IsNullOrEmpty(existingRecipe.ImagePath) &&
                             !existingRecipe.ImagePath.Contains("default-product.jpg"))
                         {
-                            string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath,
+                            string oldImagePath = Path.Combine(webHostEnvironment.WebRootPath,
                                 existingRecipe.ImagePath.TrimStart('/'));
                             if (System.IO.File.Exists(oldImagePath))
                             {
@@ -188,7 +188,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(recipe.ImagePath) &&
                 !recipe.ImagePath.Contains("default-product.jpg"))
             {
-                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath,
+                string imagePath = Path.Combine(webHostEnvironment.WebRootPath,
                     recipe.ImagePath.TrimStart('/'));
                 if (System.IO.File.Exists(imagePath))
                 {
@@ -205,7 +205,8 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
 
         private bool RecipeExists(int id)
         {
-            return  context.Recipes.Any(e => e.Id == id);
+            return context.Recipes.Any(e => e.Id == id);
         }
     }
 }
+

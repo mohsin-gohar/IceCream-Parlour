@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>
+﻿@* @model IEnumerable<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Gallery - iCREAM";
@@ -165,6 +165,294 @@
         });
 
         // Hover effects
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 15px 35px rgba(241,149,178,0.15)';
+                this.style.borderColor = '#F195B2';
+                const img = this.querySelector('img');
+                if (img) img.style.transform = 'scale(1.08)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.06)';
+                this.style.borderColor = 'rgba(241,149,178,0.06)';
+                const img = this.querySelector('img');
+                if (img) img.style.transform = 'scale(1)';
+            });
+        });
+    });
+</script> *@
+
+@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Gallery - iCREAM";
+}
+
+<style>
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 992px) {
+        .gallery-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+        }
+
+        .filter-chip {
+            padding: 8px 20px !important;
+            font-size: 13px !important;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+        }
+
+        .page-header h1 {
+            font-size: 2rem !important;
+        }
+
+        .filter-chip {
+            padding: 6px 14px !important;
+            font-size: 12px !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .gallery-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+        }
+
+        .gallery-item {
+            border-radius: 14px !important;
+        }
+
+        .filter-chip {
+            padding: 4px 12px !important;
+            font-size: 11px !important;
+        }
+    }
+</style>
+
+<!-- ===== FILTER BAR ===== -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 30px 20px; max-width: 1200px; margin: 0 auto;">
+    <button class="filter-chip active" data-filter="all" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">All</button>
+    <button class="filter-chip" data-filter="recipe" style="background: #fff; border: 2px solid #f0e8e5; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.3s ease;">🍦 Flavors</button>
+    <button class="filter-chip" data-filter="book" style="background: #fff; border: 2px solid #f0e8e5; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.3s ease;">📚 Books</button>
+    <button class="filter-chip" data-filter="user" style="background: #fff; border: 2px solid #f0e8e5; padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.3s ease;">👨‍🍳 User Recipes</button>
+</div>
+
+<!-- ===== GALLERY GRID ===== -->
+<section style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px;">
+    <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px;">
+
+        <!-- Card 1 - Vanilla Ice Cream (Recipe) -->
+        <div class="gallery-item" data-type="recipe" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/product-4.jpg" alt="Vanilla Ice Cream" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">🍦 Flavor</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Vanilla Dream</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Classic vanilla with real vanilla beans</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$99.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Maria</div>
+            </div>
+        </div>
+
+        <!-- Card 2 - Chocolate Fudge (Recipe) -->
+        <div class="gallery-item" data-type="recipe" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/gallery2.jpg" alt="Chocolate Fudge" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">🍦 Flavor</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Chocolate Fudge</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Rich dark chocolate with fudge swirls</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$89.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef John</div>
+            </div>
+        </div>
+
+        <!-- Card 3 - Strawberry Bliss (Recipe) -->
+        <div class="gallery-item" data-type="recipe" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/product-3.jpg" alt="Strawberry Bliss" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">🍦 Flavor</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Strawberry Bliss</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Fresh strawberries with cream</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$79.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Sarah</div>
+            </div>
+        </div>
+
+        <!-- Card 4 - Mint Chip (Recipe) -->
+        <div class="gallery-item" data-type="recipe" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/mintchip.jpg" alt="Mint Chip" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">🍦 Flavor</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Mint Chip</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Refreshing mint with dark chocolate chips</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$109.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Alex</div>
+            </div>
+        </div>
+
+        <!-- Card 5 - Pistachio Delight (Recipe) -->
+        <div class="gallery-item" data-type="recipe" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/product-8.jpg" alt="Pistachio Delight" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">🍦 Flavor</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Pistachio Delight</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Sicilian pistachio with caramel</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$95.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Marco</div>
+            </div>
+        </div>
+
+        <!-- Card 6 - Cookie Monster (Recipe) -->
+        <div class="gallery-item" data-type="recipe" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/gallery5.jpg" alt="Cookie Monster" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">🍦 Flavor</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Cookie Monster</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Vanilla with chocolate chip cookies</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$85.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Emily</div>
+            </div>
+        </div>
+
+        <!-- Card 7 - Ice Cream Book (Book) -->
+        <div class="gallery-item" data-type="book" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/portfolio-6.jpg" alt="Ice Cream Book" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">📚 Book</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">The Art of Ice Cream</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">50 classic recipes from Italy</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$29.99</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Antonio</div>
+            </div>
+        </div>
+
+        <!-- Card 8 - Gelato Book (Book) -->
+        <div class="gallery-item" data-type="book" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/service-3.jpg" alt="Gelato Book" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">📚 Book</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Gelato Masterclass</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Authentic Italian gelato recipes</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$34.99</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Luca</div>
+            </div>
+        </div>
+
+        <!-- Card 9 - User Recipe (User) -->
+        <div class="gallery-item" data-type="user" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/gallery6.jpg" alt="User Recipe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">👨‍🍳 User</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Sarah's Berry Bliss</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Mixed berries with honey</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$69.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> sarah_kitchen</div>
+            </div>
+        </div>
+
+        <!-- Card 10 - User Recipe (User) -->
+        <div class="gallery-item" data-type="user" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/product-1.jpg" alt="User Recipe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">👨‍🍳 User</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Mike's Caramel Dream</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Homemade caramel with sea salt</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$75.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> mike_cooks</div>
+            </div>
+        </div>
+
+        <!-- Card 11 - User Recipe (User) -->
+        <div class="gallery-item" data-type="user" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/gallery4.jpg" alt="User Recipe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">👨‍🍳 User</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Emma's Cookie Crunch</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Oreo cookies with cream</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$82.00</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> emma_sweets</div>
+            </div>
+        </div>
+
+        <!-- Card 12 - Book (Book) -->
+        <div class="gallery-item" data-type="book" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border: 1px solid rgba(241,149,178,0.06);">
+            <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                <img src="~/img/product-4.jpg" alt="Ice Cream Book" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">📚 Book</span>
+            </div>
+            <div style="padding: 16px 18px 18px; text-align: center;">
+                <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">Sorbet & Gelato</div>
+                <p style="font-size: 13px; color: #888; margin-bottom: 6px;">Healthy frozen dessert recipes</p>
+                <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$24.99</div>
+                <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit"></i> Chef Natalie</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" style="position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 6px 20px rgba(241,149,178,0.4); text-decoration: none; z-index: 999; transition:0.3s;">
+    <i class="fa fa-angle-double-up"></i>
+</a>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                filterChips.forEach(c => {
+                    c.style.background = '#fff';
+                    c.style.color = '#666';
+                    c.style.border = '2px solid #f0e8e5';
+                });
+                this.style.background = 'linear-gradient(135deg, #F195B2, #62C3E7)';
+                this.style.color = '#fff';
+                this.style.border = 'none';
+
+                const filter = this.getAttribute('data-filter');
+                galleryItems.forEach(item => {
+                    const type = item.getAttribute('data-type');
+                    if (filter === 'all' || type === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
         galleryItems.forEach(item => {
             item.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-8px)';

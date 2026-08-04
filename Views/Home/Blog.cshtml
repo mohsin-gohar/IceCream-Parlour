@@ -1,0 +1,471 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Blog Management - iCREAM";
+}
+
+<style>
+    /* ===== BLOG CARD STYLES ===== */
+    .blog-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        border: 1px solid rgba(241,149,178,0.06);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(241,149,178,0.15);
+            border-color: #F195B2;
+        }
+
+        .blog-card img {
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .blog-card .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 18px 18px;
+        }
+
+            .blog-card .card-body .card-footer-actions {
+                margin-top: auto;
+                display: flex;
+                gap: 8px;
+                padding-top: 12px;
+                border-top: 1px solid rgba(0,0,0,0.05);
+            }
+
+        .blog-card .blog-excerpt {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 992px) {
+        .blog-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .blog-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+        }
+
+        .page-header h1 {
+            font-size: 2rem !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .blog-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+        }
+
+        .blog-card {
+            border-radius: 14px !important;
+        }
+    }
+</style>
+
+<!-- ===== PAGE HEADER WITH GRADIENT OVERLAY ===== -->
+<div style="background-image: url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
+    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
+        <i class="fas fa-blog me-3"></i> Blog Management
+    </h1>
+    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 500px;">Manage your blog posts — all data stored locally</p>
+</div>
+
+<!-- ===== TOGGLE BUTTON ===== -->
+<div style="max-width: 1200px; margin: 20px auto 10px; padding: 0 20px; text-align: center;">
+    <button id="toggleFormBtn" onclick="toggleForm()" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 12px 35px; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(241,149,178,0.3);"
+            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(241,149,178,0.4)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(241,149,178,0.3)';">
+        <i class="fas fa-plus-circle me-2"></i> Add New Post
+    </button>
+</div>
+
+<!-- ===== ADD / EDIT FORM (HIDDEN BY DEFAULT) ===== -->
+<div id="blogFormContainer" style="max-width: 700px; margin: 20px auto; padding: 0 20px; display: none;">
+    <div style="background: #fff; border-radius: 20px; box-shadow: 0 5px 30px rgba(0,0,0,0.1); padding: 25px 30px; border: 1px solid rgba(241,149,178,0.08);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h4 style="font-weight: 700; color: #2d2d2d; font-family: 'Playfair Display', serif;" id="formTitle">Add New Post</h4>
+            <button onclick="toggleForm()" style="background: none; border: none; font-size: 1.5rem; color: #999; cursor: pointer; transition: 0.3s;" onmouseover="this.style.color='#dc3545';" onmouseout="this.style.color='#999';">&times;</button>
+        </div>
+        <form id="blogForm" onsubmit="savePost(event)">
+            <input type="hidden" id="blogId" value="0" />
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <label style="font-weight: 600; font-size: 0.85rem; color: #444;">Post Title *</label>
+                    <input type="text" id="blogTitle" required placeholder="e.g. 10 Best Ice Cream Flavors" style="width:100%; padding: 10px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:0.95rem; transition:0.3s; background:#fafafa;"
+                           onfocus="this.style.borderColor='#F195B2'; this.style.background='#fff';" onblur="this.style.borderColor='#e0e0e0'; this.style.background='#fafafa';" />
+                </div>
+                <div>
+                    <label style="font-weight: 600; font-size: 0.85rem; color: #444;">Category *</label>
+                    <select id="blogCategory" style="width:100%; padding: 10px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:0.95rem; background:#fafafa;">
+                        <option value="Recipes">🍦 Recipes</option>
+                        <option value="Tips">💡 Tips & Tricks</option>
+                        <option value="News">📰 News</option>
+                        <option value="Reviews">⭐ Reviews</option>
+                        <option value="Events">🎉 Events</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-top: 12px;">
+                <label style="font-weight: 600; font-size: 0.85rem; color: #444;">Short Description *</label>
+                <input type="text" id="blogExcerpt" required placeholder="Brief summary of the post" style="width:100%; padding: 10px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:0.95rem; background:#fafafa;"
+                       onfocus="this.style.borderColor='#F195B2'; this.style.background='#fff';" onblur="this.style.borderColor='#e0e0e0'; this.style.background='#fafafa';" />
+            </div>
+
+            <div style="margin-top: 12px;">
+                <label style="font-weight: 600; font-size: 0.85rem; color: #444;">Full Content *</label>
+                <textarea id="blogContent" rows="4" required placeholder="Write your full blog post here..." style="width:100%; padding: 10px 14px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:0.95rem; background:#fafafa; resize:vertical;"
+                          onfocus="this.style.borderColor='#F195B2'; this.style.background='#fff';" onblur="this.style.borderColor='#e0e0e0'; this.style.background='#fafafa';"></textarea>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 12px;">
+                <div style="flex:1; min-width: 200px;">
+                    <label style="font-weight: 600; font-size: 0.85rem; color: #444;">Featured Image</label>
+                    <input type="file" id="blogImageFile" accept="image/*" style="width:100%; padding: 8px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:0.95rem; background:#fafafa;" />
+                    <div id="imagePreview" style="margin-top: 8px; display: none;">
+                        <img id="imagePreviewImg" src="" alt="Preview" style="max-width: 100px; max-height: 100px; border-radius: 10px; border: 2px solid #F195B2;" />
+                        <button type="button" onclick="clearImage()" style="background: none; border: none; color: #dc3545; cursor: pointer; font-size: 0.8rem; display:block; margin-top:4px;">Remove</button>
+                    </div>
+                    <small class="text-muted">Optional - JPG, PNG (Max 2MB)</small>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; padding-top: 6px;">
+                    <label style="font-weight: 600; font-size: 0.85rem; color: #444;">Published?</label>
+                    <input type="checkbox" id="blogIsPublished" checked style="width:20px; height:20px; accent-color:#F195B2;" />
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 12px 20px; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; width:100%; margin-top: 16px; transition:0.3s;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(241,149,178,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                <i class="fas fa-plus-circle me-2"></i>Add Post
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- ===== BLOG GRID ===== -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 40px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-weight: 700; color: #2d2d2d; font-family: 'Playfair Display', serif;">
+            <i class="fas fa-blog me-2" style="color: #F195B2;"></i> All Posts
+        </h3>
+        <span id="blogCount" style="background: #f0ecee; padding: 4px 14px; border-radius: 50px; font-size: 0.85rem; color: #555;">0 posts</span>
+    </div>
+
+    <div id="blogGrid" class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
+        <!-- Blog posts will be rendered here -->
+    </div>
+</div>
+
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" style="position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 6px 20px rgba(241,149,178,0.4); text-decoration: none; z-index: 999; transition:0.3s;"
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(241,149,178,0.5)';"
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(241,149,178,0.4)';">
+    <i class="fa fa-angle-double-up"></i>
+</a>
+
+<!-- ============================================================ -->
+<!-- ===== JAVASCRIPT - ALL LOGIC ===== -->
+<!-- ============================================================ -->
+<script>
+    // ===== INITIAL BLOG DATA =====
+    let posts = [
+        {
+            id: 1,
+            title: "10 Best Ice Cream Flavors for Summer",
+            category: "Recipes",
+            excerpt: "Discover the most refreshing ice cream flavors to beat the summer heat.",
+            content: "Summer is here and it's time to indulge in the creamiest, most delicious ice cream flavors. From classic vanilla to exotic mango, we've got you covered...",
+            image: "https://images.unsplash.com/photo-1563805042-3e4fa5f8c55a?w=400&h=400&fit=crop",
+            isPublished: true,
+            createdAt: "2026-07-10"
+        },
+        {
+            id: 2,
+            title: "How to Make Perfect Gelato at Home",
+            category: "Tips",
+            excerpt: "Learn the secrets of authentic Italian gelato making in your own kitchen.",
+            content: "Gelato is the Italian version of ice cream that's denser, creamier, and more flavorful. Here's how you can make it at home with simple ingredients...",
+            image: "https://images.unsplash.com/photo-1570197788417-0e82375c9378?w=400&h=400&fit=crop",
+            isPublished: true,
+            createdAt: "2026-07-08"
+        },
+        {
+            id: 3,
+            title: "Top 5 Ice Cream Shops in New York",
+            category: "Reviews",
+            excerpt: "Explore the best ice cream parlors in NYC that you must visit this year.",
+            content: "New York City is home to some of the most incredible ice cream shops. From artisanal gelato to classic sundaes, here are our top picks...",
+            image: "https://images.unsplash.com/photo-1551029506-0807df4e2031?w=400&h=400&fit=crop",
+            isPublished: true,
+            createdAt: "2026-07-05"
+        },
+        {
+            id: 4,
+            title: "Vegan Ice Cream: Delicious Dairy-Free Options",
+            category: "Recipes",
+            excerpt: "Discover the best vegan ice cream recipes that are just as creamy and delicious.",
+            content: "Going dairy-free doesn't mean giving up ice cream. These vegan recipes use coconut milk, cashews, and other plant-based ingredients for amazing results...",
+            image: "https://images.unsplash.com/photo-1554487731-8d2c7e27b8f1?w=400&h=400&fit=crop",
+            isPublished: false,
+            createdAt: "2026-07-03"
+        }
+    ];
+
+    // ===== LOAD FROM LOCAL STORAGE =====
+    function loadFromStorage() {
+        const stored = localStorage.getItem('blogPosts');
+        if (stored) {
+            try {
+                posts = JSON.parse(stored);
+            } catch (e) { /* ignore */ }
+        } else {
+            localStorage.setItem('blogPosts', JSON.stringify(posts));
+        }
+    }
+
+    function saveToStorage() {
+        localStorage.setItem('blogPosts', JSON.stringify(posts));
+    }
+
+    // ===== TOGGLE FORM VISIBILITY =====
+    let isFormVisible = false;
+
+    function toggleForm() {
+        const container = document.getElementById('blogFormContainer');
+        const btn = document.getElementById('toggleFormBtn');
+        if (isFormVisible) {
+            container.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-plus-circle me-2"></i> Add New Post';
+            isFormVisible = false;
+        } else {
+            container.style.display = 'block';
+            btn.innerHTML = '<i class="fas fa-times-circle me-2"></i> Close Form';
+            isFormVisible = true;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // ===== IMAGE HANDLING =====
+    let currentImageData = '';
+
+    document.getElementById('blogImageFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) {
+            alert('Image size must be less than 2MB.');
+            this.value = '';
+            return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+            alert('Please select an image file.');
+            this.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            currentImageData = ev.target.result;
+            document.getElementById('imagePreviewImg').src = currentImageData;
+            document.getElementById('imagePreview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    });
+
+    function clearImage() {
+        currentImageData = '';
+        document.getElementById('blogImageFile').value = '';
+        document.getElementById('imagePreview').style.display = 'none';
+        document.getElementById('imagePreviewImg').src = '';
+    }
+
+    // ===== RENDER BLOG POSTS =====
+    function renderPosts() {
+        const grid = document.getElementById('blogGrid');
+        const count = document.getElementById('blogCount');
+
+        if (posts.length === 0) {
+            grid.innerHTML = `
+                <div style="text-align: center; padding: 80px 20px; grid-column: 1 / -1;">
+                    <i class="fas fa-blog fa-4x" style="color: #ddd; margin-bottom: 20px;"></i>
+                    <h4 style="color: #888;">No posts yet</h4>
+                    <p style="color: #aaa;">Add your first blog post using the form above!</p>
+                </div>
+            `;
+            count.textContent = '0 posts';
+            return;
+        }
+
+        let html = '';
+        posts.sort((a, b) => b.id - a.id).forEach(p => {
+            const imgSrc = p.image && p.image.startsWith('data:image') ? p.image : (p.image || 'https://via.placeholder.com/400x400?text=Blog');
+            const date = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+            html += `
+                <div class="blog-card">
+                    <div style="overflow: hidden; position: relative; padding-top: 70%; background: #f8f5f6;">
+                        <img src="${imgSrc}" alt="${p.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
+                        <span style="position: absolute; top: 12px; left: 12px; background: ${p.isPublished ? 'linear-gradient(135deg, #28a745, #20c997)' : 'linear-gradient(135deg, #ffc107, #fd7e14)'}; color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                            ${p.isPublished ? '📢 Published' : '📝 Draft'}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: #999; margin-bottom: 6px;">
+                            <span><i class="fas fa-tag" style="color: #F195B2;"></i> ${p.category}</span>
+                            ${date ? `<span><i class="far fa-calendar-alt" style="color: #62C3E7;"></i> ${date}</span>` : ''}
+                        </div>
+                        <h5 style="font-size: 1.05rem; font-weight: 700; color: #2d2d2d; margin-bottom: 6px; font-family: 'Playfair Display', serif; line-height: 1.3;">${p.title}</h5>
+                        <p class="blog-excerpt" style="font-size: 0.82rem; color: #5c5458; line-height: 1.5; flex:1; margin-bottom: 8px;">
+                            ${p.excerpt}
+                        </p>
+                        <div class="card-footer-actions">
+                            <button onclick="editPost(${p.id})" style="flex:1; padding: 6px 12px; border: 1.5px solid #F195B2; border-radius: 30px; background: transparent; color: #F195B2; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.3s;"
+                                    onmouseover="this.style.background='#F195B2'; this.style.color='#fff';"
+                                    onmouseout="this.style.background='transparent'; this.style.color='#F195B2';">
+                                <i class="fas fa-edit me-1"></i> Edit
+                            </button>
+                            <button onclick="deletePost(${p.id})" style="flex:1; padding: 6px 12px; border: 1.5px solid #dc3545; border-radius: 30px; background: transparent; color: #dc3545; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.3s;"
+                                    onmouseover="this.style.background='#dc3545'; this.style.color='#fff';"
+                                    onmouseout="this.style.background='transparent'; this.style.color='#dc3545';">
+                                <i class="fas fa-trash me-1"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        grid.innerHTML = html;
+        count.textContent = posts.length + ' posts';
+    }
+
+    // ===== CRUD OPERATIONS =====
+
+    function savePost(e) {
+        e.preventDefault();
+        const id = parseInt(document.getElementById('blogId').value);
+        const title = document.getElementById('blogTitle').value.trim();
+        const category = document.getElementById('blogCategory').value;
+        const excerpt = document.getElementById('blogExcerpt').value.trim();
+        const content = document.getElementById('blogContent').value.trim();
+        const isPublished = document.getElementById('blogIsPublished').checked;
+
+        if (!title || !excerpt || !content) {
+            alert('Please fill all required fields.');
+            return;
+        }
+
+        const imageData = currentImageData;
+        const today = new Date().toISOString().split('T')[0];
+
+        if (id === 0) {
+            const newId = posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1;
+            posts.push({
+                id: newId,
+                title,
+                category,
+                excerpt,
+                content,
+                image: imageData || 'https://via.placeholder.com/400x400?text=' + encodeURIComponent(title),
+                isPublished,
+                createdAt: today
+            });
+        } else {
+            const index = posts.findIndex(p => p.id === id);
+            if (index !== -1) {
+                posts[index] = {
+                    ...posts[index],
+                    title,
+                    category,
+                    excerpt,
+                    content,
+                    image: imageData || posts[index].image,
+                    isPublished,
+                    updatedAt: today
+                };
+            }
+        }
+
+        saveToStorage();
+        renderPosts();
+        resetForm();
+
+        if (isFormVisible) {
+            toggleForm();
+        }
+    }
+
+    function editPost(id) {
+        const post = posts.find(p => p.id === id);
+        if (!post) return;
+
+        document.getElementById('blogId').value = post.id;
+        document.getElementById('blogTitle').value = post.title;
+        document.getElementById('blogCategory').value = post.category;
+        document.getElementById('blogExcerpt').value = post.excerpt;
+        document.getElementById('blogContent').value = post.content;
+        document.getElementById('blogIsPublished').checked = post.isPublished;
+
+        if (post.image && (post.image.startsWith('data:image') || post.image.startsWith('http'))) {
+            currentImageData = post.image;
+            document.getElementById('imagePreviewImg').src = post.image;
+            document.getElementById('imagePreview').style.display = 'block';
+        } else {
+            clearImage();
+        }
+
+        document.getElementById('formTitle').innerText = '✏️ Edit Post';
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-save me-2"></i>Update Post';
+
+        if (!isFormVisible) {
+            toggleForm();
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deletePost(id) {
+        if (confirm('Are you sure you want to delete this post?')) {
+            posts = posts.filter(p => p.id !== id);
+            saveToStorage();
+            renderPosts();
+        }
+    }
+
+    function resetForm() {
+        document.getElementById('blogId').value = 0;
+        document.getElementById('blogTitle').value = '';
+        document.getElementById('blogCategory').value = 'Recipes';
+        document.getElementById('blogExcerpt').value = '';
+        document.getElementById('blogContent').value = '';
+        document.getElementById('blogIsPublished').checked = true;
+        clearImage();
+        document.getElementById('formTitle').innerText = 'Add New Post';
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-plus-circle me-2"></i>Add Post';
+    }
+
+    // ===== INIT =====
+    loadFromStorage();
+    renderPosts();
+</script>

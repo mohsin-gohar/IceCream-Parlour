@@ -1,3 +1,105 @@
+@* @model Ice_Cream_Parlour_Eproject.Models.Recipe
+@{
+    ViewData["Title"] = "Add Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Add New Product</h2>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+
+                <div class="row g-3">
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label fw-bold">Product Name *</label>
+                        <input asp-for="Name" class="form-control" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="col-md-6">
+                        <label asp-for="Category" class="form-label fw-bold">Category *</label>
+                        <select asp-for="Category" class="form-select" required>
+                            <option value="">Select Category</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Fruit">Fruit</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Special">Special</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+
+                    <!-- Ingredients -->
+                    <div class="col-12">
+                        <label asp-for="Ingredients" class="form-label fw-bold">Ingredients *</label>
+                        <textarea asp-for="Ingredients" class="form-control" rows="3" required></textarea>
+                        <span asp-validation-for="Ingredients" class="text-danger"></span>
+                    </div>
+
+                    <!-- Procedure -->
+                    <div class="col-12">
+                        <label asp-for="Procedure" class="form-label fw-bold">Procedure *</label>
+                        <textarea asp-for="Procedure" class="form-control" rows="4" required></textarea>
+                        <span asp-validation-for="Procedure" class="text-danger"></span>
+                    </div>
+
+                    <!-- IsFree -->
+                    <div class="col-md-4">
+                        <label asp-for="IsFree" class="form-label fw-bold">Access Type</label>
+                        <select asp-for="IsFree" class="form-select">
+                            <option value="true">Free Recipe</option>
+                            <option value="false">Premium (Paid)</option>
+                        </select>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="col-md-4">
+                        <label asp-for="Price" class="form-label fw-bold">Price ($) *</label>
+                        <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Product Image</label>
+                        <input type="file" name="ImageFile" class="form-control" accept="image/*" />
+                        <small class="text-muted">Optional - JPG, PNG (Max 2MB)</small>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-plus-circle me-2"></i>Add Product
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} *@
+
+
 @model Ice_Cream_Parlour_Eproject.Models.Recipe
 @{
     ViewData["Title"] = "Add Product";
@@ -42,6 +144,7 @@
                             <option value="Fruit">Fruit</option>
                             <option value="Premium">Premium</option>
                             <option value="Special">Special</option>
+                            <option value="Nutty">Nutty</option>
                         </select>
                         <span asp-validation-for="Category" class="text-danger"></span>
                     </div>

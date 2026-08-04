@@ -20,7 +20,11 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         {
             return View();
         }
-
+        public IActionResult Blog()
+        {
+            return View();
+        }    
+        
         public IActionResult About()
         {
             return View();
