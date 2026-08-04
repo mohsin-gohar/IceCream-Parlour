@@ -9,10 +9,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // ===== Database Context =====
-var provider = builder.Services.BuildServiceProvider();
-var config = provider.GetRequiredService<IConfiguration>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(config.GetConnectionString("icecreamcs")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("icecreamcs")));
 
 // ===== Register Services =====
 builder.Services.AddScoped<ICustomerService, CustomerService>();
