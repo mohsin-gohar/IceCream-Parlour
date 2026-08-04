@@ -156,8 +156,30 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Order(Order order)
         {
+            ModelState.Remove("OrderNumber");
+            ModelState.Remove("Customer");
+            ModelState.Remove("Book");
+
             if (ModelState.IsValid)
             {
+                // Find or create customer based on email
+                var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == order.CustomerEmail);
+                if (customer == null)
+                {
+                    customer = new Customer
+                    {
+                        FullName = order.CustomerName,
+                        Email = order.CustomerEmail,
+                        Phone = order.CustomerPhone,
+                        Address = order.DeliveryAddress,
+                        IsActive = true,
+                        CreatedAt = DateTime.Now
+                    };
+                    _context.Customers.Add(customer);
+                    await _context.SaveChangesAsync();
+                }
+
+                order.CustomerId = customer.Id;
                 order.OrderNumber = "ORD-" + DateTime.Now.ToString("yyyyMMdd") + "-" + new Random().Next(1000, 9999);
                 order.OrderDate = DateTime.Now;
                 order.OrderStatus = "Pending";
@@ -167,7 +189,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["Success"] = "Order placed successfully! Order #: " + order.OrderNumber;
-                return RedirectToAction("Index", "Home");  // ✅ Public Home page par redirect
+                return RedirectToAction("Index", "Home", new { area = "" });  // ✅ Public Home page par redirect
             }
 
             // ❌ Validation fail → wapas Order form par bhejo
