@@ -63,7 +63,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 else
                 {
                     // Default image
-                    recipe.ImagePath = "/images/recipes/";
+                    recipe.ImagePath = "/img/product-1.jpg";
                 }
 
                 context.Recipes.Add(recipe);
