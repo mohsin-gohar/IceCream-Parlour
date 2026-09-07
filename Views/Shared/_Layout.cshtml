@@ -82,6 +82,7 @@
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">About</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Product" ? "active" : "")" asp-controller="Home" asp-action="Product">Products</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Recipe" ? "active" : "")" asp-controller="Recipe" asp-action="Index">Recipes</a></li>
                 </ul>
 
                 <!-- Centered Brand -->
@@ -92,7 +93,7 @@
                 <!-- Right links -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Book" ? "active" : "")" asp-controller="Book" asp-action="Index">Books</a></li>
-                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Gallery" ? "active" : "")" asp-controller="Home" asp-action="Gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Gallery" ? "active" : "")" asp-controller="Gallery" asp-action="Index">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Home" asp-action="Contact">Contact</a></li>
 
                     <!-- User Menu -->
@@ -282,7 +283,7 @@
                         </a>
                     </li>
                     <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Recipe" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                        <a asp-controller="Recipe" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
                             <i class="fas fa-utensils me-1" style="font-size: 0.7rem;"></i>Recipes
                         </a>
                     </li>
@@ -302,7 +303,7 @@
                         </a>
                     </li>
                             <li style="margin-bottom: 8px;">
-                                <a asp-controller="Home" asp-action="Gallery" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <a asp-controller="Gallery" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
                                     <i class="fas fa-images me-1" style="font-size: 0.7rem;"></i>Gallery
                                 </a>
                             </li>
