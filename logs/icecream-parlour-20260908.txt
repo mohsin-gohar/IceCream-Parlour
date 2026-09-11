@@ -1,0 +1,434 @@
+2026-09-08 22:37:51.819 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Create.cshtml'.
+2026-09-08 22:37:52.028 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Edit.cshtml'.
+2026-09-08 22:37:52.033 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Index.cshtml'.
+2026-09-08 22:37:52.036 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Create.cshtml'.
+2026-09-08 22:37:52.038 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Delete.cshtml'.
+2026-09-08 22:37:52.040 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Details.cshtml'.
+2026-09-08 22:37:52.043 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Edit.cshtml'.
+2026-09-08 22:37:52.045 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Index.cshtml'.
+2026-09-08 22:37:52.049 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Create.cshtml'.
+2026-09-08 22:37:52.052 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Details.cshtml'.
+2026-09-08 22:37:52.054 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Edit.cshtml'.
+2026-09-08 22:37:52.056 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Index.cshtml'.
+2026-09-08 22:37:52.058 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Dashboard/Index.cshtml'.
+2026-09-08 22:37:52.061 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Create.cshtml'.
+2026-09-08 22:37:52.064 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Details.cshtml'.
+2026-09-08 22:37:52.066 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Index.cshtml'.
+2026-09-08 22:37:52.068 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Invoice.cshtml'.
+2026-09-08 22:37:52.070 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Create.cshtml'.
+2026-09-08 22:37:52.072 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Edit.cshtml'.
+2026-09-08 22:37:52.093 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Index.cshtml'.
+2026-09-08 22:37:52.099 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Reports/Index.cshtml'.
+2026-09-08 22:37:52.101 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Shared/_AdminLayout.cshtml'.
+2026-09-08 22:37:52.103 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewImports.cshtml'.
+2026-09-08 22:37:52.104 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewStart.cshtml'.
+2026-09-08 22:37:52.106 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/AccessDenied.cshtml'.
+2026-09-08 22:37:52.108 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ForgotPassword.cshtml'.
+2026-09-08 22:37:52.110 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Login.cshtml'.
+2026-09-08 22:37:52.111 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Profile.cshtml'.
+2026-09-08 22:37:52.116 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Register.cshtml'.
+2026-09-08 22:37:52.119 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ResetPassword.cshtml'.
+2026-09-08 22:37:52.123 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Book/index.cshtml'.
+2026-09-08 22:37:52.125 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Book/Order.cshtml'.
+2026-09-08 22:37:52.127 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/About.cshtml'.
+2026-09-08 22:37:52.132 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Blog.cshtml'.
+2026-09-08 22:37:52.134 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Contact.cshtml'.
+2026-09-08 22:37:52.136 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Faq.cshtml'.
+2026-09-08 22:37:52.139 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Feedback.cshtml'.
+2026-09-08 22:37:52.141 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Gallery.cshtml'.
+2026-09-08 22:37:52.143 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Index.cshtml'.
+2026-09-08 22:37:52.147 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Privacy.cshtml'.
+2026-09-08 22:37:52.151 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Product.cshtml'.
+2026-09-08 22:37:52.164 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Recipe.cshtml'.
+2026-09-08 22:37:52.170 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Service.cshtml'.
+2026-09-08 22:37:52.172 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/Error.cshtml'.
+2026-09-08 22:37:52.183 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_ValidationScriptsPartial.cshtml'.
+2026-09-08 22:37:52.185 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewImports.cshtml'.
+2026-09-08 22:37:52.189 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewStart.cshtml'.
+2026-09-08 22:37:52.192 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_Layout.cshtml'.
+2026-09-08 22:37:52.242 +05:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2026-09-08 22:37:52.418 +05:00 [INF] User profile is available. Using 'C:\Users\mohsi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-08 22:37:52.885 +05:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2026-09-08 22:37:53.804 +05:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserRole<string>' as the properties are already covered by the index {'UserId', 'RoleId'}.
+2026-09-08 22:37:53.808 +05:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserToken<string>' as the properties are already covered by the index {'UserId', 'LoginProvider', 'Name'}.
+2026-09-08 22:37:54.123 +05:00 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.130 +05:00 [WRN] No store type was specified for the decimal property 'UnitPrice' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.137 +05:00 [WRN] No store type was specified for the decimal property 'DiscountPercent' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.143 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.147 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Book'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.152 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Recipe'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.159 +05:00 [WRN] No store type was specified for the decimal property 'PrizeMoney' on entity type 'UserRecipe'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:37:54.465 +05:00 [DBG] Entity Framework Core 8.0.28 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.28' with options: None
+2026-09-08 22:37:54.687 +05:00 [DBG] Compiling query expression: 
+'DbSet<IdentityRole>()
+    .FirstOrDefault(r => r.NormalizedName == __normalizedName_0)'
+2026-09-08 22:37:55.127 +05:00 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<IdentityRole>(
+    asyncEnumerable: new SingleQueryingEnumerable<IdentityRole>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: IdentityRole.Id (string) Required PK AfterSave:Throw, 0], [Property: IdentityRole.ConcurrencyStamp (string) Concurrency, 1], [Property: IdentityRole.Name (string) MaxLength(256), 2], [Property: IdentityRole.NormalizedName (string) Index MaxLength(256), 3] }
+            SELECT TOP(1) a.Id, a.ConcurrencyStamp, a.Name, a.NormalizedName
+            FROM AspNetRoles AS a
+            WHERE a.NormalizedName == @__normalizedName_0), 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, IdentityRole>, 
+        Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+        False, 
+        False, 
+        True
+    ), 
+    cancellationToken: queryContext.CancellationToken)'
+2026-09-08 22:37:55.226 +05:00 [DBG] Creating DbConnection.
+2026-09-08 22:37:55.289 +05:00 [DBG] Created DbConnection. (60ms).
+2026-09-08 22:37:55.304 +05:00 [DBG] Opening connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:38:10.402 +05:00 [ERR] An error occurred using the connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:38:10.560 +05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+2026-09-08 22:38:10.764 +05:00 [DBG] 'ApplicationDbContext' disposed.
+2026-09-08 22:38:10.774 +05:00 [DBG] Disposing connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:38:10.803 +05:00 [DBG] Disposed connection to database '' on server '' (6ms).
+2026-09-08 22:38:10.810 +05:00 [FTL] Application terminated unexpectedly
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.RoleExistsAsync(String roleName)
+   at Program.<Main>$(String[] args) in F:\.net\Ice_Cream_Parlour_Eproject\Ice_Cream_Parlour_Eproject\Program.cs:line 103
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+2026-09-08 22:38:21.269 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Create.cshtml'.
+2026-09-08 22:38:21.373 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Edit.cshtml'.
+2026-09-08 22:38:21.376 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Index.cshtml'.
+2026-09-08 22:38:21.379 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Create.cshtml'.
+2026-09-08 22:38:21.383 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Delete.cshtml'.
+2026-09-08 22:38:21.385 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Details.cshtml'.
+2026-09-08 22:38:21.388 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Edit.cshtml'.
+2026-09-08 22:38:21.390 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Index.cshtml'.
+2026-09-08 22:38:21.393 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Create.cshtml'.
+2026-09-08 22:38:21.395 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Details.cshtml'.
+2026-09-08 22:38:21.398 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Edit.cshtml'.
+2026-09-08 22:38:21.400 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Index.cshtml'.
+2026-09-08 22:38:21.402 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Dashboard/Index.cshtml'.
+2026-09-08 22:38:21.405 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Create.cshtml'.
+2026-09-08 22:38:21.407 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Details.cshtml'.
+2026-09-08 22:38:21.409 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Index.cshtml'.
+2026-09-08 22:38:21.412 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Invoice.cshtml'.
+2026-09-08 22:38:21.416 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Create.cshtml'.
+2026-09-08 22:38:21.418 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Edit.cshtml'.
+2026-09-08 22:38:21.421 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Index.cshtml'.
+2026-09-08 22:38:21.423 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Reports/Index.cshtml'.
+2026-09-08 22:38:21.425 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Shared/_AdminLayout.cshtml'.
+2026-09-08 22:38:21.428 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewImports.cshtml'.
+2026-09-08 22:38:21.430 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewStart.cshtml'.
+2026-09-08 22:38:21.433 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/AccessDenied.cshtml'.
+2026-09-08 22:38:21.435 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ForgotPassword.cshtml'.
+2026-09-08 22:38:21.438 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Login.cshtml'.
+2026-09-08 22:38:21.440 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Profile.cshtml'.
+2026-09-08 22:38:21.443 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Register.cshtml'.
+2026-09-08 22:38:21.445 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ResetPassword.cshtml'.
+2026-09-08 22:38:21.449 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Book/index.cshtml'.
+2026-09-08 22:38:21.455 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Book/Order.cshtml'.
+2026-09-08 22:38:21.457 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/About.cshtml'.
+2026-09-08 22:38:21.460 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Blog.cshtml'.
+2026-09-08 22:38:21.462 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Contact.cshtml'.
+2026-09-08 22:38:21.466 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Faq.cshtml'.
+2026-09-08 22:38:21.472 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Feedback.cshtml'.
+2026-09-08 22:38:21.474 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Gallery.cshtml'.
+2026-09-08 22:38:21.477 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Index.cshtml'.
+2026-09-08 22:38:21.479 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Privacy.cshtml'.
+2026-09-08 22:38:21.485 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Product.cshtml'.
+2026-09-08 22:38:21.488 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Recipe.cshtml'.
+2026-09-08 22:38:21.491 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Service.cshtml'.
+2026-09-08 22:38:21.493 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/Error.cshtml'.
+2026-09-08 22:38:21.496 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_ValidationScriptsPartial.cshtml'.
+2026-09-08 22:38:21.501 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewImports.cshtml'.
+2026-09-08 22:38:21.504 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewStart.cshtml'.
+2026-09-08 22:38:21.507 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_Layout.cshtml'.
+2026-09-08 22:38:21.540 +05:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2026-09-08 22:38:21.618 +05:00 [INF] User profile is available. Using 'C:\Users\mohsi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-08 22:38:22.026 +05:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2026-09-08 22:38:22.972 +05:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserRole<string>' as the properties are already covered by the index {'UserId', 'RoleId'}.
+2026-09-08 22:38:22.980 +05:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserToken<string>' as the properties are already covered by the index {'UserId', 'LoginProvider', 'Name'}.
+2026-09-08 22:38:23.270 +05:00 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.278 +05:00 [WRN] No store type was specified for the decimal property 'UnitPrice' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.282 +05:00 [WRN] No store type was specified for the decimal property 'DiscountPercent' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.289 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.295 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Book'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.300 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Recipe'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.304 +05:00 [WRN] No store type was specified for the decimal property 'PrizeMoney' on entity type 'UserRecipe'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:38:23.528 +05:00 [DBG] Entity Framework Core 8.0.28 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.28' with options: None
+2026-09-08 22:38:23.778 +05:00 [DBG] Compiling query expression: 
+'DbSet<IdentityRole>()
+    .FirstOrDefault(r => r.NormalizedName == __normalizedName_0)'
+2026-09-08 22:38:24.237 +05:00 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<IdentityRole>(
+    asyncEnumerable: new SingleQueryingEnumerable<IdentityRole>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: IdentityRole.Id (string) Required PK AfterSave:Throw, 0], [Property: IdentityRole.ConcurrencyStamp (string) Concurrency, 1], [Property: IdentityRole.Name (string) MaxLength(256), 2], [Property: IdentityRole.NormalizedName (string) Index MaxLength(256), 3] }
+            SELECT TOP(1) a.Id, a.ConcurrencyStamp, a.Name, a.NormalizedName
+            FROM AspNetRoles AS a
+            WHERE a.NormalizedName == @__normalizedName_0), 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, IdentityRole>, 
+        Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+        False, 
+        False, 
+        True
+    ), 
+    cancellationToken: queryContext.CancellationToken)'
+2026-09-08 22:38:24.337 +05:00 [DBG] Creating DbConnection.
+2026-09-08 22:38:24.407 +05:00 [DBG] Created DbConnection. (60ms).
+2026-09-08 22:38:24.421 +05:00 [DBG] Opening connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:38:39.787 +05:00 [ERR] An error occurred using the connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:38:39.851 +05:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+2026-09-08 22:38:40.032 +05:00 [DBG] 'ApplicationDbContext' disposed.
+2026-09-08 22:38:40.042 +05:00 [DBG] Disposing connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:38:40.057 +05:00 [DBG] Disposed connection to database '' on server '' (7ms).
+2026-09-08 22:38:40.068 +05:00 [FTL] Application terminated unexpectedly
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.RoleExistsAsync(String roleName)
+   at Program.<Main>$(String[] args) in F:\.net\Ice_Cream_Parlour_Eproject\Ice_Cream_Parlour_Eproject\Program.cs:line 103
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+2026-09-08 22:45:17.143 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Create.cshtml'.
+2026-09-08 22:45:17.279 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Edit.cshtml'.
+2026-09-08 22:45:17.282 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Index.cshtml'.
+2026-09-08 22:45:17.284 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Create.cshtml'.
+2026-09-08 22:45:17.286 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Delete.cshtml'.
+2026-09-08 22:45:17.289 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Details.cshtml'.
+2026-09-08 22:45:17.291 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Edit.cshtml'.
+2026-09-08 22:45:17.293 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Index.cshtml'.
+2026-09-08 22:45:17.295 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Create.cshtml'.
+2026-09-08 22:45:17.298 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Details.cshtml'.
+2026-09-08 22:45:17.300 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Edit.cshtml'.
+2026-09-08 22:45:17.303 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Index.cshtml'.
+2026-09-08 22:45:17.305 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Dashboard/Index.cshtml'.
+2026-09-08 22:45:17.308 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Create.cshtml'.
+2026-09-08 22:45:17.310 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Details.cshtml'.
+2026-09-08 22:45:17.312 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Index.cshtml'.
+2026-09-08 22:45:17.315 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Invoice.cshtml'.
+2026-09-08 22:45:17.317 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Create.cshtml'.
+2026-09-08 22:45:17.319 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Edit.cshtml'.
+2026-09-08 22:45:17.322 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Index.cshtml'.
+2026-09-08 22:45:17.324 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Reports/Index.cshtml'.
+2026-09-08 22:45:17.326 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Shared/_AdminLayout.cshtml'.
+2026-09-08 22:45:17.328 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewImports.cshtml'.
+2026-09-08 22:45:17.330 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewStart.cshtml'.
+2026-09-08 22:45:17.333 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/AccessDenied.cshtml'.
+2026-09-08 22:45:17.334 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ForgotPassword.cshtml'.
+2026-09-08 22:45:17.336 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Login.cshtml'.
+2026-09-08 22:45:17.339 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Profile.cshtml'.
+2026-09-08 22:45:17.341 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Register.cshtml'.
+2026-09-08 22:45:17.344 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ResetPassword.cshtml'.
+2026-09-08 22:45:17.346 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Book/index.cshtml'.
+2026-09-08 22:45:17.348 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Book/Order.cshtml'.
+2026-09-08 22:45:17.350 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/About.cshtml'.
+2026-09-08 22:45:17.352 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Blog.cshtml'.
+2026-09-08 22:45:17.355 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Contact.cshtml'.
+2026-09-08 22:45:17.357 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Faq.cshtml'.
+2026-09-08 22:45:17.359 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Feedback.cshtml'.
+2026-09-08 22:45:17.361 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Gallery.cshtml'.
+2026-09-08 22:45:17.363 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Index.cshtml'.
+2026-09-08 22:45:17.365 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Privacy.cshtml'.
+2026-09-08 22:45:17.367 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Product.cshtml'.
+2026-09-08 22:45:17.369 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Recipe.cshtml'.
+2026-09-08 22:45:17.371 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Service.cshtml'.
+2026-09-08 22:45:17.373 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/Error.cshtml'.
+2026-09-08 22:45:17.376 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_ValidationScriptsPartial.cshtml'.
+2026-09-08 22:45:17.378 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewImports.cshtml'.
+2026-09-08 22:45:17.382 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewStart.cshtml'.
+2026-09-08 22:45:17.386 +05:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_Layout.cshtml'.
+2026-09-08 22:45:17.401 +05:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2026-09-08 22:45:17.480 +05:00 [INF] User profile is available. Using 'C:\Users\mohsi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-08 22:45:17.947 +05:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2026-09-08 22:45:18.966 +05:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserRole<string>' as the properties are already covered by the index {'UserId', 'RoleId'}.
+2026-09-08 22:45:18.972 +05:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserToken<string>' as the properties are already covered by the index {'UserId', 'LoginProvider', 'Name'}.
+2026-09-08 22:45:19.223 +05:00 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.227 +05:00 [WRN] No store type was specified for the decimal property 'UnitPrice' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.234 +05:00 [WRN] No store type was specified for the decimal property 'DiscountPercent' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.238 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.243 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Book'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.251 +05:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Recipe'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.254 +05:00 [WRN] No store type was specified for the decimal property 'PrizeMoney' on entity type 'UserRecipe'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-09-08 22:45:19.488 +05:00 [DBG] Entity Framework Core 8.0.28 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:8.0.28' with options: None
+2026-09-08 22:45:19.512 +05:00 [DBG] Creating DbConnection.
+2026-09-08 22:45:19.592 +05:00 [DBG] Created DbConnection. (76ms).
+2026-09-08 22:45:19.599 +05:00 [DBG] Migrating using database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:45:19.643 +05:00 [DBG] Opening connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:45:33.997 +05:00 [DBG] An error occurred using the connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:45:34.215 +05:00 [DBG] 'ApplicationDbContext' disposed.
+2026-09-08 22:45:34.227 +05:00 [DBG] Disposing connection to database 'Ice_Cream_Parlourdb' on server '.\SQLEXPRESS'.
+2026-09-08 22:45:34.241 +05:00 [DBG] Disposed connection to database '' on server '' (7ms).
+2026-09-08 22:45:34.249 +05:00 [FTL] Application terminated unexpectedly
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.HistoryRepository.ExistsAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in F:\.net\Ice_Cream_Parlour_Eproject\Ice_Cream_Parlour_Eproject\Program.cs:line 97
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20

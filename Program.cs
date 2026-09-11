@@ -1,135 +1,160 @@
 using Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers;
 using Ice_Cream_Parlour_Eproject.Data;
+using Ice_Cream_Parlour_Eproject.Middleware;
 using Ice_Cream_Parlour_Eproject.Models;
 using Ice_Cream_Parlour_Eproject.Services;
 using Ice_Cream_Parlour_Eproject.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ===== Database Context =====
-var provider = builder.Services.BuildServiceProvider();
-var config = provider.GetRequiredService<IConfiguration>();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(config.GetConnectionString("icecreamcs")));
-
-// ===== Register Services =====
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IReportService, ReportService>();
-builder.Services.AddScoped<IDashboardService, DashboardService>();
-
-// ===== Identity with Roles =====
-builder.Services.AddIdentity<User, IdentityRole>(options =>
+try
 {
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 6;
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedEmail = false;
-})
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+    // ===== Serilog Configuration =====
+    Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Debug()
+        .WriteTo.Console()
+        .WriteTo.File("logs/icecream-parlour-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 30)
+        .Enrich.FromLogContext()
+        .Enrich.WithProperty("Application", "IceCreamParlour")
+        .CreateLogger();
 
-// ===== Session =====
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
+    builder.Host.UseSerilog();
 
-// ===== MVC =====
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-builder.Services.AddHttpContextAccessor();
+    // ===== Database Context =====
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("icecreamcs")));
 
-var app = builder.Build();
+    // ===== Register Services =====
+    builder.Services.AddScoped<ICustomerService, CustomerService>();
+    builder.Services.AddScoped<IProductService, ProductService>();
+    builder.Services.AddScoped<IOrderService, OrderService>();
+    builder.Services.AddScoped<IReportService, ReportService>();
+    builder.Services.AddScoped<IDashboardService, DashboardService>();
 
-// ===== Middleware =====
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseSession();
-
-// ===== Routes =====
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapRazorPages();
-
-// ===== Seed Roles and Users =====
-using (var scope = app.Services.CreateScope())
-{
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-
-    // --- Create Roles ---
-    string[] roles = { "Admin", "User" };
-    foreach (var role in roles)
+    // ===== Identity with Roles =====
+    builder.Services.AddIdentity<User, IdentityRole>(options =>
     {
-        if (!await roleManager.RoleExistsAsync(role))
-            await roleManager.CreateAsync(new IdentityRole(role));
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredLength = 6;
+        options.User.RequireUniqueEmail = true;
+        options.SignIn.RequireConfirmedEmail = false;
+    })
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+    // ===== Session =====
+    builder.Services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+    });
+
+    // ===== MVC =====
+    builder.Services.AddControllersWithViews();
+    builder.Services.AddRazorPages();
+    builder.Services.AddHttpContextAccessor();
+
+    var app = builder.Build();
+
+    // ===== Middleware =====
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();
     }
 
-    // --- Create Admin User ---
-    var adminEmail = "admin@icream.com";
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser == null)
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+    app.UseSession();
+
+    // ===== Routes =====
+    app.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.MapRazorPages();
+
+    // ===== Seed Roles and Users =====
+    using (var scope = app.Services.CreateScope())
     {
-        adminUser = new User
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+        // --- Create Roles ---
+        string[] roles = { "Admin", "User" };
+        foreach (var role in roles)
         {
-            UserName = adminEmail,
-            Email = adminEmail,
-            FullName = "Admin",
-            Address = "Admin Office",
-            IsPaid = true,
-            PaymentType = "Yearly",
-            PaymentDate = DateTime.Now,
-            PaymentExpiry = DateTime.Now.AddYears(1)
-        };
-        var result = await userManager.CreateAsync(adminUser, "Admin@123");
-        if (result.Succeeded)
-            await userManager.AddToRoleAsync(adminUser, "Admin");
-    }
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+        }
 
-    // --- Create Regular User ---
-    var userEmail = "user@icream.com";
-    var regularUser = await userManager.FindByEmailAsync(userEmail);
-    if (regularUser == null)
-    {
-        regularUser = new User
+        // --- Create Admin User ---
+        var adminEmail = "admin@icream.com";
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
         {
-            UserName = userEmail,
-            Email = userEmail,
-            FullName = "Regular User",
-            Address = "User Address",
-            IsPaid = false,
-            PaymentType = "Monthly",
-            PaymentDate = DateTime.Now,
-            PaymentExpiry = DateTime.Now.AddMonths(1)
-        };
-        var result = await userManager.CreateAsync(regularUser, "User@123");
-        if (result.Succeeded)
-            await userManager.AddToRoleAsync(regularUser, "User");
-    }
-}
+            adminUser = new User
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                FullName = "Admin",
+                Address = "Admin Office",
+                IsPaid = true,
+                PaymentType = "Yearly",
+                PaymentDate = DateTime.Now,
+                PaymentExpiry = DateTime.Now.AddYears(1)
+            };
+            var result = await userManager.CreateAsync(adminUser, "Admin@123");
+            if (result.Succeeded)
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
 
-app.Run();
+        // --- Create Regular User ---
+        var userEmail = "user@icream.com";
+        var regularUser = await userManager.FindByEmailAsync(userEmail);
+        if (regularUser == null)
+        {
+            regularUser = new User
+            {
+                UserName = userEmail,
+                Email = userEmail,
+                FullName = "Regular User",
+                Address = "User Address",
+                IsPaid = false,
+                PaymentType = "Monthly",
+                PaymentDate = DateTime.Now,
+                PaymentExpiry = DateTime.Now.AddMonths(1)
+            };
+            var result = await userManager.CreateAsync(regularUser, "User@123");
+            if (result.Succeeded)
+                await userManager.AddToRoleAsync(regularUser, "User");
+        }
+    }
+
+    Log.Information("Application started successfully");
+    await app.RunAsync();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
