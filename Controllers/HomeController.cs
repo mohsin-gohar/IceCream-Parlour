@@ -120,8 +120,10 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         }
 
         // ===== ERROR =====
-        public IActionResult Error()
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error(int? statusCode = null)
         {
+            ViewBag.StatusCode = statusCode;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

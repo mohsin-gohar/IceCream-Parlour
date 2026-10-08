@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers;
 using Ice_Cream_Parlour_Eproject.Data;
 using Ice_Cream_Parlour_Eproject.Models;
@@ -49,6 +50,8 @@ builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 // ===== Middleware =====
+app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
