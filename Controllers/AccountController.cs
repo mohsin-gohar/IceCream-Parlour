@@ -276,5 +276,34 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             TempData["Success"] = "Profile picture updated successfully!";
             return RedirectToAction(nameof(Profile));
         }
+
+        // ===== UPGRADE MEMBERSHIP =====
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> UpgradeMembership()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return NotFound();
+            return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpgradeMembership(string paymentType)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return NotFound();
+
+            user.IsPaid = true;
+            user.PaymentType = string.IsNullOrEmpty(paymentType) ? "Monthly VIP" : paymentType;
+            user.PaymentDate = DateTime.Now;
+            user.PaymentExpiry = DateTime.Now.AddDays(30);
+
+            await _userManager.UpdateAsync(user);
+
+            TempData["Success"] = "Congratulations! Your account has been upgraded to VIP Membership.";
+            return RedirectToAction(nameof(Profile));
+        }
     }
 }

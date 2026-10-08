@@ -1,0 +1,53 @@
+@model Ice_Cream_Parlour_Eproject.Models.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Upgrade Membership - iCREAM";
+}
+
+<div style="background: linear-gradient(135deg, #F195B2, #62C3E7); min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 20px;">
+    <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 6px;"><i class="fas fa-crown" style="margin-right: 10px;"></i> VIP Membership Upgrade</h1>
+    <p style="font-size: 1rem; opacity: 0.9;">Unlock exclusive recipes and premium member perks</p>
+</div>
+
+<section style="padding: 40px 0;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 0 15px;">
+        <div style="background: #fff; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); padding: 30px; border: 1px solid rgba(241,149,178,0.15);">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <span style="font-size: 3rem; color: #F195B2;"><i class="fas fa-gem"></i></span>
+                <h3 style="font-weight: 700; margin-top: 10px;">Upgrade to VIP Status</h3>
+                <p style="color: #666;">Get full access to secret parlour recipes, custom recipe submission contests, and special discounts.</p>
+            </div>
+
+            @if (Model.IsPaid && Model.PaymentExpiry > DateTime.Now)
+            {
+                <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; text-align: center; font-weight: 600;">
+                    <i class="fas fa-check-circle"></i> You are currently an active VIP Member until @Model.PaymentExpiry?.ToString("MMMM dd, yyyy").
+                </div>
+            }
+            else
+            {
+                <form asp-controller="Account" asp-action="UpgradeMembership" method="post">
+                    @Html.AntiForgeryToken()
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 8px;">Select Plan</label>
+                        <select name="paymentType" class="form-select" style="padding: 12px; border-radius: 10px; border: 1.5px solid #e0e0e0; width: 100%;">
+                            <option value="Monthly VIP">Monthly VIP Membership - $9.99 / month</option>
+                            <option value="Annual Gold">Annual Gold Membership - $89.99 / year</option>
+                        </select>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 600;">
+                            <span>Membership Total:</span>
+                            <span style="color: #F195B2; font-size: 1.2rem;">$9.99</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 14px; border-radius: 50px; font-weight: 700; font-size: 1rem; width: 100%; cursor: pointer;">
+                        <i class="fas fa-lock"></i> Confirm & Upgrade Now
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+</section>
