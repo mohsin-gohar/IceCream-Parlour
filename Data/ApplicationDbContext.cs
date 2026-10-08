@@ -48,6 +48,10 @@ namespace Ice_Cream_Parlour_Eproject.Data
             modelBuilder.Entity<UserRecipe>()
                 .Property(ur => ur.PrizeMoney)
                 .HasColumnType("decimal(18, 2)");
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(oi => oi.UnitPrice)
+                .HasColumnType("decimal(18, 2)");
         }
 
 
