@@ -1,4 +1,5 @@
 using Ice_Cream_Parlour_Eproject.Data;
+using Ice_Cream_Parlour_Eproject.Helpers;
 using Ice_Cream_Parlour_Eproject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,22 +8,25 @@ using Microsoft.EntityFrameworkCore;
 namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = AppRoles.AdminOrManager)]
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext context;
-        private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
-            this.context = context;
-            this.webHostEnvironment = webHostEnvironment;
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // ===== INDEX =====
         public async Task<IActionResult> Index()
         {
-            var recipes = await context.Recipes.ToListAsync();
+            ViewData["Title"] = "Products";
+            var recipes = await _context.Recipes.AsNoTracking()
+                .OrderBy(r => r.Name)
+                .ToListAsync();
             return View(recipes);
         }
 
@@ -30,68 +34,65 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["Title"] = "Add Product";
             return View(new Recipe());
         }
 
         // ===== CREATE (POST) =====
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(5 * 1024 * 1024)]
         public async Task<IActionResult> Create(Recipe recipe, IFormFile? ImageFile)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // ✅ Ensure directory exists
-                string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "recipes");
-                if (!Directory.Exists(uploadFolder))
-                {
-                    Directory.CreateDirectory(uploadFolder);
-                }
-
-                // Handle Image Upload
-                if (ImageFile != null && ImageFile.Length > 0)
-                {
-                    string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                    string filePath = Path.Combine(uploadFolder, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await ImageFile.CopyToAsync(stream);
-                    }
-
-                    recipe.ImagePath = "/images/recipes/" + fileName;
-                }
-                else
-                {
-                    // Default image
-                    recipe.ImagePath = "/img/product-1.jpg";
-                }
-
-                context.Recipes.Add(recipe);
-                await context.SaveChangesAsync();
-
-                TempData["Success"] = "Product added successfully!";
-                return RedirectToAction(nameof(Index));
+                return View(recipe);
             }
 
-            return View(recipe);
+            if (ImageFile is { Length: > 0 })
+            {
+                var (path, error) = await FileStorage.SaveImageAsync(ImageFile, _webHostEnvironment, "recipes");
+                if (path == null)
+                {
+                    ModelState.AddModelError(nameof(ImageFile), error ?? "Invalid image.");
+                    return View(recipe);
+                }
+
+                recipe.ImagePath = path;
+            }
+            else
+            {
+                recipe.ImagePath = "/img/product-1.jpg";
+            }
+
+            recipe.CreatedDate = DateTime.Now;
+
+            _context.Recipes.Add(recipe);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Product added successfully!";
+            return RedirectToAction(nameof(Index));
         }
 
         // ===== EDIT (GET) =====
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var recipe = await context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes.FindAsync(id);
             if (recipe == null)
             {
                 TempData["Error"] = "Product not found!";
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["Title"] = "Edit Product";
             return View(recipe);
         }
 
         // ===== EDIT (POST) =====
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(5 * 1024 * 1024)]
         public async Task<IActionResult> Edit(int id, Recipe recipe, IFormFile? ImageFile)
         {
             if (id != recipe.Id)
@@ -100,113 +101,64 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    var existingRecipe = await context.Recipes.FindAsync(id);
-                    if (existingRecipe == null)
-                    {
-                        TempData["Error"] = "Product not found!";
-                        return RedirectToAction(nameof(Index));
-                    }
-
-                    // Update fields
-                    existingRecipe.Name = recipe.Name;
-                    existingRecipe.Category = recipe.Category;
-                    existingRecipe.Ingredients = recipe.Ingredients;
-                    existingRecipe.Procedure = recipe.Procedure;
-                    existingRecipe.IsFree = recipe.IsFree;
-                    existingRecipe.Price = recipe.Price;
-
-                    // ✅ Ensure directory exists
-                    string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "recipes");
-                    if (!Directory.Exists(uploadFolder))
-                    {
-                        Directory.CreateDirectory(uploadFolder);
-                    }
-
-                    // Handle Image Upload
-                    if (ImageFile != null && ImageFile.Length > 0)
-                    {
-                        // Delete old image
-                        if (!string.IsNullOrEmpty(existingRecipe.ImagePath) &&
-                            !existingRecipe.ImagePath.Contains("default-product.jpg"))
-                        {
-                            string oldImagePath = Path.Combine(webHostEnvironment.WebRootPath,
-                                existingRecipe.ImagePath.TrimStart('/'));
-                            if (System.IO.File.Exists(oldImagePath))
-                            {
-                                System.IO.File.Delete(oldImagePath);
-                            }
-                        }
-
-                        string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                        string filePath = Path.Combine(uploadFolder, fileName);
-
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await ImageFile.CopyToAsync(stream);
-                        }
-
-                        existingRecipe.ImagePath = "/images/recipes/" + fileName;
-                    }
-
-                    await context.SaveChangesAsync();
-                    TempData["Success"] = "Product updated successfully!";
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RecipeExists(recipe.Id))
-                    {
-                        TempData["Error"] = "Product not found!";
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                return View(recipe);
             }
-            return View(recipe);
+
+            var existing = await _context.Recipes.FindAsync(id);
+            if (existing == null)
+            {
+                TempData["Error"] = "Product not found!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            existing.Name = recipe.Name.Trim();
+            existing.Category = recipe.Category.Trim();
+            existing.Ingredients = recipe.Ingredients;
+            existing.Procedure = recipe.Procedure;
+            existing.IsFree = recipe.IsFree;
+            existing.Price = recipe.Price;
+
+            if (ImageFile is { Length: > 0 })
+            {
+                var (path, error) = await FileStorage.SaveImageAsync(ImageFile, _webHostEnvironment, "recipes");
+                if (path == null)
+                {
+                    ModelState.AddModelError(nameof(ImageFile), error ?? "Invalid image.");
+                    return View(recipe);
+                }
+
+                FileStorage.DeleteImage(_webHostEnvironment, existing.ImagePath);
+                existing.ImagePath = path;
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Product updated successfully!";
+            return RedirectToAction(nameof(Index));
         }
 
         // ===== DELETE =====
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = AppRoles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
-            var recipe = await context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes.FindAsync(id);
             if (recipe == null)
             {
                 TempData["Error"] = "Product not found!";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Delete image file
-            if (!string.IsNullOrEmpty(recipe.ImagePath) &&
-                !recipe.ImagePath.Contains("default-product.jpg"))
-            {
-                string imagePath = Path.Combine(webHostEnvironment.WebRootPath,
-                    recipe.ImagePath.TrimStart('/'));
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
-            }
+            FileStorage.DeleteImage(_webHostEnvironment, recipe.ImagePath);
 
-            context.Recipes.Remove(recipe);
-            await context.SaveChangesAsync();
+            _context.Recipes.Remove(recipe);
+            await _context.SaveChangesAsync();
 
             TempData["Success"] = "Product deleted successfully!";
             return RedirectToAction(nameof(Index));
         }
-
-        private bool RecipeExists(int id)
-        {
-            return context.Recipes.Any(e => e.Id == id);
-        }
     }
 }
-

@@ -1,10 +1,10 @@
-﻿using Ice_Cream_Parlour_Eproject.Data;
+using System.Security.Claims;
+using Ice_Cream_Parlour_Eproject.Helpers;
 using Ice_Cream_Parlour_Eproject.Models;
 using Ice_Cream_Parlour_Eproject.Models.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Ice_Cream_Parlour_Eproject.Controllers
 {
@@ -13,40 +13,63 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ILogger<AccountController> _logger;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IWebHostEnvironment webHostEnvironment
-        )
+            IWebHostEnvironment webHostEnvironment,
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
+            _logger = logger;
         }
 
         // ===== LOGIN =====
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
             return View(new LoginModel());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model, string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
-                {
-                    return await RedirectToLocal(returnUrl);
-                }
-                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
             }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(
+                user, model.Password, model.RememberMe, lockoutOnFailure: true);
+
+            if (result.Succeeded)
+            {
+                return await RedirectToLocal(returnUrl);
+            }
+
+            ModelState.AddModelError(string.Empty, result.IsLockedOut
+                ? "This account is temporarily locked. Please try again later."
+                : "Invalid login attempt.");
+
             return View(model);
         }
 
@@ -58,35 +81,43 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = new User
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FullName = model.FullName
-                };
+                return View(model);
+            }
 
-                var result = await _userManager.CreateAsync(user, model.Password);
+            var user = new User
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                FullName = model.FullName,
+                CreatedAt = DateTime.Now
+            };
 
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "User");
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
-                }
-
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("", error.Description);
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
+                return View(model);
             }
-            return View(model);
+
+            await _userManager.AddToRoleAsync(user, AppRoles.User);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            TempData["Success"] = "Welcome to iCREAM! Your account has been created.";
+            return RedirectToAction("Index", "Home");
         }
 
         // ===== LOGOUT =====
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -101,79 +132,81 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user != null)
-                {
-                    // Generate password reset token
-                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-                    // Build reset link
-                    var resetLink = Url.Action("ResetPassword", "Account", new
-                    {
-                        email = model.Email,
-                        token = token
-                    }, protocol: Request.Scheme);
-
-                    // TODO: Send email with resetLink
-                    // For now, just show success message
-                    TempData["Success"] = "Password reset link has been sent to your email.";
-                    return RedirectToAction("Login");
-                }
-                ModelState.AddModelError("", "Email not found.");
+                return View(model);
             }
-            return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var resetLink = Url.Action("ResetPassword", "Account", new
+                {
+                    email = model.Email,
+                    token
+                }, protocol: Request.Scheme);
+
+                // Email delivery is not configured in this project - the link is
+                // written to the log so administrators can hand it over securely.
+                _logger.LogInformation("Password reset link for {Email}: {ResetLink}", model.Email, resetLink);
+            }
+
+            // Always show the same message so the endpoint cannot be used to
+            // discover which email addresses have an account.
+            TempData["Success"] = "If an account exists for that email address, a password reset link has been generated.";
+            return RedirectToAction(nameof(Login));
         }
 
         // ===== RESET PASSWORD (GET) =====
         [HttpGet]
-        public IActionResult ResetPassword(string token, string email)
+        public IActionResult ResetPassword(string? token, string? email)
         {
             if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
             {
                 TempData["Error"] = "Invalid password reset link.";
-                return RedirectToAction("Login");
+                return RedirectToAction(nameof(Login));
             }
 
-            var model = new ResetPasswordModel
+            return View(new ResetPasswordModel
             {
                 Token = token,
                 Email = email
-            };
-            return View(model);
+            });
         }
 
         // ===== RESET PASSWORD (POST) =====
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null)
-                {
-                    // Don't reveal that the user doesn't exist
-                    TempData["Success"] = "Password has been reset successfully.";
-                    return RedirectToAction("Login");
-                }
-
-                // Use NewPassword instead of Password
-                var result = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
-
-                if (result.Succeeded)
-                {
-                    TempData["Success"] = "Password reset successfully! Please login with your new password.";
-                    return RedirectToAction("Login");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                return View(model);
             }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                TempData["Success"] = "Password has been reset successfully. Please login with your new password.";
+                return RedirectToAction(nameof(Login));
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+            if (result.Succeeded)
+            {
+                TempData["Success"] = "Password reset successfully! Please login with your new password.";
+                return RedirectToAction(nameof(Login));
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
             return View(model);
         }
 
@@ -184,32 +217,13 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             return View();
         }
 
-        // ===== REDIRECT TO LOCAL =====
-        private async Task<IActionResult> RedirectToLocal(string? returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-
-            var user = await _userManager.GetUserAsync(User);
-
-            if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
-            {
-                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
         // ===== PROFILE =====
         [Authorize]
         public async Task<IActionResult> Profile()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId)) return Challenge();
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return NotFound();
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Challenge();
+
             return View(user);
         }
 
@@ -217,64 +231,47 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateProfilePicture(IFormFile profilePicture)
+        [RequestSizeLimit(5 * 1024 * 1024)]
+        public async Task<IActionResult> UpdateProfilePicture(IFormFile? profilePicture)
         {
-            if (profilePicture == null || profilePicture.Length == 0)
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Challenge();
+
+            var (path, error) = await FileStorage.SaveImageAsync(profilePicture, _webHostEnvironment, "profiles");
+            if (path == null)
             {
-                TempData["Error"] = "Please select an image.";
+                TempData["Error"] = error ?? "Please select a valid image.";
                 return RedirectToAction(nameof(Profile));
             }
 
-            // Validate file type
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
-            var extension = Path.GetExtension(profilePicture.FileName).ToLower();
-            if (!allowedExtensions.Contains(extension))
-            {
-                TempData["Error"] = "Only image files (jpg, png, gif, webp) are allowed.";
-                return RedirectToAction(nameof(Profile));
-            }
+            FileStorage.DeleteImage(_webHostEnvironment, user.ProfilePicture);
 
-            // Validate file size (max 2MB)
-            if (profilePicture.Length > 2 * 1024 * 1024)
-            {
-                TempData["Error"] = "Image size must be less than 2MB.";
-                return RedirectToAction(nameof(Profile));
-            }
+            user.ProfilePicture = path;
+            var result = await _userManager.UpdateAsync(user);
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId)) return Challenge();
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return NotFound();
+            TempData[result.Succeeded ? "Success" : "Error"] = result.Succeeded
+                ? "Profile picture updated successfully!"
+                : "The profile picture could not be saved.";
 
-            // Delete old image if exists
-            if (!string.IsNullOrEmpty(user.ProfilePicture))
-            {
-                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, user.ProfilePicture.TrimStart('/'));
-                if (System.IO.File.Exists(oldImagePath))
-                {
-                    System.IO.File.Delete(oldImagePath);
-                }
-            }
-
-            // Save new image
-            string folder = "images/profiles/";
-            string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(profilePicture.FileName);
-            string fullPath = Path.Combine(folderPath, fileName);
-
-            using (var stream = new FileStream(fullPath, FileMode.Create))
-            {
-                await profilePicture.CopyToAsync(stream);
-            }
-
-            user.ProfilePicture = "/" + folder + fileName;
-            await _userManager.UpdateAsync(user);
-
-            TempData["Success"] = "Profile picture updated successfully!";
             return RedirectToAction(nameof(Profile));
+        }
+
+        // ===== REDIRECT TO LOCAL =====
+        private async Task<IActionResult> RedirectToLocal(string? returnUrl)
+        {
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null && await _userManager.IsInRoleAsync(user, AppRoles.Admin))
+            {
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

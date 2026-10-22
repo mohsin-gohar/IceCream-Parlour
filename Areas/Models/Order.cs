@@ -29,11 +29,14 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Models
 
         [Required]
         [StringLength(100)]
+        [EmailAddress]
         public string CustomerEmail { get; set; } = string.Empty;
 
         [StringLength(20)]
+        [Phone]
         public string? CustomerPhone { get; set; }
 
+        [StringLength(500)]
         public string? DeliveryAddress { get; set; }
 
         // ===== Order Details =====
@@ -73,8 +76,9 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Models
         [ForeignKey("OrderId")]
         public virtual Order? Order { get; set; }
 
-        [Required]
-        public int ProductId { get; set; }
+        // Optional link to a catalogue product. Orders can also contain
+        // free-form line items (books / recipes) which have no Product row.
+        public int? ProductId { get; set; }
 
         [ForeignKey("ProductId")]
         public virtual Product? Product { get; set; }

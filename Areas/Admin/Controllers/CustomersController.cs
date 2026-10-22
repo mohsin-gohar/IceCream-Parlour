@@ -11,11 +11,13 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers;
 [Authorize(Roles = AppRoles.AllStaff)]
 public class CustomersController : Controller
 {
-    private readonly  ICustomerService _customerService;
-    public CustomersController(ICustomerService customerService)
+    private readonly ICustomerService _customerService;
+    private readonly IWebHostEnvironment _environment;
 
+    public CustomersController(ICustomerService customerService, IWebHostEnvironment environment)
     {
         _customerService = customerService;
+        _environment = environment;
     }
 
     public async Task<IActionResult> Index(string? search, string sortBy = "name", string sortDir = "asc", int page = 1)
@@ -36,7 +38,7 @@ public class CustomersController : Controller
     {
         if (!ModelState.IsValid) return View(model);
 
-        if (!await _customerService.CreateAsync(model, HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>()))
+        if (!await _customerService.CreateAsync(model, _environment))
         {
             ModelState.AddModelError("", "Email already exists or invalid data.");
             return View(model);
@@ -59,7 +61,7 @@ public class CustomersController : Controller
     {
         if (!ModelState.IsValid) return View(model);
 
-        if (!await _customerService.UpdateAsync(model, HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>()))
+        if (!await _customerService.UpdateAsync(model, _environment))
         {
             ModelState.AddModelError("", "Update failed. Email may already exist.");
             return View(model);
@@ -82,7 +84,7 @@ public class CustomersController : Controller
     [Authorize(Roles = AppRoles.AdminOrManager)]
     public async Task<IActionResult> Delete(int id)
     {
-        var deleted = await _customerService.DeleteAsync(id, HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>());
+        var deleted = await _customerService.DeleteAsync(id, _environment);
         TempData[deleted ? "Success" : "Error"] = deleted ? "Customer deleted." : "Cannot delete customer with existing orders.";
         return RedirectToAction(nameof(Index));
     }

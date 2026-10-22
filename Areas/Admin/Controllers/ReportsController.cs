@@ -1,5 +1,5 @@
-using Ice_Cream_Parlour_Eproject.Helpers;        
-using Ice_Cream_Parlour_Eproject.Services;       
+using Ice_Cream_Parlour_Eproject.Helpers;
+using Ice_Cream_Parlour_Eproject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,12 +25,14 @@ public class ReportsController : Controller
     public async Task<IActionResult> ExportPdf(string reportType = "daily", DateTime? startDate = null, DateTime? endDate = null)
     {
         var pdf = await _reportService.ExportPdfAsync(reportType, startDate, endDate);
-        return File(pdf, "application/pdf", $"Report-{reportType}-{DateTime.Now:yyyyMMdd}.pdf");
+        return File(pdf, "application/pdf",
+            FileStorage.BuildExportFileName($"Report-{reportType}", ".pdf"));
     }
 
     public async Task<IActionResult> ExportExcel(string reportType = "daily", DateTime? startDate = null, DateTime? endDate = null)
     {
-        var excel = await _reportService.ExportExcelAsync(reportType, startDate, endDate);
-        return File(excel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Report-{reportType}-{DateTime.Now:yyyyMMdd}.xlsx");
+        var csv = await _reportService.ExportExcelAsync(reportType, startDate, endDate);
+        return File(csv, "text/csv",
+            FileStorage.BuildExportFileName($"Report-{reportType}", ".csv"));
     }
 }

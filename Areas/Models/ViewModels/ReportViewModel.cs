@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Ice_Cream_Parlour_Eproject.Areas.Models.Report;
 
 namespace Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels
 {
@@ -17,6 +18,8 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels
         public List<decimal> ChartData { get; set; } = new();
 
         public List<OrderReportDto> RecentOrders { get; set; } = new();
+
+        public List<TopProductDto> TopProducts { get; set; } = new();
     }
 
     public class OrderReportDto

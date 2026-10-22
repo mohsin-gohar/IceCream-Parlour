@@ -1,5 +1,5 @@
 using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Models;
+using Ice_Cream_Parlour_Eproject.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = AppRoles.AdminOrManager)]
     public class UserRecipesController : Controller
     {
+        private static readonly string[] AllowedStatuses = { "Pending", "Selected", "Rejected" };
+
         private readonly ApplicationDbContext _context;
 
         public UserRecipesController(ApplicationDbContext context)
@@ -20,7 +22,8 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
         // ===== LIST USER RECIPES =====
         public async Task<IActionResult> Index()
         {
-            var userRecipes = await _context.UserRecipes
+            ViewData["Title"] = "User Recipes";
+            var userRecipes = await _context.UserRecipes.AsNoTracking()
                 .OrderByDescending(ur => ur.SubmittedDate)
                 .ToListAsync();
             return View(userRecipes);
@@ -29,8 +32,10 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
         // ===== DETAILS & REVIEW =====
         public async Task<IActionResult> Details(int id)
         {
-            var recipe = await _context.UserRecipes.FindAsync(id);
+            var recipe = await _context.UserRecipes.AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
             if (recipe == null) return NotFound();
+
+            ViewData["Title"] = "Review Recipe";
             return View(recipe);
         }
 
@@ -39,16 +44,23 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Review(int id, string status, decimal? prizeMoney, bool isCertificateIssued, string? adminRemarks)
         {
+            if (!AllowedStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+            {
+                TempData["Error"] = "Invalid review status.";
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
             var recipe = await _context.UserRecipes.FindAsync(id);
             if (recipe == null) return NotFound();
 
             recipe.Status = status;
-            recipe.PrizeMoney = prizeMoney;
+            recipe.PrizeMoney = prizeMoney is >= 0 ? prizeMoney : null;
             recipe.IsCertificateIssued = isCertificateIssued;
-            recipe.AdminRemarks = adminRemarks;
+            recipe.AdminRemarks = string.IsNullOrWhiteSpace(adminRemarks) ? null : adminRemarks.Trim();
             recipe.ReviewedDate = DateTime.Now;
 
             await _context.SaveChangesAsync();
+
             TempData["Success"] = $"Recipe status updated to {status} successfully!";
             return RedirectToAction(nameof(Index));
         }
@@ -56,6 +68,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
         // ===== DELETE =====
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = AppRoles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var recipe = await _context.UserRecipes.FindAsync(id);
@@ -65,6 +78,7 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "User recipe deleted successfully!";
             }
+
             return RedirectToAction(nameof(Index));
         }
     }

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Ice_Cream_Parlour_Eproject.Data;
+using Ice_Cream_Parlour_Eproject.Helpers;
+using Ice_Cream_Parlour_Eproject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Models;
-
-using System.Security.Claims;
 
 namespace Ice_Cream_Parlour_Eproject.Controllers
 {
@@ -19,26 +19,36 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             _env = env;
         }
 
-        // ===== RECIPE LIST (All Recipes) =====
+        // ===== RECIPE LIST =====
         public async Task<IActionResult> Index()
         {
-            var recipes = await _context.Recipes.ToListAsync();
+            var recipes = await _context.Recipes.AsNoTracking()
+                .OrderBy(r => r.Name)
+                .ToListAsync();
             return View(recipes);
         }
 
-        // ===== RECIPE DETAIL - Registered Users Only =====
-        [Authorize]
+        // ===== RECIPE DETAIL - free recipes are public, premium ones need an account =====
         public async Task<IActionResult> Details(int id)
         {
-            var recipe = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes.AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
             if (recipe == null) return NotFound();
+
+            if (!recipe.IsFree && User.Identity?.IsAuthenticated != true)
+            {
+                return Challenge();
+            }
+
             return View(recipe);
         }
 
         // ===== FREE RECIPES - Public =====
         public async Task<IActionResult> FreeRecipes()
         {
-            var recipes = await _context.Recipes.Where(r => r.IsFree).ToListAsync();
+            var recipes = await _context.Recipes.AsNoTracking()
+                .Where(r => r.IsFree)
+                .OrderBy(r => r.Name)
+                .ToListAsync();
             return View(recipes);
         }
 
@@ -54,13 +64,26 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(5 * 1024 * 1024)]
         public async Task<IActionResult> SubmitCustomRecipe(UserRecipe userRecipe, IFormFile? ImageFile)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId)) return Challenge();
 
-            ModelState.Remove("UserId");
-            ModelState.Remove("UserName");
+            ModelState.Remove(nameof(userRecipe.UserId));
+            ModelState.Remove(nameof(userRecipe.UserName));
+
+            if (ImageFile is { Length: > 0 })
+            {
+                var (path, error) = await FileStorage.SaveImageAsync(ImageFile, _env, "recipes");
+                if (path == null)
+                {
+                    ModelState.AddModelError(nameof(ImageFile), error ?? "Invalid image.");
+                    return View(userRecipe);
+                }
+
+                userRecipe.ImagePath = path;
+            }
 
             if (ModelState.IsValid)
             {
@@ -68,22 +91,8 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
                 userRecipe.UserName = User.Identity?.Name ?? "User";
                 userRecipe.SubmittedDate = DateTime.Now;
                 userRecipe.Status = "Pending";
-
-                if (ImageFile != null && ImageFile.Length > 0)
-                {
-                    string folder = "images/recipes/";
-                    string folderPath = Path.Combine(_env.WebRootPath, folder);
-                    if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-
-                    string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                    string fullPath = Path.Combine(folderPath, fileName);
-
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        await ImageFile.CopyToAsync(stream);
-                    }
-                    userRecipe.ImagePath = "/" + folder + fileName;
-                }
+                userRecipe.PrizeMoney = null;
+                userRecipe.IsCertificateIssued = false;
 
                 _context.UserRecipes.Add(userRecipe);
                 await _context.SaveChangesAsync();

@@ -1,49 +1,10 @@
-@using Microsoft.EntityFrameworkCore
-@using Ice_Cream_Parlour_Eproject.Data
 @using System.Security.Claims
-@inject ApplicationDbContext DbContext
 @{
-    // ===== MEMBERSHIP BANNER LOGIC =====
-    var showMembershipBanner = true;
-    if (User.Identity?.IsAuthenticated == true)
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!string.IsNullOrEmpty(userId))
-        {
-            var user = await DbContext.Users.FindAsync(userId);
-            if (user != null && user.IsPaid && user.PaymentExpiry.HasValue && user.PaymentExpiry.Value > DateTime.Now)
-            {
-                showMembershipBanner = false;
-            }
-        }
-    }
-
-    // ===== USER AVATAR DATA =====
-    string avatarImage = "";
-    string userInitials = "U";
-    string fullName = "";
-    if (User.Identity?.IsAuthenticated == true)
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!string.IsNullOrEmpty(userId))
-        {
-            var user = await DbContext.Users.FindAsync(userId);
-            if (user != null)
-            {
-                fullName = user.FullName ?? user.UserName ?? "";
-                avatarImage = user.ProfilePicture ?? "";
-                // Initials = first letter of first and last name
-                if (!string.IsNullOrEmpty(fullName))
-                {
-                    var parts = fullName.Trim().Split(' ');
-                    if (parts.Length >= 2)
-                        userInitials = parts[0][0].ToString() + parts[1][0].ToString();
-                    else
-                        userInitials = parts[0][0].ToString();
-                }
-            }
-        }
-    }
+    // All user data is loaded once per request by UserProfileFilter.
+    var showMembershipBanner = ViewData["ShowMembershipBanner"] as bool? ?? true;
+    var avatarImage = ViewData["AvatarImage"] as string ?? string.Empty;
+    var userInitials = ViewData["UserInitials"] as string ?? "U";
+    var fullName = ViewData["DisplayName"] as string ?? string.Empty;
 }
 <!DOCTYPE html>
 <html lang="en">
