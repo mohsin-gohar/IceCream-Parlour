@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - iCREAM Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="~/css/components.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/dashboard.css" />
+    
 </head>
 <body class="admin-body">
     <div class="page-loader" id="pageLoader"><div class="spinner"></div></div>
@@ -44,8 +45,11 @@
             <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Orders" ? "active" : "")">
                 <i class="fas fa-shopping-cart"></i><span>Orders</span>
             </a>
-            <a asp-area="Admin" asp-controller="Books" asp-action="Index"class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Books" ? "active" : "")">
+            <a asp-area="Admin" asp-controller="Books" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Books" ? "active" : "")">
                 <i class="fas fa-book"></i><span>Books</span>
+            </a>
+            <a asp-area="Admin" asp-controller="UserRecipes" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "UserRecipes" ? "active" : "")">
+                <i class="fas fa-lightbulb"></i><span>User Recipes</span>
             </a>
             <a asp-area="Admin" asp-controller="Reports" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Reports" ? "active" : "")">
                 <i class="fas fa-file-alt"></i><span>Reports</span>

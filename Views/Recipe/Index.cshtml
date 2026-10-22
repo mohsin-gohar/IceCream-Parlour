@@ -50,16 +50,6 @@
     </a>
 </div>
 
-@if (TempData["Success"] != null)
-{
-    <div class="container mt-4" style="max-width: 1200px;">
-        <div class="alert alert-success alert-dismissible fade show rounded-3" role="alert">
-            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-}
-
 <!-- ===== RECIPE GRID ===== -->
 <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
     @if (Model == null || !Model.Any())

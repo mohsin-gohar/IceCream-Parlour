@@ -1,0 +1,27 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var code = ViewData["StatusCode"] as int? ?? 404;
+    var (heading, description, icon) = code switch
+    {
+        400 => ("Bad request", "The request could not be understood. Please go back and try again.", "fa-triangle-exclamation"),
+        401 => ("Sign in required", "You need to sign in to view this page.", "fa-user-lock"),
+        403 => ("Access denied", "You do not have permission to view this page.", "fa-ban"),
+        404 => ("Page not found", "The page you are looking for may have been moved or no longer exists.", "fa-magnifying-glass"),
+        500 => ("Something went wrong", "An unexpected error occurred. Please try again in a moment.", "fa-server"),
+        _ => ("Unexpected error", "Something did not go as planned. Please try again.", "fa-circle-exclamation")
+    };
+}
+
+<section class="container py-5" style="min-height: 60vh; display: flex; align-items: center;">
+    <div class="text-center w-100">
+        <div style="font-size: 5rem; font-weight: 800; background: linear-gradient(135deg, #F195B2, #62C3E7); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;">@code</div>
+        <h2 class="fw-bold mt-3"><i class="fas @icon me-2" style="color:#F195B2;"></i>@heading</h2>
+        <p class="text-muted mb-4">@description</p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill px-4" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none;">
+            <i class="fas fa-home me-2"></i>Back to Home
+        </a>
+        <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-secondary rounded-pill px-4 ms-2">
+            <i class="fas fa-envelope me-2"></i>Contact Support
+        </a>
+    </div>
+</section>

@@ -77,14 +77,23 @@
     <!-- Search Bar -->
     <div class="card border-0 shadow-sm rounded-4 p-4 mb-5">
         <form asp-controller="Order" asp-action="Track" method="get" class="row g-2 align-items-center">
-            <div class="col-md-9">
+            <div class="col-md-5">
                 <input type="text" name="orderNumber" class="form-control form-control-lg rounded-pill px-4"
-                       placeholder="Enter Order # (e.g. ORD-20260630-1234)" value="@Context.Request.Query["orderNumber"]" required />
+                       placeholder="Order # (e.g. ORD-20260630-1234)" maxlength="50"
+                       value="@Context.Request.Query["orderNumber"]" required />
+            </div>
+            <div class="col-md-4">
+                <input type="email" name="email" class="form-control form-control-lg rounded-pill px-4"
+                       placeholder="E-mail used for the order" maxlength="100"
+                       value="@Context.Request.Query["email"]" />
             </div>
             <div class="col-md-3">
                 <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none;">
                     <i class="fas fa-search me-1"></i> Track
                 </button>
+            </div>
+            <div class="col-12">
+                <small class="text-muted"><i class="fas fa-lock me-1"></i>For your privacy, sign in or provide the e-mail address used when ordering.</small>
             </div>
         </form>
     </div>

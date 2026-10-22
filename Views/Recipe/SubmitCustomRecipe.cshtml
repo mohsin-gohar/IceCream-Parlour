@@ -20,6 +20,7 @@
         </h4>
 
         <form asp-controller="Recipe" asp-action="SubmitCustomRecipe" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             @Html.AntiForgeryToken()
 
             <div class="mb-3">

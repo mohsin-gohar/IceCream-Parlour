@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Feedback - iCREAM";
 }
@@ -269,15 +269,7 @@
                     <p class="text-muted small mb-4">Fill in the form below and let us know about your experience.</p>
 
                     <!-- Success/Error Messages -->
-                    @if (TempData["Success"] != null)
-                    {
-                        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-                            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    }
-
-                    <form asp-controller="Feedback" asp-action="Create" method="post" class="feedback-form">
+                                        <form asp-controller="Feedback" asp-action="Create" method="post" class="feedback-form">
                         @Html.AntiForgeryToken()
                         <div class="row g-3">
                             <div class="col-md-6">

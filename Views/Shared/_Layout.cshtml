@@ -1,48 +1,29 @@
-@using Microsoft.EntityFrameworkCore
-@using Ice_Cream_Parlour_Eproject.Data
+@using System.Globalization
 @using System.Security.Claims
-@inject ApplicationDbContext DbContext
 @{
-    // ===== MEMBERSHIP BANNER LOGIC =====
-    var showMembershipBanner = true;
-    if (User.Identity?.IsAuthenticated == true)
+    // Values come from the authentication cookie (see AppUserClaimsPrincipalFactory) - no DB hit per request.
+    var isAuthenticated = User.Identity?.IsAuthenticated == true;
+    var fullName = User.FindFirstValue("full_name") ?? User.Identity?.Name ?? "";
+    var avatarImage = User.FindFirstValue("avatar") ?? string.Empty;
+    var isPaid = string.Equals(User.FindFirstValue("is_paid"), "true", StringComparison.OrdinalIgnoreCase);
+
+    var membershipActive = false;
+    if (isAuthenticated && isPaid && DateTime.TryParse(
+            User.FindFirstValue("payment_expiry"), CultureInfo.InvariantCulture,
+            DateTimeStyles.RoundtripKind, out var expiry))
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!string.IsNullOrEmpty(userId))
-        {
-            var user = await DbContext.Users.FindAsync(userId);
-            if (user != null && user.IsPaid && user.PaymentExpiry.HasValue && user.PaymentExpiry.Value > DateTime.Now)
-            {
-                showMembershipBanner = false;
-            }
-        }
+        membershipActive = expiry > DateTime.UtcNow;
     }
 
-    // ===== USER AVATAR DATA =====
-    string avatarImage = "";
-    string userInitials = "U";
-    string fullName = "";
-    if (User.Identity?.IsAuthenticated == true)
+    var showMembershipBanner = !membershipActive;
+    var userInitials = "U";
+
+    if (!string.IsNullOrWhiteSpace(fullName))
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!string.IsNullOrEmpty(userId))
-        {
-            var user = await DbContext.Users.FindAsync(userId);
-            if (user != null)
-            {
-                fullName = user.FullName ?? user.UserName ?? "";
-                avatarImage = user.ProfilePicture ?? "";
-                // Initials = first letter of first and last name
-                if (!string.IsNullOrEmpty(fullName))
-                {
-                    var parts = fullName.Trim().Split(' ');
-                    if (parts.Length >= 2)
-                        userInitials = parts[0][0].ToString() + parts[1][0].ToString();
-                    else
-                        userInitials = parts[0][0].ToString();
-                }
-            }
-        }
+        var parts = fullName.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        userInitials = parts.Length >= 2
+            ? string.Concat(parts[0][0], parts[1][0]).ToUpperInvariant()
+            : parts[0][0].ToString().ToUpperInvariant();
     }
 }
 <!DOCTYPE html>
@@ -138,6 +119,25 @@
     <!-- ===== MAIN CONTENT ===== -->
     <!-- ============================================================ -->
     <main class="flex-grow-1">
+        @if (TempData["Success"] != null)
+        {
+            <div class="container mt-3">
+                <div class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="container mt-3">
+                <div class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+
         @RenderBody()
     </main>
 

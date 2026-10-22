@@ -153,6 +153,7 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="Id" />
 
