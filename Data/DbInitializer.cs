@@ -228,16 +228,23 @@ namespace Ice_Cream_Parlour_Eproject.Data
         /// </summary>
         private static async Task SyncProductsFromRecipesAsync(ApplicationDbContext db, ILogger logger)
         {
-            if (await db.Products.AnyAsync() || !await db.Recipes.AnyAsync())
+            var recipes = await db.Recipes.ToListAsync();
+            if (recipes.Count == 0)
             {
                 return;
             }
 
             var categories = await db.Categories.ToListAsync();
-            var recipes = await db.Recipes.ToListAsync();
+            var added = 0;
 
             foreach (var recipe in recipes)
             {
+                // Only add missing entries so manual product edits are preserved.
+                if (await db.Products.AnyAsync(p => p.Name == recipe.Name))
+                {
+                    continue;
+                }
+
                 var category = categories.FirstOrDefault(c =>
                     string.Equals(c.Name, recipe.Category, StringComparison.OrdinalIgnoreCase));
 
@@ -269,10 +276,15 @@ namespace Ice_Cream_Parlour_Eproject.Data
                     Status = Areas.Models.ProductStatus.Active,
                     CreatedAt = DateTime.UtcNow
                 });
+
+                added++;
             }
 
             await db.SaveChangesAsync();
-            logger.LogInformation("Bootstrapped {Count} products from the recipe catalogue.", recipes.Count);
+            if (added > 0)
+            {
+                logger.LogInformation("Synced {Count} product(s) from the recipe catalogue.", added);
+            }
         }
     }
 }

@@ -59,10 +59,14 @@ namespace Ice_Cream_Parlour_Eproject.Data
                 unitPrice.HasPrecision(18, 2);
             }
 
+            // Preserve the original table name from the initial migration.
+            modelBuilder.Entity<OrderItem>().ToTable("OrderItem");
+
             // ===== Uniqueness / lookup indexes =====
+            // Uniqueness is enforced by OrderNumberHelper before insert; a non-unique
+            // index keeps the migration safe for databases that already contain duplicates.
             modelBuilder.Entity<Order>()
-                .HasIndex(o => o.OrderNumber)
-                .IsUnique();
+                .HasIndex(o => o.OrderNumber);
 
             modelBuilder.Entity<Order>()
                 .HasIndex(o => o.CustomerEmail);

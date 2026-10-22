@@ -1,3 +1,4 @@
+using Ice_Cream_Parlour_Eproject.Areas.Models;
 using Ice_Cream_Parlour_Eproject.Data;
 using Ice_Cream_Parlour_Eproject.Helpers;
 using Ice_Cream_Parlour_Eproject.Models;
@@ -122,6 +123,8 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            var previousName = existing.Name;
+
             existing.Name = recipe.Name;
             existing.Category = recipe.Category;
             existing.Ingredients = recipe.Ingredients;
@@ -144,6 +147,16 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 }
             }
 
+            if (!string.Equals(previousName, existing.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                var linkedProduct = await _context.Products.FirstOrDefaultAsync(p => p.Name == previousName);
+                if (linkedProduct != null &&
+                    !await _context.OrderItems.AnyAsync(i => i.ProductId == linkedProduct.Id))
+                {
+                    linkedProduct.Name = existing.Name;
+                }
+            }
+
             await _context.SaveChangesAsync();
             TempData["Success"] = "Product updated successfully!";
             return RedirectToAction(nameof(Index));
@@ -163,6 +176,19 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
             if (!string.Equals(recipe.ImagePath, DefaultImage, StringComparison.OrdinalIgnoreCase))
             {
                 FileUploadHelper.DeleteIfExists(_environment, recipe.ImagePath);
+            }
+
+            var linked = await _context.Products.FirstOrDefaultAsync(p => p.Name == recipe.Name);
+            if (linked != null)
+            {
+                if (await _context.OrderItems.AnyAsync(i => i.ProductId == linked.Id))
+                {
+                    linked.Status = ProductStatus.Discontinued;
+                }
+                else
+                {
+                    _context.Products.Remove(linked);
+                }
             }
 
             _context.Recipes.Remove(recipe);

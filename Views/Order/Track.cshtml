@@ -111,7 +111,7 @@
         var status = Model.OrderStatus?.ToLower() ?? "pending";
         var step1 = true;
         var step2 = status == "processing" || status == "completed" || status == "delivered";
-        var step3 = status == "out for delivery" || status == "completed" || status == "delivered";
+        var step3 = status == "shipped" || status == "out for delivery" || status == "completed" || status == "delivered";
         var step4 = status == "completed" || status == "delivered";
 
         <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
@@ -155,7 +155,16 @@
                     </div>
                     <div class="col-md-6">
                         <small class="text-muted d-block">Payment Status</small>
-                        <span class="badge bg-success">@Model.PaymentStatus</span> (@Model.PaymentMethod)
+                        @{
+                            var paymentClass = Model.PaymentStatus switch
+                            {
+                                "Paid" => "bg-success",
+                                "Failed" => "bg-danger",
+                                "Refunded" => "bg-secondary",
+                                _ => "bg-warning text-dark"
+                            };
+                        }
+                        <span class="badge @paymentClass">@Model.PaymentStatus</span> (@Model.PaymentMethod)
                     </div>
                     <div class="col-12">
                         <small class="text-muted d-block">Delivery Address</small>
