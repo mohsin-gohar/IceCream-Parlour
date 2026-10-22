@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Book>
+@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Book>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Recipe Books - iCREAM";
@@ -74,10 +74,19 @@
                                 <div style="font-size: 20px; font-weight: 800; color: #F195B2;">
                                     $@book.Price.ToString("0.00")
                                 </div>
-                                <a asp-controller="Book" asp-action="Order" asp-route-id="@book.Id"
-                                   style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 13px; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-                                    <i class="fas fa-shopping-bag"></i> Order Now
-                                </a>
+                                @if (book.StockQuantity > 0)
+                                {
+                                    <a asp-controller="Book" asp-action="Order" asp-route-id="@book.Id"
+                                       style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 13px; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                                        <i class="fas fa-shopping-bag"></i> Order Now
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span style="background: #e9ecef; color: #6c757d; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; cursor: not-allowed;">
+                                        <i class="fas fa-ban"></i> Out of Stock
+                                    </span>
+                                }
                             </div>
                         </div>
                     </div>
