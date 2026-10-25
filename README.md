@@ -119,6 +119,26 @@ Smtp__FromAddress=no-reply@example.com
 
 ---
 
+## 4a. Design system & UI
+
+The interface was rebuilt around one premium design system so every page feels consistent.
+
+- **`wwwroot/css/premium.css`** (loaded last) is the single source of truth for the visual
+  language: design tokens, typography scale, glass navbar, buttons, cards, forms, tables,
+  badges, stat cards, timelines, FAQ accordion, admin shell, auth pages, responsive and
+  print rules. It refines the legacy stylesheets rather than fighting them.
+- **Tokens**: ink/rose/aqua palette, 6-step elevation scale, 5-step radius scale, two easing
+  curves, fluid type via `clamp()`.
+- **Components**: premium hero (animated blob + floating chips), page-header gradient band,
+  product/recipe/book/gallery cards, stat cards, KPI grid, chart cards, timeline tracker,
+  toast notifications, empty states.
+- **Motion**: AOS scroll reveals (guarded - the page works even if the CDN is unavailable),
+  hover lift/zoom micro-interactions, `prefers-reduced-motion` support.
+- **Accessibility**: visible focus rings, semantic landmarks, labelled inputs, colour-coded
+  status badges with text (not colour alone), print stylesheet.
+- **Admin**: dark gradient sidebar with grouped navigation, sticky top bar with live page
+  filter, KPI dashboard, Chart.js revenue + pipeline charts, low-stock and top-seller panels.
+
 ## 5. Security notes
 
 - All unsafe requests are covered by a global anti-forgery filter; logout is POST-only.

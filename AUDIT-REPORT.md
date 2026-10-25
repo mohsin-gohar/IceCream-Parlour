@@ -74,6 +74,26 @@ All findings below were reproduced and re-tested against a live instance.
 - Profile page now allows editing name, phone and address.
 - Added `.dotnet/`, `*.db` and log folders to `.gitignore`.
 
+## 4a. UI / UX overhaul (premium rebuild)
+
+| # | Issue found | Fix |
+|---|---|---|
+| 39 | `AOS.init()` was called but the AOS library was never loaded - a JavaScript error on **every** page | AOS CSS + JS added and guarded with `if (window.AOS)` |
+| 40 | The home page contained lorem-ipsum copy and a Bootstrap-4 carousel | Rebuilt: premium hero, trust strip, story section, dynamic flavours, membership band, services, gallery, testimonials, final CTA, video modal |
+| 41 | About page contained lorem ipsum and a `margin-left:100px` layout hack | Rebuilt with real story copy, image collage, stats, values and team |
+| 42 | Contact page had Urdu placeholder copy and duplicated alerts | Rebuilt with a real form, contact cards, opening hours and map block |
+| 43 | Service page had malformed HTML `<istyle ="color:black;">` inside a dark header | Header replaced with the shared premium page header |
+| 44 | Feedback page header used black text on a dark image (invisible breadcrumb) | Replaced with the shared premium page header |
+| 45 | Products page used Bootstrap-negative-margin tricks and Order links that pointed at books | Rebuilt as a filterable menu with correct recipe links |
+| 46 | FAQ page had no page header and misaligned stat cards | Premium header added; stat layout fixed in CSS |
+| 47 | Gallery, recipes and books had no filtering and inconsistent cards | Client-side category filters and one consistent card component |
+| 48 | Admin layout did not load the design system and never initialised AOS | Added `premium.css`, AOS init, grouped sidebar, sticky top bar, page filter, footer |
+| 49 | Dashboard was a static grid with a hard-coded 7-day query loop | Rebuilt with KPI cards, Chart.js revenue + pipeline charts, low-stock and top-seller panels, recent orders |
+| 50 | Admin tables had no empty states; three admin views contained large commented-out duplicate markup | Empty states added, dead blocks removed |
+| 51 | Checkout displayed a shipping fee that the server never charged | Shipping (free over $100, otherwise $4.99) now calculated server-side and recorded on the order |
+| 52 | Profile page had no way to edit details and inline styles only | Rebuilt with identity card, editable details form, quick actions |
+| 53 | No favicon/theme-colour, no client-side validation in admin | Both added |
+
 ## 5. New migration
 
 `20261022181717_AddIndexesAndConstraints` adds indexes for the columns used by search,

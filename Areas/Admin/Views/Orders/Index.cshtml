@@ -37,6 +37,26 @@
                 <tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Order Status</th><th>Payment</th><th>Actions</th></tr>
             </thead>
             <tbody>
+
+                @* EmptyState *@
+
+                @if (!Model.Orders.Items.Any())
+
+                {
+
+                    <tr>
+
+                        <td colspan="7" class="text-center py-5">
+
+                            <i class="fas fa-receipt fa-2x text-muted mb-2 d-block"></i>
+
+                            <div class="text-muted small">No orders match your filters yet.</div>
+
+                        </td>
+
+                    </tr>
+
+                }
                 @foreach (var o in Model.Orders.Items)
                 {
                     <tr>
