@@ -175,7 +175,11 @@ existing data that may already contain duplicates.
 
 ## 7. Verification performed
 
-- `dotnet build` - 0 warnings, 0 errors.
+- `dotnet build` (clean rebuild) - 0 warnings, 0 errors.
+- Every public page, admin page and asset returns HTTP 200 (fresh SQLite database, 0 runtime errors).
+- All JavaScript files pass `node --check`; all CSS files have balanced braces.
+- All referenced local images return HTTP 200 (no broken thumbnails).
+- AOS/Chart.js/DataTables/SweetAlert are all guarded so a CDN outage cannot break the UI.
 - End-to-end smoke test against a real SQLite database:
   public pages, admin login, all admin screens, book ordering (server-side total,
   stock decrement, order number), order tracking with/without e-mail, profile update,
