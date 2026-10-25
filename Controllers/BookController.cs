@@ -144,7 +144,12 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
                 order.OrderDate = DateTime.UtcNow;
                 order.OrderStatus = "Pending";
                 order.PaymentStatus = "Pending";
-                order.TotalAmount = book.Price;
+                // Shipping mirrors the checkout summary: free over $100, otherwise a flat fee.
+                var shippingFee = book.Price >= 100m ? 0m : 4.99m;
+                order.TotalAmount = Math.Round(book.Price + shippingFee, 2);
+                order.Notes = shippingFee > 0
+                    ? $"Shipping ${shippingFee:0.00} included"
+                    : "Free shipping applied";
 
                 book.StockQuantity -= 1;
 

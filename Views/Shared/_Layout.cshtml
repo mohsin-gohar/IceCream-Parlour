@@ -62,66 +62,72 @@
     <!-- ============================================================ -->
     <!-- ===== NAVBAR ===== -->
     <!-- ============================================================ -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top px-0">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                <div style="width:42px;height:42px;background:var(--grad-rose);border-radius:12px;display:grid;place-items:center;box-shadow:var(--sh-rose)">
+                    <i class="fas fa-ice-cream text-white" style="font-size:1.15rem"></i>
+                </div>
+                <span class="ms-2 fw-bold fs-4" style="background:var(--grad-rose);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-family:'Playfair Display',serif;letter-spacing:-.5px">iCREAM</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="mainNavbar">
-                <!-- Left links -->
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">About</a></li>
-                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Product" ? "active" : "")" asp-controller="Home" asp-action="Product">Products</a></li>
+                <ul class="navbar-nav mx-auto my-3 my-lg-0">
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Product" ? "active" : "")" asp-controller="Home" asp-action="Product">Flavours</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Recipe" ? "active" : "")" asp-controller="Recipe" asp-action="Index">Recipes</a></li>
-                </ul>
-
-                <!-- Centered Brand -->
-                <a class="navbar-brand mx-auto" asp-controller="Home" asp-action="Index">
-                    <h1 class="m-0 display-4 text-primary"><span class="text-secondary">i</span>CREAM</h1>
-                </a>
-
-                <!-- Right links -->
-                <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Book" ? "active" : "")" asp-controller="Book" asp-action="Index">Books</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Gallery" ? "active" : "")" asp-controller="Gallery" asp-action="Index">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">About</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
 
-                    <!-- User Menu -->
-                    @if (User.Identity?.IsAuthenticated == true)
+                <div class="d-flex align-items-center gap-2 my-3 my-lg-0">
+                    @if (isAuthenticated)
                     {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 4px 8px;">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2 ps-2 pe-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 @if (!string.IsNullOrEmpty(avatarImage))
                                 {
-                                    <img src="@avatarImage" alt="Avatar" style="width:32px; height:32px; border-radius:50%; object-fit:cover;" />
+                                    <img src="@avatarImage" alt="@fullName" class="rounded-circle" style="width:32px;height:32px;object-fit:cover" />
                                 }
                                 else
                                 {
-                                    <span style="display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background: linear-gradient(135deg, #F195B2, #62C3E7); color:#fff; font-weight:700; font-size:14px;">@userInitials</span>
+                                    <span class="rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;background:var(--grad-rose);color:#fff;font-weight:700;font-size:.8rem">@userInitials</span>
                                 }
-                                <span class="d-none d-sm-inline">@fullName</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown" style="border-radius:16px; border:none; padding:8px; min-width:200px;">
-                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user-circle me-2"></i>My Profile</a></li>
-                                <li><a class="dropdown-item" asp-controller="Order" asp-action="MyOrders"><i class="fas fa-box-open me-2"></i>My Orders</a></li>
-                                <li><a class="dropdown-item" asp-controller="Order" asp-action="Track"><i class="fas fa-search-location me-2"></i>Track Order</a></li>
+                                <span class="d-none d-sm-inline small fw-semibold">@fullName</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user text-primary me-2"></i>My profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Order" asp-action="MyOrders"><i class="fas fa-bag-shopping text-primary me-2"></i>My orders</a></li>
+                                <li><a class="dropdown-item" asp-controller="Order" asp-action="Track"><i class="fas fa-location-dot text-primary me-2"></i>Track order</a></li>
+                                @if (membershipActive)
+                                {
+                                    <li><span class="dropdown-item disabled text-success"><i class="fas fa-crown text-warning me-2"></i>Premium member</span></li>
+                                }
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
-                                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    <form asp-controller="Account" asp-action="Logout" method="post">
                                         @Html.AntiForgeryToken()
-                                        <button type="submit" class="dropdown-item text-danger" style="border:none; background:none; width:100%; text-align:left;"><i class="fas fa-sign-out-alt me-2"></i>Logout</button>
+                                        <button type="submit" class="dropdown-item text-danger"><i class="fas fa-right-from-bracket me-2"></i>Sign out</button>
                                     </form>
                                 </li>
                             </ul>
-                        </li>
+                        </div>
                     }
                     else
                     {
-                        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Login</a></li>
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary">Sign in</a>
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Join free</a>
                     }
-                </ul>
+                    <a asp-controller="Book" asp-action="Index" class="btn btn-outline-primary d-none d-md-inline-flex">
+                        <i class="fas fa-bag-shopping me-1"></i>Shop
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -157,253 +163,98 @@
     <!-- ============================================================ -->
     @if (showMembershipBanner)
     {
-        <div class="membership-banner" style="background: linear-gradient(135deg, #fff, #fef8f5); border-top: 4px solid #F195B2; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 20px 0;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <div class="d-flex align-items-center gap-3">
-                            <div style="background: linear-gradient(135deg, #F195B2, #62C3E7); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            <div>
-                                <h5 style="font-weight: 700; margin-bottom: 2px; color: #2d2d2d;">🍦 Full recipes for members only</h5>
-                                <p style="margin: 0; color: #888; font-size: 0.95rem;">Join to unlock 20+ artisan recipes &amp; exclusive content</p>
-                            </div>
+        <section class="container pb-4">
+            <div class="rounded-xl overflow-hidden shadow-strong p-4 p-md-4" style="background:linear-gradient(120deg,#1E2542 0%,#2A1F33 55%,#3A2338 100%)" data-aos="fade-up">
+                <div class="row align-items-center g-3">
+                    <div class="col-lg-8 d-flex align-items-center gap-3">
+                        <div class="rounded-circle d-grid" style="width:56px;height:56px;place-items:center;background:var(--grad-rose);box-shadow:var(--sh-rose);flex:0 0 auto">
+                            <i class="fas fa-crown text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-white mb-1" style="font-size:1.2rem">Unlock the full recipe archive</h5>
+                            <p class="mb-0 small" style="color:rgba(255,255,255,.66)">20+ artisan recipes, seasonal drops and 10% off every book.</p>
                         </div>
                     </div>
-                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                        <div class="d-flex flex-wrap gap-2 justify-content-md-end">
-                            <span style="background: #F195B2; color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">$15 / month</span>
-                            <span style="background: #62C3E7; color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;">$150 / year</span>
-                            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-sm rounded-pill px-4" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; font-weight: 600;">Join Now</a>
-                        </div>
+                    <div class="col-lg-4 d-flex justify-content-lg-end gap-2 mt-3 mt-lg-0">
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-gradient">Join for $15/mo</a>
+                        <a asp-controller="Home" asp-action="Faq" class="btn btn-outline-light">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     }
 
-    <!-- ============================================================ -->
+<!-- ============================================================ -->
     <!-- ===== PROFESSIONAL FOOTER ===== -->
     <!-- ============================================================ -->
-    <footer class="footer" style="background: #1a1a2e; color: rgba(255,255,255,0.8); padding-top: 50px; padding-bottom: 20px; margin-top: 40px;">
-        <div class="container">
-            <!-- Footer grid (same as before) -->
-            <div class="row g-4 pb-4 border-bottom border-secondary" style="border-color: rgba(255,255,255,0.08) !important;">
+    <footer class="footer">
+        <div class="container py-5">
+            <div class="row g-4 pb-4">
                 <div class="col-lg-4 col-md-6">
-                    <div class="footer-brand">
-                        <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">
-                            <span style="color: #F195B2;">i</span><span style="color: #62C3E7;">CREAM</span>
-                        </h2>
-                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6; max-width: 320px;">
-                            Traditional &amp; Delicious Ice Cream Since 1950. Made with love and the finest ingredients.
-                        </p>
-                        <div class="d-flex gap-2 mt-2">
-                            <a href="#" style="..."><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" style="..."><i class="fab fa-twitter"></i></a>
-                            <a href="#" style="..."><i class="fab fa-instagram"></i></a>
-                            <a href="#" style="..."><i class="fab fa-youtube"></i></a>
+                    <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center text-decoration-none mb-3">
+                        <div style="width:42px;height:42px;background:var(--grad-rose);border-radius:12px;display:grid;place-items:center;box-shadow:var(--sh-rose)">
+                            <i class="fas fa-ice-cream text-white"></i>
                         </div>
-                    </div>
-                </div>
-                @* <!-- ===== QUICK LINKS - FOOTER ===== -->
-                <div class="col-lg-2 col-md-6">
-                    <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Quick Links</h6>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-home me-2" style="font-size: 0.75rem;"></i>Home
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="About" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-info-circle me-2" style="font-size: 0.75rem;"></i>About Us
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="Product" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-ice-cream me-2" style="font-size: 0.75rem;"></i>Products
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Book" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-book me-2" style="font-size: 0.75rem;"></i>Books
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="Gallery" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-images me-2" style="font-size: 0.75rem;"></i>Gallery
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="Contact" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-envelope me-2" style="font-size: 0.75rem;"></i>Contact
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="Faq" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-question-circle me-2" style="font-size: 0.75rem;"></i>FAQ
-                            </a>
-                        </li>
-                        <li style="margin-bottom: 8px;">
-                            <a asp-controller="Home" asp-action="Privacy" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                <i class="fas fa-shield-alt me-2" style="font-size: 0.75rem;"></i>Privacy Policy
-                            </a>
-                        </li>
-                        @* @if (User.Identity.IsAuthenticated)
-                        {
-                            <li style="margin-bottom: 8px;">
-                                <a asp-controller="Account" asp-action="Profile" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                    <i class="fas fa-user me-2" style="font-size: 0.75rem;"></i>My Profile
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li style="margin-bottom: 8px;">
-                                <a asp-controller="Account" asp-action="Login" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                    <i class="fas fa-sign-in-alt me-2" style="font-size: 0.75rem;"></i>Login
-                                </a>
-                            </li>
-                            <li style="margin-bottom: 8px;">
-                                <a asp-controller="Account" asp-action="Register" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.9rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                    <i class="fas fa-user-plus me-2" style="font-size: 0.75rem;"></i>Register
-                                </a>
-                            </li>
-                        } 
-                    </ul>
-                </div> *@
-
-        <!-- ===== QUICK LINKS - FOOTER (2 Columns) ===== -->
-        <div class="col-lg-2 col-md-6">
-            <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Quick Links</h6>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px;">
-                <!-- Column 1 -->
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-home me-1" style="font-size: 0.7rem;"></i>Home
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="About" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-info-circle me-1" style="font-size: 0.7rem;"></i>About
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Product" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-ice-cream me-1" style="font-size: 0.7rem;"></i>Products
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Recipe" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-utensils me-1" style="font-size: 0.7rem;"></i>Recipes
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Book" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-book me-1" style="font-size: 0.7rem;"></i>Books
-                        </a>
-                    </li>
-                 
-                </ul>
-
-                <!-- Column 2 -->
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Contact" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-envelope me-1" style="font-size: 0.7rem;"></i>Contact
-                        </a>
-                    </li>
-                            <li style="margin-bottom: 8px;">
-                                <a asp-controller="Gallery" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                                    <i class="fas fa-images me-1" style="font-size: 0.7rem;"></i>Gallery
-                                </a>
-                            </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Faq" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-question-circle me-1" style="font-size: 0.7rem;"></i>FAQ
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Privacy" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-shield-alt me-1" style="font-size: 0.7rem;"></i>Privacy
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Blog" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
-                            <i class="fas fa-blog me-1" style="font-size: 0.7rem;"></i>Blog
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-                <div class="col-lg-3 col-md-6">
-                    <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Get in Touch</h6>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="display: flex; gap: 12px; margin-bottom: 12px; color: rgba(255,255,255,0.5); font-size: 0.9rem;"><i class="fas fa-map-marker-alt" style="color: #F195B2; width: 20px; margin-top: 3px;"></i><span>123 Ice Cream Street,<br>New York, NY 10001</span></li>
-                        <li style="display: flex; gap: 12px; margin-bottom: 12px; color: rgba(255,255,255,0.5); font-size: 0.9rem;"><i class="fas fa-phone" style="color: #F195B2; width: 20px; margin-top: 3px;"></i><span>+1 (012) 345 6789</span></li>
-                        <li style="display: flex; gap: 12px; margin-bottom: 12px; color: rgba(255,255,255,0.5); font-size: 0.9rem;"><i class="fas fa-envelope" style="color: #F195B2; width: 20px; margin-top: 3px;"></i><span>info@icream.com</span></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h6 style="color: #fff; font-weight: 600; margin-bottom: 16px; font-size: 1rem;">Opening Hours</h6>
-                    <ul style="list-style: none; padding: 0; margin: 0; color: rgba(255,255,255,0.5); font-size: 0.9rem;">
-                        <li style="display: flex; justify-content: space-between; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 6px;"><span>Monday – Saturday</span><span>8:00 AM – 9:00 PM</span></li>
-                        <li style="display: flex; justify-content: space-between; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 6px;"><span>Sunday</span><span>10:00 AM – 6:00 PM</span></li>
-                    </ul>
-                    <div style="margin-top: 16px;">
-                        <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem; margin-bottom: 6px;">Subscribe to our newsletter</p>
-                        <div style="display: flex; gap: 6px;">
-                            <input type="email" placeholder="Your email" style="flex:1; padding: 6px 12px; border: none; border-radius: 30px; background: rgba(255,255,255,0.08); color: #fff; font-size: 0.8rem; outline: none; transition: 0.3s;" onfocus="this.style.background='rgba(255,255,255,0.15)';" onblur="this.style.background='rgba(255,255,255,0.08)';" />
-                            <button style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 30px; padding: 6px 16px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(241,149,178,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Subscribe</button>
-                        </div>
-                    </div><br />
-                    @* <div style="display: flex; gap: 6px;">
-                        <button style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 30px; padding: 6px 16px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(241,149,178,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Register</button>
-                        <button style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 30px; padding: 6px 16px; color: #fff; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(241,149,178,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Login</button>
-                    </div>  *@
-                    <div style="display: flex; gap: 10px; margin-top: 8px;">
-                        <!-- Register Button -->
-                        <a asp-controller="Account" asp-action="Register"
-                           style="display: inline-block; padding: 8px 24px;
-                            background: linear-gradient(135deg, #F195B2, #e07a9e);
-                            color: #fff; font-weight: 600; font-size: 0.85rem;
-                            border: none; border-radius: 50px;
-                            text-decoration: none; cursor: pointer;
-                            transition: all 0.3s ease;
-                            box-shadow: 0 4px 15px rgba(241,149,178,0.3);"
-                           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(241,149,178,0.5)'; this.style.background='linear-gradient(135deg, #e07a9e, #d46a8e)';"
-                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(241,149,178,0.3)'; this.style.background='linear-gradient(135deg, #F195B2, #e07a9e)';">
-                            <i class="fas fa-user-plus me-2"></i>Register
-                        </a>
-
-                        <!-- Login Button -->
-                        <a asp-controller="Account" asp-action="Login"
-                           style="display: inline-block; padding: 8px 28px;
-                            background: linear-gradient(135deg, #62C3E7, #4aafd4);
-                            color: #fff; font-weight: 600; font-size: 0.85rem;
-                            border: none; border-radius: 50px;
-                            text-decoration: none; cursor: pointer;
-                            transition: all 0.3s ease;
-                            box-shadow: 0 4px 15px rgba(98,195,231,0.3);"
-                           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(98,195,231,0.5)'; this.style.background='linear-gradient(135deg, #4aafd4, #3a9fc4)';"
-                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(98,195,231,0.3)'; this.style.background='linear-gradient(135deg, #62C3E7, #4aafd4)';">
-                            <i class="fas fa-sign-in-alt me-2"></i>Login
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem; margin: 0;">
-                        &copy; @DateTime.Now.Year <strong style="color: #F195B2;">iCREAM</strong>. All Rights Reserved.
-                        <span style="margin: 0 8px;">|</span>
-                        <a asp-controller="Home" asp-action="Privacy" style="color: rgba(255,255,255,0.3); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#F195B2';" onmouseout="this.style.color='rgba(255,255,255,0.3)';">Privacy Policy</a>
-                        <span style="margin: 0 8px;">|</span>
-                        <a asp-controller="Home" asp-action="Faq" style="color: rgba(255,255,255,0.3); text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#F195B2';" onmouseout="this.style.color='rgba(255,255,255,0.3)';">FAQ</a>
+                        <span class="ms-2 fw-bold fs-4" style="color:#fff;font-family:'Playfair Display',serif">iCREAM</span>
+                    </a>
+                    <p style="max-width:320px">
+                        Artisan ice cream churned in small batches since 2006. Organic milk, real fruit and no shortcuts.
                     </p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="footer-social" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6>Explore</h6>
+                    <ul class="list-unstyled">
+                        <li><a asp-controller="Home" asp-action="Product">Flavours</a></li>
+                        <li><a asp-controller="Recipe" asp-action="Index">Recipes</a></li>
+                        <li><a asp-controller="Book" asp-action="Index">Recipe books</a></li>
+                        <li><a asp-controller="Gallery" asp-action="Index">Gallery</a></li>
+                        <li><a asp-controller="Home" asp-action="About">Our story</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6>Account</h6>
+                    <ul class="list-unstyled">
+                        <li><a asp-controller="Account" asp-action="Login">Sign in</a></li>
+                        <li><a asp-controller="Account" asp-action="Register">Create account</a></li>
+                        <li><a asp-controller="Account" asp-action="Profile">My profile</a></li>
+                        <li><a asp-controller="Order" asp-action="MyOrders">My orders</a></li>
+                        <li><a asp-controller="Order" asp-action="Track">Track order</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h6>Stay in the loop</h6>
+                    <p class="mb-3">New flavour drops, member offers and kitchen notes. No spam, ever.</p>
+                    <form id="newsletterForm" class="d-flex gap-2">
+                        <input type="email" class="form-control" placeholder="you@example.com" aria-label="Email address" required />
+                        <button type="submit" class="btn btn-primary" style="white-space:nowrap">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="d-flex flex-column gap-2 mt-4 small">
+                        <span><i class="fas fa-location-dot me-2"></i>123 Ice Cream Street, Karachi</span>
+                        <span><i class="fas fa-phone me-2"></i>+92 300 1234567</span>
+                        <span><i class="fas fa-envelope me-2"></i>support@icream.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border-color:rgba(255,255,255,.1)" />
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pt-2">
+                <span class="small">&copy; @DateTime.Now.Year iCREAM. All rights reserved.</span>
+                <div class="d-flex gap-3 small">
+                    <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    <a asp-controller="Home" asp-action="Faq">Terms &amp; FAQ</a>
+                    <a asp-controller="Home" asp-action="Contact">Contact</a>
                 </div>
             </div>
         </div>

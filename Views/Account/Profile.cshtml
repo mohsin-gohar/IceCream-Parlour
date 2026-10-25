@@ -1,164 +1,167 @@
 @model Ice_Cream_Parlour_Eproject.Models.User
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "My Profile - iCREAM";
+    ViewData["Title"] = "My Profile";
+
+    var displayName = !string.IsNullOrWhiteSpace(Model.FullName) ? Model.FullName : (Model.UserName ?? "Member");
+    var initials = "U";
+    var nameParts = displayName.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    if (nameParts.Length >= 2)
+    {
+        initials = string.Concat(nameParts[0][0], nameParts[1][0]).ToUpperInvariant();
+    }
+    else if (nameParts.Length == 1 && nameParts[0].Length > 0)
+    {
+        initials = nameParts[0][0].ToString().ToUpperInvariant();
+    }
+
+    var membershipActive = Model.IsPaid && Model.PaymentExpiry.HasValue && Model.PaymentExpiry.Value > DateTime.UtcNow;
 }
 
-<!-- ===== PROFILE CONTENT ===== -->
-<section style="padding: 30px 0; width: 100%;">
-    <div style="max-width: 700px; margin: 0 auto; padding: 0 15px;">
-
-        <!-- Profile Card -->
-        <div style="background: #fff; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); padding: 30px; border: 1px solid rgba(241,149,178,0.08);">
-
-            <!-- ============================================================ -->
-            <!-- ===== AVATAR WITH PENCIL ICON OVERLAY ===== -->
-            <!-- ============================================================ -->
-            <div style="text-align: center; margin-bottom: 25px; position: relative; display: inline-block; width: 100%;">
-
-                <!-- Avatar Container -->
-                <div style="position: relative; display: inline-block; cursor: pointer;" onclick="document.getElementById('fileInput').click();">
-
-                    <!-- Avatar Image / Initials -->
-                    @if (!string.IsNullOrEmpty(Model.ProfilePicture))
-                    {
-                        <img id="profileImage" src="@Model.ProfilePicture" alt="Profile" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #F195B2; box-shadow: 0 4px 15px rgba(241,149,178,0.3); transition: 0.3s;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';" />
-                    }
-                    else
-                    {
-                        <div id="profileInitials" style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #F195B2, #62C3E7); display: inline-flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: #fff; border: 4px solid #F195B2; box-shadow: 0 4px 15px rgba(241,149,178,0.3); transition: 0.3s;">
-                            @{
-                                var initials = "";
-                                if (!string.IsNullOrEmpty(Model.FullName))
-                                {
-                                    var parts = Model.FullName.Trim().Split(' ');
-                                    if (parts.Length >= 2)
-                                        initials = parts[0][0].ToString() + parts[1][0].ToString();
-                                    else
-                                        initials = parts[0][0].ToString();
-                                }
-                                else if (!string.IsNullOrEmpty(Model.UserName))
-                                {
-                                    initials = Model.UserName[0].ToString().ToUpper();
-                                }
-                            }
-                            @initials
-                        </div>
-                    }
-
-                    <!-- ===== PENCIL ICON OVERLAY ===== -->
-                    <div style="position: absolute; bottom: 0; right: 0; background: linear-gradient(135deg, #F195B2, #62C3E7); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; box-shadow: 0 4px 15px rgba(241,149,178,0.3); transition: 0.3s;">
-                        <i class="fas fa-pencil-alt" style="color: #fff; font-size: 14px;"></i>
-                    </div>
-                </div>
-
-                <!-- Hidden File Input -->
-                <form id="profilePicForm" asp-action="UpdateProfilePicture" method="post" enctype="multipart/form-data" style="display:none;">
-                    @Html.AntiForgeryToken()
-                    <input type="file" id="fileInput" name="profilePicture" accept="image/*" onchange="document.getElementById('profilePicForm').submit();" />
-                </form>
-
-                <h4 style="margin-top: 12px; font-weight: 700; color: #2d2d2d;">@Model.FullName</h4>
-                <p style="color: #888; font-size: 0.9rem;">@Model.Email</p>
-                <p style="color: #aaa; font-size: 0.8rem;"><i class="fas fa-info-circle"></i> Click on avatar to change picture</p>
-            </div>
-
-            <!-- ===== USER INFO ===== -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                <div>
-                    <label style="font-weight: 600; font-size: 0.85rem; color: #888; display: block;">Full Name</label>
-                    <p style="font-weight: 500; color: #2d2d2d; margin: 0;">@Model.FullName</p>
-                </div>
-                <div>
-                    <label style="font-weight: 600; font-size: 0.85rem; color: #888; display: block;">Email</label>
-                    <p style="font-weight: 500; color: #2d2d2d; margin: 0;">@Model.Email</p>
-                </div>
-                <div>
-                    <label style="font-weight: 600; font-size: 0.85rem; color: #888; display: block;">Phone</label>
-                    <p style="font-weight: 500; color: #2d2d2d; margin: 0;">@(Model.PhoneNumber ?? "Not provided")</p>
-                </div>
-                <div>
-                    <label style="font-weight: 600; font-size: 0.85rem; color: #888; display: block;">Address</label>
-                    <p style="font-weight: 500; color: #2d2d2d; margin: 0;">@(Model.Address ?? "Not provided")</p>
-                </div>
-                <div>
-                    <label style="font-weight: 600; font-size: 0.85rem; color: #888; display: block;">Account Type</label>
-                    <p style="font-weight: 500; color: #2d2d2d; margin: 0;">
-                        @if (Model.IsPaid)
-                        {
-                            <span style="background: #d4edda; color: #155724; padding: 2px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 600;">Premium</span>
-                        }
-                        else
-                        {
-                            <span style="background: #f8d7da; color: #721c24; padding: 2px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 600;">Free</span>
-                        }
-                    </p>
-                </div>
-                <div>
-                    <label style="font-weight: 600; font-size: 0.85rem; color: #888; display: block;">Member Since</label>
-                    <p style="font-weight: 500; color: #2d2d2d; margin: 0;">@Model.CreatedAt.ToString("dd MMM yyyy")</p>
-                </div>
-            </div>
-
-            <!-- ===== EDIT PROFILE ===== -->
-            <div style="margin-top: 20px;">
-                <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#editProfileForm" style="border-radius: 50px; font-weight: 600;">
-                    <i class="fas fa-user-edit me-2"></i>Edit Profile Details
-                </button>
-                <div class="collapse mt-3" id="editProfileForm">
-                    <form asp-action="UpdateProfile" method="post" class="row g-3">
-                        @Html.AntiForgeryToken()
-                        <div class="col-md-6">
-                            <label class="form-label" for="fullName">Full Name</label>
-                            <input id="fullName" name="fullName" class="form-control" value="@Model.FullName" maxlength="100" required />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="phoneNumber">Phone</label>
-                            <input id="phoneNumber" name="phoneNumber" class="form-control" value="@Model.PhoneNumber" maxlength="20" />
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label" for="address">Address</label>
-                            <textarea id="address" name="address" class="form-control" rows="2" maxlength="255">@Model.Address</textarea>
-                        </div>
-                        <div class="col-12 text-end">
-                            <button type="submit" class="btn btn-primary" style="border-radius: 50px; padding: 8px 24px;">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Divider -->
-            <div style="border-top: 1px solid #f0ecee; margin: 20px 0;"></div>
-
-            <!-- Action Buttons -->
-            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-                <a asp-controller="Order" asp-action="MyOrders" class="btn btn-primary" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none; border-radius: 50px; padding: 10px 28px; font-weight: 600; text-decoration: none; color: #fff;"><i class="fas fa-box-open me-2"></i>My Orders</a>
-                <a asp-controller="Order" asp-action="Track" class="btn btn-outline-primary" style="border-radius: 50px; padding: 10px 28px; font-weight: 600; text-decoration: none; border: 1.5px solid #F195B2; color: #F195B2;"><i class="fas fa-search-location me-2"></i>Track Order</a>
-                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary" style="border-radius: 50px; padding: 10px 28px; font-weight: 600; text-decoration: none; border: 1.5px solid #ddd; color: #555;">Back to Home</a>
-            </div>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>My profile</h1>
+        <p>Manage your details, avatar and membership.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Profile</span>
         </div>
     </div>
 </section>
 
-<!-- ===== TOAST MESSAGES ===== -->
-<!-- ===== BACK TO TOP ===== -->
-<a href="#" style="position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 6px 20px rgba(241,149,178,0.4); text-decoration: none; z-index: 999; transition:0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(241,149,178,0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(241,149,178,0.4)';">
-    <i class="fa fa-angle-double-up"></i>
-</a>
+<section class="py-5" style="padding-top:3.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="row g-4 g-lg-4">
+            <!-- ===== IDENTITY CARD ===== -->
+            <div class="col-lg-4" data-aos="fade-right">
+                <div class="surface-card p-4 text-center h-100">
+                    <div class="position-relative d-inline-block mb-3">
+                        @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+                        {
+                            <img src="@Model.ProfilePicture" alt="@displayName" class="rounded-circle" style="width:132px;height:132px;object-fit:cover;border:4px solid #fff;box-shadow:var(--sh-md)" />
+                        }
+                        else
+                        {
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width:132px;height:132px;background:var(--grad-rose);color:#fff;font-size:2.6rem;font-weight:800;border:4px solid #fff;box-shadow:var(--sh-md)">@initials</div>
+                        }
+                        <button type="button" class="btn btn-primary rounded-circle position-absolute" style="width:40px;height:40px;right:0;bottom:0;display:grid;place-items:center" onclick="document.getElementById('fileInput').click();" aria-label="Change profile picture">
+                            <i class="fas fa-camera" style="font-size:.85rem"></i>
+                        </button>
+                    </div>
 
-<style>
-    @@media (max-width: 576px) {
-        .profile-grid {
-            grid-template-columns: 1fr !important;
-        }
+                    <h4 class="fw-bold mb-1">@displayName</h4>
+                    <p class="small text-muted mb-3">@Model.Email</p>
 
-        .profile-actions {
-            flex-direction: column;
-        }
+                    @if (membershipActive)
+                    {
+                        <span class="badge-status badge-completed"><i class="fas fa-crown"></i> Premium member</span>
+                    }
+                    else
+                    {
+                        <span class="badge-status badge-inactive"><i class="fas fa-user"></i> Free account</span>
+                    }
 
-            .profile-actions a {
-                width: 100%;
-                text-align: center;
-            }
-    }
-</style>
+                    <hr class="my-4" />
+
+                    <div class="row text-center g-2">
+                        <div class="col-6">
+                            <div class="small text-muted">Member since</div>
+                            <div class="fw-semibold small">@Model.CreatedAt.ToString("MMM yyyy")</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="small text-muted">Phone</div>
+                            <div class="fw-semibold small">@(string.IsNullOrEmpty(Model.PhoneNumber) ? "—" : Model.PhoneNumber)</div>
+                        </div>
+                    </div>
+
+                    <form id="profilePicForm" asp-action="UpdateProfilePicture" method="post" enctype="multipart/form-data" class="d-none">
+                        @Html.AntiForgeryToken()
+                        <input type="file" id="fileInput" name="profilePicture" accept="image/jpeg,image/png,image/gif,image/webp" onchange="document.getElementById('profilePicForm').submit();" />
+                    </form>
+                    <p class="small text-muted mt-3 mb-0"><i class="fas fa-circle-info me-1"></i>JPG, PNG, GIF or WebP · max 2 MB</p>
+                </div>
+            </div>
+
+            <!-- ===== DETAILS + ACTIONS ===== -->
+            <div class="col-lg-8" data-aos="fade-left">
+                <div class="surface-card p-4 p-lg-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Account details</h5>
+                        <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#editProfileForm" aria-expanded="false">
+                            <i class="fas fa-pen me-1"></i>Edit
+                        </button>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="small text-muted">Full name</div>
+                            <div class="fw-semibold">@displayName</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="small text-muted">Email</div>
+                            <div class="fw-semibold">@Model.Email</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="small text-muted">Phone</div>
+                            <div class="fw-semibold">@(string.IsNullOrEmpty(Model.PhoneNumber) ? "Not provided" : Model.PhoneNumber)</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="small text-muted">Membership</div>
+                            <div class="fw-semibold">@(membershipActive ? "Premium (active)" : "Free")</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="small text-muted">Address</div>
+                            <div class="fw-semibold">@(string.IsNullOrEmpty(Model.Address) ? "Not provided" : Model.Address)</div>
+                        </div>
+                    </div>
+
+                    <div class="collapse mt-4" id="editProfileForm">
+                        <hr />
+                        <form asp-action="UpdateProfile" method="post" class="row g-3">
+                            @Html.AntiForgeryToken()
+                            <div class="col-md-6">
+                                <label class="form-label" for="fullName">Full name</label>
+                                <input id="fullName" name="fullName" class="form-control" value="@Model.FullName" maxlength="100" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="phoneNumber">Phone</label>
+                                <input id="phoneNumber" name="phoneNumber" class="form-control" value="@Model.PhoneNumber" maxlength="20" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="address">Address</label>
+                                <textarea id="address" name="address" class="form-control" rows="2" maxlength="255">@Model.Address</textarea>
+                            </div>
+                            <div class="col-12 d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileForm">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Quick actions -->
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <a asp-controller="Order" asp-action="MyOrders" class="surface-card p-3 d-flex align-items-center gap-3 h-100 text-decoration-none hover-lift">
+                            <div class="stat-icon"><i class="fas fa-bag-shopping"></i></div>
+                            <div><div class="fw-bold small">My orders</div><div class="text-muted" style="font-size:.75rem">Track purchases</div></div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a asp-controller="Order" asp-action="Track" class="surface-card p-3 d-flex align-items-center gap-3 h-100 text-decoration-none hover-lift">
+                            <div class="stat-icon blue"><i class="fas fa-location-dot"></i></div>
+                            <div><div class="fw-bold small">Track an order</div><div class="text-muted" style="font-size:.75rem">Check status</div></div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a asp-controller="Recipe" asp-action="Index" class="surface-card p-3 d-flex align-items-center gap-3 h-100 text-decoration-none hover-lift">
+                            <div class="stat-icon green"><i class="fas fa-book-open"></i></div>
+                            <div><div class="fw-bold small">Recipes</div><div class="text-muted" style="font-size:.75rem">Premium archive</div></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

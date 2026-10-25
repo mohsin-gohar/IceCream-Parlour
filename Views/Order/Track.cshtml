@@ -1,177 +1,151 @@
 @model Ice_Cream_Parlour_Eproject.Areas.Models.Order
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Track Order - iCREAM";
+    ViewData["Title"] = "Track Order";
+    var status = Model?.OrderStatus?.ToLowerInvariant() ?? "pending";
+    var step1 = Model != null;
+    var step2 = status is "processing" or "shipped" or "out for delivery" or "completed" or "delivered";
+    var step3 = status is "shipped" or "out for delivery" or "completed" or "delivered";
+    var step4 = status is "completed" or "delivered";
+    var paymentClass = Model?.PaymentStatus switch
+    {
+        "Paid" => "badge-paid",
+        "Failed" => "badge-failed",
+        "Refunded" => "badge-refunded",
+        _ => "badge-pending"
+    };
 }
 
-<style>
-    /* Tracking Timeline Styles */
-    .timeline-steps {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        margin: 40px 0;
-    }
-
-    .timeline-steps::before {
-        content: "";
-        position: absolute;
-        top: 25px;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: #e0e0e0;
-        z-index: 1;
-    }
-
-    .timeline-step {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        flex: 1;
-    }
-
-    .timeline-icon {
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-        background: #e0e0e0;
-        color: #888;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        margin: 0 auto 12px;
-        transition: all 0.3s ease;
-    }
-
-    .timeline-step.completed .timeline-icon {
-        background: linear-gradient(135deg, #28a745, #20c997);
-        color: white;
-        box-shadow: 0 4px 15px rgba(40,167,69,0.3);
-    }
-
-    .timeline-step.active .timeline-icon {
-        background: linear-gradient(135deg, #F195B2, #62C3E7);
-        color: white;
-        box-shadow: 0 4px 15px rgba(241,149,178,0.4);
-        transform: scale(1.15);
-    }
-
-    .timeline-title {
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #333;
-    }
-</style>
-
-<!-- ===== PAGE HEADER ===== -->
-<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
-        <i class="fas fa-search-location me-2"></i> Track Your Order
-    </h1>
-    <p style="font-size: 1.1rem; opacity: 0.95;">Enter your order number to view real-time status</p>
-</div>
-
-<div class="container py-5" style="max-width: 900px;">
-    <!-- Search Bar -->
-    <div class="card border-0 shadow-sm rounded-4 p-4 mb-5">
-        <form asp-controller="Order" asp-action="Track" method="get" class="row g-2 align-items-center">
-            <div class="col-md-5">
-                <input type="text" name="orderNumber" class="form-control form-control-lg rounded-pill px-4"
-                       placeholder="Order # (e.g. ORD-20260630-1234)" maxlength="50"
-                       value="@Context.Request.Query["orderNumber"]" required />
-            </div>
-            <div class="col-md-4">
-                <input type="email" name="email" class="form-control form-control-lg rounded-pill px-4"
-                       placeholder="E-mail used for the order" maxlength="100"
-                       value="@Context.Request.Query["email"]" />
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none;">
-                    <i class="fas fa-search me-1"></i> Track
-                </button>
-            </div>
-            <div class="col-12">
-                <small class="text-muted"><i class="fas fa-lock me-1"></i>For your privacy, sign in or provide the e-mail address used when ordering.</small>
-            </div>
-        </form>
-    </div>
-
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-warning text-center rounded-3 p-4">
-            <i class="fas fa-exclamation-triangle fa-2x mb-2 text-warning d-block"></i>
-            <strong>@ViewBag.Message</strong>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>Track your order</h1>
+        <p>Enter your order number and the e-mail used at checkout.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Track order</span>
         </div>
-    }
+    </div>
+</section>
 
-    @if (Model != null)
-    {
-        var status = Model.OrderStatus?.ToLower() ?? "pending";
-        var step1 = true;
-        var step2 = status == "processing" || status == "completed" || status == "delivered";
-        var step3 = status == "shipped" || status == "out for delivery" || status == "completed" || status == "delivered";
-        var step4 = status == "completed" || status == "delivered";
+<section class="py-5" style="padding-top:3.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container" style="max-width:900px">
 
-        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
-            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 border-bottom pb-3 gap-2">
-                <div>
-                    <h4 class="fw-bold text-dark m-0">Order #@Model.OrderNumber</h4>
-                    <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i> Placed on @Model.OrderDate.ToString("F")</small>
+        <!-- Search -->
+        <div class="surface-card p-4 mb-4" data-aos="fade-up">
+            <form asp-controller="Order" asp-action="Track" method="get" class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label" for="orderNumber">Order number</label>
+                    <input id="orderNumber" type="text" name="orderNumber" class="form-control"
+                           placeholder="ORD-20261022-ABCD1234" maxlength="50"
+                           value="@Context.Request.Query["orderNumber"]" required />
                 </div>
-                <div>
-                    <span class="badge bg-primary px-3 py-2 rounded-pill fs-6">@Model.OrderStatus</span>
+                <div class="col-md-4">
+                    <label class="form-label" for="email">E-mail used for the order</label>
+                    <input id="email" type="email" name="email" class="form-control"
+                           placeholder="you@example.com" maxlength="100"
+                           value="@Context.Request.Query["email"]" />
                 </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-magnifying-glass me-1"></i>Track</button>
+                </div>
+                <div class="col-12">
+                    <div class="form-text"><i class="fas fa-lock me-1"></i>For your privacy, sign in or provide the e-mail used when ordering.</div>
+                </div>
+            </form>
+        </div>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-warning d-flex align-items-start gap-2" data-aos="fade-up">
+                <i class="fas fa-triangle-exclamation mt-1"></i>
+                <div>@ViewBag.Message</div>
             </div>
+        }
 
-            <!-- Timeline Tracker -->
-            <div class="timeline-steps my-4">
-                <div class="timeline-step @(step1 ? (step2 ? "completed" : "active") : "")">
-                    <div class="timeline-icon"><i class="fas fa-receipt"></i></div>
-                    <div class="timeline-title">Order Placed</div>
+        @if (Model != null)
+        {
+            <div class="surface-card p-4 p-md-5" data-aos="fade-up">
+                <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 pb-3 mb-4" style="border-bottom:1px solid var(--line)">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <h4 class="fw-bold mb-0" style="font-family:'Inter',sans-serif;font-size:1.15rem">@Model.OrderNumber</h4>
+                            <span class="badge-status badge-@status">@Model.OrderStatus</span>
+                        </div>
+                        <div class="small text-muted"><i class="fas fa-calendar me-1"></i>Placed @Model.OrderDate.ToString("dd MMMM yyyy · HH:mm")</div>
+                    </div>
+                    <div class="text-end">
+                        <div class="small text-muted">Order total</div>
+                        <div class="fw-bold" style="font-size:1.3rem;color:var(--rose-ink)">$@Model.TotalAmount.ToString("0.00")</div>
+                    </div>
                 </div>
-                <div class="timeline-step @(step2 ? (step3 ? "completed" : "active") : "")">
-                    <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
-                    <div class="timeline-title">Preparing</div>
-                </div>
-                <div class="timeline-step @(step3 ? (step4 ? "completed" : "active") : "")">
-                    <div class="timeline-icon"><i class="fas fa-truck"></i></div>
-                    <div class="timeline-title">Out for Delivery</div>
-                </div>
-                <div class="timeline-step @(step4 ? "completed" : "")">
-                    <div class="timeline-icon"><i class="fas fa-home"></i></div>
-                    <div class="timeline-title">Delivered</div>
-                </div>
-            </div>
 
-            <!-- Details Table -->
-            <div class="bg-light rounded-3 p-4 mt-4">
-                <h6 class="fw-bold mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Delivery & Payment Details</h6>
-                <div class="row g-3">
+                <!-- Timeline -->
+                <div class="timeline-steps my-4">
+                    <div class="timeline-step @(step1 ? (step2 ? "completed" : "active") : "")">
+                        <div class="timeline-icon"><i class="fas fa-receipt"></i></div>
+                        <div class="timeline-title">Placed</div>
+                    </div>
+                    <div class="timeline-step @(step2 ? (step3 ? "completed" : "active") : "")">
+                        <div class="timeline-icon"><i class="fas fa-ice-cream"></i></div>
+                        <div class="timeline-title">Preparing</div>
+                    </div>
+                    <div class="timeline-step @(step3 ? (step4 ? "completed" : "active") : "")">
+                        <div class="timeline-icon"><i class="fas fa-truck"></i></div>
+                        <div class="timeline-title">On the way</div>
+                    </div>
+                    <div class="timeline-step @(step4 ? "completed" : "")">
+                        <div class="timeline-icon"><i class="fas fa-house"></i></div>
+                        <div class="timeline-title">Delivered</div>
+                    </div>
+                </div>
+
+                <!-- Details -->
+                <div class="row g-3 mt-4">
                     <div class="col-md-6">
-                        <small class="text-muted d-block">Customer Name</small>
-                        <strong>@Model.CustomerName</strong>
+                        <div class="surface-card p-3 h-100">
+                            <div class="small text-muted mb-1">Customer</div>
+                            <div class="fw-semibold">@Model.CustomerName</div>
+                            <div class="small text-muted">@Model.CustomerEmail</div>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <small class="text-muted d-block">Payment Status</small>
-                        @{
-                            var paymentClass = Model.PaymentStatus switch
-                            {
-                                "Paid" => "bg-success",
-                                "Failed" => "bg-danger",
-                                "Refunded" => "bg-secondary",
-                                _ => "bg-warning text-dark"
-                            };
-                        }
-                        <span class="badge @paymentClass">@Model.PaymentStatus</span> (@Model.PaymentMethod)
+                        <div class="surface-card p-3 h-100">
+                            <div class="small text-muted mb-1">Payment</div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge-status @paymentClass">@Model.PaymentStatus</span>
+                                <span class="small text-muted">@Model.PaymentMethod</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <small class="text-muted d-block">Delivery Address</small>
-                        <strong>@(string.IsNullOrEmpty(Model.DeliveryAddress) ? "Store Pickup" : Model.DeliveryAddress)</strong>
+                        <div class="surface-card p-3">
+                            <div class="small text-muted mb-1">Delivery address</div>
+                            <div class="fw-semibold">@(string.IsNullOrEmpty(Model.DeliveryAddress) ? "Store pickup" : Model.DeliveryAddress)</div>
+                        </div>
                     </div>
+                    @if (Model.Book != null)
+                    {
+                        <div class="col-12">
+                            <div class="surface-card p-3 d-flex align-items-center gap-3">
+                                @if (!string.IsNullOrEmpty(Model.Book.ImagePath))
+                                {
+                                    <img src="@Url.Content(Model.Book.ImagePath)" alt="@Model.Book.Title" class="rounded-md" style="width:48px;height:64px;object-fit:cover" />
+                                }
+                                <div>
+                                    <div class="fw-semibold small">@Model.Book.Title</div>
+                                    <div class="small text-muted">@Model.Book.Author</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <a asp-controller="Order" asp-action="MyOrders" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>My orders</a>
+                    <a asp-controller="Home" asp-action="Contact" class="btn btn-primary"><i class="fas fa-headset me-2"></i>Need help?</a>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+</section>
