@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Blog Management - iCREAM";
 }
@@ -84,13 +84,18 @@
     }
 </style>
 
-<!-- ===== PAGE HEADER WITH GRADIENT OVERLAY ===== -->
-<div style="background-image: url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
-        <i class="fas fa-blog me-3"></i> Blog Management
-    </h1>
-    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 500px;">Manage your blog posts — all data stored locally</p>
-</div>
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header-premium">
+    <div class="container">
+        <h1>The journal</h1>
+        <p>Notes from the kitchen, flavour science and parlour news.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Journal</span>
+        </div>
+    </div>
+</section>
 
 <!-- ===== TOGGLE BUTTON ===== -->
 <div style="max-width: 1200px; margin: 20px auto 10px; padding: 0 20px; text-align: center;">

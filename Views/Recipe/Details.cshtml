@@ -1,47 +1,98 @@
 @model Ice_Cream_Parlour_Eproject.Models.Recipe
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = Model.Name + " - iCREAM";
+    ViewData["Title"] = Model.Name;
+    var image = string.IsNullOrEmpty(Model.ImagePath) ? Url.Content("~/img/product-1.jpg") : Url.Content(Model.ImagePath);
+    var ingredients = (Model.Ingredients ?? string.Empty)
+        .Split(new[] { '\n', ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+        .Select(i => i.Trim())
+        .Where(i => i.Length > 0)
+        .ToList();
 }
 
 <!-- ===== PAGE HEADER ===== -->
-<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
-        @Model.Name
-    </h1>
-    <p style="font-size: 1.1rem; opacity: 0.95;"><i class="fas fa-tag me-1"></i> Category: @Model.Category</p>
-</div>
-
-<!-- ===== DETAILS CONTENT ===== -->
-<div class="container py-5">
-    <div class="row g-4 align-items-center">
-        <div class="col-md-5">
-            <div class="rounded-4 overflow-hidden shadow-sm border">
-                @{
-                    var imagePath = !string.IsNullOrEmpty(Model.ImagePath) ? Model.ImagePath : "/img/product-1.jpg";
-                }
-                <img src="@imagePath" alt="@Model.Name" class="img-fluid w-100" style="max-height: 400px; object-fit: cover;" />
-            </div>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>@Model.Name</h1>
+        <p>@Model.Category · @(Model.IsFree ? "Free recipe" : "Premium recipe")</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <a asp-controller="Recipe" asp-action="Index">Recipes</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>@Model.Name</span>
         </div>
-        <div class="col-md-7">
-            <div class="bg-white p-4 rounded-4 shadow-sm border">
-                <span class="badge mb-3 px-3 py-2" style="background: @(Model.IsFree ? "#28a745" : "#F195B2"); font-size: 0.85rem;">
-                    @(Model.IsFree ? "Free Recipe" : "Premium Recipe")
-                </span>
-                <h2 class="fw-bold mb-3" style="font-family: 'Playfair Display', serif;">@Model.Name</h2>
+    </div>
+</section>
 
-                <h5 class="fw-bold mt-4 text-primary"><i class="fas fa-list-ul me-2"></i>Ingredients</h5>
-                <p class="text-muted fs-6">@Model.Ingredients</p>
+<section class="py-5" style="padding-top:4rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="row g-4 g-lg-5">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="position-relative rounded-xl overflow-hidden shadow-strong" style="aspect-ratio:4/5;">
+                    <img src="@image" alt="@Model.Name" class="img-cover" />
+                    <span class="product-badge" style="background:@(Model.IsFree ? "rgba(6,118,71,.9)" : "rgba(16,24,40,.8)")">
+                        @(Model.IsFree ? "Free access" : "Members only")
+                    </span>
+                </div>
 
-                <h5 class="fw-bold mt-4 text-primary"><i class="fas fa-tasks me-2"></i>Procedure</h5>
-                <p class="text-muted fs-6" style="white-space: pre-line;">@Model.Procedure</p>
+                <div class="surface-card p-4 mt-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small text-muted">Category</span>
+                        <span class="badge" style="background:rgba(241,149,178,.14);color:var(--rose-ink)">@Model.Category</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small text-muted">Added</span>
+                        <span class="small fw-semibold">@Model.CreatedDate.ToString("dd MMM yyyy")</span>
+                    </div>
+                    @if (Model.Price > 0)
+                    {
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted">Value</span>
+                            <span class="fw-bold" style="color:var(--rose-ink)">$@Model.Price.ToString("0.00")</span>
+                        </div>
+                    }
+                </div>
+            </div>
 
-                <div class="mt-4">
-                    <a asp-action="Index" class="btn btn-secondary rounded-pill px-4 me-2">
-                        <i class="fas fa-arrow-left me-2"></i>Back to Recipes
+            <div class="col-lg-7" data-aos="fade-left">
+                <span class="eyebrow">The recipe</span>
+                <h2 class="mt-2 mb-3">@Model.Name</h2>
+
+                <h5 class="fw-bold mt-4 mb-3"><i class="fas fa-basket-shopping me-2" style="color:var(--rose)"></i>Ingredients</h5>
+                @if (ingredients.Count > 0)
+                {
+                    <ul class="list-unstyled row g-2">
+                        @foreach (var ingredient in ingredients)
+                        {
+                            <li class="col-sm-6">
+                                <div class="d-flex align-items-start gap-2 surface-card p-3 h-100">
+                                    <i class="fas fa-circle-check text-success mt-1" style="font-size:.85rem"></i>
+                                    <span class="small">@ingredient</span>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">@Model.Ingredients</p>
+                }
+
+                <h5 class="fw-bold mt-4 mb-3"><i class="fas fa-list-ol me-2" style="color:var(--rose)"></i>Method</h5>
+                <div class="surface-card p-4" style="white-space:pre-line;line-height:1.85">
+                    @Model.Procedure
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a asp-controller="Recipe" asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to recipes
+                    </a>
+                    <a asp-controller="Home" asp-action="Product" class="btn btn-primary">
+                        <i class="fas fa-ice-cream me-2"></i>Browse flavours
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

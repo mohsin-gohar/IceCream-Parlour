@@ -1,180 +1,130 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Contact Us - iCREAM";
+    ViewData["Title"] = "Contact";
 }
 
-<!-- Contact Section Start -->
-<div class="container-fluid contact-section py-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <!-- Contact Info Column -->
-            <div class="col-lg-5">
-                <div class="contact-info">
-                    <span class="badge bg-primary text-white px-4 py-2 rounded-pill mb-3">
-                        <i class="fas fa-heart me-2"></i>Get In Touch
-                    </span>
-                    <h2 class="display-5 fw-bold mb-3">We Are Here <span class="text-primary">For You</span></h2>
-                    <p class="text-muted mb-4">Aap hamein kisi bhi waqt message ya call kar sakte hain. Hamari team jald se jald aap se rabta karegi.</p>
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header-premium">
+    <div class="container">
+        <h1>Say hello</h1>
+        <p>Questions, allergies, catering or just a flavour idea — we read everything.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Contact</span>
+        </div>
+    </div>
+</section>
 
-                    <!-- Contact Info Cards -->
-                    <div class="contact-info-cards">
-                        <div class="info-card d-flex align-items-start p-3 mb-3 rounded-3 bg-white shadow-sm">
-                            <div class="info-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h6 class="fw-bold mb-1">Our Location</h6>
-                                <p class="text-muted mb-0">123 Ice Cream Street, Karachi, Pakistan</p>
-                            </div>
-                        </div>
+<section class="py-5" style="padding-top:4rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="row g-4 g-lg-5">
+            <!-- Info -->
+            <div class="col-lg-5" data-aos="fade-right">
+                <span class="eyebrow">Get in touch</span>
+                <h2 class="mt-2 mb-3">We are here for you</h2>
+                <p class="text-muted mb-4">Prefer to talk? Call the parlour during opening hours and you will reach someone who actually makes the ice cream.</p>
 
-                        <div class="info-card d-flex align-items-start p-3 mb-3 rounded-3 bg-white shadow-sm">
-                            <div class="info-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div>
-                                <h6 class="fw-bold mb-1">Phone Number</h6>
-                                <p class="text-muted mb-0">+92 300 1234567</p>
-                            </div>
-                        </div>
-
-                        <div class="info-card d-flex align-items-start p-3 rounded-3 bg-white shadow-sm">
-                            <div class="info-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h6 class="fw-bold mb-1">Email Address</h6>
-                                <p class="text-muted mb-0">support@icream.com</p>
-                            </div>
+                <div class="d-flex flex-column gap-3">
+                    <div class="surface-card p-3 d-flex align-items-start gap-3">
+                        <div class="stat-icon"><i class="fas fa-location-dot"></i></div>
+                        <div>
+                            <div class="fw-bold">Visit the parlour</div>
+                            <div class="small text-muted">123 Ice Cream Street, Karachi</div>
+                            <div class="small text-muted">Open daily 10:00 – 22:00</div>
                         </div>
                     </div>
-
-                    <!-- Social Media -->
-                    <div class="social-media mt-4">
-                        <h6 class="fw-bold mb-3">Follow Us</h6>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; transition: all 0.3s;">
-                                <i class="fab fa-youtube"></i>
-                            </a>
+                    <div class="surface-card p-3 d-flex align-items-start gap-3">
+                        <div class="stat-icon blue"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <div class="fw-bold">Call us</div>
+                            <a href="tel:+923001234567" class="small text-muted text-decoration-none">+92 300 1234567</a>
                         </div>
+                    </div>
+                    <div class="surface-card p-3 d-flex align-items-start gap-3">
+                        <div class="stat-icon green"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="fw-bold">Email</div>
+                            <a href="mailto:support@icream.com" class="small text-muted text-decoration-none">support@icream.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h6 class="fw-bold mb-3">Follow the churn</h6>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:42px;height:42px;display:grid;place-items:center" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:42px;height:42px;display:grid;place-items:center" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:42px;height:42px;display:grid;place-items:center" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:42px;height:42px;display:grid;place-items:center" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- Contact Form Column -->
-            <div class="col-lg-7">
-                <div class="contact-form-wrapper bg-white p-5 rounded-4 shadow-sm">
-                    <h4 class="fw-bold mb-2">Send Us a Message</h4>
-                    <p class="text-muted small mb-4">We'll get back to you within 24 hours.</p>
+            <!-- Form -->
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="surface-card p-4 p-lg-5">
+                    <h4 class="fw-bold mb-1" style="font-family:'Playfair Display',serif">Send us a message</h4>
+                    <p class="text-muted small mb-4">We reply within one business day.</p>
 
-                    <!-- Success/Error Messages -->
-                                                            <form asp-controller="Home" asp-action="Contact" method="post" class="contact-form">
+                    <form asp-controller="Home" asp-action="Contact" method="post" class="contact-form">
                         @Html.AntiForgeryToken()
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label fw-semibold">
-                                        <i class="fas fa-user text-primary me-2"></i>Your Name
-                                    </label>
-                                    <input type="text" name="Name" class="form-control form-control-lg"
-                                           placeholder="Enter your full name" required />
-                                </div>
+                                <label class="form-label" for="contactName">Your name <span class="text-danger">*</span></label>
+                                <input id="contactName" type="text" name="Name" class="form-control form-control-lg" placeholder="Jane Doe" maxlength="100" required />
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label fw-semibold">
-                                        <i class="fas fa-envelope text-primary me-2"></i>Your Email
-                                    </label>
-                                    <input type="email" name="Email" class="form-control form-control-lg"
-                                           placeholder="Enter your email" required />
-                                </div>
+                                <label class="form-label" for="contactEmail">Email <span class="text-danger">*</span></label>
+                                <input id="contactEmail" type="email" name="Email" class="form-control form-control-lg" placeholder="jane@example.com" maxlength="100" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="contactSubject">Subject</label>
+                                <input id="contactSubject" type="text" name="Subject" class="form-control form-control-lg" placeholder="Catering enquiry, allergy question…" maxlength="150" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="contactMessage">Message <span class="text-danger">*</span></label>
+                                <textarea id="contactMessage" name="Message" class="form-control" rows="6" placeholder="Tell us how we can help…" maxlength="2000" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Send message
+                                </button>
+                                <p class="form-text text-center mt-3 mb-0">By sending this you agree to our privacy policy.</p>
                             </div>
                         </div>
-
-                        <div class="form-group mt-3">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-tag text-primary me-2"></i>Subject
-                            </label>
-                            <input type="text" name="Subject" class="form-control form-control-lg"
-                                   placeholder="How can we help you?" required />
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-comment text-primary me-2"></i>Message
-                            </label>
-                            <textarea name="Message" class="form-control" rows="5"
-                                      placeholder="Write your message here..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 rounded-pill" id="submitBtn">
-                            <i class="fas fa-paper-plane me-2"></i>Send Message
-                        </button>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- Google Map -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="map-container rounded-4 overflow-hidden shadow-sm">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28959.578346889755!2d67.0011!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e066f5f48dd%3A0xb2a6f2d5c72c8f9d!2sKarachi%2C%20Pakistan!5e0!3m2!1sen!2s!4v1680000000000"
-                            width="100%"
-                            height="350"
-                            style="border:0;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+<!-- ===== MAP / HOURS ===== -->
+<section class="py-5 bg-cream">
+    <div class="container">
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-7" data-aos="fade-up">
+                <div class="rounded-xl overflow-hidden shadow-soft h-100" style="min-height:320px;background:linear-gradient(135deg,#F4F7FB,#EAF6FB);display:grid;place-items:center;">
+                    <div class="text-center p-4">
+                        <i class="fas fa-map-location-dot fa-3x mb-3" style="color:var(--rose)"></i>
+                        <h5 class="fw-bold">123 Ice Cream Street</h5>
+                        <p class="small text-muted mb-3">Karachi · two minutes from the promenade</p>
+                        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">Open in Maps</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5" data-aos="fade-up" data-aos-delay="80">
+                <div class="surface-card h-100 p-4 p-lg-5">
+                    <h5 class="fw-bold mb-3">Opening hours</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="d-flex justify-content-between py-2 border-bottom"><span class="text-muted">Monday – Thursday</span><span class="fw-semibold">10:00 – 22:00</span></li>
+                        <li class="d-flex justify-content-between py-2 border-bottom"><span class="text-muted">Friday – Saturday</span><span class="fw-semibold">10:00 – 23:30</span></li>
+                        <li class="d-flex justify-content-between py-2 border-bottom"><span class="text-muted">Sunday</span><span class="fw-semibold">11:00 – 22:00</span></li>
+                        <li class="d-flex justify-content-between py-2"><span class="text-muted">Delivery</span><span class="fw-semibold">11:00 – 21:00</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Contact Section End -->
-<!-- Back to Top -->
-<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-@section Scripts {
-    <script>
-        // ===== SOCIAL MEDIA HOVER =====
-        document.querySelectorAll('.social-link').forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px)';
-                this.style.boxShadow = '0 5px 20px rgba(212, 175, 55, 0.3)';
-            });
-
-            link.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = 'none';
-            });
-        });
-
-        // ===== BACK TO TOP =====
-        const backToTop = document.querySelector('.back-to-top');
-        if (backToTop) {
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.classList.add('show');
-                } else {
-                    backToTop.classList.remove('show');
-                }
-            });
-
-            backToTop.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-    </script>
-}
+</section>

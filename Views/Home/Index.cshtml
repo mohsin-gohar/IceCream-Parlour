@@ -1,325 +1,391 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Home - iCREAM";
+    ViewData["Title"] = "Home";
+    var products = ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>;
 }
 
-<!-- ===== HERO CAROUSEL ===== -->
-<div class="container-fluid p-0 mb-5 pb-5">
-    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="w-100" src="~/img/carousel-1.jpg" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
-                        <h1 class="display-3 text-white mb-md-4">Traditional Ice Cream Since 2006</h1>
-                        <a asp-controller="Home" asp-action="About" class="btn btn-primary py-md-3 px-md-5 mt-2">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="w-100" src="~/img/carousel-2.jpg" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
-                        <h1 class="display-3 text-white mb-md-4">Made From Our Own Organic Milk</h1>
-                        <a asp-controller="Home" asp-action="About" class="btn btn-primary py-md-3 px-md-5 mt-2">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#header-carousel" data-bs-slide="prev">
-            <div class="btn btn-secondary px-0" style="width:45px;height:45px;">
-                <span class="carousel-control-prev-icon mb-n1"></span>
-            </div>
-        </a>
-        <a class="carousel-control-next" href="#header-carousel" data-bs-slide="next">
-            <div class="btn btn-secondary px-0" style="width:45px;height:45px;">
-                <span class="carousel-control-next-icon mb-n1"></span>
-            </div>
-        </a>
-    </div>
-</div>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero-premium">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 hero-copy" data-aos="fade-up">
+                <span class="eyebrow">Handcrafted since 2006</span>
+                <h1 class="display-hero mt-3 mb-0">
+                    Ice cream that tastes like <span class="text-gradient">pure joy</span>.
+                </h1>
+                <p class="lead-muted">
+                    Small-batch artisan ice cream churned daily with organic milk, real fruit and
+                    zero artificial flavourings. Discover flavours worth queuing for.
+                </p>
 
-<!-- ===== ABOUT PREVIEW ===== -->
-<section class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 text-center">
-                <h2 class="section-title position-relative mb-5">Traditional &amp; Delicious Ice Cream Since 2006</h2>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-lg-4 py-5">
-                <h4 class="fw-bold mb-3">About Us</h4>
-                <p class="text-muted">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</p>
-                <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod.</p>
-                <a asp-controller="Home" asp-action="About" class="btn btn-secondary mt-2">Learn More</a>
-            </div>
-            <div class="col-lg-4" style="height:450px;">
-                <div class="position-relative h-100 rounded overflow-hidden shadow"
-                     style="background: url('/img/about.jpg') center center / cover no-repeat;">
+                <div class="d-flex flex-wrap gap-3">
+                    <a asp-controller="Home" asp-action="Product" class="btn btn-primary btn-lg">
+                        <i class="fas fa-ice-cream me-2"></i>Explore flavours
+                    </a>
+                    <a asp-controller="Recipe" asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-book-open me-2"></i>Browse recipes
+                    </a>
+                </div>
+
+                <div class="hero-stat">
+                    <div><strong>20+</strong><span>Signature flavours</span></div>
+                    <div><strong>18 yrs</strong><span>Family craft</span></div>
+                    <div><strong>4.9/5</strong><span>Customer rating</span></div>
                 </div>
             </div>
-            <div class="col-lg-4 py-5">
-                <h4 class="fw-bold mb-3">Our Features</h4>
-                <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos.</p>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-check text-secondary me-3"></i>
-                    <span>Premium Quality Ingredients</span>
+
+            <div class="col-lg-6">
+                <div class="hero-visual" data-aos="zoom-in" data-aos-delay="120">
+                    <div class="hero-blob"></div>
+                    <img class="hero-photo" src="~/img/carousel-1.jpg" alt="Freshly churned artisan ice cream" loading="eager" />
+                    <div class="float-chip one"><i class="fas fa-leaf text-success"></i> 100% organic milk</div>
+                    <div class="float-chip two"><i class="fas fa-star text-warning"></i> 4.9 from 2,400+ reviews</div>
                 </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-check text-secondary me-3"></i>
-                    <span>100% Organic Milk</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-check text-secondary me-3"></i>
-                    <span>Traditional Family Recipes</span>
-                </div>
-                <a asp-controller="Home" asp-action="About" class="btn btn-primary mt-2">Learn More</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== PROMOTION ===== -->
-<div class="container-fluid my-5 py-5 px-0">
-    <div class="row bg-primary m-0">
-        <div class="col-md-6 px-0" style="min-height:500px;">
-            <div class="position-relative h-100">
-                <img class="position-absolute w-100 h-100" src="~/img/promotion.jpg" style="object-fit:cover;">
-                <button type="button" class="btn-play" data-toggle="modal"
-                        data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-target="#videoModal">
+<!-- ============================================================
+     TRUST STRIP
+     ============================================================ -->
+<section class="py-4" style="background:#fff;border-bottom:1px solid var(--line)">
+    <div class="container">
+        <div class="row g-3 text-center">
+            <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="fas fa-truck-fast text-primary"></i>
+                    <span class="small fw-semibold">Same-day delivery</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="fas fa-seedling text-success"></i>
+                    <span class="small fw-semibold">Organic ingredients</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="fas fa-award text-warning"></i>
+                    <span class="small fw-semibold">Award-winning recipes</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="fas fa-shield-heart text-danger"></i>
+                    <span class="small fw-semibold">No artificial additives</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="py-5" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="position-relative">
+                    <img src="~/img/about.jpg" alt="Our parlour kitchen" class="w-100 rounded-xl shadow-strong" style="aspect-ratio:4/3;object-fit:cover;" loading="lazy" />
+                    <div class="glass-panel position-absolute d-none d-sm-flex align-items-center gap-3 p-3" style="bottom:-22px;right:-6px;">
+                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                        <div>
+                            <div class="fw-bold">Made daily</div>
+                            <div class="small text-muted">Never from a tub</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <span class="eyebrow">Our story</span>
+                <h2 class="mt-3 mb-3">A family parlour that never cut corners</h2>
+                <p class="lead-muted mb-4">
+                    What started as a single counter in 2006 is now a much-loved local institution.
+                    Every batch still starts with fresh organic milk, real vanilla pods and fruit
+                    picked at peak ripeness.
+                </p>
+
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="d-flex gap-3 p-3 surface-card h-100">
+                            <i class="fas fa-cow text-primary fs-4"></i>
+                            <div>
+                                <div class="fw-bold small">Farm-to-counter</div>
+                                <div class="small text-muted">Milk sourced within 40 km</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex gap-3 p-3 surface-card h-100">
+                            <i class="fas fa-mortar-pestle text-primary fs-4"></i>
+                            <div>
+                                <div class="fw-bold small">Small batch</div>
+                                <div class="small text-muted">Churned 20 L at a time</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex gap-3 p-3 surface-card h-100">
+                            <i class="fas fa-leaf text-primary fs-4"></i>
+                            <div>
+                                <div class="fw-bold small">Clean label</div>
+                                <div class="small text-muted">No gums or stabilisers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex gap-3 p-3 surface-card h-100">
+                            <i class="fas fa-users text-primary fs-4"></i>
+                            <div>
+                                <div class="fw-bold small">Family run</div>
+                                <div class="small text-muted">Three generations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a asp-controller="Home" asp-action="About" class="btn btn-primary mt-4">
+                    Read our story <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     SIGNATURE FLAVOURS
+     ============================================================ -->
+<section class="py-5 bg-cream" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <span class="eyebrow justify-content-center">The menu</span>
+            <h2 class="mt-2">Flavours our regulars swear by</h2>
+            <p>Churned in-house every morning. Availability changes with the season.</p>
+        </div>
+
+        @if (products != null && products.Any())
+        {
+            <div class="row g-4">
+                @foreach (var product in products.Take(8))
+                {
+                    var image = string.IsNullOrEmpty(product.ImagePath) ? Url.Content("~/img/product-1.jpg") : Url.Content(product.ImagePath);
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="@(20 * (product.Id % 4))">
+                        <div class="product-card h-100 d-flex flex-column">
+                            <div class="product-image ratio ratio-1x1">
+                                <span class="product-badge">@(product.IsFree ? "Free recipe" : "Premium")</span>
+                                <img src="@image" alt="@product.Name" loading="lazy" />
+                            </div>
+                            <div class="product-body d-flex flex-column flex-grow-1">
+                                <h5 class="product-title">@product.Name</h5>
+                                <p class="product-description small text-muted mb-2">@product.Category</p>
+                                <div class="product-price mt-auto">
+                                    <span class="current-price">$@product.Price.ToString("0.00")</span>
+                                </div>
+                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@product.Id" class="btn-order">
+                                    View recipe <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var flavour in new[] {
+                    new { Name = "Madagascar Vanilla", Image = "product-1.jpg", Note = "Classic", Price = "3.99" },
+                    new { Name = "Belgian Chocolate", Image = "product-2.jpg", Note = "Premium", Price = "4.99" },
+                    new { Name = "Strawberry Fields", Image = "product-3.jpg", Note = "Seasonal", Price = "4.49" },
+                    new { Name = "Mango Sorbet", Image = "product-4.jpg", Note = "Dairy free", Price = "3.49" },
+                    new { Name = "Salted Butterscotch", Image = "product-5.jpg", Note = "Bestseller", Price = "4.49" },
+                    new { Name = "Espresso Crunch", Image = "product-6.jpg", Note = "Premium", Price = "4.99" },
+                    new { Name = "Pistachio Gelato", Image = "product-8.jpg", Note = "Sicilian", Price = "5.49" },
+                    new { Name = "Blackcurrant Swirl", Image = "product-11.png", Note = "Seasonal", Price = "4.49" }
+                })
+                {
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up">
+                        <div class="product-card h-100 d-flex flex-column">
+                            <div class="product-image ratio ratio-1x1">
+                                <span class="product-badge">@flavour.Note</span>
+                                <img src="~/img/@flavour.Image" alt="@flavour.Name" loading="lazy" />
+                            </div>
+                            <div class="product-body d-flex flex-column flex-grow-1">
+                                <h5 class="product-title">@flavour.Name</h5>
+                                <div class="product-price mt-auto">
+                                    <span class="current-price">$@flavour.Price</span>
+                                </div>
+                                <a asp-controller="Home" asp-action="Contact" class="btn-order">
+                                    Order a tub <i class="fas fa-shopping-bag"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="text-center mt-5">
+            <a asp-controller="Home" asp-action="Product" class="btn btn-outline-primary btn-lg">
+                See the full menu <i class="fas fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     MEMBERSHIP / PROMO
+     ============================================================ -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-0 align-items-stretch rounded-xl overflow-hidden shadow-strong" data-aos="fade-up">
+            <div class="col-lg-6 position-relative" style="min-height:380px;">
+                <img src="~/img/promotion.jpg" alt="Behind the counter at iCREAM" class="position-absolute w-100 h-100" style="object-fit:cover;" loading="lazy" />
+                <button type="button" class="btn-play" data-bs-toggle="modal" data-bs-target="#videoModal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" aria-label="Play our story">
                     <span></span>
                 </button>
             </div>
-        </div>
-        <div class="col-md-6 py-5 py-md-0 px-0">
-            <div class="h-100 d-flex flex-column align-items-center justify-content-center text-center p-5">
-                <div class="d-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
-                     style="width:100px;height:100px;">
-                    <h3 class="text-secondary mb-0">$199</h3>
-                </div>
-                <h3 class="text-white mt-3 mb-4">Chocolate Ice Cream</h3>
-                <p class="text-white mb-4">Lorem justo clita dolor ipsum ut sed eos, ipsum et dolor kasd sit ea justo.</p>
-                <a href="#" class="btn btn-secondary py-3 px-5 mt-2">Order Now</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ===== SERVICES AS CARDS ===== -->
-<section class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col-lg-6">
-                <h2 class="section-title position-relative mb-5">Best Services We Provide For Our Clients</h2>
-            </div>
-        </div>
-        <div class="row g-4">
-            <!-- Service Card 1 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
-                    <div class="service-icon mx-auto">
-                        <i class="fas fa-medal"></i>
+            <div class="col-lg-6" style="background:var(--grad-ink);">
+                <div class="h-100 d-flex flex-column justify-content-center p-4 p-lg-5 text-white">
+                    <span class="eyebrow" style="color:#F7C7D6">iCREAM Club</span>
+                    <h2 class="text-white mt-2 mb-3">Unlock the recipes behind the counter</h2>
+                    <p style="color:rgba(255,255,255,.72)" class="mb-4">
+                        Members get every artisan recipe, seasonal flavour drops, 10% off books and
+                        early access to limited batches.
+                    </p>
+                    <ul class="list-unstyled mb-4" style="color:rgba(255,255,255,.8)">
+                        <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>20+ premium recipes</li>
+                        <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>Member-only flavour previews</li>
+                        <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>Monthly recipe contest entry</li>
+                    </ul>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-gradient btn-lg">Join for $15/mo</a>
+                        <a asp-controller="Home" asp-action="Faq" class="btn btn-outline-light btn-lg">How it works</a>
                     </div>
-                    <h5 class="fw-bold mt-3">Quality Maintain</h5>
-                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
-                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
-                </div>
-            </div>
-            <!-- Service Card 2 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
-                    <div class="service-icon mx-auto">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3">Individual Approach</h5>
-                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
-                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
-                </div>
-            </div>
-            <!-- Service Card 3 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
-                    <div class="service-icon mx-auto">
-                        <i class="fas fa-birthday-cake"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3">Celebration Ice Cream</h5>
-                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
-                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
-                </div>
-            </div>
-            <!-- Service Card 4 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card service-card h-100 border-0 shadow-sm text-center p-4">
-                    <div class="service-icon mx-auto">
-                        <i class="fas fa-truck-fast"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3">Delivery To Any Point</h5>
-                    <p class="text-muted small">Dolor nonumy sed eos sed lorem diam amet eos magna.</p>
-                    <a href="#" class="text-primary fw-bold text-decoration-none">Learn More →</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
-<div class="container-fluid my-5 py-5 px-0">
-    <div class="row justify-content-center m-0">
-        <div class="col-lg-5 text-center">
-            <h2 class="section-title position-relative mb-5">Delicious Ice Cream Made From Our Very Own Organic Milk</h2>
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section class="py-5 bg-blush" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <span class="eyebrow justify-content-center">What we do</span>
+            <h2 class="mt-2">More than a scoop shop</h2>
+            <p>From birthdays to brand events, we bring the parlour to you.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                <div class="surface-card h-100 text-center p-4 hover-lift">
+                    <div class="stat-icon mx-auto mb-3"><i class="fas fa-medal"></i></div>
+                    <h5 class="fw-bold">Quality first</h5>
+                    <p class="small text-muted mb-0">Organic milk, real fruit and no artificial colours or stabilisers.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="80">
+                <div class="surface-card h-100 text-center p-4 hover-lift">
+                    <div class="stat-icon blue mx-auto mb-3"><i class="fas fa-user-check"></i></div>
+                    <h5 class="fw-bold">Personal service</h5>
+                    <p class="small text-muted mb-0">Allergy guidance and tasting notes from people who churn the ice cream.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="160">
+                <div class="surface-card h-100 text-center p-4 hover-lift">
+                    <div class="stat-icon orange mx-auto mb-3"><i class="fas fa-birthday-cake"></i></div>
+                    <h5 class="fw-bold">Celebrations</h5>
+                    <p class="small text-muted mb-0">Custom cakes, ice-cream carts and catering for events of any size.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="240">
+                <div class="surface-card h-100 text-center p-4 hover-lift">
+                    <div class="stat-icon green mx-auto mb-3"><i class="fas fa-truck-fast"></i></div>
+                    <h5 class="fw-bold">Chilled delivery</h5>
+                    <p class="small text-muted mb-0">Insulated same-day delivery so every scoop arrives perfect.</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row m-0 portfolio-container">
-        @for (int i = 1; i <= 6; i++)
-        {
-            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
-                <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="~/img/portfolio-@(i).jpg" alt="">
-                    <a class="portfolio-btn" href="~/img/portfolio-@(i).jpg" data-lightbox="portfolio">
-                        <i class="fa fa-plus text-primary" style="font-size:60px;"></i>
+</section>
+
+<!-- ============================================================
+     GALLERY STRIP
+     ============================================================ -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4" data-aos="fade-up">
+            <div>
+                <span class="eyebrow">From the parlour</span>
+                <h2 class="mt-2 mb-0">A look inside iCREAM</h2>
+            </div>
+            <a asp-controller="Gallery" asp-action="Index" class="btn btn-outline-secondary">Open gallery <i class="fas fa-arrow-up-right-from-square ms-1"></i></a>
+        </div>
+        <div class="row g-3">
+            @for (int i = 1; i <= 6; i++)
+            {
+                var delay = (i - 1) * 60;
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="@delay">
+                    <a asp-controller="Gallery" asp-action="Index" class="d-block overflow-hidden rounded-lg position-relative gallery-tile" style="aspect-ratio:4/3;">
+                        <img src="~/img/portfolio-@(i).jpg" alt="iCREAM parlour gallery image @i" class="img-cover" loading="lazy" />
                     </a>
                 </div>
-            </div>
-        }
-    </div>
-</div>
-
-<!-- ===== PRODUCTS WITH ORDER LINKS ===== -->
-<section class="container-fluid py-5">
-    <div class="container">
-        <div class="section-title text-center mb-5">
-            <h2>Best Prices We Offer For Ice Cream Lovers</h2>
-            <p>Delicious ice cream made with love and care</p>
-        </div>
-        <div class="row g-4">
-            @if (ViewBag.Products != null && (ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>) != null)
-            {
-                var productList = ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>;
-                foreach (var product in productList!)
-                {
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-card">
-                            <div class="product-badge">@(product.IsFree ? "Free" : "Premium")</div>
-                            <div class="product-image">
-                                <img src="@(string.IsNullOrEmpty(product.ImagePath) ? Url.Content("~/img/product-1.jpg") : Url.Content(product.ImagePath))" alt="@product.Name" loading="lazy">
-                            </div>
-                            <div class="product-body">
-                                <h5 class="product-title">@product.Name</h5>
-                                <p class="product-description small text-muted">@product.Category</p>
-                                <div class="product-price">
-                                    <span class="current-price">$@product.Price.ToString("0.00")</span>
-                                </div>
-                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@product.Id" class="btn-order">View Recipe <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <!-- Fallback static products (only used when the recipe table is empty) -->
-                var fallbackProducts = new[]
-                {
-                    new { Name = "Vanilla", Image = "product-1.jpg", Price = 10.00m },
-                    new { Name = "Chocolate", Image = "product-2.jpg", Price = 10.00m },
-                    new { Name = "Strawberry", Image = "product-3.jpg", Price = 11.00m },
-                    new { Name = "Mango", Image = "product-4.jpg", Price = 11.00m },
-                    new { Name = "Butterscotch", Image = "product-5.jpg", Price = 10.00m },
-                    new { Name = "Coffee", Image = "product-6.jpg", Price = 10.00m },
-                    new { Name = "Pistachio", Image = "product-8.jpg", Price = 12.00m },
-                    new { Name = "Black Currant", Image = "product-11.png", Price = 12.00m }
-                };
-                foreach (var p in fallbackProducts)
-                {
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-card">
-                            <div class="product-badge">Popular</div>
-                            <div class="product-image">
-                                <img src="~/img/@p.Image" alt="@p.Name" loading="lazy">
-                            </div>
-                            <div class="product-body">
-                                <h5 class="product-title">@p.Name Ice Cream</h5>
-                                <p class="product-description small text-muted">Delicious @p.Name flavor</p>
-                                <div class="product-price">
-                                    <span class="current-price">$@p.Price.ToString("0.00")</span>
-                                    <span class="old-price">$@((p.Price + 5).ToString("0.00"))</span>
-                                </div>
-                                <a asp-controller="Home" asp-action="Contact" class="btn-order">Order Now <i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                }
             }
         </div>
     </div>
 </section>
 
-<!-- ===== TESTIMONIALS AS CARDS ===== -->
-<section class="container-fluid py-5 bg-light">
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section class="py-5 bg-cream" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
     <div class="container">
-        <div class="section-title text-center mb-5">
-            <h2>Clients Say About Our Famous Ice Cream</h2>
-            <p>What our customers are saying about us</p>
+        <div class="section-title" data-aos="fade-up">
+            <span class="eyebrow justify-content-center">Reviews</span>
+            <h2 class="mt-2">2,400+ happy scoops</h2>
+            <p>Real words from regulars, food writers and first-time visitors.</p>
         </div>
         <div class="row g-4">
-            <!-- Testimonial Card 1 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+            <div class="col-lg-4" data-aos="fade-up">
+                <div class="testimonial-card h-100 d-flex flex-column">
                     <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                    <p class="mt-2">"Best ice cream I've ever tasted! The creamy texture and authentic flavors are unmatched."</p>
-                    <div class="d-flex align-items-center mt-auto pt-3">
-                        <img src="~/img/team-1.jpg" class="rounded-circle" width="50" height="50" alt="Client">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">John Anderson</h6>
-                            <small class="text-muted">Regular Customer</small>
+                    <p class="flex-grow-1">“The salted butterscotch is genuinely the best ice cream I have had outside Italy. You can taste that it is made in small batches.”</p>
+                    <div class="d-flex align-items-center gap-3 mt-3">
+                        <img src="~/img/team-1.jpg" class="rounded-circle" width="46" height="46" alt="Amelia R." />
+                        <div>
+                            <div class="fw-bold small">Amelia R.</div>
                             <div class="text-warning small">★★★★★</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Testimonial Card 2 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="80">
+                <div class="testimonial-card h-100 d-flex flex-column">
                     <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                    <p class="mt-2">"Amazing quality and variety! The chocolate ice cream is my absolute favorite."</p>
-                    <div class="d-flex align-items-center mt-auto pt-3">
-                        <img src="~/img/team-2.jpg" class="rounded-circle" width="50" height="50" alt="Client">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Maria Garcia</h6>
-                            <small class="text-muted">Food Blogger</small>
+                    <p class="flex-grow-1">“We booked their cart for our daughter’s birthday. Arrived on time, set up beautifully and the kids were obsessed. Worth every penny.”</p>
+                    <div class="d-flex align-items-center gap-3 mt-3">
+                        <img src="~/img/team-2.jpg" class="rounded-circle" width="46" height="46" alt="Daniel K." />
+                        <div>
+                            <div class="fw-bold small">Daniel K.</div>
                             <div class="text-warning small">★★★★★</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Testimonial Card 3 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="160">
+                <div class="testimonial-card h-100 d-flex flex-column">
                     <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                    <p class="mt-2">"The strawberry ice cream tastes like real strawberries! Organic ingredients make all the difference."</p>
-                    <div class="d-flex align-items-center mt-auto pt-3">
-                        <img src="~/img/team-3.jpg" class="rounded-circle" width="50" height="50" alt="Client">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Robert Wilson</h6>
-                            <small class="text-muted">Ice Cream Lover</small>
-                            <div class="text-warning small">★★★★☆</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial Card 4 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card testimonial-card h-100 border-0 shadow-sm p-4">
-                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                    <p class="mt-2">"Perfect dessert spot! The butterscotch ice cream is to die for. Love the atmosphere."</p>
-                    <div class="d-flex align-items-center mt-auto pt-3">
-                        <img src="~/img/team-4.jpg" class="rounded-circle" width="50" height="50" alt="Client">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Lisa Thompson</h6>
-                            <small class="text-muted">Verified Buyer</small>
+                    <p class="flex-grow-1">“As a member I get the recipe book and the seasonal drops. The mango sorbet recipe alone paid for the subscription.”</p>
+                    <div class="d-flex align-items-center gap-3 mt-3">
+                        <img src="~/img/team-3.jpg" class="rounded-circle" width="46" height="46" alt="Priya S." />
+                        <div>
+                            <div class="fw-bold small">Priya S.</div>
                             <div class="text-warning small">★★★★★</div>
                         </div>
                     </div>
@@ -329,25 +395,65 @@
     </div>
 </section>
 
-<!-- ===== VIDEO MODAL ===== -->
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center rounded-xl p-5 shadow-strong" style="background:var(--grad-brand);color:#fff;" data-aos="fade-up">
+            <span class="eyebrow justify-content-center" style="color:rgba(255,255,255,.85)">Ready when you are</span>
+            <h2 class="text-white mt-2 mb-3" style="font-size:clamp(1.8rem,3.4vw,2.6rem)">Treat yourself to a better scoop</h2>
+            <p class="mb-4 mx-auto" style="color:rgba(255,255,255,.9);max-width:58ch">
+                Order a tub for delivery, browse the recipe books, or join the club for the full
+                recipe archive.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-lg"><i class="fas fa-shopping-bag me-2"></i>Order a tub</a>
+                <a asp-controller="Book" asp-action="Index" class="btn btn-dark btn-lg"><i class="fas fa-book me-2"></i>Shop recipe books</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video modal (Bootstrap 5) -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title" id="videoModalLabel">Inside iCREAM</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <div class="ratio ratio-16x9">
-                    <iframe src="" id="video" title="Promo video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <iframe id="video" src="" title="iCREAM story" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- ===== BACK TO TOP ===== -->
-<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
 
 @section Scripts {
-                        <script src="~/js/main.js"></script>
+    <script>
+        // Lightweight video modal wiring
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('videoModal');
+            if (!modal) return;
+            var iframe = document.getElementById('video');
+            var src = '';
+
+            document.querySelectorAll('.btn-play').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    src = btn.getAttribute('data-src') || '';
+                });
+            });
+
+            modal.addEventListener('shown.bs.modal', function () {
+                if (src) iframe.src = src + '?autoplay=1&rel=0';
+            });
+
+            modal.addEventListener('hide.bs.modal', function () {
+                iframe.src = '';
+            });
+        });
+    </script>
 }

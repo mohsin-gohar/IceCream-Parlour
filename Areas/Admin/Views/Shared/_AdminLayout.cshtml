@@ -1,13 +1,19 @@
-
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var pageTitle = ViewData["Title"]?.ToString() ?? currentController;
+    var userName = User.Identity?.Name ?? "Admin";
+    var initials = string.IsNullOrWhiteSpace(userName) ? "A" : userName.Substring(0, 1).ToUpperInvariant();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - iCREAM Admin</title>
     <meta name="robots" content="noindex, nofollow" />
+    <title>@pageTitle - iCREAM Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" />
@@ -15,8 +21,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/components.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/premium.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
-    
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="admin-body">
     <div class="page-loader" id="pageLoader"><div class="spinner"></div></div>
@@ -26,60 +33,88 @@
             <span class="brand-icon"><i class="fas fa-ice-cream"></i></span>
             <div>
                 <h1>iCREAM</h1>
-                <small>Management System</small>
+                <small>Management</small>
             </div>
         </div>
+
         <nav class="sidebar-nav">
-            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
+            <span class="sidebar-label">Overview</span>
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nav-link @(currentController == "Dashboard" ? "active" : "")">
                 <i class="fas fa-chart-pie"></i><span>Dashboard</span>
             </a>
-            <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Customers" ? "active" : "")">
+            <a asp-area="Admin" asp-controller="Reports" asp-action="Index" class="nav-link @(currentController == "Reports" ? "active" : "")">
+                <i class="fas fa-chart-line"></i><span>Reports</span>
+            </a>
+
+            <span class="sidebar-label">Commerce</span>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="nav-link @(currentController == "Orders" ? "active" : "")">
+                <i class="fas fa-receipt"></i><span>Orders</span>
+            </a>
+            <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="nav-link @(currentController == "Customers" ? "active" : "")">
                 <i class="fas fa-users"></i><span>Customers</span>
             </a>
-            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Category" ? "active" : "")">
-                <i class="fas fa-tags"></i><span>Categories</span>
-            </a>
-            <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")">
-                <i class="fas fa-box"></i><span>Products</span>
-            </a>
-            <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Orders" ? "active" : "")">
-                <i class="fas fa-shopping-cart"></i><span>Orders</span>
-            </a>
-            <a asp-area="Admin" asp-controller="Books" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Books" ? "active" : "")">
+            <a asp-area="Admin" asp-controller="Books" asp-action="Index" class="nav-link @(currentController == "Books" ? "active" : "")">
                 <i class="fas fa-book"></i><span>Books</span>
             </a>
-            <a asp-area="Admin" asp-controller="UserRecipes" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "UserRecipes" ? "active" : "")">
+
+            <span class="sidebar-label">Catalogue</span>
+            <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="nav-link @(currentController == "Products" ? "active" : "")">
+                <i class="fas fa-ice-cream"></i><span>Products</span>
+            </a>
+            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link @(currentController == "Category" ? "active" : "")">
+                <i class="fas fa-tags"></i><span>Categories</span>
+            </a>
+            <a asp-area="Admin" asp-controller="UserRecipes" asp-action="Index" class="nav-link @(currentController == "UserRecipes" ? "active" : "")">
                 <i class="fas fa-lightbulb"></i><span>User Recipes</span>
             </a>
-            <a asp-area="Admin" asp-controller="Reports" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Reports" ? "active" : "")">
-                <i class="fas fa-file-alt"></i><span>Reports</span>
-            </a>
-            <div class="nav-divider"></div>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link" target="_blank">
-                <i class="fas fa-globe"></i><span>Public Site</span>
-            </a>
+
+            <div class="sidebar-foot">
+                <a asp-area="" asp-controller="Home" asp-action="Index" target="_blank" class="nav-link">
+                    <i class="fas fa-globe"></i><span>View public site</span>
+                </a>
+            </div>
         </nav>
     </aside>
 
     <div class="main-wrapper">
         <header class="top-navbar">
-            <button class="sidebar-toggle" id="sidebarToggle" type="button"><i class="fas fa-bars"></i></button>
-            <div class="navbar-search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search..." id="globalSearch" />
+            <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="topbar-title d-none d-md-block">
+                <span class="topbar-eyebrow">Admin</span>
+                <h6 class="mb-0">@pageTitle</h6>
             </div>
+
+            <div class="navbar-search ms-md-auto">
+                <i class="fas fa-search"></i>
+                <input type="search" placeholder="Filter this page…" id="globalSearch" aria-label="Filter this page" />
+            </div>
+
             <div class="navbar-actions">
+                <a asp-area="" asp-controller="Home" asp-action="Index" target="_blank" class="topbar-icon" title="Public site">
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+
                 <div class="dropdown">
-                    <button class="user-menu" data-bs-toggle="dropdown">
-                        <div class="user-avatar"><i class="fas fa-user"></i></div>
-                        <span>@User.Identity?.Name</span>
-                        <i class="fas fa-chevron-down ms-1"></i>
+                    <button class="user-menu" data-bs-toggle="dropdown" type="button" aria-expanded="false">
+                        <span class="user-avatar">@initials</span>
+                        <span class="d-none d-sm-inline">@userName</span>
+                        <i class="fas fa-chevron-down" style="font-size:.7rem"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg">
+                        <li class="px-3 py-2">
+                            <div class="small fw-bold">@userName</div>
+                            <div class="small text-muted">Administrator</div>
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
                         <li>
-                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                            <form asp-controller="Account" asp-action="Logout" method="post">
                                 @Html.AntiForgeryToken()
-                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Logout</button>
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Sign out
+                                </button>
                             </form>
                         </li>
                     </ul>
@@ -90,16 +125,25 @@
         <main class="main-content">
             @if (TempData["Success"] != null)
             {
-                <div class="toast-alert toast-success" data-toast="success">@TempData["Success"]</div>
+                <div class="toast-alert toast-success" data-toast="success">
+                    <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+                </div>
             }
             @if (TempData["Error"] != null)
             {
-                <div class="toast-alert toast-error" data-toast="error">@TempData["Error"]</div>
+                <div class="toast-alert toast-error" data-toast="error">
+                    <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+                </div>
             }
+
             @RenderBody()
+
+            <footer class="admin-footer">
+                <span>&copy; @DateTime.Now.Year iCREAM Management</span>
+                <span class="text-muted">v2.0 · @(ViewContext.RouteData.Values["controller"])/@(ViewContext.RouteData.Values["action"])</span>
+            </footer>
         </main>
     </div>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -109,7 +153,24 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
-   
+    <script>
+        if (window.AOS) { AOS.init({ duration: 600, once: true, offset: 60 }); }
+
+        // Lightweight "filter this page" search: filters table rows and card lists.
+        (function () {
+            var input = document.getElementById('globalSearch');
+            if (!input) return;
+            input.addEventListener('input', function () {
+                var term = input.value.trim().toLowerCase();
+                document.querySelectorAll('table tbody tr').forEach(function (row) {
+                    row.style.display = (!term || row.textContent.toLowerCase().indexOf(term) > -1) ? '' : 'none';
+                });
+                document.querySelectorAll('[data-searchable]').forEach(function (card) {
+                    card.style.display = (!term || card.textContent.toLowerCase().indexOf(term) > -1) ? '' : 'none';
+                });
+            });
+        })();
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

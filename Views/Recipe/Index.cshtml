@@ -1,91 +1,125 @@
 @model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Recipe>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Recipes - iCREAM";
+    ViewData["Title"] = "Recipes";
+    var recipes = Model?.ToList() ?? new List<Ice_Cream_Parlour_Eproject.Models.Recipe>();
+    var categories = recipes.Select(r => r.Category).Where(c => !string.IsNullOrWhiteSpace(c)).Distinct().OrderBy(c => c).ToList();
+    var freeCount = recipes.Count(r => r.IsFree);
 }
 
-<style>
-    .recipe-card {
-        background: #fff;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        border: 1px solid rgba(241,149,178,0.06);
-        transition: all 0.3s ease;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .recipe-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(241,149,178,0.15);
-        border-color: #F195B2;
-    }
-
-    .recipe-card img {
-        transition: transform 0.5s ease;
-    }
-
-    .recipe-card:hover img {
-        transform: scale(1.05);
-    }
-
-    .recipe-card .card-body {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 18px;
-    }
-</style>
-
 <!-- ===== PAGE HEADER ===== -->
-<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
-        <i class="fas fa-utensils me-3"></i> Ice Cream Recipes
-    </h1>
-    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 500px;" class="mb-3">Explore our collection of delicious ice cream recipes</p>
-    <a asp-controller="Recipe" asp-action="SubmitCustomRecipe" class="btn btn-light rounded-pill px-4 py-2 fw-bold text-primary shadow-sm" style="font-size: 0.95rem;">
-        <i class="fas fa-plus-circle me-2"></i>Submit Your Recipe
-    </a>
-</div>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>The recipe archive</h1>
+        <p>@recipes.Count recipes · @freeCount free to try · new drops every month.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Recipes</span>
+        </div>
+    </div>
+</section>
 
-<!-- ===== RECIPE GRID ===== -->
-<div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
-    @if (Model == null || !Model.Any())
-    {
-        <div style="text-align: center; padding: 60px 0;">
-            <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
-            <h4 style="color: #888;">No recipes found</h4>
+<section class="py-5" style="padding-top:4rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4" data-aos="fade-up">
+            <div>
+                <span class="eyebrow">Browse</span>
+                <h2 class="mt-2 mb-0" style="font-size:1.75rem">Find your next favourite</h2>
+            </div>
+            <a asp-controller="Recipe" asp-action="SubmitCustomRecipe" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-2"></i>Submit your recipe
+            </a>
         </div>
-    }
-    else
-    {
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
-            @foreach (var r in Model)
-            {
-                var imgSrc = !string.IsNullOrEmpty(r.ImagePath) ? r.ImagePath : "/img/product-1.jpg";
-                <div class="recipe-card">
-                    <div style="overflow: hidden; position: relative; padding-top: 80%; background: #f8f5f6;">
-                        <img src="@imgSrc" alt="@r.Name" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
-                        <span style="position: absolute; top: 12px; left: 12px; background: @(r.IsFree ? "linear-gradient(135deg, #28a745, #20c997)" : "linear-gradient(135deg, #F195B2, #62C3E7)"); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase;">
-                            @(r.IsFree ? "Free Access" : "Premium")
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h5 style="font-size: 1.15rem; font-weight: 700; color: #2d2d2d; margin-bottom: 6px; font-family: 'Playfair Display', serif;">@r.Name</h5>
-                        <div style="font-size: 0.8rem; color: #F195B2; font-weight: 600; margin-bottom: 8px;">
-                            <i class="fas fa-tag me-1"></i> @r.Category
+
+        @if (categories.Count > 1)
+        {
+            <div class="d-flex flex-wrap gap-2 mb-4" id="recipeFilters">
+                <button type="button" class="filter-chip active" data-filter="all">All</button>
+                @foreach (var category in categories)
+                {
+                    <button type="button" class="filter-chip" data-filter="@category">@category</button>
+                }
+            </div>
+        }
+
+        @if (recipes.Count == 0)
+        {
+            <div class="text-center py-5 surface-card p-5" data-aos="fade-up">
+                <i class="fas fa-utensils fa-3x mb-3" style="color:var(--rose)"></i>
+                <h4 class="fw-bold">No recipes yet</h4>
+                <p class="text-muted mb-4">Be the first to share a recipe with the community.</p>
+                <a asp-controller="Recipe" asp-action="SubmitCustomRecipe" class="btn btn-primary">Submit a recipe</a>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4" id="recipeGrid">
+                @foreach (var r in recipes)
+                {
+                    var imgSrc = string.IsNullOrEmpty(r.ImagePath) ? Url.Content("~/img/product-1.jpg") : Url.Content(r.ImagePath);
+                    var snippet = r.Ingredients.Length > 90 ? r.Ingredients.Substring(0, 90) + "…" : r.Ingredients;
+                    <div class="col-lg-4 col-md-6 recipe-cell" data-category="@r.Category" data-aos="fade-up">
+                        <div class="recipe-card h-100 d-flex flex-column">
+                            <div class="position-relative overflow-hidden" style="aspect-ratio:4/3;">
+                                <span class="product-badge" style="background:@(r.IsFree ? "rgba(6,118,71,.9)" : "rgba(16,24,40,.75)")">
+                                    @(r.IsFree ? "Free" : "Premium")
+                                </span>
+                                <img src="@imgSrc" alt="@r.Name" class="img-cover" loading="lazy" />
+                            </div>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="badge" style="background:rgba(241,149,178,.14);color:var(--rose-ink);font-size:.7rem">@r.Category</span>
+                                    @if (r.Price > 0)
+                                    {
+                                        <span class="small fw-bold" style="color:var(--rose-ink)">$@r.Price.ToString("0.00")</span>
+                                    }
+                                </div>
+                                <h5 class="fw-bold mb-2" style="font-family:'Playfair Display',serif">@r.Name</h5>
+                                <p class="small text-muted mb-3">@snippet</p>
+                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@r.Id" class="btn btn-outline-primary btn-sm mt-auto align-self-start">
+                                    Read recipe <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
                         </div>
-                        <p style="font-size: 0.85rem; color: #666; line-height: 1.5; margin-bottom: 12px; flex: 1;">
-                            <strong>Ingredients:</strong> @(r.Ingredients.Length > 80 ? r.Ingredients.Substring(0, 80) + "..." : r.Ingredients)
-                        </p>
-                        <a asp-controller="Recipe" asp-action="Details" asp-route-id="@r.Id" class="btn btn-outline-primary rounded-pill w-100" style="border-color: #F195B2; color: #F195B2; font-weight: 600;">
-                            View Details <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
                     </div>
-                </div>
-            }
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<section class="py-5 bg-cream">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+                <span class="eyebrow justify-content-center">Community</span>
+                <h2 class="mt-2 mb-3">Got a recipe worth sharing?</h2>
+                <p class="text-muted mb-4">Submit your creation for review. Selected recipes are published in the archive, and the best of the month wins a prize.</p>
+                <a asp-controller="Recipe" asp-action="SubmitCustomRecipe" class="btn btn-primary btn-lg">Submit your recipe</a>
+            </div>
         </div>
-    }
-</div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var chips = document.querySelectorAll('#recipeFilters .filter-chip');
+            var cells = document.querySelectorAll('#recipeGrid .recipe-cell');
+            if (!chips.length || !cells.length) return;
+
+            chips.forEach(function (chip) {
+                chip.addEventListener('click', function () {
+                    chips.forEach(function (c) { c.classList.remove('active'); });
+                    chip.classList.add('active');
+                    var filter = chip.getAttribute('data-filter');
+                    cells.forEach(function (cell) {
+                        var match = filter === 'all' || cell.getAttribute('data-category') === filter;
+                        cell.style.display = match ? '' : 'none';
+                    });
+                });
+            });
+        });
+    </script>
+}

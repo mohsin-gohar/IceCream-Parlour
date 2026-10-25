@@ -1,60 +1,101 @@
 @model Ice_Cream_Parlour_Eproject.Models.UserRecipe
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Submit Custom Recipe - iCREAM";
+    ViewData["Title"] = "Submit a recipe";
 }
 
-<!-- ===== PAGE HEADER ===== -->
-<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
-        <i class="fas fa-plus-circle me-2"></i> Submit Your Custom Recipe
-    </h1>
-    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 550px;">Share your unique ice cream creation! Top recipes win cash prizes and certificates.</p>
-</div>
-
-<!-- ===== SUBMISSION FORM ===== -->
-<div class="container py-5" style="max-width: 800px;">
-    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
-        <h4 class="fw-bold mb-4" style="font-family: 'Playfair Display', serif; color: #2d2d2d;">
-            <i class="fas fa-utensils text-primary me-2"></i>Recipe Details
-        </h4>
-
-        <form asp-controller="Recipe" asp-action="SubmitCustomRecipe" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-            @Html.AntiForgeryToken()
-
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Recipe Name <span class="text-danger">*</span></label>
-                <input asp-for="RecipeName" class="form-control form-control-lg rounded-3" placeholder="e.g. Mango Coconut Crunch" required />
-                <span asp-validation-for="RecipeName" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Ingredients <span class="text-danger">*</span></label>
-                <textarea asp-for="Ingredients" class="form-control rounded-3" rows="4" placeholder="List all ingredients (e.g. 2 cups heavy cream, 1 cup mango puree, 1/2 cup sugar...)" required></textarea>
-                <span asp-validation-for="Ingredients" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label fw-semibold">Procedure / Preparation Steps <span class="text-danger">*</span></label>
-                <textarea asp-for="Procedure" class="form-control rounded-3" rows="5" placeholder="Step-by-step instructions to prepare your ice cream..." required></textarea>
-                <span asp-validation-for="Procedure" class="text-danger"></span>
-            </div>
-
-            <div class="mb-4">
-                <label class="form-label fw-semibold">Photo of Your Creation</label>
-                <input type="file" name="ImageFile" accept="image/*" class="form-control form-control-lg rounded-3" />
-                <small class="text-muted">Optional: Upload a clear image of your finished ice cream (JPG, PNG, WebP)</small>
-            </div>
-
-            <div class="d-flex gap-3">
-                <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none;">
-                    <i class="fas fa-paper-plane me-2"></i>Submit Recipe
-                </button>
-                <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
-                    Cancel
-                </a>
-            </div>
-        </form>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>Submit a recipe</h1>
+        <p>Share your creation — the best of the month wins a cash prize.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <a asp-controller="Recipe" asp-action="Index">Recipes</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Submit</span>
+        </div>
     </div>
-</div>
+</section>
+
+<section class="py-5" style="padding-top:4rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="row g-4 g-lg-5">
+            <div class="col-lg-4" data-aos="fade-right">
+                <div class="surface-card p-4 mb-3">
+                    <h5 class="fw-bold mb-3">How it works</h5>
+                    <ol class="ps-3 small text-muted mb-0" style="line-height:2">
+                        <li>Submit your recipe with a photo.</li>
+                        <li>Our team reviews it within 48 hours.</li>
+                        <li>Approved recipes join the public archive.</li>
+                        <li>The best submission each month wins a prize and certificate.</li>
+                    </ol>
+                </div>
+                <div class="surface-card p-4">
+                    <h6 class="fw-bold mb-2"><i class="fas fa-lightbulb text-warning me-2"></i>Tips for approval</h6>
+                    <ul class="small text-muted ps-3 mb-0" style="line-height:1.9">
+                        <li>Use clear quantities and temperatures.</li>
+                        <li>Tell us what makes it different.</li>
+                        <li>Upload a bright, in-focus photo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-8" data-aos="fade-left">
+                <div class="surface-card p-4 p-lg-5">
+                    <h4 class="fw-bold mb-4" style="font-family:'Playfair Display',serif">Recipe details</h4>
+
+                    <form asp-controller="Recipe" asp-action="SubmitCustomRecipe" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="RecipeName" class="form-label">Recipe name <span class="text-danger">*</span></label>
+                            <input asp-for="RecipeName" class="form-control form-control-lg" placeholder="e.g. Mango Coconut Crunch" required />
+                            <span asp-validation-for="RecipeName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Ingredients" class="form-label">Ingredients <span class="text-danger">*</span></label>
+                            <textarea asp-for="Ingredients" class="form-control" rows="4" placeholder="2 cups heavy cream, 1 cup mango purée, ½ cup sugar…" required></textarea>
+                            <span asp-validation-for="Ingredients" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Procedure" class="form-label">Method <span class="text-danger">*</span></label>
+                            <textarea asp-for="Procedure" class="form-control" rows="6" placeholder="Step-by-step instructions, including chilling and churning times…" required></textarea>
+                            <span asp-validation-for="Procedure" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label" for="recipeImage">Photo of your creation</label>
+                            <input type="file" id="recipeImage" name="ImageFile" accept="image/jpeg,image/png,image/webp,image/gif" class="form-control" />
+                            <div class="form-text">Optional. JPG, PNG, GIF or WebP up to 5 MB.</div>
+                            <img id="recipePreview" src="" alt="Preview" class="mt-3 rounded-lg d-none" style="max-height:220px;object-fit:cover;width:100%" />
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Submit recipe</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.getElementById('recipeImage')?.addEventListener('change', function (e) {
+            var file = e.target.files && e.target.files[0];
+            var preview = document.getElementById('recipePreview');
+            if (!file || !preview) return;
+            var reader = new FileReader();
+            reader.onload = function (ev) {
+                preview.src = ev.target.result;
+                preview.classList.remove('d-none');
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+}
