@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Book>
+@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Book>
 @{
     ViewData["Title"] = "Manage Books";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -18,6 +18,26 @@
         <tr><th>Title</th><th>Author</th><th>Price</th><th>Stock</th><th>Actions</th></tr>
     </thead>
     <tbody>
+
+        @* EmptyState *@
+
+        @if (!Model.Any())
+
+        {
+
+            <tr>
+
+                <td colspan="6" class="text-center py-5">
+
+                    <i class="fas fa-book fa-2x text-muted mb-2 d-block"></i>
+
+                    <div class="text-muted small">No books in the catalogue yet.</div>
+
+                </td>
+
+            </tr>
+
+        }
         @foreach (var book in Model)
         {
             <tr>

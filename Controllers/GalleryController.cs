@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Ice_Cream_Parlour_Eproject.Data;
 using Ice_Cream_Parlour_Eproject.Models;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ice_Cream_Parlour_Eproject.Controllers
 {
@@ -21,13 +20,14 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
 
             // ===== 1. RECIPES (Ice Cream Flavors) =====
             var recipes = await _context.Recipes
+                .AsNoTracking()
                 .Select(r => new GalleryItemViewModel
                 {
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Description = r.Category,
-                    Price = 0,
+                    Price = r.Price,
                     Type = "recipe",
                     Category = r.Category,
                     CreatedDate = r.CreatedDate
@@ -37,6 +37,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
 
             // ===== 2. BOOKS =====
             var books = await _context.Books
+                .AsNoTracking()
                 .Select(b => new GalleryItemViewModel
                 {
                     Id = b.Id,
@@ -51,9 +52,10 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
                 .ToListAsync();
             items.AddRange(books);
 
-            // ===== 3. USER RECIPES (if any) =====
+            // ===== 3. USER RECIPES (approved only) =====
             var userRecipes = await _context.UserRecipes
-                .Where(ur => ur.Status == "Selected")
+                .AsNoTracking()
+                .Where(ur => ur.Status == "Approved" || ur.Status == "Selected")
                 .Select(ur => new GalleryItemViewModel
                 {
                     Id = ur.Id,
@@ -69,7 +71,9 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             items.AddRange(userRecipes);
 
             // Sort by CreatedDate descending (newest first)
-            items = items.OrderByDescending(i => i.CreatedDate ?? DateTime.MinValue).ToList();
+            items = items
+                .OrderByDescending(i => i.CreatedDate ?? DateTime.MinValue)
+                .ToList();
 
             return View(items);
         }

@@ -1,128 +1,124 @@
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Security.Claims;
 using Ice_Cream_Parlour_Eproject.Data;
 using Ice_Cream_Parlour_Eproject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using System.Security.Claims;
 
 namespace Ice_Cream_Parlour_Eproject.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // ===== MAIN PAGES =====
         public async Task<IActionResult> Index()
         {
-            ViewBag.Products = await _context.Recipes.ToListAsync();
-            return View();
-        }
-        public IActionResult Blog()
-        {
-            return View();
-        }    
-        
-        public IActionResult About()
-        {
+            ViewBag.Products = await _context.Recipes
+                .AsNoTracking()
+                .OrderByDescending(r => r.CreatedDate)
+                .Take(8)
+                .ToListAsync();
+
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            return View();
-        }
-
-        public IActionResult Service()
-        {
-            return View();
-        }
+        public IActionResult Blog() => View();
+        public IActionResult About() => View();
+        public IActionResult Contact() => View();
+        public IActionResult Service() => View();
 
         public IActionResult Gallery()
         {
-            return View();
+            // The gallery is served by GalleryController (it has the data); avoid a
+            // second, model-less copy of the page that would throw a NullReferenceException.
+            return RedirectToAction("Index", "Gallery");
         }
 
         public async Task<IActionResult> Product()
         {
-            var recipes = await _context.Recipes.ToListAsync();
+            var recipes = await _context.Recipes
+                .AsNoTracking()
+                .OrderByDescending(r => r.CreatedDate)
+                .ToListAsync();
+
             return View(recipes);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Faq()
-        {
-            return View();
-        }
-
-        public IActionResult Recipe()
-        {
-            return View();
-        }
-
-        public IActionResult Feedback()
-        {
-            return View();
-        }
-
-        public IActionResult Bookorder()
-        {
-            return View();
-        }
+        public IActionResult Privacy() => View();
+        public IActionResult Faq() => View();
+        public IActionResult Recipe() => View();
+        public IActionResult Feedback() => View();
 
         // ===== CONTACT FORM POST =====
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Contact(string Name, string Email, string Subject, string Message)
+        public async Task<IActionResult> Contact(string? name, string? email, string? subject, string? message)
         {
-            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Message))
+            name = name?.Trim();
+            email = email?.Trim();
+            subject = subject?.Trim();
+            message = message?.Trim();
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(message))
             {
-                var feedback = new Feedback
-                {
-                    UserName = Name,
-                    Email = Email,
-                    Message = string.IsNullOrEmpty(Subject) ? Message : $"[{Subject}] {Message}",
-                    Rating = 5,
-                    SubmittedDate = DateTime.Now,
-                    IsRegistered = User.Identity?.IsAuthenticated ?? false,
-                    UserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)
-                };
-
-                _context.Feedbacks.Add(feedback);
-                await _context.SaveChangesAsync();
-
-                TempData["Success"] = "Thank you for contacting us! We'll get back to you soon.";
-                return RedirectToAction("Contact");
+                TempData["Error"] = "Please fill in your name, e-mail address and message.";
+                return RedirectToAction(nameof(Contact));
             }
-            TempData["Error"] = "Please fill in all required fields.";
-            return View();
+
+            if (!new EmailAddressAttribute().IsValid(email))
+            {
+                TempData["Error"] = "Please enter a valid e-mail address.";
+                return RedirectToAction(nameof(Contact));
+            }
+
+            if (name.Length > 100 || email.Length > 100 || (subject?.Length ?? 0) > 150 || message.Length > 2000)
+            {
+                TempData["Error"] = "One of the fields is too long. Please shorten your message.";
+                return RedirectToAction(nameof(Contact));
+            }
+
+            var feedback = new Feedback
+            {
+                UserName = name,
+                Email = email,
+                Message = string.IsNullOrWhiteSpace(subject) ? message : $"[{subject}] {message}",
+                Rating = 5,
+                SubmittedDate = DateTime.UtcNow,
+                IsRegistered = User.Identity?.IsAuthenticated ?? false,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            _context.Feedbacks.Add(feedback);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Contact message received from {Email}.", email);
+            TempData["Success"] = "Thank you for contacting us! We'll get back to you soon.";
+            return RedirectToAction(nameof(Contact));
         }
 
-        // ===== FEEDBACK FORM POST =====
-        [HttpPost]
-        public IActionResult Feedback(string Name, string Email, int Rating, string Message)
-        {
-            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Email))
-            {
-                // Save feedback to database
-                TempData["Success"] = "Thank you for your feedback!";
-                return RedirectToAction("Feedback");
-            }
-            return View();
-        }
-
-        // ===== ERROR =====
+        // ===== ERROR HANDLING =====
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // ===== STATUS CODE PAGES (404, 403, ...) =====
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult StatusCodePage(int code = 404)
+        {
+            Response.StatusCode = code;
+            ViewData["StatusCode"] = code;
+            ViewData["Title"] = $"Error {code} - iCREAM";
+            return View();
         }
     }
 }

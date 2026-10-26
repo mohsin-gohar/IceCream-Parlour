@@ -1,7 +1,21 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "FAQ - iCREAM";
 }
+
+
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header-premium">
+    <div class="container">
+        <h1>Questions, answered</h1>
+        <p>Everything about flavours, membership, delivery and the recipe contest.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>FAQ</span>
+        </div>
+    </div>
+</section>
 
 <!-- FAQ Section Start -->
 <div class="container-fluid faq-section py-5 wow fadeIn" data-wow-delay="0.1s">
