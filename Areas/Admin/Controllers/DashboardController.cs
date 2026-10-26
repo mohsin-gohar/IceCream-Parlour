@@ -12,10 +12,12 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
     public class DashboardController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public DashboardController(ApplicationDbContext context)
+        public DashboardController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> Index()
@@ -122,8 +124,11 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
                     var folder = "images/recipes/";
+                    var folderPath = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+
                     var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder, fileName);
+                    var fullPath = Path.Combine(folderPath, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
@@ -167,8 +172,11 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
                     var folder = "images/recipes/";
+                    var folderPath = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+
                     var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(ImageFile.FileName);
-                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder, fileName);
+                    var fullPath = Path.Combine(folderPath, fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {

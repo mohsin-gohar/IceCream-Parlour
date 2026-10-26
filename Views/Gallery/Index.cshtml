@@ -1,0 +1,152 @@
+@model IEnumerable<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Gallery - iCREAM";
+}
+
+<style>
+    .gallery-item {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(241,149,178,0.06);
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(241,149,178,0.15);
+        border-color: #F195B2;
+    }
+
+    .filter-chip {
+        background: #fff;
+        border: 2px solid #f0e8e5;
+        padding: 10px 28px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .filter-chip.active {
+        background: linear-gradient(135deg, #F195B2, #62C3E7);
+        color: #fff;
+        border: none;
+    }
+
+    @@media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .gallery-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+        }
+    }
+</style>
+
+<!-- ===== PAGE HEADER ===== -->
+<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
+    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
+        <i class="fas fa-images me-3"></i> iCREAM Gallery
+    </h1>
+    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 500px;">Explore our finest flavors, books, and customer creations</p>
+</div>
+
+<!-- ===== FILTER BAR ===== -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 30px 20px; max-width: 1200px; margin: 0 auto;">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="recipe">🍦 Flavors</button>
+    <button class="filter-chip" data-filter="book">📚 Books</button>
+    <button class="filter-chip" data-filter="user">👨‍🍳 User Recipes</button>
+</div>
+
+<!-- ===== GALLERY GRID ===== -->
+<section style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px;">
+    @if (Model == null || !Model.Any())
+    {
+        <div style="text-align: center; padding: 60px 0;">
+            <i class="fas fa-images fa-3x text-muted mb-3"></i>
+            <h4 style="color: #888;">No items in gallery yet</h4>
+        </div>
+    }
+    else
+    {
+        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px;">
+            @foreach (var item in Model)
+            {
+                var imgSrc = !string.IsNullOrEmpty(item.ImagePath) ? item.ImagePath : "/img/product-1.jpg";
+                <div class="gallery-item" data-type="@item.Type">
+                    <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
+                        <img src="@imgSrc" alt="@item.Name" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
+                        <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
+                            @switch (item.Type)
+                            {
+                                case "recipe":
+                                    @:🍦 Flavor
+                                    break;
+                                case "book":
+                                    @:📚 Book
+                                    break;
+                                case "user":
+                                    @:👨‍🍳 User
+                                    break;
+                                default:
+                                    @item.Type
+                                    break;
+                            }
+                        </span>
+                    </div>
+                    <div style="padding: 16px 18px 18px; text-align: center;">
+                        <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">@item.Name</div>
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                            <p style="font-size: 13px; color: #888; margin-bottom: 6px;">@item.Description</p>
+                        }
+                        @if (item.Price > 0)
+                        {
+                            <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$@item.Price.ToString("0.00")</div>
+                        }
+                        @if (!string.IsNullOrEmpty(item.Author))
+                        {
+                            <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit me-1"></i>@item.Author</div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                filterChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+                galleryItems.forEach(item => {
+                    const type = item.getAttribute('data-type');
+                    if (filter === 'all' || type === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>

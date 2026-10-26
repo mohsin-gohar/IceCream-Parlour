@@ -1,0 +1,159 @@
+@model Ice_Cream_Parlour_Eproject.Areas.Models.Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Track Order - iCREAM";
+}
+
+<style>
+    /* Tracking Timeline Styles */
+    .timeline-steps {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin: 40px 0;
+    }
+
+    .timeline-steps::before {
+        content: "";
+        position: absolute;
+        top: 25px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: #e0e0e0;
+        z-index: 1;
+    }
+
+    .timeline-step {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        flex: 1;
+    }
+
+    .timeline-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: #e0e0e0;
+        color: #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin: 0 auto 12px;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-step.completed .timeline-icon {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        box-shadow: 0 4px 15px rgba(40,167,69,0.3);
+    }
+
+    .timeline-step.active .timeline-icon {
+        background: linear-gradient(135deg, #F195B2, #62C3E7);
+        color: white;
+        box-shadow: 0 4px 15px rgba(241,149,178,0.4);
+        transform: scale(1.15);
+    }
+
+    .timeline-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #333;
+    }
+</style>
+
+<!-- ===== PAGE HEADER ===== -->
+<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
+    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
+        <i class="fas fa-search-location me-2"></i> Track Your Order
+    </h1>
+    <p style="font-size: 1.1rem; opacity: 0.95;">Enter your order number to view real-time status</p>
+</div>
+
+<div class="container py-5" style="max-width: 900px;">
+    <!-- Search Bar -->
+    <div class="card border-0 shadow-sm rounded-4 p-4 mb-5">
+        <form asp-controller="Order" asp-action="Track" method="get" class="row g-2 align-items-center">
+            <div class="col-md-9">
+                <input type="text" name="orderNumber" class="form-control form-control-lg rounded-pill px-4"
+                       placeholder="Enter Order # (e.g. ORD-20260630-1234)" value="@Context.Request.Query["orderNumber"]" required />
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none;">
+                    <i class="fas fa-search me-1"></i> Track
+                </button>
+            </div>
+        </form>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-warning text-center rounded-3 p-4">
+            <i class="fas fa-exclamation-triangle fa-2x mb-2 text-warning d-block"></i>
+            <strong>@ViewBag.Message</strong>
+        </div>
+    }
+
+    @if (Model != null)
+    {
+        var status = Model.OrderStatus?.ToLower() ?? "pending";
+        var step1 = true;
+        var step2 = status == "processing" || status == "completed" || status == "delivered";
+        var step3 = status == "out for delivery" || status == "completed" || status == "delivered";
+        var step4 = status == "completed" || status == "delivered";
+
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 border-bottom pb-3 gap-2">
+                <div>
+                    <h4 class="fw-bold text-dark m-0">Order #@Model.OrderNumber</h4>
+                    <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i> Placed on @Model.OrderDate.ToString("F")</small>
+                </div>
+                <div>
+                    <span class="badge bg-primary px-3 py-2 rounded-pill fs-6">@Model.OrderStatus</span>
+                </div>
+            </div>
+
+            <!-- Timeline Tracker -->
+            <div class="timeline-steps my-4">
+                <div class="timeline-step @(step1 ? (step2 ? "completed" : "active") : "")">
+                    <div class="timeline-icon"><i class="fas fa-receipt"></i></div>
+                    <div class="timeline-title">Order Placed</div>
+                </div>
+                <div class="timeline-step @(step2 ? (step3 ? "completed" : "active") : "")">
+                    <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="timeline-title">Preparing</div>
+                </div>
+                <div class="timeline-step @(step3 ? (step4 ? "completed" : "active") : "")">
+                    <div class="timeline-icon"><i class="fas fa-truck"></i></div>
+                    <div class="timeline-title">Out for Delivery</div>
+                </div>
+                <div class="timeline-step @(step4 ? "completed" : "")">
+                    <div class="timeline-icon"><i class="fas fa-home"></i></div>
+                    <div class="timeline-title">Delivered</div>
+                </div>
+            </div>
+
+            <!-- Details Table -->
+            <div class="bg-light rounded-3 p-4 mt-4">
+                <h6 class="fw-bold mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Delivery & Payment Details</h6>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <small class="text-muted d-block">Customer Name</small>
+                        <strong>@Model.CustomerName</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <small class="text-muted d-block">Payment Status</small>
+                        <span class="badge bg-success">@Model.PaymentStatus</span> (@Model.PaymentMethod)
+                    </div>
+                    <div class="col-12">
+                        <small class="text-muted d-block">Delivery Address</small>
+                        <strong>@(string.IsNullOrEmpty(Model.DeliveryAddress) ? "Store Pickup" : Model.DeliveryAddress)</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

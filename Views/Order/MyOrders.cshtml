@@ -1,0 +1,96 @@
+@model IEnumerable<Ice_Cream_Parlour_Eproject.Areas.Models.Order>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "My Orders - iCREAM";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
+    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
+        <i class="fas fa-box-open me-2"></i> My Orders
+    </h1>
+    <p style="font-size: 1.1rem; opacity: 0.95;">Track and view your order history</p>
+</div>
+
+<!-- ===== ORDERS CONTENT ===== -->
+<div class="container py-5" style="max-width: 1100px;">
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-5 bg-white rounded-4 shadow-sm border p-5">
+            <i class="fas fa-shopping-bag fa-4x text-muted mb-3"></i>
+            <h4 class="fw-bold text-dark">No orders found</h4>
+            <p class="text-muted">You haven't placed any orders yet.</p>
+            <a asp-controller="Book" asp-action="Index" class="btn btn-primary rounded-pill px-4 mt-2" style="background: linear-gradient(135deg, #F195B2, #62C3E7); border: none;">
+                Browse Recipe Books
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var order in Model)
+            {
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-header bg-light border-0 py-3 px-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div>
+                                <span class="fw-bold text-dark fs-5">Order #@order.OrderNumber</span>
+                                <span class="text-muted ms-3 small"><i class="fas fa-calendar-alt me-1"></i>@order.OrderDate.ToString("MMM dd, yyyy - hh:mm tt")</span>
+                            </div>
+                            <div>
+                                @switch (order.OrderStatus?.ToLower())
+                                {
+                                    case "completed":
+                                    case "delivered":
+                                        <span class="badge bg-success px-3 py-2 rounded-pill"><i class="fas fa-check-circle me-1"></i>@order.OrderStatus</span>
+                                        break;
+                                    case "processing":
+                                        <span class="badge bg-info text-dark px-3 py-2 rounded-pill"><i class="fas fa-cog fa-spin me-1"></i>Processing</span>
+                                        break;
+                                    case "cancelled":
+                                        <span class="badge bg-danger px-3 py-2 rounded-pill"><i class="fas fa-times-circle me-1"></i>Cancelled</span>
+                                        break;
+                                    default:
+                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill"><i class="fas fa-clock me-1"></i>Pending</span>
+                                        break;
+                                }
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row align-items-center g-3">
+                                <div class="col-md-6">
+                                    @if (order.Book != null)
+                                    {
+                                        <div class="d-flex align-items-center gap-3">
+                                            @if (!string.IsNullOrEmpty(order.Book.ImagePath))
+                                            {
+                                                <img src="@order.Book.ImagePath" alt="@order.Book.Title" style="width:60px; height:80px; object-fit:cover;" class="rounded-3 shadow-sm" />
+                                            }
+                                            <div>
+                                                <h6 class="fw-bold mb-1">@order.Book.Title</h6>
+                                                <small class="text-muted">Author: @order.Book.Author</small>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="fw-bold text-dark"><i class="fas fa-ice-cream me-2 text-primary"></i>Ice Cream Parlour Order</div>
+                                    }
+                                </div>
+                                <div class="col-md-3 text-md-center">
+                                    <span class="text-muted d-block small">Total Amount</span>
+                                    <span class="fw-bold fs-5 text-primary">$@order.TotalAmount.ToString("0.00")</span>
+                                </div>
+                                <div class="col-md-3 text-md-end">
+                                    <a asp-action="Track" asp-route-orderNumber="@order.OrderNumber" class="btn btn-outline-primary rounded-pill btn-sm px-3">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Track Order
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

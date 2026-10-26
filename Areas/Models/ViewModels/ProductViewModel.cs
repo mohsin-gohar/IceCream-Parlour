@@ -41,10 +41,10 @@ namespace Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels
 
         public List<string> ExistingImages { get; set; } = new();
         public List<IFormFile> NewImages { get; set; } = new();
-        public PaginatedList<ProductViewModel> Products { get; internal set; }
+        public PaginatedList<ProductViewModel>? Products { get; internal set; }
         public string? SearchTerm { get; internal set; }
         public int? CategoryFilter { get; internal set; }
-        public string ProductCode { get; internal set; }
+        public string? ProductCode { get; internal set; }
         public string? Category { get; set; }
         public string? ImagePath { get; set; }
         public bool IsFree { get; set; }

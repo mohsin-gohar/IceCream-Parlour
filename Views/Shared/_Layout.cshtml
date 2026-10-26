@@ -5,7 +5,7 @@
 @{
     // ===== MEMBERSHIP BANNER LOGIC =====
     var showMembershipBanner = true;
-    if (User.Identity.IsAuthenticated)
+    if (User.Identity?.IsAuthenticated == true)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(userId))
@@ -22,7 +22,7 @@
     string avatarImage = "";
     string userInitials = "U";
     string fullName = "";
-    if (User.Identity.IsAuthenticated)
+    if (User.Identity?.IsAuthenticated == true)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(userId))
@@ -30,7 +30,7 @@
             var user = await DbContext.Users.FindAsync(userId);
             if (user != null)
             {
-                fullName = user.FullName ?? user.UserName;
+                fullName = user.FullName ?? user.UserName ?? "";
                 avatarImage = user.ProfilePicture ?? "";
                 // Initials = first letter of first and last name
                 if (!string.IsNullOrEmpty(fullName))
@@ -82,6 +82,7 @@
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "active" : "")" asp-controller="Home" asp-action="About">About</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Product" ? "active" : "")" asp-controller="Home" asp-action="Product">Products</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Recipe" ? "active" : "")" asp-controller="Recipe" asp-action="Index">Recipes</a></li>
                 </ul>
 
                 <!-- Centered Brand -->
@@ -92,11 +93,11 @@
                 <!-- Right links -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Book" ? "active" : "")" asp-controller="Book" asp-action="Index">Books</a></li>
-                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Gallery" ? "active" : "")" asp-controller="Home" asp-action="Gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Gallery" ? "active" : "")" asp-controller="Gallery" asp-action="Index">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Contact" ? "active" : "")" asp-controller="Home" asp-action="Contact">Contact</a></li>
 
                     <!-- User Menu -->
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity?.IsAuthenticated == true)
                     {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 4px 8px;">
@@ -112,6 +113,8 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown" style="border-radius:16px; border:none; padding:8px; min-width:200px;">
                                 <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user-circle me-2"></i>My Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Order" asp-action="MyOrders"><i class="fas fa-box-open me-2"></i>My Orders</a></li>
+                                <li><a class="dropdown-item" asp-controller="Order" asp-action="Track"><i class="fas fa-search-location me-2"></i>Track Order</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li>
                                     <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
@@ -282,7 +285,7 @@
                         </a>
                     </li>
                     <li style="margin-bottom: 8px;">
-                        <a asp-controller="Home" asp-action="Recipe" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                        <a asp-controller="Recipe" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
                             <i class="fas fa-utensils me-1" style="font-size: 0.7rem;"></i>Recipes
                         </a>
                     </li>
@@ -302,7 +305,7 @@
                         </a>
                     </li>
                             <li style="margin-bottom: 8px;">
-                                <a asp-controller="Home" asp-action="Gallery" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
+                                <a asp-controller="Gallery" asp-action="Index" style="color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.3s; font-size: 0.85rem; display: block;" onmouseover="this.style.color='#F195B2'; this.style.paddingLeft='5px';" onmouseout="this.style.color='rgba(255,255,255,0.5)'; this.style.paddingLeft='0px';">
                                     <i class="fas fa-images me-1" style="font-size: 0.7rem;"></i>Gallery
                                 </a>
                             </li>

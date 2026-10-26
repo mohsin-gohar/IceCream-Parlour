@@ -195,9 +195,10 @@
             <p>Delicious ice cream made with love and care</p>
         </div>
         <div class="row g-4">
-            @if (ViewBag.Products != null)
+            @if (ViewBag.Products != null && (ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>) != null)
             {
-                foreach (var product in ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>)
+                var productList = ViewBag.Products as List<Ice_Cream_Parlour_Eproject.Models.Recipe>;
+                foreach (var product in productList!)
                 {
                     <div class="col-lg-3 col-md-6">
                         <div class="product-card">

@@ -97,6 +97,10 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
         {
             try
             {
+                ModelState.Remove("OrderNumber");
+                ModelState.Remove("Customer");
+                ModelState.Remove("Book");
+
                 if (order == null)
                 {
                     _logger.LogWarning("Null order object received");
@@ -130,6 +134,25 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
                     ModelState.AddModelError("CustomerPhone", "Valid phone number is required");
                     return View(order);
                 }
+
+                // Find or create customer based on email
+                var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == order.CustomerEmail);
+                if (customer == null)
+                {
+                    customer = new Customer
+                    {
+                        FullName = order.CustomerName,
+                        Email = order.CustomerEmail,
+                        Phone = order.CustomerPhone,
+                        Address = order.DeliveryAddress,
+                        IsActive = true,
+                        CreatedAt = DateTime.Now
+                    };
+                    _context.Customers.Add(customer);
+                    await _context.SaveChangesAsync();
+                }
+
+                order.CustomerId = customer.Id;
 
                 // Generate order number
                 order.OrderNumber = $"ORD-{DateTime.Now:yyyyMMdd}-{new Random().Next(1000, 9999)}";

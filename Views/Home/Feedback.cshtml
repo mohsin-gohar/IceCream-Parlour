@@ -269,18 +269,24 @@
                     <p class="text-muted small mb-4">Fill in the form below and let us know about your experience.</p>
 
                     <!-- Success/Error Messages -->
-                    <div id="feedbackMessage" style="display: none;"></div>
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
 
-                    <form id="feedbackForm" class="feedback-form">
+                    <form asp-controller="Feedback" asp-action="Create" method="post" class="feedback-form">
+                        @Html.AntiForgeryToken()
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label fw-semibold">
                                         <i class="fas fa-user text-primary me-2"></i>Full Name
                                     </label>
-                                    <input type="text" id="fullName" class="form-control form-control-lg"
+                                    <input type="text" name="UserName" class="form-control form-control-lg"
                                            placeholder="Enter your full name" required />
-                                    <span class="text-danger error-message" id="fullNameError"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -288,29 +294,10 @@
                                     <label class="form-label fw-semibold">
                                         <i class="fas fa-envelope text-primary me-2"></i>Email Address
                                     </label>
-                                    <input type="email" id="email" class="form-control form-control-lg"
+                                    <input type="email" name="Email" class="form-control form-control-lg"
                                            placeholder="Enter your email" required />
-                                    <span class="text-danger error-message" id="emailError"></span>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <label class="form-label fw-semibold">
-                                <i class="fas fa-ice-cream text-primary me-2"></i>Which flavor did you try?
-                            </label>
-                            <select id="flavor" class="form-select form-select-lg" required>
-                                <option value="">Select your favorite flavor</option>
-                                <option value="Madagascar Vanilla">Madagascar Vanilla</option>
-                                <option value="Belgian Dark Chocolate">Belgian Dark Chocolate</option>
-                                <option value="Strawberry Bliss">Strawberry Bliss</option>
-                                <option value="Mango Tango">Mango Tango</option>
-                                <option value="Butterscotch Dream">Butterscotch Dream</option>
-                                <option value="Pistachio Delight">Pistachio Delight</option>
-                                <option value="Coffee Crunch">Coffee Crunch</option>
-                                <option value="Black Currant">Black Currant</option>
-                            </select>
-                            <span class="text-danger error-message" id="flavorError"></span>
                         </div>
 
                         <div class="form-group mt-3">
@@ -318,28 +305,26 @@
                                 <i class="fas fa-star text-primary me-2"></i>Rate Your Experience
                             </label>
                             <div class="star-rating-box d-flex flex-row-reverse justify-content-end gap-2">
-                                <input type="radio" name="rating" id="star5" value="5" />
+                                <input type="radio" name="Rating" id="star5" value="5" checked />
                                 <label for="star5" class="star-label" title="Excellent">★</label>
-                                <input type="radio" name="rating" id="star4" value="4" />
+                                <input type="radio" name="Rating" id="star4" value="4" />
                                 <label for="star4" class="star-label" title="Very Good">★</label>
-                                <input type="radio" name="rating" id="star3" value="3" />
+                                <input type="radio" name="Rating" id="star3" value="3" />
                                 <label for="star3" class="star-label" title="Good">★</label>
-                                <input type="radio" name="rating" id="star2" value="2" />
+                                <input type="radio" name="Rating" id="star2" value="2" />
                                 <label for="star2" class="star-label" title="Fair">★</label>
-                                <input type="radio" name="rating" id="star1" value="1" />
+                                <input type="radio" name="Rating" id="star1" value="1" />
                                 <label for="star1" class="star-label" title="Poor">★</label>
                             </div>
                             <small class="text-muted">Click on a star to rate</small>
-                            <span class="text-danger error-message d-block" id="ratingError"></span>
                         </div>
 
                         <div class="form-group mt-3">
                             <label class="form-label fw-semibold">
                                 <i class="fas fa-comment text-primary me-2"></i>Your Review / Comments
                             </label>
-                            <textarea id="comment" class="form-control" rows="5"
+                            <textarea name="Message" class="form-control" rows="5"
                                       placeholder="Tell us what you loved or how we can improve..." required></textarea>
-                            <span class="text-danger error-message" id="commentError"></span>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 rounded-pill" id="submitBtn">
@@ -390,117 +375,6 @@
             });
         });
 
-        // ===== FORM SUBMISSION WITH PURE JAVASCRIPT =====
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Clear previous errors
-            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-            // Get form values
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const flavor = document.getElementById('flavor').value;
-            const rating = document.querySelector('input[name="rating"]:checked');
-            const comment = document.getElementById('comment').value.trim();
-
-            let isValid = true;
-
-            // Validate Full Name
-            if (!fullName) {
-                document.getElementById('fullNameError').textContent = 'Please enter your full name';
-                isValid = false;
-            }
-
-            // Validate Email
-            const emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
-            if (!email) {
-                document.getElementById('emailError').textContent = 'Please enter your email address';
-                isValid = false;
-            } else if (!emailPattern.test(email)) {
-                document.getElementById('emailError').textContent = 'Please enter a valid email address';
-                isValid = false;
-            }
-
-            // Validate Flavor
-            if (!flavor) {
-                document.getElementById('flavorError').textContent = 'Please select a flavor';
-                isValid = false;
-            }
-
-            // Validate Rating
-            if (!rating) {
-                document.getElementById('ratingError').textContent = 'Please select a rating';
-                isValid = false;
-            }
-
-            // Validate Comment
-            if (!comment) {
-                document.getElementById('commentError').textContent = 'Please write your review';
-                isValid = false;
-            }
-
-            if (!isValid) {
-                // Scroll to first error
-                const firstError = document.querySelector('.error-message:not(:empty)');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                return;
-            }
-
-            // ===== SUBMIT FORM USING JAVASCRIPT =====
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
-
-            // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
-            submitBtn.disabled = true;
-
-            // Prepare data
-            const formData = {
-                fullName: fullName,
-                email: email,
-                flavor: flavor,
-                rating: rating.value,
-                comment: comment,
-                submittedAt: new Date().toISOString()
-            };
-
-            // Save to localStorage (optional - for demo)
-            let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
-            feedbacks.push(formData);
-            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
-
-            // Show success message
-            setTimeout(() => {
-                const messageDiv = document.getElementById('feedbackMessage');
-                messageDiv.style.display = 'block';
-                messageDiv.className = 'alert alert-success';
-                messageDiv.innerHTML = `
-                    <i class="fas fa-check-circle me-2"></i>
-                    <strong>Thank you!</strong> Your feedback has been submitted successfully.
-                    <button type="button" class="btn-close float-end" onclick="this.parentElement.style.display='none'"></button>
-                `;
-
-                // Reset form
-                document.getElementById('feedbackForm').reset();
-                document.querySelectorAll('.star-label').forEach(l => l.style.color = '#ddd');
-
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-
-                // Auto hide message after 5 seconds
-                setTimeout(() => {
-                    messageDiv.style.display = 'none';
-                }, 5000);
-
-                // Scroll to success message
-                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            }, 1500);
-        });
 
         // ===== BACK TO TOP =====
         const backToTop = document.querySelector('.back-to-top');
