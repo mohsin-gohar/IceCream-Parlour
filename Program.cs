@@ -24,8 +24,19 @@ try
     builder.Host.UseSerilog();
 
     // ===== Database Context =====
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("icecreamcs")));
+    var useSqlite = builder.Environment.IsDevelopment();
+    if (useSqlite)
+    {
+        var sqliteConnectionString = builder.Configuration.GetConnectionString("SQLite");
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlite(sqliteConnectionString));
+    }
+    else
+    {
+        var connectionString = builder.Configuration.GetConnectionString("IceCreamParlourDb");
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    }
 
     // ===== Register Services =====
     builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -90,9 +101,14 @@ try
 
     app.MapRazorPages();
 
-    // ===== Seed Roles and Users =====
+    // ===== Seed Database (Create Schema + Fake Data) =====
     using (var scope = app.Services.CreateScope())
     {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await db.Database.EnsureCreatedAsync();
+        await DatabaseSeeder.SeedAsync(db);
+
+        // ===== Seed Roles and Users =====
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 

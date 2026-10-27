@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Book Order - iCREAM";
+}
+
+<!-- ===== PAGE HEADER ===== -->
+<div style="background: linear-gradient(135deg, #F195B2, #62C3E7); min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 30px 20px;">
+    <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 6px;"><i class="fas fa-shopping-cart" style="margin-right: 12px;"></i>Book Order</h1>
+    <p style="font-size: 1rem; opacity: 0.9; max-width: 500px;">Explore our collection of ice cream cookbooks and place your order</p>
+</div>
+
+<!-- ===== ORDER INFO ===== -->
+<section style="padding: 40px 0; width: 100%;">
+    <div style="max-width: 750px; margin: 0 auto; padding: 0 15px;">
+        @if (TempData["Error"] != null)
+        {
+            <div style="background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; border: 1px solid #f5c6cb;">
+                <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div style="background: #d4edda; color: #155724; padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; border: 1px solid #c3e6cb;">
+                <i class="fas fa-check-circle"></i> @TempData["Success"]
+            </div>
+        }
+
+        <div style="background: #fff; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); padding: 30px 32px; border: 1px solid rgba(241,149,178,0.06);">
+            <h5 style="font-weight: 700; margin-bottom: 20px; font-size: 1.1rem; color: #2d2d2d; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-book" style="color: #F195B2;"></i> How To Order
+            </h5>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 14;">
+                Select any book from our <a href="/Book/Index" style="color: #F195B2; font-weight: 600;">Books</a> page and click
+                <strong>"Order Now"</strong> to place an order directly.
+            </p>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 14;">
+                You can also browse our ice cream recipe books while enjoying our freshly churned flavors.
+            </p>
+            <div style="margin-top: 24px; background: linear-gradient(135deg, rgba(241,149,178,0.06), rgba(98,195,231,0.06)); border-radius: 12px; padding: 16px 20px; border: 1px solid rgba(241,149,178,0.1);">
+                <span style="font-weight: 600; color: #555;"><i class="fas fa-map-marker-alt" style="color: #F195B2; margin-right: 8px;"></i> Delivery Information</span>
+                <p style="color: #777; font-size: 0.9rem; margin-top: 6px; margin-bottom: 0;">We deliver all over the country via partner couriers. Standard delivery takes 3-5 business days.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BACK TO TOP ===== -->
+<a href="#" style="position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 6px 20px rgba(241,149,178,0.4); text-decoration: none; z-index: 999; transition:0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(241,149,178,0.5)';" onmouseout="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(241,149,178,0.4)';">
+    <i class="fa fa-angle-double-up"></i>
+</a>
+
+<!-- ===== RESPONSIVE ===== -->
+<style>
+    @@media (max-width: 768px) {
+        .page-header h1 { font-size: 1.6rem !important; }
+        .page-header p { font-size: 0.85rem !important; }
+    }
+</style>

@@ -191,7 +191,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             try
             {
                 _logger.LogInformation("Accessed book order information page");
-                return View();
+                return View("~/Views/Home/Bookorder", new Book());
             }
             catch (Exception ex)
             {

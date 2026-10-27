@@ -1,0 +1,1083 @@
+[08:32:52 DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Create.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Edit.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Books/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Create.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Delete.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Details.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Edit.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Category/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Create.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Details.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Edit.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Customers/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Dashboard/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Create.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Details.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Orders/Invoice.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Create.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Edit.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Products/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Reports/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/Shared/_AdminLayout.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/UserRecipes/Details.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/UserRecipes/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewImports.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Areas/Admin/Views/_ViewStart.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Account/AccessDenied.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ForgotPassword.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Login.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Profile.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Account/Register.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Account/ResetPassword.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Book/index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Book/Order.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Gallery/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/About.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Blog.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Contact.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Faq.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Feedback.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Gallery.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Privacy.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Product.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Recipe.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Service.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Order/MyOrders.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Order/Track.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Recipe/Details.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Recipe/Index.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Recipe/SubmitCustomRecipe.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/Error.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_ValidationScriptsPartial.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewImports.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewStart.cshtml'.
+[08:32:52 DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_Layout.cshtml'.
+[08:32:52 INF] User profile is available. Using 'C:\Users\mohsi\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[08:32:54 DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+[08:32:55 DBG] The index {'UserId'} was not created on entity type 'IdentityUserRole<string>' as the properties are already covered by the index {'UserId', 'RoleId'}.
+[08:32:55 DBG] The index {'UserId'} was not created on entity type 'IdentityUserToken<string>' as the properties are already covered by the index {'UserId', 'LoginProvider', 'Name'}.
+[08:32:56 DBG] Entity Framework Core 8.0.28 initialized 'ApplicationDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:8.0.3' with options: ServerVersion=8.4.9-mysql 
+[08:32:56 DBG] Creating DbConnection.
+[08:32:56 DBG] Created DbConnection. (3ms).
+[08:32:56 DBG] Opening connection to database '' on server '127.0.0.1'.
+[08:32:56 DBG] Opened connection to database '' on server '127.0.0.1'.
+[08:32:56 DBG] Creating DbConnection.
+[08:32:56 DBG] Created DbConnection. (0ms).
+[08:32:56 DBG] Disposing connection to database '' on server '127.0.0.1'.
+[08:32:56 DBG] Disposed connection to database '' on server '127.0.0.1' (1ms).
+[08:32:56 DBG] Creating DbCommand for 'ExecuteScalar'.
+[08:32:56 DBG] Created DbCommand for 'ExecuteScalar' (1ms).
+[08:32:56 DBG] Initialized DbCommand for 'ExecuteScalar' (6ms).
+[08:32:56 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:56 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:56 DBG] Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'icecreamdb'
+[08:32:56 INF] Executed DbCommand (27ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM information_schema.tables
+WHERE table_type = 'BASE TABLE' AND table_schema = 'icecreamdb'
+[08:32:56 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:56 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (4ms).
+[08:32:56 DBG] Compiling query expression: 
+'DbSet<Category>()
+    .FirstOrDefault(x => x.Name == __category_Item1_0)'
+[08:32:56 DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<Category>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Category.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Category.CreatedDate (DateTime) Required, 1], [Property: Category.Description (string) MaxLength(300), 2], [Property: Category.IsActive (bool) Required, 3], [Property: Category.Name (string) Required MaxLength(50), 4] }
+        SELECT TOP(1) c.Id, c.CreatedDate, c.Description, c.IsActive, c.Name
+        FROM Categories AS c
+        WHERE c.Name == @__category_Item1_0), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, Category>, 
+    Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+    False, 
+    False, 
+    True
+)
+    .SingleOrDefault()'
+[08:32:56 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:56 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:56 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:56 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:56 DBG] Initialized DbCommand for 'ExecuteReader' (23ms).
+[08:32:56 DBG] Executing DbCommand [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (53ms) [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'Category' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 79ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'Category' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 4ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'Category' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (7ms) [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'Category' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 1ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (5ms) [Parameters=[@__category_Item1_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Id`, `c`.`CreatedDate`, `c`.`Description`, `c`.`IsActive`, `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Name` = @__category_Item1_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'Category' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 1ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Compiling query expression: 
+'DbSet<Category>()
+    .Where(c => c.Id == __product_CategoryId_0)
+    .Select(c => c.Name)
+    .FirstOrDefault()'
+[08:32:57 DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<string>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT TOP(1) c.Name
+        FROM Categories AS c
+        WHERE c.Id == @__product_CategoryId_0), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, string>, 
+    Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+    False, 
+    False, 
+    True
+)
+    .SingleOrDefault()'
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Compiling query expression: 
+'DbSet<Product>()
+    .Any(p => p.Barcode == __product_Barcode_0)'
+[08:32:57 DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<bool>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Products AS p
+            WHERE p.Barcode == @__product_Barcode_0)), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, bool>, 
+    Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+    False, 
+    False, 
+    True
+)
+    .Single()'
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 1ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 1ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (3ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (6ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (9ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (1ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (2ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 2ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 1ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__product_CategoryId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`Name`
+FROM `Categories` AS `c`
+WHERE `c`.`Id` = @__product_CategoryId_0
+LIMIT 1
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__product_Barcode_0='?' (Size = 12)], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Products` AS `p`
+    WHERE `p`.`Barcode` = @__product_Barcode_0)
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 0ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Compiling query expression: 
+'DbSet<IdentityRole>()
+    .FirstOrDefault(r => r.NormalizedName == __normalizedName_0)'
+[08:32:57 DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<IdentityRole>(
+    asyncEnumerable: new SingleQueryingEnumerable<IdentityRole>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: IdentityRole.Id (string) Required PK AfterSave:Throw, 0], [Property: IdentityRole.ConcurrencyStamp (string) Concurrency, 1], [Property: IdentityRole.Name (string) MaxLength(256), 2], [Property: IdentityRole.NormalizedName (string) Index MaxLength(256), 3] }
+            SELECT TOP(1) a.Id, a.ConcurrencyStamp, a.Name, a.NormalizedName
+            FROM AspNetRoles AS a
+            WHERE a.NormalizedName == @__normalizedName_0), 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, IdentityRole>, 
+        Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+        False, 
+        False, 
+        True
+    ), 
+    cancellationToken: queryContext.CancellationToken)'
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 30ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (2ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+[08:32:57 INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 1ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Compiling query expression: 
+'DbSet<User>()
+    .SingleOrDefault(u => u.NormalizedEmail == __normalizedEmail_0)'
+[08:32:57 DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<User>(
+    asyncEnumerable: new SingleQueryingEnumerable<User>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.Id (string) Required PK AfterSave:Throw, 0], [Property: User.AccessFailedCount (int) Required, 1], [Property: User.Address (string), 2], [Property: User.ConcurrencyStamp (string) Concurrency, 3], [Property: User.CreatedAt (DateTime) Required, 4], [Property: User.Email (string) MaxLength(256), 5], [Property: User.EmailConfirmed (bool) Required, 6], [Property: User.FullName (string), 7], [Property: User.IsPaid (bool) Required, 8], [Property: User.LockoutEnabled (bool) Required, 9], [Property: User.LockoutEnd (DateTimeOffset?), 10], [Property: User.NormalizedEmail (string) Index MaxLength(256), 11], [Property: User.NormalizedUserName (string) Index MaxLength(256), 12], [Property: User.PasswordHash (string), 13], [Property: User.PaymentDate (DateTime?), 14], [Property: User.PaymentExpiry (DateTime?), 15], [Property: User.PaymentType (string), 16], [Property: User.PhoneNumber (string), 17], [Property: User.PhoneNumberConfirmed (bool) Required, 18], [Property: User.ProfilePicture (string), 19], [Property: User.SecurityStamp (string), 20], [Property: User.TwoFactorEnabled (bool) Required, 21], [Property: User.UserName (string) MaxLength(256), 22] }
+            SELECT TOP(2) a.Id, a.AccessFailedCount, a.Address, a.ConcurrencyStamp, a.CreatedAt, a.Email, a.EmailConfirmed, a.FullName, a.IsPaid, a.LockoutEnabled, a.LockoutEnd, a.NormalizedEmail, a.NormalizedUserName, a.PasswordHash, a.PaymentDate, a.PaymentExpiry, a.PaymentType, a.PhoneNumber, a.PhoneNumberConfirmed, a.ProfilePicture, a.SecurityStamp, a.TwoFactorEnabled, a.UserName
+            FROM AspNetUsers AS a
+            WHERE a.NormalizedEmail == @__normalizedEmail_0), 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, User>, 
+        Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+        False, 
+        False, 
+        True
+    ), 
+    cancellationToken: queryContext.CancellationToken)'
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`Address`, `a`.`ConcurrencyStamp`, `a`.`CreatedAt`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`IsPaid`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PaymentDate`, `a`.`PaymentExpiry`, `a`.`PaymentType`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`ProfilePicture`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+[08:32:57 INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`Address`, `a`.`ConcurrencyStamp`, `a`.`CreatedAt`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`IsPaid`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PaymentDate`, `a`.`PaymentExpiry`, `a`.`PaymentType`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`ProfilePicture`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'User' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 85ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:32:57 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:32:57 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:32:57 DBG] Executing DbCommand [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`Address`, `a`.`ConcurrencyStamp`, `a`.`CreatedAt`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`IsPaid`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PaymentDate`, `a`.`PaymentExpiry`, `a`.`PaymentType`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`ProfilePicture`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+[08:32:57 INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`Address`, `a`.`ConcurrencyStamp`, `a`.`CreatedAt`, `a`.`Email`, `a`.`EmailConfirmed`, `a`.`FullName`, `a`.`IsPaid`, `a`.`LockoutEnabled`, `a`.`LockoutEnd`, `a`.`NormalizedEmail`, `a`.`NormalizedUserName`, `a`.`PasswordHash`, `a`.`PaymentDate`, `a`.`PaymentExpiry`, `a`.`PaymentType`, `a`.`PhoneNumber`, `a`.`PhoneNumberConfirmed`, `a`.`ProfilePicture`, `a`.`SecurityStamp`, `a`.`TwoFactorEnabled`, `a`.`UserName`
+FROM `AspNetUsers` AS `a`
+WHERE `a`.`NormalizedEmail` = @__normalizedEmail_0
+LIMIT 2
+[08:32:57 DBG] Context 'ApplicationDbContext' started tracking 'User' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:32:57 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 2ms reading results.
+[08:32:57 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 DBG] 'ApplicationDbContext' disposed.
+[08:32:57 DBG] Disposing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:32:57 DBG] Disposed connection to database 'icecreamdb' on server '127.0.0.1' (0ms).
+[08:32:57 INF] Application started successfully
+[08:32:57 DBG] Hosting starting
+[08:32:57 DBG] Reading data from file 'C:\Users\mohsi\AppData\Local\ASP.NET\DataProtection-Keys\key-556a2c46-4207-4df0-bf40-faf4c058a0a4.xml'.
+[08:32:57 DBG] Reading data from file 'C:\Users\mohsi\AppData\Local\ASP.NET\DataProtection-Keys\key-b5f40b55-77ba-42aa-8246-738cba4639dc.xml'.
+[08:32:57 DBG] Found key {556a2c46-4207-4df0-bf40-faf4c058a0a4}.
+[08:32:57 DBG] Found key {b5f40b55-77ba-42aa-8246-738cba4639dc}.
+[08:32:57 DBG] Considering key {b5f40b55-77ba-42aa-8246-738cba4639dc} with expiration date 2026-10-27 18:13:49Z as default key.
+[08:32:57 DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+[08:32:57 DBG] Decrypting secret element using Windows DPAPI.
+[08:32:57 DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+[08:32:57 DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+[08:32:57 DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+[08:32:57 DBG] Using key {b5f40b55-77ba-42aa-8246-738cba4639dc} as the default key.
+[08:32:57 DBG] Key ring with default key {b5f40b55-77ba-42aa-8246-738cba4639dc} was loaded during application startup.
+[08:32:57 INF] Now listening on: http://localhost:5005
+[08:32:57 DBG] Loaded hosting startup assembly Ice_Cream_Parlour_Eproject
+[08:32:57 INF] Application started. Press Ctrl+C to shut down.
+[08:32:57 INF] Hosting environment: Development
+[08:32:57 INF] Content root path: F:\.net\Ice_Cream_Parlour_Eproject\Ice_Cream_Parlour_Eproject
+[08:32:57 DBG] Hosting started
+[08:33:40 DBG] Connection id "0HNPJ27MMLJAA" accepted.
+[08:33:40 DBG] Connection id "0HNPJ27MMLJAA" started.
+[08:33:40 INF] Request starting HTTP/1.1 GET http://localhost:5005/ - null null
+[08:33:40 DBG] Wildcard detected, all requests with hosts will be allowed.
+[08:33:40 WRN] Failed to determine the https port for redirect.
+[08:33:40 DBG] The request path / does not match a supported file type
+[08:33:40 DBG] 1 candidate(s) found for the request path '/'
+[08:33:40 DBG] Endpoint 'Ice_Cream_Parlour_Eproject.Controllers.HomeController.Index (Ice_Cream_Parlour_Eproject)' with route pattern '{controller=Home}/{action=Index}/{id?}' is valid for the request path '/'
+[08:33:40 DBG] Request matched endpoint 'Ice_Cream_Parlour_Eproject.Controllers.HomeController.Index (Ice_Cream_Parlour_Eproject)'
+[08:33:40 DBG] AuthenticationScheme: Identity.Application was not authenticated.
+[08:33:40 INF] Executing endpoint 'Ice_Cream_Parlour_Eproject.Controllers.HomeController.Index (Ice_Cream_Parlour_Eproject)'
+[08:33:40 INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller Ice_Cream_Parlour_Eproject.Controllers.HomeController (Ice_Cream_Parlour_Eproject).
+[08:33:40 DBG] Execution plan of authorization filters (in the following order): ["None"]
+[08:33:40 DBG] Execution plan of resource filters (in the following order): ["Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.SaveTempDataFilter"]
+[08:33:40 DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+[08:33:40 DBG] Execution plan of exception filters (in the following order): ["None"]
+[08:33:40 DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.SaveTempDataFilter"]
+[08:33:40 DBG] Executing controller factory for controller Ice_Cream_Parlour_Eproject.Controllers.HomeController (Ice_Cream_Parlour_Eproject)
+[08:33:40 DBG] Executed controller factory for controller Ice_Cream_Parlour_Eproject.Controllers.HomeController (Ice_Cream_Parlour_Eproject)
+[08:33:40 DBG] Entity Framework Core 8.0.28 initialized 'ApplicationDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:8.0.3' with options: ServerVersion=8.4.9-mysql 
+[08:33:40 DBG] Compiling query expression: 
+'DbSet<Recipe>()'
+[08:33:40 DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<Recipe>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Recipe.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Recipe.Category (string) Required MaxLength(50), 1], [Property: Recipe.CreatedDate (DateTime) Required, 2], [Property: Recipe.ImagePath (string), 3], [Property: Recipe.Ingredients (string) Required, 4], [Property: Recipe.IsFree (bool) Required, 5], [Property: Recipe.Name (string) Required MaxLength(100), 6], [Property: Recipe.Price (decimal) Required, 7], [Property: Recipe.Procedure (string) Required, 8] }
+        SELECT r.Id, r.Category, r.CreatedDate, r.ImagePath, r.Ingredients, r.IsFree, r.Name, r.Price, r.Procedure
+        FROM Recipes AS r), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, Recipe>, 
+    Ice_Cream_Parlour_Eproject.Data.ApplicationDbContext, 
+    False, 
+    False, 
+    True
+)'
+[08:33:40 DBG] Creating DbConnection.
+[08:33:40 DBG] Created DbConnection. (0ms).
+[08:33:40 DBG] Opening connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:33:40 DBG] Opened connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:33:40 DBG] Creating DbCommand for 'ExecuteReader'.
+[08:33:40 DBG] Created DbCommand for 'ExecuteReader' (0ms).
+[08:33:40 DBG] Initialized DbCommand for 'ExecuteReader' (1ms).
+[08:33:40 DBG] Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `r`.`Id`, `r`.`Category`, `r`.`CreatedDate`, `r`.`ImagePath`, `r`.`Ingredients`, `r`.`IsFree`, `r`.`Name`, `r`.`Price`, `r`.`Procedure`
+FROM `Recipes` AS `r`
+[08:33:40 INF] Executed DbCommand (32ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `r`.`Id`, `r`.`Category`, `r`.`CreatedDate`, `r`.`ImagePath`, `r`.`Ingredients`, `r`.`IsFree`, `r`.`Name`, `r`.`Price`, `r`.`Procedure`
+FROM `Recipes` AS `r`
+[08:33:40 DBG] Context 'ApplicationDbContext' started tracking 'Recipe' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:33:40 DBG] Context 'ApplicationDbContext' started tracking 'Recipe' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:33:40 DBG] Context 'ApplicationDbContext' started tracking 'Recipe' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+[08:33:40 DBG] Closing data reader to 'icecreamdb' on server '127.0.0.1'.
+[08:33:40 DBG] A data reader for 'icecreamdb' on server '127.0.0.1' is being disposed after spending 67ms reading results.
+[08:33:40 DBG] Closing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:33:40 DBG] Closed connection to database 'icecreamdb' on server '127.0.0.1' (1ms).
+[08:33:40 DBG] View lookup cache miss for view 'Index' in controller 'Home'.
+[08:33:40 INF] Executing ViewResult, running view Index.
+[08:33:40 DBG] The view path '/Views/Home/Index.cshtml' was found in 13.5279ms.
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[About],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "About", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/About and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/About
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[About],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "About", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/About and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/About
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[About],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "About", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/About and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/About
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[About],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "About", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/About and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/About
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (id=[2],action=[Order],controller=[Book])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Order", "controller": "Book", "id": "2" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Book/Order/2 and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Book/Order/2
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (id=[3],action=[Order],controller=[Book])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Order", "controller": "Book", "id": "3" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Book/Order/3 and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Book/Order/3
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (id=[4],action=[Order],controller=[Book])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Order", "controller": "Book", "id": "4" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Book/Order/4 and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Book/Order/4
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in  and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[About],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "About", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/About and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/About
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Product],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Product", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Product and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Product
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Recipe])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Recipe" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Recipe and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Recipe
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in  and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Book])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Book" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Book and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Book
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Gallery])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Gallery" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Gallery and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Gallery
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Contact],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Contact", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Contact and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Contact
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Login],controller=[Account])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Login", "controller": "Account" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Account/Login and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Account/Login
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Register],controller=[Account])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Register", "controller": "Account" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Account/Register and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Account/Register
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in  and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[About],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "About", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/About and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/About
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Product],controller=[Home])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Product", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Product and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Product
+[08:33:40 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Recipe])
+[08:33:40 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Recipe" } with default values { "action": "Index", "controller": "Home" }
+[08:33:40 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Recipe and 
+[08:33:40 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Recipe
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Book])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Book" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Book and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Book
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Contact],controller=[Home])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Contact", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Contact and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Contact
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Index],controller=[Gallery])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Index", "controller": "Gallery" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Gallery and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Gallery
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Faq],controller=[Home])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Faq", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Faq and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Faq
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Privacy],controller=[Home])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Privacy", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Privacy and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Privacy
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Blog],controller=[Home])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Blog", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Blog and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Blog
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Register],controller=[Account])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Register", "controller": "Account" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Account/Register and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Account/Register
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Login],controller=[Account])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Login", "controller": "Account" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Account/Login and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Account/Login
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Privacy],controller=[Home])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Privacy", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Privacy and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Privacy
+[08:33:41 DBG] Found the endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] for address (action=[Faq],controller=[Home])
+[08:33:41 DBG] Failed to process the template {area:exists}/{controller=Home}/{action=Index}/{id?} for Route: {area:exists}/{controller=Home}/{action=Index}/{id?}. A required route value is missing, or has a different value from the required default values. Supplied ambient values { "action": "Index", "controller": "Home" } and { "action": "Faq", "controller": "Home" } with default values { "action": "Index", "controller": "Home" }
+[08:33:41 DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Faq and 
+[08:33:41 DBG] Link generation succeeded for endpoints ["Route: {area:exists}/{controller=Home}/{action=Index}/{id?}", "Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Faq
+[08:33:41 INF] Executed ViewResult - view Index executed in 445.4123ms.
+[08:33:41 INF] Executed action Ice_Cream_Parlour_Eproject.Controllers.HomeController.Index (Ice_Cream_Parlour_Eproject) in 723.0431ms
+[08:33:41 INF] Executed endpoint 'Ice_Cream_Parlour_Eproject.Controllers.HomeController.Index (Ice_Cream_Parlour_Eproject)'
+[08:33:41 DBG] Connection id "0HNPJ27MMLJAA" completed keep alive response.
+[08:33:41 DBG] 'ApplicationDbContext' disposed.
+[08:33:41 DBG] Disposing connection to database 'icecreamdb' on server '127.0.0.1'.
+[08:33:41 DBG] Disposed connection to database 'icecreamdb' on server '127.0.0.1' (2ms).
+[08:33:41 INF] Request finished HTTP/1.1 GET http://localhost:5005/ - 200 null text/html; charset=utf-8 949.8174ms
+[08:33:41 DBG] Connection id "0HNPJ27MMLJAA" reset.
+[08:33:41 DBG] Connection id "0HNPJ27MMLJAA" disconnecting.
+[08:33:41 DBG] Connection id "0HNPJ27MMLJAA" stopped.
+[08:33:41 DBG] Connection id "0HNPJ27MMLJAA" sending FIN because: "The Socket transport's send loop completed gracefully."
