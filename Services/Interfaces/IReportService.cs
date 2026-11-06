@@ -1,12 +1,12 @@
-﻿using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels;
+using Ice_Cream_Parlour_Eproject.Areas.Models.ViewModels;
 
 namespace Ice_Cream_Parlour_Eproject.Services
 {
     public interface IReportService
     {
         Task<ReportViewModel> GetReportAsync(string reportType, DateTime? startDate, DateTime? endDate);
-        Task<byte[]> ExportPdfAsync(string reportType, DateTime? startDate, DateTime? endDate);
-        Task<byte[]> ExportExcelAsync(string reportType, DateTime? startDate, DateTime? endDate);
-        Task<byte[]> ExportOrderInvoicePdfAsync(int orderId);
+
+        /// <summary>Exports the selected report as CSV (opens directly in Excel).</summary>
+        Task<byte[]> ExportCsvAsync(string reportType, DateTime? startDate, DateTime? endDate);
     }
 }

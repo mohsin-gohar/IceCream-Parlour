@@ -1,202 +1,177 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Models;
+using System.ComponentModel.DataAnnotations;
 using Ice_Cream_Parlour_Eproject.Areas.Models;
+using Ice_Cream_Parlour_Eproject.Data;
 using Ice_Cream_Parlour_Eproject.Helpers;
+using Ice_Cream_Parlour_Eproject.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OrderEntity = Ice_Cream_Parlour_Eproject.Areas.Models.Order;
 
 namespace Ice_Cream_Parlour_Eproject.Controllers
 {
-    /// <summary>
-    /// Controller for managing book browsing and ordering functionality.
-    /// </summary>
     public class BookController : Controller
     {
+        private static readonly HashSet<string> AllowedPaymentMethods = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "Credit Card", "Debit Card", "PayPal", "Cash on Delivery", "Bank Transfer"
+        };
+
         private readonly ApplicationDbContext _context;
         private readonly ILogger<BookController> _logger;
 
         public BookController(ApplicationDbContext context, ILogger<BookController> logger)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _context = context;
+            _logger = logger;
         }
 
-        /// <summary>
-        /// Displays the list of all available books.
-        /// </summary>
-        /// <returns>View with list of books or error page</returns>
+        // ===== BOOK LIST =====
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                _logger.LogInformation("Fetching books list");
-                var books = await _context.Books.ToListAsync();
+            var books = await _context.Books
+                .AsNoTracking()
+                .OrderByDescending(b => b.Id)
+                .ToListAsync();
 
-                if (books.IsNullOrEmpty())
-                {
-                    _logger.LogWarning("No books found in database");
-                    TempData["Info"] = "No books available at the moment.";
-                    return View("index", new List<Book>());
-                }
-
-                _logger.LogInformation("Successfully retrieved {BookCount} books", books.Count);
-                return View("index", books);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving books list");
-                TempData["Error"] = "An error occurred while retrieving books. Please try again later.";
-                return RedirectToAction("Index", "Home");
-            }
+            return View("index", books);
         }
 
-        /// <summary>
-        /// Displays the book details and order form for a specific book.
-        /// </summary>
-        /// <param name="id">The book ID</param>
-        /// <returns>Book details view or NotFound if book doesn't exist</returns>
+        // ===== BOOK ORDER (GET) =====
         public async Task<IActionResult> Order(int id)
         {
-            try
+            var book = await _context.Books.AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
+            if (book == null)
             {
-                if (id <= 0)
-                {
-                    _logger.LogWarning("Invalid book ID requested: {BookId}", id);
-                    return BadRequest("Invalid book ID");
-                }
-
-                var book = await _context.Books
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync(b => b.Id == id);
-
-                if (book == null)
-                {
-                    _logger.LogWarning("Book not found with ID: {BookId}", id);
-                    return NotFound("The requested book could not be found.");
-                }
-
-                _logger.LogInformation("Retrieved book details for ID: {BookId}", id);
-                return View(book);
+                return NotFound();
             }
-            catch (Exception ex)
+
+            if (book.StockQuantity <= 0)
             {
-                _logger.LogError(ex, "Error retrieving book details for ID: {BookId}", id);
-                TempData["Error"] = "An error occurred while retrieving book details.";
-                return RedirectToAction("Index");
+                TempData["Error"] = $"\"{book.Title}\" is currently out of stock.";
+                return RedirectToAction(nameof(Index));
             }
+
+            return View(book);
         }
 
-        /// <summary>
-        /// Processes the book order submission (POST).
-        /// </summary>
-        /// <param name="order">The order object with book details</param>
-        /// <returns>Redirect to index on success or the form on validation failure</returns>
+        // ===== BOOK ORDER (POST) =====
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Order(Order order)
         {
+            // These values are always calculated on the server - never trust the client.
+            ModelState.Remove(nameof(OrderEntity.OrderNumber));
+            ModelState.Remove(nameof(OrderEntity.Customer));
+            ModelState.Remove(nameof(OrderEntity.Book));
+            ModelState.Remove(nameof(OrderEntity.OrderItems));
+            ModelState.Remove(nameof(OrderEntity.TotalAmount));
+            ModelState.Remove(nameof(OrderEntity.OrderDate));
+            ModelState.Remove(nameof(OrderEntity.OrderStatus));
+            ModelState.Remove(nameof(OrderEntity.PaymentStatus));
+            ModelState.Remove(nameof(OrderEntity.CustomerId));
+
+            if (string.IsNullOrWhiteSpace(order.DeliveryAddress))
+            {
+                ModelState.AddModelError(nameof(OrderEntity.DeliveryAddress), "Delivery address is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(order.PaymentMethod) || !AllowedPaymentMethods.Contains(order.PaymentMethod))
+            {
+                ModelState.AddModelError(nameof(OrderEntity.PaymentMethod), "Please choose a valid payment method.");
+            }
+
+            if (!new EmailAddressAttribute().IsValid(order.CustomerEmail ?? string.Empty))
+            {
+                ModelState.AddModelError(nameof(OrderEntity.CustomerEmail), "Please enter a valid e-mail address.");
+            }
+
+            var book = order.BookId.HasValue
+                ? await _context.Books.FirstOrDefaultAsync(b => b.Id == order.BookId.Value)
+                : null;
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            if (book.StockQuantity <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "This book is out of stock.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Please fill all required fields correctly.";
+                return View(book);
+            }
+
+            var email = order.CustomerEmail?.Trim() ?? string.Empty;
+
+            await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                ModelState.Remove("OrderNumber");
-                ModelState.Remove("Customer");
-                ModelState.Remove("Book");
+                var customer = await _context.Customers
+                    .FirstOrDefaultAsync(c => c.Email.ToLower() == email.ToLower());
 
-                if (order == null)
-                {
-                    _logger.LogWarning("Null order object received");
-                    return BadRequest("Invalid order data");
-                }
-
-                // Validate model state
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogWarning("Order validation failed. Errors: {@Errors}", ModelState.Values
-                        .SelectMany(v => v.Errors)
-                        .Select(e => e.ErrorMessage));
-                    return View(order);
-                }
-
-                // Validate required fields
-                if (order.CustomerName.IsNullOrWhiteSpace())
-                {
-                    ModelState.AddModelError("CustomerName", "Customer name is required");
-                    return View(order);
-                }
-
-                if (order.CustomerEmail.IsNullOrWhiteSpace() || !order.CustomerEmail.IsValidEmail())
-                {
-                    ModelState.AddModelError("CustomerEmail", "Valid email address is required");
-                    return View(order);
-                }
-
-                if (order.CustomerPhone.IsNullOrWhiteSpace() || !order.CustomerPhone.IsValidPhoneNumber())
-                {
-                    ModelState.AddModelError("CustomerPhone", "Valid phone number is required");
-                    return View(order);
-                }
-
-                // Find or create customer based on email
-                var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == order.CustomerEmail);
                 if (customer == null)
                 {
                     customer = new Customer
                     {
-                        FullName = order.CustomerName,
-                        Email = order.CustomerEmail,
-                        Phone = order.CustomerPhone,
-                        Address = order.DeliveryAddress,
+                        FullName = order.CustomerName.Trim(),
+                        Email = email,
+                        Phone = order.CustomerPhone?.Trim(),
+                        Address = order.DeliveryAddress?.Trim(),
                         IsActive = true,
-                        CreatedAt = DateTime.Now
+                        CreatedAt = DateTime.UtcNow
                     };
                     _context.Customers.Add(customer);
                     await _context.SaveChangesAsync();
                 }
+                else
+                {
+                    // Keep the customer record fresh with the latest delivery details.
+                    customer.FullName = order.CustomerName.Trim();
+                    customer.Phone = order.CustomerPhone?.Trim() ?? customer.Phone;
+                    customer.Address = order.DeliveryAddress?.Trim() ?? customer.Address;
+                    customer.LastActivityDate = DateTime.UtcNow;
+                }
 
+                order.Id = 0;
                 order.CustomerId = customer.Id;
-
-                // Generate order number
-                order.OrderNumber = $"ORD-{DateTime.Now:yyyyMMdd}-{new Random().Next(1000, 9999)}";
-                order.OrderDate = DateTime.Now;
+                order.CustomerName = order.CustomerName.Trim();
+                order.CustomerEmail = email;
+                order.OrderNumber = await OrderNumberHelper.GenerateUniqueAsync(
+                    number => _context.Orders.AnyAsync(o => o.OrderNumber == number));
+                order.OrderDate = DateTime.UtcNow;
                 order.OrderStatus = "Pending";
                 order.PaymentStatus = "Pending";
+                // Shipping mirrors the checkout summary: free over $100, otherwise a flat fee.
+                var shippingFee = book.Price >= 100m ? 0m : 4.99m;
+                order.TotalAmount = Math.Round(book.Price + shippingFee, 2);
+                order.Notes = shippingFee > 0
+                    ? $"Shipping ${shippingFee:0.00} included"
+                    : "Free shipping applied";
 
-                // Add and save order
+                book.StockQuantity -= 1;
+
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
 
-                _logger.LogInformation("Order successfully created with number: {OrderNumber}", order.OrderNumber);
-                TempData["Success"] = $"Order placed successfully! Order #: {order.OrderNumber}";
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError(ex, "Database error while creating order");
-                TempData["Error"] = "An error occurred while saving your order. Please try again.";
-                return View(order);
+                _logger.LogInformation("Order {OrderNumber} placed for book {BookId}.", order.OrderNumber, book.Id);
+                TempData["Success"] = $"Order placed successfully! Your order number is {order.OrderNumber}.";
+
+                return RedirectToAction("Track", "Order", new
+                {
+                    orderNumber = order.OrderNumber,
+                    email = order.CustomerEmail
+                });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unexpected error while processing order");
-                TempData["Error"] = "An unexpected error occurred. Please try again later.";
-                return View(order);
-            }
-        }
-
-        /// <summary>
-        /// Displays the static book order information page.
-        /// </summary>
-        /// <returns>Static book order page</returns>
-        public IActionResult Bookorder()
-        {
-            try
-            {
-                _logger.LogInformation("Accessed book order information page");
-                return View("~/Views/Home/Bookorder", new Book());
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error loading book order page");
-                return RedirectToAction("Index", "Home");
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, "Failed to place an order for book {BookId}.", book.Id);
+                ModelState.AddModelError(string.Empty, "We could not place your order. Please try again.");
+                return View(book);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿@model Ice_Cream_Parlour_Eproject.Models.Book
+@model Ice_Cream_Parlour_Eproject.Models.Book
 @{
     ViewData["Title"] = "Edit Book";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -12,6 +12,7 @@
 <div class="card">
     <div class="card-body">
         <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ImagePath" />
             <div class="row">

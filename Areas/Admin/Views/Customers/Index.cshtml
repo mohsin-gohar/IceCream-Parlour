@@ -46,6 +46,26 @@
                 </tr>
             </thead>
             <tbody>
+
+                @* EmptyState *@
+
+                @if (!Model.Customers.Items.Any())
+
+                {
+
+                    <tr>
+
+                        <td colspan="7" class="text-center py-5">
+
+                            <i class="fas fa-users fa-2x text-muted mb-2 d-block"></i>
+
+                            <div class="text-muted small">No customers found yet.</div>
+
+                        </td>
+
+                    </tr>
+
+                }
                 @foreach (var c in Model.Customers.Items)
                 {
                     <tr>

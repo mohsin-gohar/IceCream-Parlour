@@ -1,62 +1,128 @@
 @model IEnumerable<Ice_Cream_Parlour_Eproject.Models.Recipe>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Products - iCREAM";
+    ViewData["Title"] = "Products";
+    var recipes = Model?.ToList() ?? new List<Ice_Cream_Parlour_Eproject.Models.Recipe>();
+    var categories = recipes.Select(r => r.Category).Where(c => !string.IsNullOrWhiteSpace(c)).Distinct().OrderBy(c => c).ToList();
 }
 
-<!-- Header Start -->
-<div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 50px; background-image:url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 250px; display: flex; align-items: center; justify-content: center;">
-    <div class="container text-center py-5">
-        <h1 class="text-white display-3 mt-lg-5" style="font-family: 'Playfair Display', serif;">Our Ice Cream Products</h1>
-        <div class="d-inline-flex align-items-center text-white">
-            <p class="m-0"><a class="text-white fw-bold" asp-action="Index" asp-controller="Home">Home</a></p>
-            <i class="fa fa-circle px-3 text-primary"></i>
-            <p class="m-0 text-white-50">Products</p>
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header-premium">
+    <div class="container">
+        <h1>The menu</h1>
+        <p>Churned fresh every morning. Seasonal flavours rotate weekly.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Products</span>
         </div>
     </div>
-</div>
-<!-- Header End -->
+</section>
 
-<!-- Products Start -->
-<div class="container-fluid py-5">
-    <div class="container py-3">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h1 class="section-title position-relative text-center mb-5" style="font-family: 'Playfair Display', serif;">Best Prices We Offer For Ice Cream Lovers</h1>
-            </div>
-        </div>
-
-        @if (Model == null || !Model.Any())
+<section class="py-5" style="padding-top:4rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        @if (categories.Count > 1)
         {
-            <div class="text-center py-5">
-                <i class="fas fa-ice-cream fa-4x text-muted mb-3"></i>
-                <h4 class="text-muted">No products available at the moment</h4>
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="productFilters">
+                <button type="button" class="filter-chip active" data-filter="all">All flavours</button>
+                @foreach (var category in categories)
+                {
+                    <button type="button" class="filter-chip" data-filter="@category">@category</button>
+                }
+            </div>
+        }
+
+        @if (recipes.Count == 0)
+        {
+            <div class="text-center py-5 surface-card p-5" data-aos="fade-up">
+                <i class="fas fa-ice-cream fa-3x mb-3" style="color:var(--rose)"></i>
+                <h4 class="fw-bold">The churn is empty</h4>
+                <p class="text-muted mb-4">No flavours are published yet. Check back shortly or browse our recipe books.</p>
+                <a asp-controller="Book" asp-action="Index" class="btn btn-primary">Browse recipe books</a>
             </div>
         }
         else
         {
-            <div class="row g-4">
-                @foreach (var p in Model)
+            <div class="row g-4" id="productGrid">
+                @foreach (var p in recipes)
                 {
-                    var imgSrc = !string.IsNullOrEmpty(p.ImagePath) ? p.ImagePath : "/img/product-1.jpg";
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3 h-100 shadow-sm border" style="transition: all 0.3s ease;">
-                            <div class="bg-primary mt-n5 py-3 rounded-pill shadow-sm" style="width: 100px;">
-                                <h4 class="font-weight-bold text-white mb-0">$@p.Price.ToString("0.00")</h4>
+                    var imgSrc = string.IsNullOrEmpty(p.ImagePath) ? Url.Content("~/img/product-1.jpg") : Url.Content(p.ImagePath);
+                    <div class="col-lg-3 col-md-6 product-cell" data-category="@p.Category" data-aos="fade-up">
+                        <div class="product-card h-100 d-flex flex-column">
+                            <div class="product-image ratio ratio-1x1">
+                                <span class="product-badge">@(p.IsFree ? "Free recipe" : "Premium")</span>
+                                <img src="@imgSrc" alt="@p.Name" loading="lazy" />
                             </div>
-                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-2" style="width: 150px; height: 150px; overflow: hidden;">
-                                <img class="rounded-circle w-100 h-100" src="@imgSrc" style="object-fit: cover;" alt="@p.Name">
+                            <div class="product-body d-flex flex-column flex-grow-1">
+                                <h5 class="product-title">@p.Name</h5>
+                                <p class="product-description small text-muted mb-2">@p.Category</p>
+                                <div class="product-price mt-auto">
+                                    <span class="current-price">$@p.Price.ToString("0.00")</span>
+                                    @if (p.IsFree)
+                                    {
+                                        <span class="old-price">$@((p.Price + 2).ToString("0.00"))</span>
+                                    }
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <a asp-controller="Recipe" asp-action="Details" asp-route-id="@p.Id" class="btn-order">
+                                        View recipe <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-shopping-bag me-1"></i>Order a tub
+                                    </a>
+                                </div>
                             </div>
-                            <h5 class="font-weight-bold mb-2" style="font-family: 'Playfair Display', serif;">@p.Name</h5>
-                            <p class="text-muted small mb-4 flex-grow-1">@p.Category</p>
-                            <a asp-controller="Book" asp-action="Index" class="btn btn-sm btn-secondary rounded-pill px-4 py-2 fw-bold">
-                                Order Now <i class="fas fa-shopping-cart ms-1"></i>
-                            </a>
                         </div>
                     </div>
                 }
             </div>
+            <p class="text-center text-muted small mt-4 mb-0" id="noFilterResults" style="display:none">
+                No flavours in this category yet.
+            </p>
         }
     </div>
-</div>
-<!-- Products End -->
+</section>
+
+<section class="py-5 bg-cream">
+    <div class="container">
+        <div class="row align-items-center g-4 surface-card p-4 p-lg-5" data-aos="fade-up" style="border-radius:var(--r-xl)">
+            <div class="col-lg-8">
+                <span class="eyebrow">Allergies?</span>
+                <h2 class="mt-2 mb-2" style="font-size:1.7rem">We will find you a safe scoop</h2>
+                <p class="text-muted mb-0">Most sorbets are dairy free and several flavours can be made without nuts. Tell us what you need and we will talk you through the batch notes.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a asp-controller="Home" asp-action="Contact" class="btn btn-primary btn-lg">Ask us anything</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var chips = document.querySelectorAll('#productFilters .filter-chip');
+            var cells = document.querySelectorAll('#productGrid .product-cell');
+            if (!chips.length || !cells.length) return;
+
+            chips.forEach(function (chip) {
+                chip.addEventListener('click', function () {
+                    chips.forEach(function (c) { c.classList.remove('active'); });
+                    chip.classList.add('active');
+
+                    var filter = chip.getAttribute('data-filter');
+                    var visible = 0;
+
+                    cells.forEach(function (cell) {
+                        var match = filter === 'all' || cell.getAttribute('data-category') === filter;
+                        cell.style.display = match ? '' : 'none';
+                        if (match) visible++;
+                    });
+
+                    var empty = document.getElementById('noFilterResults');
+                    if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
+}

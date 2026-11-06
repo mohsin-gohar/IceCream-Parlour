@@ -1,3 +1,16 @@
-.vs/  
-bin/  
-obj/ 
+.vs/
+bin/
+obj/
+.dotnet/
+*.user
+*.db
+*.db-shm
+*.db-wal
+logs/
+
+# Runtime uploads (keep the repository clean; samples already tracked stay tracked)
+wwwroot/images/profiles/
+wwwroot/images/customers/
+wwwroot/images/recipes/
+wwwroot/images/books/
+wwwroot/images/products/

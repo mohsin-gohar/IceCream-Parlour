@@ -1,152 +1,121 @@
 @model IEnumerable<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Gallery - iCREAM";
+    ViewData["Title"] = "Gallery";
+    var items = Model?.ToList() ?? new List<Ice_Cream_Parlour_Eproject.Models.GalleryItemViewModel>();
+    var types = items.Select(i => i.Type).Where(t => !string.IsNullOrWhiteSpace(t)).Distinct().OrderBy(t => t).ToList();
 }
 
-<style>
-    .gallery-item {
-        background: #fff;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        transition: all 0.3s ease;
-        border: 1px solid rgba(241,149,178,0.06);
-    }
-
-    .gallery-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(241,149,178,0.15);
-        border-color: #F195B2;
-    }
-
-    .filter-chip {
-        background: #fff;
-        border: 2px solid #f0e8e5;
-        padding: 10px 28px;
-        border-radius: 50px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #666;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .filter-chip.active {
-        background: linear-gradient(135deg, #F195B2, #62C3E7);
-        color: #fff;
-        border: none;
-    }
-
-    @@media (max-width: 768px) {
-        .gallery-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 16px !important;
-        }
-    }
-
-    @@media (max-width: 576px) {
-        .gallery-grid {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-        }
-    }
-</style>
-
 <!-- ===== PAGE HEADER ===== -->
-<div style="background: linear-gradient(135deg, rgba(241,149,178,0.9), rgba(98,195,231,0.9)), url('/img/header.jpg'); background-size: cover; background-position: center; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 40px 20px;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; text-shadow: 0 2px 15px rgba(0,0,0,0.2);">
-        <i class="fas fa-images me-3"></i> iCREAM Gallery
-    </h1>
-    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 500px;">Explore our finest flavors, books, and customer creations</p>
-</div>
-
-<!-- ===== FILTER BAR ===== -->
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 30px 20px; max-width: 1200px; margin: 0 auto;">
-    <button class="filter-chip active" data-filter="all">All</button>
-    <button class="filter-chip" data-filter="recipe">🍦 Flavors</button>
-    <button class="filter-chip" data-filter="book">📚 Books</button>
-    <button class="filter-chip" data-filter="user">👨‍🍳 User Recipes</button>
-</div>
-
-<!-- ===== GALLERY GRID ===== -->
-<section style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px;">
-    @if (Model == null || !Model.Any())
-    {
-        <div style="text-align: center; padding: 60px 0;">
-            <i class="fas fa-images fa-3x text-muted mb-3"></i>
-            <h4 style="color: #888;">No items in gallery yet</h4>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>Gallery</h1>
+        <p>Flavours, recipe books and creations from our community.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>Gallery</span>
         </div>
-    }
-    else
-    {
-        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px;">
-            @foreach (var item in Model)
-            {
-                var imgSrc = !string.IsNullOrEmpty(item.ImagePath) ? item.ImagePath : "/img/product-1.jpg";
-                <div class="gallery-item" data-type="@item.Type">
-                    <div style="overflow: hidden; position: relative; padding-top: 85%; background: #f8f5f6;">
-                        <img src="@imgSrc" alt="@item.Name" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" loading="lazy" />
-                        <span style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
-                            @switch (item.Type)
-                            {
-                                case "recipe":
-                                    @:🍦 Flavor
-                                    break;
-                                case "book":
-                                    @:📚 Book
-                                    break;
-                                case "user":
-                                    @:👨‍🍳 User
-                                    break;
-                                default:
-                                    @item.Type
-                                    break;
-                            }
-                        </span>
-                    </div>
-                    <div style="padding: 16px 18px 18px; text-align: center;">
-                        <div style="font-size: 17px; font-weight: 700; color: #2d2d2d; margin-bottom: 4px; font-family: 'Playfair Display', serif;">@item.Name</div>
-                        @if (!string.IsNullOrEmpty(item.Description))
-                        {
-                            <p style="font-size: 13px; color: #888; margin-bottom: 6px;">@item.Description</p>
-                        }
-                        @if (item.Price > 0)
-                        {
-                            <div style="font-size: 18px; font-weight: 800; color: #F195B2;">$@item.Price.ToString("0.00")</div>
-                        }
-                        @if (!string.IsNullOrEmpty(item.Author))
-                        {
-                            <div style="font-size: 12px; color: #999; margin-top: 4px;"><i class="fas fa-user-edit me-1"></i>@item.Author</div>
-                        }
-                    </div>
-                </div>
-            }
-        </div>
-    }
+    </div>
 </section>
 
-<!-- ===== SCRIPTS ===== -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterChips = document.querySelectorAll('.filter-chip');
-        const galleryItems = document.querySelectorAll('.gallery-item');
+<section class="py-5" style="padding-top:4rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        @if (types.Count > 1)
+        {
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="galleryFilters">
+                <button type="button" class="filter-chip active" data-filter="all">Everything</button>
+                @foreach (var type in types)
+                {
+                    var label = type switch
+                    {
+                        "recipe" => "Flavours",
+                        "book" => "Books",
+                        "user" => "Community",
+                        _ => type
+                    };
+                    <button type="button" class="filter-chip" data-filter="@type">@label</button>
+                }
+            </div>
+        }
 
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', function() {
-                filterChips.forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
+        @if (items.Count == 0)
+        {
+            <div class="text-center py-5 surface-card p-5" data-aos="fade-up">
+                <i class="fas fa-images fa-3x mb-3" style="color:var(--rose)"></i>
+                <h4 class="fw-bold">Nothing here yet</h4>
+                <p class="text-muted mb-4">Our gallery fills up as new flavours and community recipes are published.</p>
+                <a asp-controller="Home" asp-action="Product" class="btn btn-primary">Browse flavours</a>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4" id="galleryGrid">
+                @foreach (var item in items)
+                {
+                    var imgSrc = string.IsNullOrEmpty(item.ImagePath) ? Url.Content("~/img/product-1.jpg") : Url.Content(item.ImagePath);
+                    var badge = item.Type switch
+                    {
+                        "recipe" => "Flavour",
+                        "book" => "Book",
+                        "user" => "Community",
+                        _ => item.Type
+                    };
 
-                const filter = this.getAttribute('data-filter');
-                galleryItems.forEach(item => {
-                    const type = item.getAttribute('data-type');
-                    if (filter === 'all' || type === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
+                    <div class="col-lg-4 col-md-6 gallery-cell" data-type="@item.Type" data-aos="zoom-in">
+                        <div class="gallery-item h-100 d-flex flex-column">
+                            <div class="position-relative overflow-hidden" style="aspect-ratio:4/3;">
+                                <img src="@imgSrc" alt="@item.Name" class="img-cover" loading="lazy" />
+                                <span class="product-badge">@badge</span>
+                            </div>
+                            <div class="p-4 d-flex flex-column flex-grow-1">
+                                <h5 class="fw-bold mb-1" style="font-family:'Playfair Display',serif;font-size:1.12rem">@item.Name</h5>
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    <p class="small text-muted mb-2">@item.Description</p>
+                                }
+                                <div class="mt-auto d-flex align-items-center justify-content-between pt-2">
+                                    @if (item.Price > 0)
+                                    {
+                                        <span class="fw-bold" style="color:var(--rose-ink)">$@item.Price.ToString("0.00")</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="small text-muted">@(item.Author ?? "iCREAM")</span>
+                                    }
+                                    @if (item.Type == "book")
+                                    {
+                                        <a asp-controller="Book" asp-action="Index" class="btn btn-sm btn-outline-primary">Shop</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var chips = document.querySelectorAll('#galleryFilters .filter-chip');
+            var cells = document.querySelectorAll('#galleryGrid .gallery-cell');
+            if (!chips.length || !cells.length) return;
+
+            chips.forEach(function (chip) {
+                chip.addEventListener('click', function () {
+                    chips.forEach(function (c) { c.classList.remove('active'); });
+                    chip.classList.add('active');
+                    var filter = chip.getAttribute('data-filter');
+
+                    cells.forEach(function (cell) {
+                        var match = filter === 'all' || cell.getAttribute('data-type') === filter;
+                        cell.style.display = match ? '' : 'none';
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>
+}

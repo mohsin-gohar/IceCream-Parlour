@@ -5,663 +5,312 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<style>
-    /* ===== PAGE HEADER ===== */
-    .page-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-
-        .page-header h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin: 0;
-        }
-
-        .page-header p {
-            color: #6c757d;
-            margin: 0.25rem 0 0 0;
-            font-size: 0.95rem;
-        }
-
-    .btn-primary-custom {
-        background: linear-gradient(135deg, #D45A7A, #c24a6a);
-        border: none;
-        padding: 0.65rem 1.5rem;
-        border-radius: 12px;
-        color: #fff;
-        font-weight: 600;
-        transition: 0.3s;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-        .btn-primary-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 90, 122, 0.35);
-            color: #fff;
-        }
-
-    /* ===== STATS GRID ===== */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.25rem;
-        margin-bottom: 2rem;
-    }
-
-    .stat-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 1.25rem 1.5rem;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: 0.3s;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-        }
-
-    .stat-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        flex-shrink: 0;
-    }
-
-        .stat-icon.pink {
-            background: #fde8ed;
-            color: #D45A7A;
-        }
-
-        .stat-icon.blue {
-            background: #e3f0ff;
-            color: #4f46e5;
-        }
-
-        .stat-icon.green {
-            background: #e3f8ed;
-            color: #0a8f5c;
-        }
-
-        .stat-icon.orange {
-            background: #fef3e2;
-            color: #e67e22;
-        }
-
-        .stat-icon.purple {
-            background: #ede7f6;
-            color: #7c3aed;
-        }
-
-        .stat-icon.teal {
-            background: #e0f7fa;
-            color: #0d9488;
-        }
-
-    .stat-info h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin: 0;
-        color: #1a1a2e;
-    }
-
-    .stat-info p {
-        margin: 0;
-        font-size: 0.8rem;
-        color: #8a8a8a;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
-    }
-
-    /* ===== DASHBOARD GRID ===== */
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    /* ===== CHART CARD ===== */
-    .chart-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-        .chart-card h5 {
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 1rem;
-        }
-
-    .chart-container {
-        position: relative;
-        height: 260px;
-        width: 100%;
-    }
-
-    /* ===== GLASS CARD (Low Stock) ===== */
-    .glass-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-        .glass-card h5 {
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-
-    .stock-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.6rem 0;
-        border-bottom: 1px solid #f0f0f2;
-    }
-
-        .stock-item:last-child {
-            border-bottom: none;
-        }
-
-    .stock-item-info h6 {
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin: 0;
-        color: #1a1a2e;
-    }
-
-    .stock-item-info small {
-        font-size: 0.75rem;
-        color: #8a8a8a;
-    }
-
-    .progress-custom {
-        height: 6px;
-        border-radius: 10px;
-        background: #f0f0f2;
-        overflow: hidden;
-        min-width: 80px;
-    }
-
-    .progress-bar {
-        height: 100%;
-        border-radius: 10px;
-        transition: width 0.6s ease;
-    }
-
-    /* ===== EMPTY STATE ===== */
-    .empty-state {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        color: #0a8f5c;
-        font-weight: 500;
-    }
-
-        .empty-state i {
-            font-size: 1.2rem;
-        }
-
-        .empty-state p {
-            margin: 0;
-        }
-
-    /* ===== TABLE CARD ===== */
-    .table-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-    .table-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-        .table-header h5 {
-            font-weight: 600;
-            color: #1a1a2e;
-            margin: 0;
-        }
-
-    .table-premium {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.9rem;
-    }
-
-        .table-premium thead th {
-            background: #f8f9fa;
-            color: #4a4a5a;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 0.75rem 1rem;
-            border-bottom: 2px solid #e9ecef;
-            text-align: left;
-        }
-
-        .table-premium tbody td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #f0f0f2;
-            vertical-align: middle;
-            color: #2d2d2d;
-        }
-
-        .table-premium tbody tr:hover {
-            background: #fafafc;
-        }
-
-        .table-premium tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-    .progress-labeled {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-
-        .progress-labeled .progress-custom {
-            flex: 1;
-            min-width: 60px;
-        }
-
-            .progress-labeled .progress-custom .progress-bar {
-                background: linear-gradient(90deg, #D45A7A, #4f46e5);
-            }
-
-    /* ===== RESPONSIVE ===== */
-    @@media (max-width: 992px) {
-        .dashboard-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @@media (max-width: 576px) {
-        .page-header {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .stats-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
-
-        .stat-card {
-            padding: 1rem;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            font-size: 1rem;
-        }
-
-        .stat-info h3 {
-            font-size: 1.1rem;
-        }
-
-        .stat-info p {
-            font-size: 0.65rem;
-        }
-
-        .chart-container {
-            height: 200px;
-        }
-
-        .table-premium thead {
-            display: none;
-        }
-
-        .table-premium tbody td {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.6rem 0.75rem;
-            border-bottom: 1px solid #f0f0f2;
-        }
-
-            .table-premium tbody td:last-child {
-                border-bottom: none;
-            }
-
-            .table-premium tbody td::before {
-                content: attr(data-label);
-                font-weight: 600;
-                color: #4a4a5a;
-                font-size: 0.75rem;
-                text-transform: uppercase;
-            }
-
-        .table-premium tbody tr {
-            display: block;
-            border: 1px solid #f0f0f2;
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem 0;
-        }
-    }
-
-    @@media (max-width: 400px) {
-        .stats-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-        }
-
-        .stat-card {
-            padding: 0.75rem;
-            gap: 0.5rem;
-        }
-
-        .stat-icon {
-            width: 32px;
-            height: 32px;
-            font-size: 0.8rem;
-        }
-
-        .stat-info h3 {
-            font-size: 0.95rem;
-        }
-    }
-</style>
-
-<!-- ===== PAGE HEADER ===== -->
-<div class="page-header" data-aos="fade-down">
+<div class="page-header" data-aos="fade-up">
     <div>
-        <h2>📊 Dashboard</h2>
-        <p>Welcome back! Here's what's happening at iCREAM today.</p>
+        <span class="eyebrow">Overview</span>
+        <h2 class="mt-1">Good @(DateTime.Now.Hour < 12 ? "morning" : DateTime.Now.Hour < 18 ? "afternoon" : "evening")</h2>
+        <p>@DateTime.Now.ToString("dddd, dd MMMM yyyy") · here is how the parlour is doing.</p>
     </div>
-    <a asp-area="Admin" asp-controller="Orders" asp-action="Create" class="btn-primary-custom">
-        <i class="fas fa-plus me-2"></i>New Order
-    </a>
+    <div class="d-flex gap-2 flex-wrap">
+        <a asp-area="Admin" asp-controller="Orders" asp-action="Create" class="btn btn-primary-custom">
+            <i class="fas fa-plus me-2"></i>New order
+        </a>
+        <a asp-area="Admin" asp-controller="Reports" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-chart-line me-2"></i>Reports
+        </a>
+    </div>
 </div>
 
-<!-- ===== STATS GRID ===== -->
+<!-- ===== PRIMARY KPIs ===== -->
 <div class="stats-grid">
-    <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
-        <div class="stat-icon pink"><i class="fas fa-shopping-bag"></i></div>
+    <div class="stat-card" data-aos="fade-up">
+        <div class="stat-icon green"><i class="fas fa-dollar-sign"></i></div>
         <div class="stat-info">
-            <h3>@Model.TotalOrders.ToString("N0")</h3>
-            <p>Total Orders</p>
+            <h3>$@Model.TodaySales.ToString("N2")</h3>
+            <p>Revenue today</p>
         </div>
     </div>
-    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="stat-icon"><i class="fas fa-receipt"></i></div>
+        <div class="stat-info">
+            <h3>@Model.TotalOrders</h3>
+            <p>Total orders</p>
+        </div>
+    </div>
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="120">
         <div class="stat-icon blue"><i class="fas fa-users"></i></div>
         <div class="stat-info">
-            <h3>@Model.TotalCustomers.ToString("N0")</h3>
-            <p>Total Customers</p>
+            <h3>@Model.TotalCustomers</h3>
+            <p>Customers</p>
         </div>
     </div>
-    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="stat-icon green"><i class="fas fa-ice-cream"></i></div>
+    <div class="stat-card" data-aos="fade-up" data-aos-delay="180">
+        <div class="stat-icon orange"><i class="fas fa-ice-cream"></i></div>
         <div class="stat-info">
-            <h3>@Model.TotalProducts.ToString("N0")</h3>
-            <p>Total Products</p>
-        </div>
-    </div>
-    <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="stat-icon orange"><i class="fas fa-tags"></i></div>
-        <div class="stat-info">
-            <h3>@Model.TotalCategories.ToString("N0")</h3>
-            <p>Categories</p>
-        </div>
-    </div>
-    <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
-        <div class="stat-icon purple"><i class="fas fa-dollar-sign"></i></div>
-        <div class="stat-info">
-            <h3>$@Model.TodaySales.ToString("N0")</h3>
-            <p>Today's Sales</p>
-        </div>
-    </div>
-    <div class="stat-card" data-aos="fade-up" data-aos-delay="500">
-        <div class="stat-icon teal"><i class="fas fa-chart-line"></i></div>
-        <div class="stat-info">
-            <h3>$@Model.MonthlySales.ToString("N0")</h3>
-            <p>Monthly Sales</p>
+            <h3>@Model.TotalProducts</h3>
+            <p>Products live</p>
         </div>
     </div>
 </div>
 
-<!-- ===== DASHBOARD GRID ===== -->
-<div class="dashboard-grid">
-    <!-- Revenue Chart -->
-    <div class="chart-card" data-aos="fade-right">
-        <h5><i class="fas fa-chart-area me-2 text-primary"></i>Revenue Overview (Last 7 Days)</h5>
-        <div class="chart-container">
-            <canvas id="revenueChart"></canvas>
+<!-- ===== SECONDARY KPIs ===== -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3 col-6">
+        <div class="surface-card p-3 h-100">
+            <div class="small text-muted">This month</div>
+            <div class="fw-bold fs-5">$@Model.MonthlySales.ToString("N0")</div>
         </div>
     </div>
-
-    <!-- Low Stock Alert -->
-    <div class="glass-card" data-aos="fade-left">
-        <h5 class="mb-3"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Low Stock Alert</h5>
-        @if (Model.LowStockProducts.Any())
-        {
-            @foreach (var item in Model.LowStockProducts)
-            {
-                <div class="stock-item">
-                    <div class="stock-item-info">
-                        <h6>@item.Name</h6>
-                        <small>@item.StockQuantity / @item.LowStockThreshold units</small>
-                    </div>
-                    <div class="progress-custom">
-                        <div class="progress-bar" style="width:@item.StockPercent%;background:@(item.StockPercent < 50 ? "#ef476f" : "#ffb703")"></div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="empty-state py-3">
-                <i class="fas fa-check-circle text-success"></i>
-                <p>All products well stocked!</p>
+    <div class="col-md-3 col-6">
+        <div class="surface-card p-3 h-100">
+            <div class="small text-muted">This year</div>
+            <div class="fw-bold fs-5">$@Model.YearlySales.ToString("N0")</div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="surface-card p-3 h-100 d-flex justify-content-between align-items-center">
+            <div>
+                <div class="small text-muted">Pending orders</div>
+                <div class="fw-bold fs-5">@Model.PendingOrders</div>
             </div>
-        }
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Index" asp-route-status="Pending" class="btn-action view"><i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="surface-card p-3 h-100 d-flex justify-content-between align-items-center">
+            <div>
+                <div class="small text-muted">Categories</div>
+                <div class="fw-bold fs-5">@Model.TotalCategories</div>
+            </div>
+            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn-action view"><i class="fas fa-arrow-right"></i></a>
+        </div>
     </div>
 </div>
 
-<!-- ===== TOP SELLING PRODUCTS ===== -->
-<div class="table-card" data-aos="fade-up">
-    <div class="table-header">
-        <h5><i class="fas fa-fire me-2 text-danger"></i>Top Selling Products</h5>
-        <span class="badge bg-light text-dark">Last 30 Days</span>
+<!-- ===== CHART + STATUS ===== -->
+<div class="row g-4 mb-2">
+    <div class="col-lg-8">
+        <div class="chart-card h-100" data-aos="fade-up">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h5 class="mb-0">Revenue · last 7 days</h5>
+                    <small class="text-muted">Paid and pending orders</small>
+                </div>
+                <span class="badge-status badge-completed"><i class="fas fa-circle"></i> Live</span>
+            </div>
+            <div class="chart-container" style="height:320px">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive">
-        <table class="table-premium mb-0">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Units Sold</th>
-                    <th>Revenue</th>
-                    <th>Performance</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.TopSellingProducts.Any())
+    <div class="col-lg-4">
+        <div class="chart-card h-100" data-aos="fade-up" data-aos-delay="80">
+            <h5 class="mb-3">Order pipeline</h5>
+            <div class="chart-container" style="height:200px">
+                <canvas id="statusChart"></canvas>
+            </div>
+            <ul class="list-unstyled mt-3 mb-0 small">
+                <li class="d-flex justify-content-between py-1"><span class="text-muted"><span class="badge-status badge-pending me-2">Pending</span></span><strong>@Model.PendingOrders</strong></li>
+                <li class="d-flex justify-content-between py-1"><span class="text-muted"><span class="badge-status badge-processing me-2">Processing</span></span><strong>@Model.ProcessingOrders</strong></li>
+                <li class="d-flex justify-content-between py-1"><span class="text-muted"><span class="badge-status badge-shipped me-2">Shipped</span></span><strong>@Model.ShippedOrders</strong></li>
+                <li class="d-flex justify-content-between py-1"><span class="text-muted"><span class="badge-status badge-completed me-2">Completed</span></span><strong>@Model.CompletedOrders</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ===== LOW STOCK + TOP SELLERS ===== -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-5">
+        <div class="table-card h-100" data-aos="fade-up">
+            <div class="table-header">
+                <h5><i class="fas fa-triangle-exclamation text-warning me-2"></i>Low stock</h5>
+                <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="small fw-semibold text-decoration-none">Manage</a>
+            </div>
+            <div class="p-3">
+                @if (Model.LowStockProducts.Any())
                 {
-                    @foreach (var p in Model.TopSellingProducts)
+                    foreach (var item in Model.LowStockProducts)
                     {
-                        <tr>
-                            <td data-label="Product"><strong>@p.ProductName</strong></td>
-                            <td data-label="Sold">@p.TotalSold</td>
-                            <td data-label="Revenue">$@p.Revenue.ToString("N2")</td>
-                            <td data-label="Performance">
-                                <div class="progress-labeled">
-                                    <div class="progress-custom">
-                                        <div class="progress-bar" style="width:@p.ProgressPercent%"></div>
-                                    </div>
-                                    <span style="font-size:0.75rem;font-weight:600;color:#4a4a5a;min-width:36px;">@p.ProgressPercent%</span>
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="small fw-semibold">@item.Name</span>
+                                    <span class="small text-muted">@item.StockQuantity left</span>
                                 </div>
-                            </td>
-                        </tr>
+                                <div class="progress" style="height:6px;border-radius:99px;background:#F2F4F7">
+                                    <div class="progress-bar" style="width:@(item.StockPercent)%;background:@(item.StockPercent <= 30 ? "linear-gradient(90deg,#F04438,#FDA29B)" : "linear-gradient(90deg,#FDB022,#FEC84B)");border-radius:99px"></div>
+                                </div>
+                            </div>
+                        </div>
                     }
                 }
                 else
                 {
-                    <tr>
-                        <td colspan="4" class="text-center text-muted py-4">
-                            <i class="fas fa-info-circle me-2"></i>No sales data available yet.
-                        </td>
-                    </tr>
+                    <div class="text-center py-4">
+                        <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                        <p class="small text-muted mb-0">Everything is comfortably in stock.</p>
+                    </div>
                 }
-            </tbody>
-        </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="table-card h-100" data-aos="fade-up" data-aos-delay="80">
+            <div class="table-header">
+                <h5><i class="fas fa-crown text-warning me-2"></i>Top sellers</h5>
+                <span class="small text-muted">By units sold</span>
+            </div>
+            <div class="p-3">
+                @if (Model.TopSellingProducts.Any())
+                {
+                    foreach (var product in Model.TopSellingProducts)
+                    {
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="stat-icon" style="width:38px;height:38px;font-size:.8rem"><i class="fas fa-ice-cream"></i></div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="small fw-semibold">@product.ProductName</span>
+                                    <span class="small text-muted">@product.TotalSold sold</span>
+                                </div>
+                                <div class="progress" style="height:6px;border-radius:99px;background:#F2F4F7">
+                                    <div class="progress-bar" style="width:@(product.ProgressPercent)%;background:var(--grad-rose);border-radius:99px"></div>
+                                </div>
+                            </div>
+                            <span class="small fw-bold" style="color:var(--rose-ink);min-width:70px;text-align:right">$@product.Revenue.ToString("N0")</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-chart-simple fa-2x text-muted mb-2"></i>
+                        <p class="small text-muted mb-0">No product sales recorded yet.</p>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
 
+<!-- ===== RECENT ORDERS ===== -->
+<div class="table-card" data-aos="fade-up">
+    <div class="table-header">
+        <h5><i class="fas fa-clock-rotate-left text-primary me-2"></i>Recent orders</h5>
+        <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="small fw-semibold text-decoration-none">View all orders</a>
+    </div>
+    @if (Model.RecentOrders.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-premium mb-0">
+                <thead>
+                    <tr><th>Order</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Payment</th><th></th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.RecentOrders)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@order.OrderNumber</td>
+                            <td>@order.CustomerName</td>
+                            <td class="text-muted">@order.OrderDate.ToString("dd MMM, HH:mm")</td>
+                            <td class="fw-semibold">$@order.TotalAmount.ToString("N2")</td>
+                            <td><span class="badge-status badge-@order.OrderStatus.ToLower()">@order.OrderStatus</span></td>
+                            <td><span class="badge-status badge-@order.PaymentStatus.ToLower()">@order.PaymentStatus</span></td>
+                            <td class="text-end">
+                                <a asp-area="Admin" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn-action view" title="View order"><i class="fas fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
+            <h6 class="fw-bold">No orders yet</h6>
+            <p class="small text-muted mb-3">Orders will appear here as soon as customers check out.</p>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Create" class="btn btn-primary-custom btn-sm">Create the first order</a>
+        </div>
+    }
+</div>
+
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-
     <script>
-        // ===== Initialize AOS Animations =====
-        AOS.init({
-        duration: 600,
-        once: true,
-        offset: 50
-        });
+        (function () {
+            if (typeof Chart === 'undefined') return;
 
-        // ===== Revenue Chart =====
-        document.addEventListener('DOMContentLoaded', function() {
-        const revenueCanvas = document.getElementById('revenueChart');
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.color = '#667085';
 
-        if (revenueCanvas) {
-        console.log('✅ Canvas found!');
+            var labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.RevenueChartLabels));
+            var data = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.RevenueChartData));
 
-        // ✅ Get data from model with fallback
-        var labels = [];
-        var revenueData = [];
+            var canvas = document.getElementById('revenueChart');
+            if (canvas) {
+                var ctx = canvas.getContext('2d');
+                var gradient = ctx.createLinearGradient(0, 0, 0, 320);
+                gradient.addColorStop(0, 'rgba(241,149,178,.35)');
+                gradient.addColorStop(1, 'rgba(241,149,178,0)');
 
-        @if (Model.RevenueChartLabels != null && Model.RevenueChartLabels.Any())
-        {
-            <text>
-                labels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.RevenueChartLabels));
-                revenueData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.RevenueChartData));
-            </text>
-        }
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Revenue',
+                            data: data,
+                            borderColor: '#E07A9E',
+                            backgroundColor: gradient,
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#E07A9E',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(16,24,40,.06)' },
+                                ticks: { callback: function (v) { return '$' + v; } }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
 
-        // ✅ If no data, use sample data for demo
-        if (!labels || labels.length === 0) {
-        console.log('⚠️ No data found, using sample data');
-        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        revenueData = [120, 85, 200, 150, 280, 350, 190];
-        }
-
-        console.log('📊 Labels:', labels);
-        console.log('📊 Data:', revenueData);
-
-        // ✅ Create Chart
-        try {
-        new Chart(revenueCanvas, {
-        type: 'line',
-        data: {
-        labels: labels,
-        datasets: [{
-        label: 'Revenue ($)',
-        data: revenueData,
-        borderColor: '#D45A7A',
-        backgroundColor: 'rgba(212, 90, 122, 0.12)',
-        borderWidth: 3,
-        fill: true,
-        tension: 0.4,
-        pointRadius: 5,
-        pointBackgroundColor: '#D45A7A',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        }]
-        },
-        options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-        legend: {
-        display: true,
-        labels: {
-        boxWidth: 12,
-        boxHeight: 12,
-        borderRadius: 4,
-        useBorderRadius: true,
-        font: { size: 12, weight: '500' }
-        }
-        },
-        tooltip: {
-        backgroundColor: '#1a1a2e',
-        titleFont: { size: 13, weight: '600' },
-        bodyFont: { size: 12 },
-        padding: 12,
-        cornerRadius: 10,
-        callbacks: {
-        label: function(context) {
-        return '$' + context.parsed.y.toFixed(2);
-        }
-        }
-        }
-        },
-        scales: {
-        y: {
-        beginAtZero: true,
-        ticks: {
-        callback: function(value) {
-        return '$' + value;
-        },
-        font: { size: 11 }
-        },
-        grid: {
-        color: 'rgba(0,0,0,0.05)',
-        drawBorder: false
-        }
-        },
-        x: {
-        grid: { display: false },
-        ticks: { font: { size: 11 } }
-        }
-        },
-        interaction: {
-        intersect: false,
-        mode: 'index'
-        }
-        }
-        });
-        console.log('✅ Chart created successfully!');
-        } catch (error) {
-        console.error('❌ Chart creation error:', error);
-        revenueCanvas.parentElement.innerHTML = '<div class="text-center text-muted py-4"><i class="fas fa-exclamation-circle me-2"></i>Chart could not be loaded. Please try again.</div>';
-        }
-        } else {
-        console.error('❌ Canvas element not found!');
-        }
-        });
+            var statusCanvas = document.getElementById('statusChart');
+            if (statusCanvas) {
+                new Chart(statusCanvas, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Pending', 'Processing', 'Shipped', 'Completed'],
+                        datasets: [{
+                            data: [@Model.PendingOrders, @Model.ProcessingOrders, @Model.ShippedOrders, @Model.CompletedOrders],
+                            backgroundColor: ['#FDB022', '#62C3E7', '#7A5AF8', '#12B76A'],
+                            borderWidth: 0,
+                            hoverOffset: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '68%',
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+        })();
     </script>
 }

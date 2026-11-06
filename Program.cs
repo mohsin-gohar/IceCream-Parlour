@@ -1,176 +1,187 @@
-using Ice_Cream_Parlour_Eproject.Areas.Admin.Controllers;
 using Ice_Cream_Parlour_Eproject.Data;
-using Ice_Cream_Parlour_Eproject.Middleware;
+using Ice_Cream_Parlour_Eproject.Health;
 using Ice_Cream_Parlour_Eproject.Models;
 using Ice_Cream_Parlour_Eproject.Services;
+using Ice_Cream_Parlour_Eproject.Services.Email;
 using Ice_Cream_Parlour_Eproject.Services.Interfaces;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-try
+// ===== Database =====
+// Provider can be switched with "Database:Provider" (SqlServer | Sqlite).
+// SqlServer is the default; Sqlite is useful for local development and CI.
+var databaseProvider = builder.Configuration["Database:Provider"] ?? "SqlServer";
+var connectionString = builder.Configuration.GetConnectionString("icecreamcs");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    // ===== Serilog Configuration =====
-    Log.Logger = new LoggerConfiguration()
-        .MinimumLevel.Debug()
-        .WriteTo.Console()
-        .WriteTo.File("logs/icecream-parlour-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 30)
-        .Enrich.FromLogContext()
-        .Enrich.WithProperty("Application", "IceCreamParlour")
-        .CreateLogger();
-
-    builder.Host.UseSerilog();
-
-    // ===== Database Context =====
-    var useSqlite = builder.Environment.IsDevelopment();
-    if (useSqlite)
+    if (string.Equals(databaseProvider, "Sqlite", StringComparison.OrdinalIgnoreCase))
     {
-        var sqliteConnectionString = builder.Configuration.GetConnectionString("SQLite");
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlite(sqliteConnectionString));
+        options.UseSqlite(connectionString ?? "Data Source=icecream.db");
     }
     else
     {
-        var connectionString = builder.Configuration.GetConnectionString("IceCreamParlourDb");
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException(
+                "Connection string 'ConnectionStrings:icecreamcs' is not configured. " +
+                "Set it in appsettings.json, user secrets, or the ConnectionStrings__icecreamcs environment variable.");
+        }
+
+        options.UseSqlServer(connectionString, sql =>
+        {
+            sql.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: null);
+            sql.CommandTimeout(60);
+        });
     }
+});
 
-    // ===== Register Services =====
-    builder.Services.AddScoped<ICustomerService, CustomerService>();
-    builder.Services.AddScoped<IProductService, ProductService>();
-    builder.Services.AddScoped<IOrderService, OrderService>();
-    builder.Services.AddScoped<IReportService, ReportService>();
-    builder.Services.AddScoped<IDashboardService, DashboardService>();
+// ===== Application services =====
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
-    // ===== Identity with Roles =====
-    builder.Services.AddIdentity<User, IdentityRole>(options =>
-    {
-        options.Password.RequireDigit = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequiredLength = 6;
-        options.User.RequireUniqueEmail = true;
-        options.SignIn.RequireConfirmedEmail = false;
-    })
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+// ===== Email =====
+builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection(SmtpOptions.SectionName));
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 
-    // ===== Session =====
-    builder.Services.AddSession(options =>
-    {
-        options.IdleTimeout = TimeSpan.FromMinutes(30);
-        options.Cookie.HttpOnly = true;
-        options.Cookie.IsEssential = true;
-    });
+// ===== Identity with Roles =====
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    // Password policy: balanced for a small business app, but strong enough for production.
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 8;
+    options.Password.RequiredUniqueChars = 4;
 
-    // ===== MVC =====
-    builder.Services.AddControllersWithViews();
-    builder.Services.AddRazorPages();
-    builder.Services.AddHttpContextAccessor();
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedEmail = false;
 
-    var app = builder.Build();
+    // Brute-force protection.
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
-    // ===== Middleware =====
-    app.UseMiddleware<ExceptionHandlingMiddleware>();
+// Adds FullName / avatar / membership claims so layouts do not hit the database on every request.
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, AppUserClaimsPrincipalFactory>();
 
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
-    }
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.Name = "iCREAM.Auth";
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    options.SlidingExpiration = true;
+});
 
+// ===== MVC =====
+builder.Services.AddControllersWithViews(options =>
+{
+    // Every unsafe request must carry an anti-forgery token unless explicitly opted out.
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
+builder.Services.AddHttpContextAccessor();
+
+// ===== Security / infrastructure =====
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
+builder.Services.AddResponseCompression(options => options.EnableForHttps = true);
+
+builder.Services.AddHealthChecks()
+    .AddCheck<DatabaseHealthCheck>("database");
+
+var app = builder.Build();
+
+// ===== Middleware pipeline =====
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseForwardedHeaders();
+
+// TLS termination is handled by the reverse proxy in production (IIS / nginx / Azure App Service).
+if (!app.Environment.IsDevelopment())
+{
     app.UseHttpsRedirection();
-    app.UseStaticFiles();
-    app.UseRouting();
-    app.UseAuthentication();
-    app.UseAuthorization();
-    app.UseSession();
+}
 
-    // ===== Routes =====
-    app.MapControllerRoute(
-        name: "areas",
-        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-
-    app.MapRazorPages();
-
-    // ===== Seed Database (Create Schema + Fake Data) =====
-    using (var scope = app.Services.CreateScope())
+app.UseResponseCompression();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
     {
-        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        await db.Database.EnsureCreatedAsync();
-        await DatabaseSeeder.SeedAsync(db);
-
-        // ===== Seed Roles and Users =====
-        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-
-        // --- Create Roles ---
-        string[] roles = { "Admin", "User" };
-        foreach (var role in roles)
+        if (ctx.Context.Request.Path.StartsWithSegments("/lib"))
         {
-            if (!await roleManager.RoleExistsAsync(role))
-                await roleManager.CreateAsync(new IdentityRole(role));
-        }
-
-        // --- Create Admin User ---
-        var adminEmail = "admin@icream.com";
-        var adminUser = await userManager.FindByEmailAsync(adminEmail);
-        if (adminUser == null)
-        {
-            adminUser = new User
-            {
-                UserName = adminEmail,
-                Email = adminEmail,
-                FullName = "Admin",
-                Address = "Admin Office",
-                IsPaid = true,
-                PaymentType = "Yearly",
-                PaymentDate = DateTime.Now,
-                PaymentExpiry = DateTime.Now.AddYears(1)
-            };
-            var result = await userManager.CreateAsync(adminUser, "Admin@123");
-            if (result.Succeeded)
-                await userManager.AddToRoleAsync(adminUser, "Admin");
-        }
-
-        // --- Create Regular User ---
-        var userEmail = "user@icream.com";
-        var regularUser = await userManager.FindByEmailAsync(userEmail);
-        if (regularUser == null)
-        {
-            regularUser = new User
-            {
-                UserName = userEmail,
-                Email = userEmail,
-                FullName = "Regular User",
-                Address = "User Address",
-                IsPaid = false,
-                PaymentType = "Monthly",
-                PaymentDate = DateTime.Now,
-                PaymentExpiry = DateTime.Now.AddMonths(1)
-            };
-            var result = await userManager.CreateAsync(regularUser, "User@123");
-            if (result.Succeeded)
-                await userManager.AddToRoleAsync(regularUser, "User");
+            ctx.Context.Response.Headers.CacheControl = "public,max-age=604800";
         }
     }
+});
 
-    Log.Information("Application started successfully");
-    await app.RunAsync();
-}
-catch (Exception ex)
+// Baseline security headers.
+app.Use(async (context, next) =>
 {
-    Log.Fatal(ex, "Application terminated unexpectedly");
-}
-finally
+    var headers = context.Response.Headers;
+    headers["X-Content-Type-Options"] = "nosniff";
+    headers["X-Frame-Options"] = "SAMEORIGIN";
+    headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+    headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()";
+    headers["X-Permitted-Cross-Domain-Policies"] = "none";
+    await next();
+});
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseStatusCodePagesWithReExecute("/Home/StatusCodePage", "?code={0}");
+
+// ===== Routes =====
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id:int?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id:int?}");
+
+app.MapHealthChecks("/health", new HealthCheckOptions
 {
-    Log.CloseAndFlush();
-}
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsJsonAsync(new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(e => new { name = e.Key, status = e.Value.Status.ToString() })
+        });
+    }
+});
+
+// ===== Seed Roles and Users =====
+await DbInitializer.InitializeAsync(app.Services, app.Logger, app.Configuration, app.Environment);
+
+app.Run();

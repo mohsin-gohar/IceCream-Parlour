@@ -35,6 +35,11 @@
             e.preventDefault();
             var form = $(this).closest('form');
             var message = $(this).data('confirm-delete') || 'This action cannot be undone.';
+            if (typeof Swal === 'undefined') {
+                if (window.confirm(message)) { form.trigger('submit'); }
+                return;
+            }
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: message,
@@ -44,7 +49,7 @@
                 cancelButtonColor: '#6c757d',
                 confirmButtonText: 'Yes, delete it!'
             }).then(function (result) {
-                if (result.isConfirmed) form.submit();
+                if (result.isConfirmed) { form.trigger('submit'); }
             });
         });
 
@@ -87,7 +92,11 @@
         // Order line add/remove
         $('#addOrderLine').on('click', function () {
             var template = $('#orderLineTemplate').html();
-            $('#orderLines').append(template);
+            if (!template) { return; }
+
+            // Each row needs its own index so model binding receives all lines.
+            var nextIndex = $('#orderLines .order-line').length;
+            $('#orderLines').append(template.split('__index__').join(nextIndex));
         });
 
         $(document).on('click', '.remove-order-line', function () {
@@ -115,7 +124,7 @@
     // Chart helper
     window.createRevenueChart = function (canvasId, labels, data) {
         var ctx = document.getElementById(canvasId);
-        if (!ctx) return;
+        if (!ctx || typeof Chart === 'undefined') return;
 
         new Chart(ctx, {
             type: 'line',
@@ -157,7 +166,7 @@
 
     window.createBarChart = function (canvasId, labels, data) {
         var ctx = document.getElementById(canvasId);
-        if (!ctx) return;
+        if (!ctx || typeof Chart === 'undefined') return;
 
         new Chart(ctx, {
             type: 'bar',

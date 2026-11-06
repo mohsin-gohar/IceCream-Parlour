@@ -9,7 +9,6 @@
 
 <div class="no-print mb-3 d-flex gap-2">
     <button id="printInvoice" class="btn btn-primary-custom"><i class="fas fa-print me-2"></i>Print Invoice</button>
-    <a asp-action="ExportPdf" asp-route-id="@Model.Id" class="btn btn-outline-danger"><i class="fas fa-file-pdf me-2"></i>Download PDF</a>
     <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Back</a>
 </div>
 
@@ -55,7 +54,6 @@
 
     <div class="text-end mt-4">
         <p>Subtotal: $@Model.SubTotal.ToString("N2")</p>
-        <p>Tax (8%): $@Model.TaxAmount.ToString("N2")</p>
         @if (Model.DiscountAmount > 0) { <p>Discount: -$@Model.DiscountAmount.ToString("N2")</p> }
         <h4>Total: $@Model.TotalAmount.ToString("N2")</h4>
     </div>

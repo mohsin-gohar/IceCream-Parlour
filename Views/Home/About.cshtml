@@ -1,167 +1,196 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "About - iCREAM";
+    ViewData["Title"] = "About";
 }
-<style>
-    .page-header {
-        background-image: url('/img/header.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        min-height: 350px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
+
 <!-- ===== PAGE HEADER ===== -->
-<div class="page-header">
-    <div class="container text-center py-5">
-        <h1 class="text-white display-3">About Us</h1>
-        <div class="d-inline-flex align-items-center text-white">
-            <a asp-action="Index" asp-controller="Home"
-               class="text-dark text-decoration-none fw-bold"><i class="fa fa-home me-1"></i> Home</a><i class="fa fa-circle px-3" style="font-size: 6px;"></i>
-            <span style="color:black;">About</span>
+<section class="page-header-premium">
+    <div class="container">
+        <h1>Our story</h1>
+        <p>A family parlour, a copper churn and one very good vanilla recipe.</p>
+        <div class="breadcrumb-chip">
+            <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;opacity:.7"></i>
+            <span>About</span>
         </div>
     </div>
-</div>  
+</section>
 
-<!-- ===== ABOUT CONTENT ===== -->
-<section class="container-fluid py-5">
+<!-- ===== STORY ===== -->
+<section class="py-5" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="row g-3">
+                    <div class="col-7">
+                        <img src="~/img/about.jpg" class="w-100 rounded-lg shadow-strong" style="aspect-ratio:3/4;object-fit:cover" alt="iCREAM kitchen" loading="lazy">
+                    </div>
+                    <div class="col-5 d-flex flex-column gap-3">
+                        <img src="~/img/gallery5.jpg" class="w-100 rounded-lg shadow-soft" style="aspect-ratio:1;object-fit:cover" alt="Fresh ingredients" loading="lazy">
+                        <img src="~/img/product-4.jpg" class="w-100 rounded-lg shadow-soft" style="aspect-ratio:1;object-fit:cover" alt="Mango sorbet" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <span class="eyebrow">Since 2006</span>
+                <h2 class="mt-3 mb-3">We started with one flavour and a stubborn belief</h2>
+                <p class="lead-muted mb-3">
+                    That ice cream should taste of what is actually in it. No powders, no shortcuts,
+                    no “ice cream flavouring”. Just milk, cream, sugar, fruit and time.
+                </p>
+                <p class="text-muted mb-4">
+                    Eighteen years later we still churn in 20-litre batches, still buy milk from the
+                    same farm, and still argue about whether the vanilla needs another pod. It is a
+                    slow way to make a living — and the only way we know how.
+                </p>
+
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fas fa-circle-check text-success"></i>
+                            <span class="small fw-semibold">No artificial colours</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fas fa-circle-check text-success"></i>
+                            <span class="small fw-semibold">No stabilisers or gums</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fas fa-circle-check text-success"></i>
+                            <span class="small fw-semibold">Milk from a single farm</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fas fa-circle-check text-success"></i>
+                            <span class="small fw-semibold">Recyclable tubs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a asp-controller="Home" asp-action="Product" class="btn btn-primary mt-4">
+                    Taste the menu <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NUMBERS ===== -->
+<section class="py-5 bg-cream">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-lg-3" data-aos="fade-up">
+                <div class="stat-card flex-column text-center">
+                    <h3>18+</h3>
+                    <p>Years churning</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                <div class="stat-card flex-column text-center">
+                    <h3>20+</h3>
+                    <p>Signature flavours</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                <div class="stat-card flex-column text-center">
+                    <h3>2,400+</h3>
+                    <p>Five-star reviews</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                <div class="stat-card flex-column text-center">
+                    <h3>40 km</h3>
+                    <p>Average sourcing radius</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VALUES ===== -->
+<section class="py-5" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <span class="eyebrow justify-content-center">What guides us</span>
+            <h2 class="mt-2">Three rules we never break</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4" data-aos="fade-up">
+                <div class="surface-card h-100 p-4 hover-lift">
+                    <div class="stat-icon mb-3"><i class="fas fa-seedling"></i></div>
+                    <h5 class="fw-bold">Real ingredients only</h5>
+                    <p class="text-muted small mb-0">If it is not something you would keep in your own kitchen, it does not go in the churn.</p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="80">
+                <div class="surface-card h-100 p-4 hover-lift">
+                    <div class="stat-icon blue mb-3"><i class="fas fa-scale-balanced"></i></div>
+                    <h5 class="fw-bold">Small batches, always</h5>
+                    <p class="text-muted small mb-0">Twenty litres at a time keeps the texture tight and lets us adjust by taste, not by spreadsheet.</p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="160">
+                <div class="surface-card h-100 p-4 hover-lift">
+                    <div class="stat-icon green mb-3"><i class="fas fa-handshake-angle"></i></div>
+                    <h5 class="fw-bold">Honest about allergens</h5>
+                    <p class="text-muted small mb-0">Every tub is labelled clearly and our team will always talk you through the options.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section class="py-5 bg-blush" style="padding-top:4.5rem !important;padding-bottom:4.5rem !important;">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <span class="eyebrow justify-content-center">The people</span>
+            <h2 class="mt-2">Meet the team behind the counter</h2>
+            <p>Churners, recipe testers and one extremely patient dishwasher.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            @foreach (var member in new[] {
+                new { Name = "Marco Rossi", Role = "Founder & Head Churner", Image = "team-1.jpg" },
+                new { Name = "Jane Smith", Role = "Pastry Chef", Image = "team-2.jpg" },
+                new { Name = "Mike Johnson", Role = "Flavour Development", Image = "team-3.jpg" },
+                new { Name = "Sarah Williams", Role = "Recipe Developer", Image = "team-4.jpg" }
+            })
+            {
+                <div class="col-lg-3 col-md-6" data-aos="fade-up">
+                    <div class="surface-card h-100 text-center p-4 hover-lift">
+                        <img src="~/img/@member.Image" alt="@member.Name" class="rounded-circle mx-auto mb-3" style="width:112px;height:112px;object-fit:cover;border:4px solid #fff;box-shadow:var(--sh-md);" loading="lazy" />
+                        <h5 class="fw-bold mb-1">@member.Name</h5>
+                        <p class="small text-muted mb-3">@member.Role</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="#" class="text-muted hover-primary" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted hover-primary" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-muted hover-primary" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-7 text-center">
-                <h2 class="section-title position-relative mb-5">Traditional &amp; Delicious Ice Cream Since 1950</h2>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <!-- Left: About Text -->
-            <div class="col-lg-4 py-4">
-                <h4 class="fw-bold mb-3">About Us</h4>
-                <p class="text-muted">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</p>
-                <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod. Amet sit amet amet no. Est nonumy sed labore eirmod sit magna. Erat at est justo sit ut. Labor diam sed ipsum et eirmod</p>
-                <a href="#" class="btn btn-secondary mt-2">Learn More</a>
-            </div>
-
-            <!-- Center: Image -->
-            <div class="col-lg-4">
-                <div class="rounded shadow"
-                     style="min-height:350px;
-                    background-image:url('/img/gallery5.jpg');
-                    background-size:cover;
-                    background-position:center;
-                    background-repeat:no-repeat;">
-                </div>
-            </div>
-
-            <!-- Right: Features -->
-            <div class="col-lg-4 py-4">
-                <h4 class="fw-bold " style="margin-left:100px;">Our Features</h4>
-                <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo.</p>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-check text-secondary me-3"></i>
-                    <span class="fw-medium">Premium Quality Ingredients</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-check text-secondary me-3"></i>
-                    <span class="fw-medium">100% Organic Milk</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-check text-secondary me-3"></i>
-                    <span class="fw-medium">Traditional Family Recipes</span>
-                </div>
-                <a href="#" class="btn btn-primary mt-2">Learn More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== TEAM SECTION ===== -->
-<section class="container-fluid py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h2 class="section-title position-relative mb-5">Experienced &amp; Most Famous Ice Cream Chefs</h2>
-            </div>
-            <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
-        </div>
-
-        <div class="row g-4">
-            <!-- Team Member 1 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-card text-center">
-                    <div class="team-img-wrapper mx-auto">
-                        <img src="~/img/team-1.jpg" alt="Chef" class="img-fluid rounded-circle">
-                    </div>
-                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
-                        <h5 class="fw-bold mt-3">John Doe</h5>
-                        <p class="text-muted small">Master Chef</p>
-                        <div class="social-links">
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Member 2 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-card text-center">
-                    <div class="team-img-wrapper mx-auto">
-                        <img src="~/img/team-2.jpg" alt="Chef" class="img-fluid rounded-circle">
-                    </div>
-                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
-                        <h5 class="fw-bold mt-3">Jane Smith</h5>
-                        <p class="text-muted small">Pastry Chef</p>
-                        <div class="social-links">
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Member 3 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-card text-center">
-                    <div class="team-img-wrapper mx-auto">
-                        <img src="~/img/team-3.jpg" alt="Chef" class="img-fluid rounded-circle">
-                    </div>
-                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
-                        <h5 class="fw-bold mt-3">Mike Johnson</h5>
-                        <p class="text-muted small">Ice Cream Expert</p>
-                        <div class="social-links">
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Member 4 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="team-card text-center">
-                    <div class="team-img-wrapper mx-auto">
-                        <img src="~/img/team-4.jpg" alt="Chef" class="img-fluid rounded-circle">
-                    </div>
-                    <div class="team-info bg-white rounded p-3 shadow-sm mt-n4 position-relative">
-                        <h5 class="fw-bold mt-3">Sarah Williams</h5>
-                        <p class="text-muted small">Recipe Developer</p>
-                        <div class="social-links">
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-secondary me-2"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-secondary"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+            <div class="col-lg-9 text-center rounded-xl p-5 shadow-strong" style="background:var(--grad-brand);color:#fff;" data-aos="fade-up">
+                <h2 class="text-white mb-3">Come say hello</h2>
+                <p class="mb-4 mx-auto" style="color:rgba(255,255,255,.92);max-width:52ch">
+                    We are open 10am–10pm, seven days a week. Tastings are always free and always generous.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a asp-controller="Home" asp-action="Contact" class="btn btn-light btn-lg"><i class="fas fa-location-dot me-2"></i>Find us</a>
+                    <a asp-controller="Home" asp-action="Faq" class="btn btn-dark btn-lg"><i class="fas fa-circle-question me-2"></i>Read the FAQ</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- ===== BACK TO TOP ===== -->
-<a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
