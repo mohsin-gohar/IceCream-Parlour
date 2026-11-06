@@ -1,0 +1,85 @@
+@model List<Ice_Cream_Parlour_Eproject.Models.CartItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Shopping Cart - iCREAM";
+}
+
+<div style="background: linear-gradient(135deg, #F195B2, #62C3E7); min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 20px;">
+    <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 6px;"><i class="fas fa-shopping-basket" style="margin-right: 10px;"></i> Shopping Cart</h1>
+    <p style="font-size: 1rem; opacity: 0.9;">Review your items before proceeding to checkout</p>
+</div>
+
+<section style="padding: 40px 0;">
+    <div style="max-width: 900px; margin: 0 auto; padding: 0 15px;">
+        @if (!Model.Any())
+        {
+            <div style="text-align: center; padding: 50px 20px; background: #fff; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <i class="fas fa-shopping-cart" style="font-size: 3.5rem; color: #ccc; margin-bottom: 15px;"></i>
+                <h4 style="font-weight: 700; color: #444;">Your cart is empty</h4>
+                <p style="color: #777;">Explore our delicious ice creams and add your favorites to the cart!</p>
+                <a href="@Url.Action("Product", "Home")" style="display: inline-block; margin-top: 15px; background: linear-gradient(135deg, #F195B2, #62C3E7); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600;">Browse Products</a>
+            </div>
+        }
+        else
+        {
+            <div style="background: #fff; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); padding: 25px; border: 1px solid rgba(241,149,178,0.1);">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #f0f0f0;">
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            @if (!string.IsNullOrEmpty(item.ImagePath))
+                                            {
+                                                <img src="@item.ImagePath" alt="@item.ProductName" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;" />
+                                            }
+                                            <span style="font-weight: 600;">@item.ProductName</span>
+                                        </div>
+                                    </td>
+                                    <td>$@item.UnitPrice.ToString("0.00")</td>
+                                    <td>
+                                        <form asp-controller="Cart" asp-action="UpdateQuantity" method="post" style="display: flex; align-items: center; gap: 6px;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="productId" value="@item.ProductId" />
+                                            <input type="number" name="quantity" value="@item.Quantity" min="1" max="99" style="width: 60px; padding: 6px; border-radius: 8px; border: 1px solid #ccc; text-align: center;" />
+                                            <button type="submit" style="background: #f0f0f0; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer;"><i class="fas fa-sync-alt"></i></button>
+                                        </form>
+                                    </td>
+                                    <td style="font-weight: 700; color: #F195B2;">$@item.TotalPrice.ToString("0.00")</td>
+                                    <td>
+                                        <form asp-controller="Cart" asp-action="RemoveFromCart" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="productId" value="@item.ProductId" />
+                                            <button type="submit" style="background: #f8d7da; color: #721c24; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer;"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 2px solid #f0f0f0; flex-wrap: wrap; gap: 15px;">
+                    <a href="@Url.Action("Product", "Home")" style="color: #666; text-decoration: none; font-weight: 600;"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+                    <div style="text-align: right;">
+                        <h4 style="font-weight: 800; color: #2d2d2d; margin-bottom: 15px;">Total: <span style="color: #F195B2;">$@Model.Sum(i => i.TotalPrice).ToString("0.00")</span></h4>
+                        <a href="@Url.Action("Checkout", "Cart")" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(241,149,178,0.3); display: inline-block;">
+                            Proceed to Checkout <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

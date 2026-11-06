@@ -104,10 +104,24 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             return RedirectToAction(nameof(Contact));
         }
 
+        // ===== FEEDBACK FORM POST =====
+        [HttpPost]
+        public IActionResult Feedback(string Name, string Email, int Rating, string Message)
+        {
+            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Email))
+            {
+                // Save feedback to database
+                TempData["Success"] = "Thank you for your feedback!";
+                return RedirectToAction("Feedback");
+            }
+            return View();
+        }
+
         // ===== ERROR HANDLING =====
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int? statusCode = null)
         {
+            ViewBag.StatusCode = statusCode;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 

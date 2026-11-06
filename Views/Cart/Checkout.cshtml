@@ -1,0 +1,66 @@
+@model Ice_Cream_Parlour_Eproject.Areas.Models.Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Checkout - iCREAM";
+}
+
+<div style="background: linear-gradient(135deg, #F195B2, #62C3E7); min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; border-radius: 0 0 30px 30px; padding: 20px;">
+    <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 6px;"><i class="fas fa-credit-card" style="margin-right: 10px;"></i> Order Checkout</h1>
+    <p style="font-size: 1rem; opacity: 0.9;">Complete your shipping & payment information</p>
+</div>
+
+<section style="padding: 40px 0;">
+    <div style="max-width: 750px; margin: 0 auto; padding: 0 15px;">
+        <div style="background: #fff; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); padding: 30px; border: 1px solid rgba(241,149,178,0.1);">
+            <form asp-controller="Cart" asp-action="Checkout" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <h5 style="font-weight: 700; margin-bottom: 20px; color: #2d2d2d;"><i class="fas fa-user-circle" style="color: #F195B2; margin-right: 8px;"></i> Customer Information</h5>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px;">
+                    <div>
+                        <label style="font-weight: 600; font-size: 0.85rem; color: #444; display: block; margin-bottom: 4px;">Full Name *</label>
+                        <input type="text" name="CustomerName" value="@Model?.CustomerName" required style="width:100%; padding:10px 14px; border:1.5px solid #e0e0e0; border-radius:10px;" placeholder="John Doe" />
+                    </div>
+                    <div>
+                        <label style="font-weight: 600; font-size: 0.85rem; color: #444; display: block; margin-bottom: 4px;">Email Address *</label>
+                        <input type="email" name="CustomerEmail" value="@Model?.CustomerEmail" required style="width:100%; padding:10px 14px; border:1.5px solid #e0e0e0; border-radius:10px;" placeholder="john@example.com" />
+                    </div>
+                    <div>
+                        <label style="font-weight: 600; font-size: 0.85rem; color: #444; display: block; margin-bottom: 4px;">Phone Number *</label>
+                        <input type="tel" name="CustomerPhone" value="@Model?.CustomerPhone" required style="width:100%; padding:10px 14px; border:1.5px solid #e0e0e0; border-radius:10px;" placeholder="+1 234 567 8900" />
+                    </div>
+                    <div>
+                        <label style="font-weight: 600; font-size: 0.85rem; color: #444; display: block; margin-bottom: 4px;">Payment Method *</label>
+                        <select name="PaymentMethod" required style="width:100%; padding:10px 14px; border:1.5px solid #e0e0e0; border-radius:10px;">
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="PayPal">PayPal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 600; font-size: 0.85rem; color: #444; display: block; margin-bottom: 4px;">Delivery Address *</label>
+                    <textarea name="DeliveryAddress" rows="3" required style="width:100%; padding:10px 14px; border:1.5px solid #e0e0e0; border-radius:10px;" placeholder="Street, City, State, ZIP Code">@Model?.DeliveryAddress</textarea>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 600; font-size: 0.85rem; color: #444; display: block; margin-bottom: 4px;">Order Notes (Optional)</label>
+                    <textarea name="Notes" rows="2" style="width:100%; padding:10px 14px; border:1.5px solid #e0e0e0; border-radius:10px;" placeholder="Special instructions for delivery...">@Model?.Notes</textarea>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(241,149,178,0.08), rgba(98,195,231,0.08)); border-radius: 12px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(241,149,178,0.15); margin-bottom: 25px;">
+                    <span style="font-weight: 700; color: #333; font-size: 1.1rem;">Total Amount:</span>
+                    <span style="font-size: 1.5rem; font-weight: 800; color: #F195B2;">$@Model?.TotalAmount.ToString("0.00")</span>
+                </div>
+
+                <button type="submit" style="background: linear-gradient(135deg, #F195B2, #62C3E7); color: #fff; border: none; padding: 14px; border-radius: 50px; font-weight: 700; font-size: 1rem; width: 100%; cursor: pointer; box-shadow: 0 4px 15px rgba(241,149,178,0.3);">
+                    <i class="fas fa-check-circle"></i> Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
