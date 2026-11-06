@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Http;
-using Serilog;
 using System.Net;
 
 namespace Ice_Cream_Parlour_Eproject.Middleware

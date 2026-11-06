@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -104,8 +105,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 });
 
-builder.Services.AddResponseCompression(options => options.EnableForHttps = true);
-
 builder.Services.AddHealthChecks()
     .AddCheck<DatabaseHealthCheck>("database");
 
@@ -130,7 +129,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-app.UseResponseCompression();
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = ctx =>
@@ -182,6 +180,6 @@ app.MapHealthChecks("/health", new HealthCheckOptions
 });
 
 // ===== Seed Roles and Users =====
-await DbInitializer.InitializeAsync(app.Services, app.Logger, app.Configuration, app.Environment);
+await DbInitializer.InitializeAsync(app.Services, app.Services.GetRequiredService<ILogger<Program>>(), app.Configuration, app.Environment);
 
 app.Run();
