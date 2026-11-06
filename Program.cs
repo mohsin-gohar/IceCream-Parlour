@@ -99,6 +99,15 @@ builder.Services.AddControllersWithViews(options =>
 });
 builder.Services.AddHttpContextAccessor();
 
+// ===== Session =====
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.Name = "iCREAM.Session";
+});
+
 // ===== Security / infrastructure =====
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -139,6 +148,9 @@ app.UseStaticFiles(new StaticFileOptions
         }
     }
 });
+
+// ===== Session =====
+app.UseSession();
 
 // Baseline security headers.
 app.Use(async (context, next) =>
