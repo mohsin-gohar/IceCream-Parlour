@@ -29,7 +29,7 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
             var orders = await _context.Orders
                 .AsNoTracking()
                 .Include(o => o.Book)
-                .Where(o => o.CustomerEmail.ToLower() == normalized)
+                .Where(o => (o.CustomerEmail ?? string.Empty).ToLower() == normalized)
                 .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
 
@@ -75,8 +75,8 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
                 .AsNoTracking()
                 .Include(o => o.Book)
                 .FirstOrDefaultAsync(o =>
-                    o.OrderNumber.ToLower() == normalizedOrderNumber &&
-                    o.CustomerEmail.ToLower() == lookupEmail);
+                    (o.OrderNumber ?? string.Empty).ToLower() == normalizedOrderNumber &&
+                    (o.CustomerEmail ?? string.Empty).ToLower() == lookupEmail);
 
             if (order == null)
             {

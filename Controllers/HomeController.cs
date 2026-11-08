@@ -106,15 +106,37 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
 
         // ===== FEEDBACK FORM POST =====
         [HttpPost]
-        public IActionResult Feedback(string Name, string Email, int Rating, string Message)
+        public async Task<IActionResult> Feedback(string Name, string Email, int Rating, string Message)
         {
-            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Email))
+            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Message))
             {
-                // Save feedback to database
-                TempData["Success"] = "Thank you for your feedback!";
-                return RedirectToAction("Feedback");
+                TempData["Error"] = "Please fill in your name, e-mail address and message.";
+                return RedirectToAction(nameof(Feedback));
             }
-            return View();
+
+            if (!new EmailAddressAttribute().IsValid(Email))
+            {
+                TempData["Error"] = "Please enter a valid e-mail address.";
+                return RedirectToAction(nameof(Feedback));
+            }
+
+            var feedback = new Feedback
+            {
+                UserName = Name.Trim(),
+                Email = Email.Trim(),
+                Message = Message.Trim(),
+                Rating = Rating,
+                SubmittedDate = DateTime.UtcNow,
+                IsRegistered = User.Identity?.IsAuthenticated ?? false,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            _context.Feedbacks.Add(feedback);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Feedback received from {Email}.", Email);
+            TempData["Success"] = "Thank you for your feedback!";
+            return RedirectToAction(nameof(Feedback));
         }
 
         // ===== ERROR HANDLING =====

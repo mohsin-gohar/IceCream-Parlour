@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Ice_Cream_Parlour_Eproject.Areas.Models;
 using Ice_Cream_Parlour_Eproject.Data;
+using Ice_Cream_Parlour_Eproject.Helpers;
 using Ice_Cream_Parlour_Eproject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -150,7 +151,8 @@ namespace Ice_Cream_Parlour_Eproject.Controllers
                 }
 
                 order.CustomerId = customer.Id;
-                order.OrderNumber = "ORD-" + DateTime.Now.ToString("yyyyMMdd") + "-" + new Random().Next(1000, 9999);
+                order.OrderNumber = await OrderNumberHelper.GenerateUniqueAsync(
+                    code => _context.Orders.AnyAsync(o => o.OrderNumber == code));
                 order.OrderDate = DateTime.Now;
                 order.OrderStatus = "Pending";
                 order.PaymentStatus = "Pending";
