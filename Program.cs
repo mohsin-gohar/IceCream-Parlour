@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-var builder = WebApplication.CreateBuilder(args);
+// Load configuration based on environment
+builder.Configuration.AddCustomConfiguration(builder.Environment);
 
 // ===== Database =====
 // Provider can be switched with "Database:Provider" (SqlServer | Sqlite).
