@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /Admin/
+Disallow: /Account/Login
+Disallow: /Account/Register
+Disallow: /Account/AccessDenied
+Disallow: /Order/Track
+
+Sitemap: https://icream.com/sitemap.xml

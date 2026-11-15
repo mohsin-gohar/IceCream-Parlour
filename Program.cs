@@ -9,11 +9,16 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCaching;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-// Load configuration based on environment
-builder.Configuration.AddCustomConfiguration(builder.Environment);
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configuration is loaded automatically by WebApplication.CreateBuilder.
 
 // ===== Database =====
 // Provider can be switched with "Database:Provider" (SqlServer | Sqlite).
@@ -52,7 +57,7 @@ builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // ===== Email =====
-builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection(SmtpOptions.SectionName));
+builder.Services.Configure<Ice_Cream_Parlour_Eproject.Services.Email.SmtpOptions>(builder.Configuration.GetSection(Ice_Cream_Parlour_Eproject.Services.Email.SmtpOptions.SectionName));
 builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 
 // ===== Identity with Roles =====
@@ -92,11 +97,15 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+// ===== Response Caching =====
+builder.Services.AddResponseCaching();
+
 // ===== MVC =====
 builder.Services.AddControllersWithViews(options =>
 {
     // Every unsafe request must carry an anti-forgery token unless explicitly opted out.
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+    options.Filters.Add(new ResponseCacheAttribute { Duration = 60, Location = ResponseCacheLocation.Client });
 });
 builder.Services.AddHttpContextAccessor();
 
@@ -132,6 +141,7 @@ else
 }
 
 app.UseForwardedHeaders();
+app.UseResponseCaching();
 
 // TLS termination is handled by the reverse proxy in production (IIS / nginx / Azure App Service).
 if (!app.Environment.IsDevelopment())

@@ -32,6 +32,42 @@
     <meta charset="utf-8" />
     <meta name="description" content="iCREAM - Premium Ice Cream Parlour" />
     <meta name="keywords" content="ice cream, parlor, artisan, desserts" />
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "IceCreamShop",
+        "name": "iCREAM Premium Ice Cream Parlour",
+        "image": "https://icream.com/img/og-image.jpg",
+        "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "123 Ice Cream Street",
+            "addressLocality": "Karachi",
+            "postalCode": "75500",
+            "addressCountry": "PK"
+        },
+        "telephone": "+92 300 1234567",
+        "email": "support@icream.com",
+        "priceRange": "$$",
+        "servesCuisine": "Ice Cream, Desserts",
+        "hasMenu": "https://icream.com/Home/Product",
+        "sameAs": [
+            "https://facebook.com/icream",
+            "https://instagram.com/icream",
+            "https://twitter.com/icream"
+        ],
+        "openingHoursSpecification": {
+            "@@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "22:00"
+        },
+        "aggregateRating": {
+            "@@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "128"
+        }
+    }
+    </script>
     <meta property="og:title" content="@ViewData["Title"] - iCREAM" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://icream.com" />
